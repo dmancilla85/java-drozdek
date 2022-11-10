@@ -1,13 +1,13 @@
-package org.drozdek.basics.lists;
+package org.drozdek.lists;
 
 import java.io.PrintStream;
 
 /**
  * Double linked list data structure.
  */
-public class DoubleLinkedList {
-    protected DoubleLinkedListNode head;
-    protected DoubleLinkedListNode tail;
+public class DoubleLinkedList<T> {
+    protected DoubleLinkedListNode<T> head;
+    protected DoubleLinkedListNode<T> tail;
 
     /**
      * Default constructor.
@@ -19,48 +19,56 @@ public class DoubleLinkedList {
     /**
      * Add a node to the tail.
      *
-     * @param el Data object
+     * @param data Data value
      */
-    public void addToTail(Object el) {
+    public void addToTail(T data) {
         if (!isEmpty()) {
-            tail = new DoubleLinkedListNode(el, null, tail);
+            tail = new DoubleLinkedListNode<T>(data, null, tail);
             tail.previous.next = tail;
-        } else head = tail = new DoubleLinkedListNode(el);
+        } else head = tail = new DoubleLinkedListNode<T>(data);
     }
 
     /**
      * Delete the matching node.
      *
-     * @param el Node to be erased
+     * @param data Data node to be erased
      */
-    public void delete(Object el) {
-        if (head != null) {
-            if (el.equals(head.data)) {
-                head = head.next;
+    public void delete(T data) {
+        if (head == null) {
+            return;
+        }
+        if (data.equals(head.data)) {
+            head = head.next;
+        } else {
+            if (data.equals(tail.data)) {
+                removeFromTail();
             } else {
-                if (el.equals(tail.data)) {
-                    removeFromTail();
-                } else {
-                    DoubleLinkedListNode pred = head;
-                    DoubleLinkedListNode tmp = head.next;
-                    for (; tmp != null && !(tmp.data.equals(el)); pred = pred.next, tmp = tmp.next) ;
+                DoubleLinkedListNode<T> predecessor = head;
+                DoubleLinkedListNode<T> tmp = head.next;
 
-                    if (tmp != null)
-                        pred.next = tmp.next;
+                while (tmp != null && !(tmp.data.equals(data))) {
+                    predecessor = predecessor.next;
+                    tmp = tmp.next;
                 }
+
+                if (tmp != null)
+                    predecessor.next = tmp.next;
             }
+
         }
     }
 
     /**
      * Search for a node in the list.
      *
-     * @param el Data object
+     * @param data Data value
      * @return Matching node
      */
-    public Object find(Object el) {
-        DoubleLinkedListNode tmp = head;
-        for (; tmp != null && !el.equals(tmp.data); tmp = tmp.next) ;
+    public T find(T data) {
+        DoubleLinkedListNode<T> tmp = head;
+        while (tmp != null && !data.equals(tmp.data)) {
+            tmp = tmp.next;
+        }
         if (tmp == null)
             return null;
 
@@ -70,16 +78,16 @@ public class DoubleLinkedList {
     /**
      * First node in list.
      *
-     * @return Data object
+     * @return First data value
      */
-    public Object first() {
+    public T first() {
         return head != null ? head.data : null;
     }
 
     /**
      * List is empty?
      *
-     * @return
+     * @return True if list is empty
      */
     public boolean isEmpty() {
         return head == null;
@@ -88,9 +96,9 @@ public class DoubleLinkedList {
     /**
      * Last node in list.
      *
-     * @return Data object
+     * @return Last data value
      */
-    public Object last() {
+    public T last() {
         return tail != null ? tail.data : null;
     }
 
@@ -101,7 +109,7 @@ public class DoubleLinkedList {
      */
     public void printAll(PrintStream out) {
         String line;
-        for (DoubleLinkedListNode tmp = head; tmp != null; tmp = tmp.next) {
+        for (DoubleLinkedListNode<T> tmp = head; tmp != null; tmp = tmp.next) {
             line = tmp == head ? "(*)" + tmp.data : "- " + tmp.data;
             out.println(line);
         }
@@ -114,7 +122,7 @@ public class DoubleLinkedList {
      */
     public void printReverse(PrintStream out) {
         String line;
-        for (DoubleLinkedListNode tmp = tail; tmp != null; tmp = tmp.previous) {
+        for (DoubleLinkedListNode<T> tmp = tail; tmp != null; tmp = tmp.previous) {
             line = tmp == head ? "(*)" + tmp.data : "- " + tmp.data;
             out.println(line);
         }
@@ -125,8 +133,8 @@ public class DoubleLinkedList {
      *
      * @return Data object
      */
-    public Object removeFromTail() {
-        Object el = tail.data;
+    public T removeFromTail() {
+        T el = tail.data;
         if (head == tail) {
             head = tail = null;
         } else {
@@ -135,5 +143,38 @@ public class DoubleLinkedList {
         }
 
         return el;
+    }
+
+    /**
+     * Get the list size
+     *
+     * @return Number of elements contained
+     */
+    public int size() {
+        int size = 0;
+        DoubleLinkedListNode<T> tmp = head;
+        while (tmp != null) {
+            ++size;
+            tmp = tmp.next;
+        }
+        return size;
+    }
+
+    /**
+     * View the first node element in the list
+     *
+     * @return Head element
+     */
+    public DoubleLinkedListNode<T> viewHeadNode() {
+        return head;
+    }
+
+    /**
+     * View the last element in the list
+     *
+     * @return Tail element
+     */
+    public DoubleLinkedListNode<T> viewTailNode() {
+        return tail;
     }
 }

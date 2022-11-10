@@ -1,12 +1,12 @@
-package org.drozdek.basics.lists;
+package org.drozdek.lists;
 
 import java.io.PrintStream;
 
 /**
  * Single linked list data structure.
  */
-public class SingleLinkedList {
-    protected SingleLinkedListNode head;
+public class SingleLinkedList<T> {
+    protected SingleLinkedListNode<T> head;
 
     /**
      * Default constructor.
@@ -17,66 +17,77 @@ public class SingleLinkedList {
 
     /**
      * Add a node to list.
-     * @param el Data object
+     *
+     * @param data Data object
      */
-    public void add(Object el) {
-        head = new SingleLinkedListNode(el, head);
+    public void add(T data) {
+        head = new SingleLinkedListNode<T>(data, head);
     }
 
     /**
      * Delete the matching node.
-     * @param el Node to be erased
+     *
+     * @param data Node to be erased
      */
-    public void delete(Object el) {
+    public void delete(T data) {
         if (head != null) {
-            if (el.equals(head.data)) {
-                head = head.next;
+            if (data.equals(head.getData())) {
+                deleteHead();
             } else {
-                SingleLinkedListNode pred = head;
-                SingleLinkedListNode tmp = head.next;
-                for (; tmp != null && !(tmp.data.equals(el)); pred = pred.next, tmp = tmp.next) ;
+                SingleLinkedListNode<T> predecessor = head;
+                SingleLinkedListNode<T> tmp = head.next;
+                while (tmp != null && !(tmp.getData().equals(data))) {
+                    predecessor = predecessor.next;
+                    tmp = tmp.next;
+                }
 
                 if (tmp != null)
-                    pred.next = tmp.next;
+                    predecessor.next = tmp.next;
             }
         }
     }
 
     /**
      * Delete head node.
+     *
      * @return Node erased
      */
-    public Object deleteHead() {
-        Object el = head.data;
+    public T deleteHead() {
+        T el = head.getData();
         head = head.next;
         return el;
     }
 
     /**
      * Search for a node in the list.
-     * @param el Data object
+     *
+     * @param data Data object
      * @return Matching node
      */
-    public Object find(Object el) {
-        SingleLinkedListNode tmp = head;
-        for (; tmp != null && !el.equals(tmp.data); tmp = tmp.next) ;
+    public T find(T data) {
+        SingleLinkedListNode<T> tmp = head;
+        while (tmp != null && !data.equals(tmp.getData())) {
+            tmp = tmp.next;
+        }
         if (tmp == null)
             return null;
 
-        else return tmp.data;
+        else return tmp.getData();
     }
 
     /**
      * First node in list.
+     *
      * @return Data object
      */
-    public Object first() {
-        return head != null ? head.data : null;
+    public T first() {
+        return head != null ? head.getData() : null;
     }
 
     /**
      * List is empty?
-     * @return
+     *
+     * @return True if list is empty
      */
     public boolean isEmpty() {
         return head == null;
@@ -84,11 +95,41 @@ public class SingleLinkedList {
 
     /**
      * Print all nodes in the list.
+     *
      * @param out Print stream
      */
     public void printAll(PrintStream out) {
-        for (SingleLinkedListNode tmp = head; tmp != null; tmp = tmp.next) {
-            out.println(tmp.data);
+        String line;
+
+        for (SingleLinkedListNode<T> tmp = head; tmp != null; tmp = tmp.next) {
+            line = tmp == head ? "(*)" + tmp.getData() : "- " + tmp.getData();
+            out.println(line);
         }
+
+        out.println();
+    }
+
+    /**
+     * Get the list size
+     *
+     * @return Number of elements contained
+     */
+    public int size() {
+        int size = 0;
+        SingleLinkedListNode<T> tmp = head;
+        while (tmp != null) {
+            ++size;
+            tmp = tmp.next;
+        }
+        return size;
+    }
+
+    /**
+     * View the first node element in the list
+     *
+     * @return Head element
+     */
+    public SingleLinkedListNode<T> viewHeadNode() {
+        return head;
     }
 }

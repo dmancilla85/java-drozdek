@@ -1,4 +1,4 @@
-package org.drozdek.stacksandqueues;
+package org.drozdek.stacks;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
@@ -7,22 +7,34 @@ import java.util.EmptyStackException;
  * Stack implemented as an arraylist.
  */
 public class Stack<T> {
-    private ArrayList<T> pool;
+    private final ArrayList<T> pool;
 
     /**
      * Default constructor.
      */
     public Stack() {
-        pool = new ArrayList<>();
+        this(100, new ArrayList<>());
     }
 
     /**
      * Constructor.
-     * @param n size
+     *
+     * @param n    size
      */
     public Stack(int n) {
+        this(n,new ArrayList<>());
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param n    size
+     * @param pool Storage pool
+     */
+    private Stack(int n, ArrayList<T> pool) {
+        this.pool = pool;
         if(n > 0)
-            pool.ensureCapacity(n);
+            this.pool.ensureCapacity(n);
     }
 
     /**

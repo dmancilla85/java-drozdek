@@ -1,4 +1,4 @@
-package org.drozdek.stacksandqueues;
+package org.drozdek.stacks;
 
 import java.util.LinkedList;
 import java.util.EmptyStackException;

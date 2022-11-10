@@ -1,100 +1,171 @@
 package lists;
 
-import org.drozdek.lists.CircularLinkedList;
+import org.drozdek.lists.DoubleCircularLinkedList;
+import org.drozdek.lists.DoubleLinkedListNode;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static java.lang.System.out;
+import static org.junit.jupiter.api.Assertions.*;
 
-class CircularLinkedListTest {
+class DoubleCircularLinkedListTest {
 
     @Test
     void isEmpty() {
-        CircularLinkedList list = new CircularLinkedList();
+        DoubleCircularLinkedList<String> list = new DoubleCircularLinkedList();
         assertTrue (list.isEmpty());
     }
 
     @Test
     void first() {
-        CircularLinkedList list=new CircularLinkedList();
+        DoubleCircularLinkedList<Integer> list=new DoubleCircularLinkedList();
         Integer a = 2, b=3, c=4;
-        Integer t = 4;
+        Integer t = 2;
 
-        list.add(a);
-        list.add(b);
-        list.add(c);
-
-        Integer first= (Integer) list.first();
+        list.addToTail(a);
+        list.addToTail(b);
+        list.addToTail(c);
+        list.printAll(System.out);
+        Integer first= list.first();
         assertEquals(0, first.compareTo(t));
     }
 
     @Test
     void printAll() {
-        CircularLinkedList list = new CircularLinkedList();
-        list.add(43);
-        list.add("hello");
-        list.add(12.34);
-
+        DoubleCircularLinkedList<String>  list = new DoubleCircularLinkedList();
+        list.addToTail("43");
+        list.addToTail("hello");
+        list.addToTail("12.34");
         list.printAll(System.out);
+        assertNotNull(list);
+    }
+
+    @Test
+    void size() {
+        DoubleCircularLinkedList<String>  list = new DoubleCircularLinkedList();
+        Integer size = 6;
+        list.addToTail("hello");
+        list.addToTail("43");
+        list.addToTail("somebody");
+        list.addToTail("€12.34");
+        list.addToTail("2021");
+        list.addToTail("bye");
+        list.printAll(System.out);
+        assertEquals(0, size.compareTo(list.size()));
     }
 
     @Test
     void add() {
-        CircularLinkedList list=new CircularLinkedList();
+        DoubleCircularLinkedList<Integer>  list=new DoubleCircularLinkedList();
         Integer a = 2;
 
-        list.add(a);
+        list.addToTail(a);
 
-        assertTrue(!list.isEmpty());
+        assertFalse(list.isEmpty());
     }
 
     @Test
     void find() {
-        CircularLinkedList list=new CircularLinkedList();
+        DoubleCircularLinkedList<Integer>  list=new DoubleCircularLinkedList();
         Integer a = 2, b=3, c=4, d=10, e=16;
         Integer t = 4;
 
-        list.add(a);
-        list.add(b);
-        list.add(c);
-        list.add(d);
-        list.add(e);
+        list.addToTail(a);
+        list.addToTail(b);
+        list.addToTail(c);
+        list.addToTail(d);
+        list.addToTail(e);
 
         Integer match = (Integer) list.find(t);
         assertEquals(0, match.compareTo(t));
     }
 
     @Test
-    void deleteHead() {
-        CircularLinkedList list=new CircularLinkedList();
+    void removeFromTail() {
+        DoubleCircularLinkedList<Integer>  list=new DoubleCircularLinkedList();
         Integer a = 2, b=3, c=4, d=10, e=16;
 
-        list.add(a);
-        list.add(b);
-        list.add(c);
-        list.add(d);
-        list.add(e);
+        list.addToTail(a);
+        list.addToTail(b);
+        list.addToTail(c);
+        list.addToTail(d);
+        list.addToTail(e);
 
-        Integer match = (Integer) list.deleteHead();
-        Integer check =(Integer)  list.find(e);
+        Integer match = list.removeFromTail();
+        Integer check =list.find(e);
+        list.printAll(System.out);
+
         assertEquals(0, match.compareTo(e));
-        assertTrue(check == null);
+        assertNull(check);
     }
 
     @Test
     void delete() {
-        CircularLinkedList list=new CircularLinkedList();
+        DoubleCircularLinkedList<Integer>  list=new DoubleCircularLinkedList();
         Integer a = 2, b=3, c=4, d=10, e=16;
 
-        list.add(a);
-        list.add(b);
-        list.add(c);
-        list.add(d);
-        list.add(e);
-
+        list.addToTail(a);
+        list.addToTail(b);
+        list.addToTail(c);
+        list.addToTail(d);
+        list.addToTail(e);
+        list.printAll(System.out);
         list.delete(c);
-        Integer check =(Integer)  list.find(c);
+        list.printAll(System.out);
+        Integer check =list.find(c);
 
-        assertTrue(check == null);
+        assertNull(check);
+    }
+
+    @Test
+    void deleteFromHead() {
+        DoubleCircularLinkedList<Integer>  list=new DoubleCircularLinkedList();
+        Integer a = 2, b=3, c=4, d=10, e=16;
+
+        list.addToTail(a);
+        list.addToTail(b);
+        list.addToTail(c);
+        list.addToTail(d);
+        list.addToTail(e);
+
+        out.println("Before deleting head:");
+        list.printAll(out);
+        list.delete(a);
+
+        out.println("After deleting head:");
+        list.printAll(out);
+
+        Integer check =list.find(a);
+
+        assertNull(check);
+    }
+
+    @Test
+    void viewHead(){
+        DoubleCircularLinkedList<Object> list = new DoubleCircularLinkedList();
+        String test = "Hi";
+
+        list.addToTail("Hi");
+        list.addToTail(5);
+        list.addToTail(234.34);
+        list.addToTail("bye");
+
+        DoubleLinkedListNode node = list.viewHeadNode();
+        out.println(node);
+        assertEquals(node.getData(),test);
+    }
+
+    @Test
+    void viewTail(){
+        DoubleCircularLinkedList<Object> list = new DoubleCircularLinkedList();
+        String test = "bye";
+
+        list.addToTail("Hi");
+        list.addToTail(5);
+        list.addToTail(234.34);
+        list.addToTail("bye");
+
+        DoubleLinkedListNode node = list.viewTailNode();
+        out.println(node);
+        assertEquals(node.getData(),test);
     }
 }

@@ -1,34 +1,38 @@
-package org.drozdek.basics.lists;
+package org.drozdek.lists;
 
 /**
  * Node for single linked list.
  */
-public class SingleLinkedListNode {
-    public Object data;
-    protected SingleLinkedListNode next;
+public class SingleLinkedListNode<T> {
+    protected T data;
+    protected SingleLinkedListNode<T> next;
 
     /**
-     * Default constructor.
+     * Constructor.
+     *
+     * @param data Data value
      */
-    public SingleLinkedListNode() {
-        next = null;
+    public SingleLinkedListNode(T data) {
+        this(data, null);
     }
 
     /**
      * Constructor.
-     * @param el Object data
-     */
-    public SingleLinkedListNode(Object el) {
-        this(el, null);
-    }
-
-    /**
-     * Constructor.
-     * @param el Object data
+     *
+     * @param data Data value
      * @param node Next node
      */
-    public SingleLinkedListNode(Object el, SingleLinkedListNode node) {
-        data = el;
+    public SingleLinkedListNode(T data, SingleLinkedListNode node) {
+        this.data = data;
         next = node;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    @Override
+    public String toString() {
+        return "{data: " + getData() + ", next: " + (next != null ? next.getData() : "<NULL>") + "}";
     }
 }

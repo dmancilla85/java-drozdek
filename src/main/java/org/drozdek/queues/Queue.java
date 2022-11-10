@@ -1,2 +1,4 @@
-package org.drozdek.stacksandqueues;public class Queue {
+package org.drozdek.queues;
+
+public class Queue {
 }
