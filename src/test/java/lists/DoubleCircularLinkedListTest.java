@@ -75,7 +75,7 @@ class DoubleCircularLinkedListTest {
         list.addToTail(d);
         list.addToTail(e);
 
-        Integer match = (Integer) list.find(t);
+        Integer match = list.find(t);
         assertEquals(0, match.compareTo(t));
     }
 

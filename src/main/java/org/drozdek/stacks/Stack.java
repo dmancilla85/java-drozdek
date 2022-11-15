@@ -19,10 +19,10 @@ public class Stack<T> {
     /**
      * Constructor.
      *
-     * @param n    size
+     * @param n size
      */
     public Stack(int n) {
-        this(n,new ArrayList<>());
+        this(n, new ArrayList<>());
     }
 
     /**
@@ -33,7 +33,7 @@ public class Stack<T> {
      */
     private Stack(int n, ArrayList<T> pool) {
         this.pool = pool;
-        if(n > 0)
+        if (n > 0)
             this.pool.ensureCapacity(n);
     }
 
@@ -46,6 +46,7 @@ public class Stack<T> {
 
     /**
      * Is stack empty?
+     *
      * @return True if is empty
      */
     public boolean isEmpty() {
@@ -60,6 +61,7 @@ public class Stack<T> {
 
     /**
      * Extract the last element.
+     *
      * @return The element removed
      */
     public T pop() {
@@ -71,6 +73,7 @@ public class Stack<T> {
 
     /**
      * Add an element to stack.
+     *
      * @param element Element to add
      */
     public void push(T element) {
@@ -79,13 +82,14 @@ public class Stack<T> {
 
     /**
      * Convert to string.
+     *
      * @return The stack as a string
      */
     @Override
     public String toString() {
-        StringBuilder content=new StringBuilder();
+        StringBuilder content = new StringBuilder();
 
-        for (T element:pool) {
+        for (T element : pool) {
             content.append(element.toString());
             content.append(System.lineSeparator());
         }
@@ -94,6 +98,7 @@ public class Stack<T> {
 
     /**
      * View element at top.
+     *
      * @return Element at top of the stack
      */
     public T topElement() {

@@ -1,11 +1,15 @@
 package org.drozdek.lists;
 
+import org.drozdek.lists.iterators.DoubleLinkedListIterator;
+
 import java.io.PrintStream;
+import java.util.Iterator;
 
 /**
  * Double linked list data structure.
+ * The head is always next to the tail (last added element).
  */
-public class DoubleLinkedList<T> {
+public class DoubleLinkedList<T> implements Iterable<T> {
     protected DoubleLinkedListNode<T> head;
     protected DoubleLinkedListNode<T> tail;
 
@@ -17,15 +21,23 @@ public class DoubleLinkedList<T> {
     }
 
     /**
+     * @return iterator
+     */
+    @Override
+    public Iterator<T> iterator() {
+        return new DoubleLinkedListIterator<>(this);
+    }
+
+    /**
      * Add a node to the tail.
      *
      * @param data Data value
      */
     public void addToTail(T data) {
         if (!isEmpty()) {
-            tail = new DoubleLinkedListNode<T>(data, null, tail);
+            tail = new DoubleLinkedListNode<>(data, null, tail);
             tail.previous.next = tail;
-        } else head = tail = new DoubleLinkedListNode<T>(data);
+        } else head = tail = new DoubleLinkedListNode<>(data);
     }
 
     /**
@@ -85,7 +97,7 @@ public class DoubleLinkedList<T> {
     }
 
     /**
-     * List is empty?
+     * Is list empty?
      *
      * @return True if list is empty
      */
@@ -109,8 +121,9 @@ public class DoubleLinkedList<T> {
      */
     public void printAll(PrintStream out) {
         String line;
-        for (DoubleLinkedListNode<T> tmp = head; tmp != null; tmp = tmp.next) {
-            line = tmp == head ? "(*)" + tmp.data : "- " + tmp.data;
+
+        for(T element: this) {
+            line = "- " + element;
             out.println(line);
         }
     }

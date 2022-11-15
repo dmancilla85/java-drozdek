@@ -48,7 +48,7 @@ class DoubleLinkedListTest {
         list.addToTail(e);
 
         list.delete(a);
-        Integer check = (Integer) list.first();
+        Integer check = list.first();
 
         assertEquals(0, check.compareTo(b));
     }
@@ -66,7 +66,7 @@ class DoubleLinkedListTest {
 
         out.println("Removing " + e + "...");
         list.delete(e);
-        Integer check = (Integer) list.last();
+        Integer check = list.last();
         out.println("Printing in reverse order:");
         list.printReverse(out);
         assertEquals(0, check.compareTo(d));
@@ -98,7 +98,7 @@ class DoubleLinkedListTest {
         list.addToTail(b);
         list.addToTail(c);
 
-        Integer first = (Integer) list.first();
+        Integer first = list.first();
         assertEquals(0, first.compareTo(t));
     }
 

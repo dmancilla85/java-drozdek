@@ -4,10 +4,11 @@ import java.io.PrintStream;
 
 /**
  * Circular linked list data structure.
+ * The head node is always the last added element.
  */
 public class CircularLinkedList<T> extends SingleLinkedList<T> {
 
-    // @Override
+    @Override
     public void add(T data) {
         addToTail(data);
     }
@@ -19,7 +20,7 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
      */
     public void addToTail(T el) {
         if (isEmpty()) {
-            head = new SingleLinkedListNode<T>(el);
+            head = new SingleLinkedListNode<>(el);
             head.next = head;
         } else {
             SingleLinkedListNode<T> tmp = head;
@@ -27,21 +28,21 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
             while (tmp.next != head)
                 tmp = tmp.next;
 
-            tmp.next = new SingleLinkedListNode<T>(el, head);
+            tmp.next = new SingleLinkedListNode<>(el, head);
         }
     }
 
     @Override
     public void delete(T data) {
         if (head != null) {
-            if (data.equals(head.getData())) {
+            if (data.equals(head.data)) {
                 head = head.next;
             } else {
                 SingleLinkedListNode<T> predecessor = head;
                 SingleLinkedListNode<T> tmp = head.next;
                 boolean flag = true;
 
-                while (!(tmp.getData().equals(data)) && flag) {
+                while (!(tmp.data.equals(data)) && flag) {
                     predecessor = predecessor.next;
                     tmp = tmp.next;
                     flag = tmp != head;
@@ -54,7 +55,7 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
 
     @Override
     public T deleteHead() {
-        T el = head.getData();
+        T el = head.data;
         SingleLinkedListNode<T> tmp = head;
 
         while (tmp.next != head)
@@ -71,12 +72,12 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
         SingleLinkedListNode<T> tmp = head;
         boolean flag = true;
 
-        while (flag && !data.equals(tmp.getData())) {
+        while (flag && !data.equals(tmp.data)) {
             tmp = tmp.next;
             flag = tmp != head;
         }
 
-        return !flag ? null : tmp.getData();
+        return !flag ? null : tmp.data;
     }
 
     @Override
@@ -87,7 +88,7 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
         out.println("Size: " + size);
 
         for (SingleLinkedListNode<T> tmp = head; i++ < size; tmp = tmp.next) {
-            line = tmp == head ? "(*)" + tmp.getData() : "- " + tmp.getData();
+            line = tmp == head ? "(*)" + tmp.data : "- " + tmp.data;
             out.println(line);
         }
     }

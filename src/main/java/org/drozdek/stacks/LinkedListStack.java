@@ -1,18 +1,18 @@
 package org.drozdek.stacks;
 
-import java.util.LinkedList;
 import java.util.EmptyStackException;
+import java.util.LinkedList;
 
 /**
  * Stack implemented as a linked list.
  */
-public class LLStack<T> {
+public class LinkedListStack<T> {
     private final LinkedList<T> pool;
 
     /**
      * Default constructor.
      */
-    public LLStack() {
+    public LinkedListStack() {
         pool = new LinkedList<>();
     }
 
@@ -25,6 +25,7 @@ public class LLStack<T> {
 
     /**
      * Is stack empty?
+     *
      * @return True if is empty
      */
     public boolean isEmpty() {
@@ -33,9 +34,10 @@ public class LLStack<T> {
 
     /**
      * Extract the last element.
+     *
      * @return The element removed
      */
-    public Object pop() {
+    public T pop() {
         if (isEmpty())
             throw new EmptyStackException();
 
@@ -44,6 +46,7 @@ public class LLStack<T> {
 
     /**
      * Add an element to stack.
+     *
      * @param element Element to add to stack
      */
     public void push(T element) {
@@ -52,13 +55,14 @@ public class LLStack<T> {
 
     /**
      * Convert to string.
+     *
      * @return The stack as a string
      */
     @Override
     public String toString() {
-        StringBuilder content=new StringBuilder();
+        StringBuilder content = new StringBuilder();
 
-        for (T element:pool) {
+        for (T element : pool) {
             content.append(element.toString());
             content.append(System.lineSeparator());
         }
@@ -67,6 +71,7 @@ public class LLStack<T> {
 
     /**
      * View element at top.
+     *
      * @return Element at top
      */
     public T topElement() {

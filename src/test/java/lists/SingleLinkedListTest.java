@@ -25,7 +25,7 @@ class SingleLinkedListTest {
         list.add(b);
         list.add(c);
 
-        Integer first= (Integer) list.first();
+        Integer first= list.first();
         assertEquals(0, first.compareTo(t));
     }
 
@@ -139,6 +139,6 @@ class SingleLinkedListTest {
 
         SingleLinkedListNode node = list.viewHeadNode();
         out.println(node);
-        assertTrue(node.getData().equals(test));
+        assertEquals(node.getData(), test);
     }
 }

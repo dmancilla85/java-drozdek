@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 /**
  * Double circular linked list data structure.
+ * The head is always next to the tail (last added element).
  */
 public class DoubleCircularLinkedList<T> extends DoubleLinkedList<T> {
 

@@ -24,14 +24,28 @@ public class DoubleLinkedListNode<T> {
      * @param next     Next node
      * @param previous Previous node
      */
-    public DoubleLinkedListNode(T el, DoubleLinkedListNode next, DoubleLinkedListNode previous) {
+    public DoubleLinkedListNode(T el, DoubleLinkedListNode<T> next, DoubleLinkedListNode<T> previous) {
         data = el;
         this.next = next;
         this.previous = previous;
     }
 
+    /**
+     * Get the data value
+     *
+     * @return Data value
+     */
     public T getData() {
         return data;
+    }
+
+    /**
+     * Get next node in list.
+     *
+     * @return Next node.
+     */
+    public DoubleLinkedListNode<T> getNext() {
+        return this.next;
     }
 
     @Override

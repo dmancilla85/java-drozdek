@@ -1,5 +1,6 @@
 package org.drozdek.lists;
 
+import java.io.PrintStream;
 import java.util.Random;
 
 /**
@@ -34,12 +35,22 @@ public class IntSkipList {
         choosePowers();
     }
 
+    private int checkForCurrentLevel(int level, IntSkipListNode current) {
+        int lvl = level;
+
+        while (lvl >= 0 && current.next[lvl] == null) {
+            lvl--;
+        }
+
+        return lvl;
+    }
+
     /**
      * Choose randomly between the superior level or a level minor than superior.
      *
      * @return chosen level
      */
-    public int chooseLevel() {
+    private int chooseLevel() {
         int i;
         int r = Math.abs(rd.nextInt()) % powers[maximumLevel - 1] + 1;
 
@@ -52,11 +63,78 @@ public class IntSkipList {
     /**
      *
      */
-    public void choosePowers() {
+    private void choosePowers() {
         powers[maximumLevel - 1] = (2 << (maximumLevel - 1)) - 1; // 2^maximumLevel-1
 
         for (int i = maximumLevel - 2, j = 0; i >= 0; i--, j++)
             powers[i] = powers[i + 1] - (2 << j); // 2^(j+1)
+    }
+
+    /**
+     * Finds the major not null value.
+     *
+     * @return
+     */
+    private int findMajorNotNullValue() {
+        int lvl = maximumLevel - 1;
+        while (lvl >= 0 && root[lvl] == null) {
+            lvl--;
+        }
+
+        return lvl;
+    }
+
+    /**
+     * Insert new node.
+     *
+     * @param key Data value
+     */
+    public void insert(int key) {
+        IntSkipListNode[] previous = new IntSkipListNode[maximumLevel];
+        IntSkipListNode[] current = new IntSkipListNode[maximumLevel];
+        int currentLevel;
+
+        current[maximumLevel - 1] = root[maximumLevel - 1];
+        previous[maximumLevel - 1] = null;
+
+        for (currentLevel = maximumLevel - 1; currentLevel >= 0; currentLevel--) {
+
+            while (current[currentLevel] != null && current[currentLevel].key < key) {
+                previous[currentLevel] = current[currentLevel];
+                current[currentLevel] = current[currentLevel].next[currentLevel];
+            }
+
+            if (current[currentLevel] != null && current[currentLevel].key == key)
+                return;
+
+            if (currentLevel > 0) {
+                if (previous[currentLevel] == null) {
+                    current[currentLevel - 1] = root[currentLevel - 1];
+                    previous[currentLevel - 1] = null;
+                } else {
+                    current[currentLevel - 1] = previous[currentLevel].next[currentLevel - 1];
+                    previous[currentLevel - 1] = previous[currentLevel];
+                }
+            }
+
+        }
+
+        currentLevel = chooseLevel();
+
+        insertKeyValue(key, currentLevel, previous, current);
+    }
+
+    private void insertKeyValue(int key, int currentLevel, IntSkipListNode[] previous, IntSkipListNode[] current) {
+        IntSkipListNode newNode = new IntSkipListNode(key, currentLevel + 1);
+
+        for (int i = 0; i <= currentLevel; i++) {
+            newNode.next[i] = current[i];
+
+            if (previous[i] == null)
+                root[i] = newNode;
+            else
+                previous[i].next[i] = newNode;
+        }
     }
 
     /**
@@ -69,51 +147,17 @@ public class IntSkipList {
     }
 
     /**
-     * Insert new node.
+     * Print all elements in the list
      *
-     * @param key Data value
+     * @param out Print stream out
      */
-    public void skipListInsert(int key) {
-        IntSkipListNode[] previous = new IntSkipListNode[maximumLevel];
-        IntSkipListNode[] current = new IntSkipListNode[maximumLevel];
-        IntSkipListNode newNode;
-        int currentLevel;
+    public void printAll(PrintStream out) {
+        IntSkipListNode tmp = root[0];
 
-        current[maximumLevel - 1] = root[maximumLevel - 1];
-        previous[maximumLevel - 1] = null;
-
-        for (currentLevel = maximumLevel - 1; currentLevel >= 0; currentLevel--) {
-            while (current[currentLevel] != null && current[currentLevel].key < key) {
-                previous[currentLevel] = current[currentLevel];
-                current[currentLevel] = current[currentLevel].next[currentLevel];
-            }
-
-            if (current[currentLevel] != null && current[currentLevel].key == key)
-                return;
-
-            if (currentLevel > 0)
-                if (previous[currentLevel] == null) {
-                    current[currentLevel - 1] = root[currentLevel - 1];
-                    previous[currentLevel - 1] = null;
-                } else {
-                    current[currentLevel - 1] = previous[currentLevel].next[currentLevel - 1];
-                    previous[currentLevel - 1] = previous[currentLevel];
-                }
-
+        while (tmp != null) {
+            out.println("(key: " + tmp.key + ", next: " + tmp.next[0] + ")");
+            tmp = tmp.next[0];
         }
-
-        currentLevel = chooseLevel();
-
-        newNode = new IntSkipListNode(key, currentLevel + 1);
-
-        for (int i = 0; i >= currentLevel; i++) {
-            newNode.next[i] = current[i];
-
-            if (previous[i] == null)
-                root[i] = newNode;
-            else previous[i].next[i] = newNode;
-        }
-
     }
 
     /**
@@ -122,23 +166,20 @@ public class IntSkipList {
      * @param key Data value
      * @return The key found
      */
-    public int skipListSearch(int key) {
+    public int search(int key) {
         int lvl;
         IntSkipListNode previous;
         IntSkipListNode current;
 
-        // finds the major not null value
-        lvl = maximumLevel - 1;
-        while (lvl >= 0 && root[lvl] == null) {
-            lvl--;
-        }
+        lvl = findMajorNotNullValue();
 
         previous = current = root[lvl];
 
         while (true) {
             if (key == current.key)
                 return current.key;
-            else if (key > current.key) {
+
+            else if (key < current.key) {
                 if (lvl == 0)
                     return 0;
                 else if (current == root[lvl])
@@ -152,15 +193,32 @@ public class IntSkipList {
                     current = current.next[lvl];
                 else {
                     lvl--;
-                    while (lvl >= 0 && current.next[lvl] == null) {
-                        lvl--;
-                    }
+
+                    lvl = checkForCurrentLevel(lvl, current);
 
                     if (lvl >= 0)
                         current = current.next[lvl];
-                    else return 0;
+                    else
+                        return 0;
                 }
             }
         }
+    }
+
+    /**
+     * List size.
+     *
+     * @return Number of elements in list.
+     */
+    public int size() {
+        int size = 0;
+        IntSkipListNode tmp = root[0];
+
+        while (tmp != null) {
+            size++;
+            tmp = tmp.next[0];
+        }
+
+        return size;
     }
 }

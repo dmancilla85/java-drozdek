@@ -1,11 +1,15 @@
 package org.drozdek.lists;
 
+import org.drozdek.lists.iterators.SingleLinkedListIterator;
+
 import java.io.PrintStream;
+import java.util.Iterator;
 
 /**
  * Single linked list data structure.
+ * The head node is always the last added element.
  */
-public class SingleLinkedList<T> {
+public class SingleLinkedList<T> implements Iterable<T> {
     protected SingleLinkedListNode<T> head;
 
     /**
@@ -21,7 +25,7 @@ public class SingleLinkedList<T> {
      * @param data Data object
      */
     public void add(T data) {
-        head = new SingleLinkedListNode<T>(data, head);
+        head = new SingleLinkedListNode<>(data, head);
     }
 
     /**
@@ -31,12 +35,12 @@ public class SingleLinkedList<T> {
      */
     public void delete(T data) {
         if (head != null) {
-            if (data.equals(head.getData())) {
+            if (data.equals(head.data)) {
                 deleteHead();
             } else {
                 SingleLinkedListNode<T> predecessor = head;
                 SingleLinkedListNode<T> tmp = head.next;
-                while (tmp != null && !(tmp.getData().equals(data))) {
+                while (tmp != null && !(tmp.data.equals(data))) {
                     predecessor = predecessor.next;
                     tmp = tmp.next;
                 }
@@ -53,7 +57,7 @@ public class SingleLinkedList<T> {
      * @return Node erased
      */
     public T deleteHead() {
-        T el = head.getData();
+        T el = head.data;
         head = head.next;
         return el;
     }
@@ -66,13 +70,13 @@ public class SingleLinkedList<T> {
      */
     public T find(T data) {
         SingleLinkedListNode<T> tmp = head;
-        while (tmp != null && !data.equals(tmp.getData())) {
+        while (tmp != null && !data.equals(tmp.data)) {
             tmp = tmp.next;
         }
         if (tmp == null)
             return null;
 
-        else return tmp.getData();
+        else return tmp.data;
     }
 
     /**
@@ -81,16 +85,24 @@ public class SingleLinkedList<T> {
      * @return Data object
      */
     public T first() {
-        return head != null ? head.getData() : null;
+        return head != null ? head.data: null;
     }
 
     /**
-     * List is empty?
+     * Is list empty?
      *
      * @return True if list is empty
      */
     public boolean isEmpty() {
         return head == null;
+    }
+
+    /**
+     * @return iterator
+     */
+    @Override
+    public Iterator<T> iterator() {
+        return new SingleLinkedListIterator<>(this);
     }
 
     /**
@@ -101,8 +113,8 @@ public class SingleLinkedList<T> {
     public void printAll(PrintStream out) {
         String line;
 
-        for (SingleLinkedListNode<T> tmp = head; tmp != null; tmp = tmp.next) {
-            line = tmp == head ? "(*)" + tmp.getData() : "- " + tmp.getData();
+        for(T element: this) {
+            line = "- " + element;
             out.println(line);
         }
 
@@ -133,3 +145,4 @@ public class SingleLinkedList<T> {
         return head;
     }
 }
+
