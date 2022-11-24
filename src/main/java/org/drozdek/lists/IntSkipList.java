@@ -1,6 +1,7 @@
 package org.drozdek.lists;
 
-import java.io.PrintStream;
+import org.drozdek.commons.LoggerService;
+
 import java.util.Random;
 
 /**
@@ -149,15 +150,22 @@ public class IntSkipList {
     /**
      * Print all elements in the list
      *
-     * @param out Print stream out
      */
-    public void printAll(PrintStream out) {
+    public void printAll() {
         IntSkipListNode tmp = root[0];
+        StringBuilder line=new StringBuilder();
 
         while (tmp != null) {
-            out.println("(key: " + tmp.key + ", next: " + tmp.next[0] + ")");
+            line.append("(key: ");
+            line.append(tmp.key);
+            line.append(", next: ");
+            line.append(tmp.next[0]);
+            line.append(")");
+            line.append(System.lineSeparator());
             tmp = tmp.next[0];
         }
+
+        LoggerService.logInfo(line.toString());
     }
 
     /**

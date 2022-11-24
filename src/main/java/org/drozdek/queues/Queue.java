@@ -31,7 +31,7 @@ public class Queue<T> {
     /**
      * Enqueue a new element
      *
-     * @param element
+     * @param element Element to add
      */
     public void enqueue(T element) {
         list.addLast(element);

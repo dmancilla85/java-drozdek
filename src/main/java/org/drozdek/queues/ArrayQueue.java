@@ -1,6 +1,7 @@
 package org.drozdek.queues;
 
-import java.io.PrintStream;
+import org.drozdek.commons.LoggerService;
+
 import java.util.Arrays;
 
 /**
@@ -50,17 +51,17 @@ public class ArrayQueue {
     /**
      * Enqueue a new element
      *
-     * @param el
+     * @param element Element to add
      */
-    public void enqueue(Object el) {
+    public void enqueue(Object element) {
         if (last == size - 1 || last == -1) {
-            storage[0] = el;
+            storage[0] = element;
             last = 0;
 
             if (first == -1)
                 first = 0;
         } else
-            storage[++last] = el;
+            storage[++last] = element;
     }
 
     /**
@@ -93,11 +94,16 @@ public class ArrayQueue {
     /**
      * Print all elements in the queue.
      *
-     * @param out Print stream
      */
-    public void printAll(PrintStream out) {
-        for (int i = 0; i < size; i++)
-            out.print(storage[i] + " ");
+    public void printAll() {
+        StringBuilder line=new StringBuilder();
+
+        for (int i = 0; i < size; i++){
+            line.append(storage[i]);
+            line.append(" ");
+        }
+
+        LoggerService.logInfo(line.toString());
     }
 
     /**

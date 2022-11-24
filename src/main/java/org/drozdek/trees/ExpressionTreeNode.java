@@ -8,10 +8,6 @@ public class ExpressionTreeNode {
     protected ExpressionTreeNode left;
     protected ExpressionTreeNode right;
 
-    public ExpressionTreeNode() {
-        this(' ', null, null);
-    }
-
     public ExpressionTreeNode(char data) {
         this(data, null, null);
     }
@@ -28,11 +24,17 @@ public class ExpressionTreeNode {
         children.add(this.right);
 
         buffer.append(prefix);
+        buffer.append("< ");
         buffer.append(this.symbol);
+        buffer.append(" >");
         buffer.append('\n');
 
         for (Iterator<ExpressionTreeNode> it = children.iterator(); it.hasNext(); ) {
             ExpressionTreeNode next = it.next();
+
+            if(next==null)
+                continue;
+
             if (it.hasNext()) {
                 next.print(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
             } else {

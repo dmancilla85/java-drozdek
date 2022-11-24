@@ -6,10 +6,6 @@ public class IntThreadedTreeNode {
     protected IntThreadedTreeNode left;
     protected IntThreadedTreeNode right;
 
-    public IntThreadedTreeNode() {
-        this(0, null, null);
-    }
-
     public IntThreadedTreeNode(int value) {
         this(value, null, null);
     }

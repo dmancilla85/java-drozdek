@@ -8,10 +8,6 @@ class SuffixTreeNode {
     protected SuffixTreeNode suffixLink;
     protected int id; // for printing only
 
-    public SuffixTreeNode() {
-        this(128);
-    }
-
     public SuffixTreeNode(int sz) {
         id = cnt++;
         suffixLink = null;

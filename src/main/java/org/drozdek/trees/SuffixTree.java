@@ -1,5 +1,7 @@
 package org.drozdek.trees;
 
+import info.schnatterer.mobynamesgenerator.MobyNamesGenerator;
+
 import static java.lang.System.out;
 
 /**
@@ -7,6 +9,7 @@ import static java.lang.System.out;
  */
 public class SuffixTree {
     protected SuffixTreeNode root;
+    protected String name;
     protected int size;
     protected int offset;
     protected String text;
@@ -22,6 +25,7 @@ public class SuffixTree {
         offset = from;
         root = new SuffixTreeNode(size);
         root.suffixLink = root;
+        name= MobyNamesGenerator.getRandomName();
     }
 
     private SuffixTreeNode findCanonicalNode(SuffixTreeNode p, int rt) {
@@ -59,14 +63,23 @@ public class SuffixTree {
             else System.out.println(text.substring(lt, pos + 1) + " " + p.id);
             for (char i = 0; i < size; i++)
                 if (p.left[i] != -1)       // if a tree node
-                    printTree(p.descendants[i], lvl + 1, p.left[i], p.right[i], pos);
-        } else
-            System.out.println(text.substring(lt, pos + 1) + " [" + lt + " " + rt + "]");
+                    printTree(p.descendants[i], lvl + 1, p.left[i], p.right[i], pos+1);
+        } else if(pos+1 < text.length() && pos>lt)
+            System.out.println(text.substring(lt, pos+1) + " [" + lt + " " + rt + "]");
     }
 
-    public void printTree(int pos) {
-        System.out.println();
+    private void printTree(int pos) {
         printTree(root, 0, 0, 0, pos);
+    }
+
+    public void printTree(){
+        out.println("Name:  " + this.name);
+        out.println("Text: " + this.text);
+        out.println("---");
+        for (int i = 1; i < this.text.length(); i++) {
+            printTree(i);
+        }
+
     }
 
     SuffixTreeNode testAndSplit(SuffixTreeNode p, int i) {
@@ -130,7 +143,6 @@ public class SuffixTree {
             // and thus, endpoint = node(canonicalNodeEP,Lt,i)
             canonicalNodeAP = findCanonicalNode(canonicalNodeEP, i);
             // and so, active point = node(canonicalNodeAP,Lt,i)
-            printTree(i);
         }
     }
 

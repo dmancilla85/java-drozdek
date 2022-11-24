@@ -74,7 +74,8 @@ public class Trie {
             } else if (pos != NOT_FOUND && ((TrieNonLeaf) p).ptr[pos] != null) {
                 p = ((TrieNonLeaf) p).ptr[pos];
                 i++;
-            } else return false;
+            } else
+                return false;
         }
 
     }
@@ -154,7 +155,8 @@ public class Trie {
                 createLeaf(lf.suffix.charAt(offset),s,p);
                 return;
             } else {
-                p=(TrieNonLeaf) p.ptr[pos];
+                if(pos!=NOT_FOUND)
+                    p=(TrieNonLeaf) p.ptr[pos];
                 i++;
             }
         }

@@ -27,54 +27,40 @@ public class MaximumHeap {
         currentHeapSize = 0;
     }
 
-    // Driver code
-    public static void main() {
-        MaximumHeap h = new MaximumHeap(11);
-        h.insertKey(3);
-        h.insertKey(2);
-        h.deleteKey(1);
-        h.insertKey(15);
-        h.insertKey(5);
-        h.insertKey(4);
-        h.insertKey(45);
-
-        //Console.Write(h.extractMin() + " ")
-
-        //Console.Write(h.getMin() + " ")
-
-        h.decreaseKey(2, 1);
-        //Console.Write(h.getMin())
-    }
-
     // Changes value on a key
-    public void changeValueOnAKey(int key, int newVal) {
-        if (heapArray[key] == newVal) {
+    public void changeValueOnAKey(int index, int newVal) {
+        if (heapArray[index] == newVal) {
             return;
         }
-        if (heapArray[key] < newVal) {
-            increaseKey(key, newVal);
+        if (heapArray[index] < newVal) {
+            increaseKey(index, newVal);
         } else {
-            decreaseKey(key, newVal);
+            decreaseKey(index, newVal);
         }
     }
 
-    // Decreases value of given key to new_val. It is assumed that new_val is smaller than heapArray[key].
-    public void decreaseKey(int key, int newVal) {
-        heapArray[key] = newVal;
+    // Decreases value of given key to new_val.
+    // It is assumed that new_val is smaller than heapArray[key].
+    public void decreaseKey(int index, int newValue) {
 
-        while (key != 0 && heapArray[key] <
-                heapArray[parent(key)]) {
-            int temp = heapArray[key];
-            heapArray[key] = heapArray[parent(key)];
-            heapArray[parent(key)] = temp;
-            key = parent(key);
+        if(newValue >= heapArray[index])
+            return;
+
+        heapArray[index] = newValue;
+
+        while (index != 0 && heapArray[index] > heapArray[parent(index)]) {
+            int temp = heapArray[index];
+            heapArray[index] = heapArray[parent(index)];
+            heapArray[parent(index)] = temp;
+            index = parent(index);
         }
     }
 
     // This function deletes key at the given index. It first reduced value to max infinite, then calls extractMax()
-    public void deleteKey(int key) {
-        decreaseKey(key, Integer.MAX_VALUE);
-        extractMax();
+    public void deleteKey(int index) {
+        decreaseKey(index, Integer.MAX_VALUE);
+        int result = extractMax();
+        System.out.println(result);
     }
 
     // Method to remove maximum element
@@ -105,11 +91,16 @@ public class MaximumHeap {
         return heapArray[0];
     }
 
-    // Increases value of given key to new_val. It is assumed that new_val is greater than heapArray[key].
+    // Increases value of given key to new_val.
+    // It is assumed that new_val is greater than heapArray[key].
     // Heapify from the given key
-    public void increaseKey(int key, int newValue) {
-        heapArray[key] = newValue;
-        maxHeapify(key);
+    public void increaseKey(int index, int newValue) {
+
+        if(newValue <= heapArray[index])
+            return;
+
+        heapArray[index] = newValue;
+        maxHeapify(index);
     }
 
     // Inserts a new key
@@ -138,13 +129,13 @@ public class MaximumHeap {
     }
 
     // Get the Left Child index for the given index
-    public int left(int key) {
+    private int left(int key) {
         return 2 * key + 1;
     }
 
     // A recursive method to heapify a subtree with the root at given index
     // This method assumes that the subtrees are already heapified
-    public void maxHeapify(int index) {
+    private void maxHeapify(int index) {
         int l = left(index);
         int r = right(index);
 
@@ -167,12 +158,29 @@ public class MaximumHeap {
     }
 
     // Get the Parent index for the given index
-    public int parent(int key) {
+    private int parent(int key) {
         return (key - 1) / 2;
     }
 
     // Get the Right Child index for the given index
-    public int right(int key) {
+    private int right(int key) {
         return 2 * key + 2;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder array = new StringBuilder();
+        array.append("[");
+
+        for (int j=0; j<heapArray.length;j++) {
+            array.append(heapArray[j]);
+
+            if(j != heapArray.length-1){
+                array.append(", ");
+            }
+        }
+
+        array.append("]");
+        return array.toString();
     }
 }

@@ -1,11 +1,11 @@
 package queues;
 
+import org.drozdek.commons.LoggerService;
 import org.drozdek.queues.Queue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -30,6 +30,20 @@ class QueueTest {
         queue.enqueue(2);
 
         assertEquals(2, queue.size(), "The expected size doesn't match with the queue size");
+    }
+
+    @Test
+    @DisplayName("Check if after cleaning the queue is empty")
+    void clear(){
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
+        queue.enqueue(4);
+        queue.enqueue(5);
+        queue.enqueue(6);
+        queue.clear();
+
+        assertEquals(0, queue.size(), "The expected size doesn't match with zero");
     }
 
     @Test
@@ -66,7 +80,7 @@ class QueueTest {
 
         Integer first= queue.firstElement();
 
-        out.println(queue);
+        LoggerService.logInfo(queue.toString());
 
         assertEquals(4,queue.size(), "It seems that the first element has been removed");
         assertEquals(45,first, "The first element doesn't match with the expected");

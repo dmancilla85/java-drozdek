@@ -1,11 +1,11 @@
 package queues;
 
+import org.drozdek.commons.LoggerService;
 import org.drozdek.queues.ArrayQueue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -14,13 +14,26 @@ class ArrayQueueTest {
 
     @BeforeEach
     void setUp() {
-        queue = new ArrayQueue();
+        queue = new ArrayQueue(6);
     }
 
     @Test
     @DisplayName("A new stack always is empty")
     void isEmpty() {
         assertTrue(queue.isEmpty(), "The stack should be empty");
+    }
+
+    @Test
+    @DisplayName("A full stack should be informed as full")
+    void isFull() {
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
+        queue.enqueue(4);
+        queue.enqueue(5);
+        queue.enqueue(6);
+
+        assertTrue(queue.isFull(), "The stack should be marked as full");
     }
 
     @Test
@@ -66,7 +79,7 @@ class ArrayQueueTest {
 
         Integer first= (Integer) queue.firstElement();
 
-        out.println(queue);
+        LoggerService.logInfo(queue.toString());
 
         assertEquals(4,queue.size(), "It seems that the first element has been removed");
         assertEquals(45,first, "The first element doesn't match with the expected");

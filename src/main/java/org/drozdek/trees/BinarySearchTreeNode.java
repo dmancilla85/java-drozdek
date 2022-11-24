@@ -26,13 +26,16 @@ public class BinarySearchTreeNode<T> {
         LinkedList<BinarySearchTreeNode<T>> children = new LinkedList<>();
         children.add(this.left);
         children.add(this.right);
-
         buffer.append(prefix);
         buffer.append(this.key);
-        buffer.append('\n');
+        buffer.append(System.lineSeparator());
 
         for (Iterator<BinarySearchTreeNode<T>> it = children.iterator(); it.hasNext(); ) {
             BinarySearchTreeNode<T> next = it.next();
+
+            if(next== null)
+                continue;
+
             if (it.hasNext()) {
                 next.print(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
             } else {
@@ -44,6 +47,7 @@ public class BinarySearchTreeNode<T> {
     @Override
     public String toString() {
         StringBuilder buffer = new StringBuilder(50);
+        buffer.append(System.lineSeparator());
         print(buffer, "", "");
         return buffer.toString();
     }

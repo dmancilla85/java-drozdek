@@ -1,8 +1,8 @@
 package org.drozdek.lists;
 
+import org.drozdek.commons.LoggerService;
 import org.drozdek.lists.iterators.SingleLinkedListIterator;
 
-import java.io.PrintStream;
 import java.util.Iterator;
 
 /**
@@ -85,7 +85,7 @@ public class SingleLinkedList<T> implements Iterable<T> {
      * @return Data object
      */
     public T first() {
-        return head != null ? head.data: null;
+        return head != null ? head.data : null;
     }
 
     /**
@@ -107,18 +107,18 @@ public class SingleLinkedList<T> implements Iterable<T> {
 
     /**
      * Print all nodes in the list.
-     *
-     * @param out Print stream
      */
-    public void printAll(PrintStream out) {
-        String line;
+    public void printAll() {
+        StringBuilder line = new StringBuilder();
+        line.append("[");
 
-        for(T element: this) {
-            line = "- " + element;
-            out.println(line);
+        for (T element : this) {
+            line.append(element);
+            line.append(" ");
         }
+        line.append("]");
 
-        out.println();
+        LoggerService.logInfo(line.toString());
     }
 
     /**

@@ -1,23 +1,23 @@
 package lists;
 
+import org.drozdek.commons.LoggerService;
 import org.drozdek.lists.SingleLinkedList;
 import org.drozdek.lists.SingleLinkedListNode;
 import org.junit.jupiter.api.Test;
 
-import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SingleLinkedListTest {
 
     @Test
     void isEmpty() {
-        SingleLinkedList<Integer> list = new SingleLinkedList();
+        SingleLinkedList<Integer> list = new SingleLinkedList<>();
         assertTrue (list.isEmpty());
     }
 
     @Test
     void first() {
-        SingleLinkedList<Integer> list=new SingleLinkedList();
+        SingleLinkedList<Integer> list=new SingleLinkedList<>();
         Integer a = 2, b=3, c=4;
         Integer t = 4;
 
@@ -31,18 +31,18 @@ class SingleLinkedListTest {
 
     @Test
     void printAll() {
-        SingleLinkedList<String> list = new SingleLinkedList();
+        SingleLinkedList<String> list = new SingleLinkedList<>();
         list.add("43");
         list.add("hello");
         list.add("12.34");
 
-        list.printAll(out);
+        list.printAll();
         assertNotNull(list);
     }
 
     @Test
     void add() {
-        SingleLinkedList<Integer> list=new SingleLinkedList();
+        SingleLinkedList<Integer> list=new SingleLinkedList<>();
         Integer a = 2;
 
         list.add(a);
@@ -52,7 +52,7 @@ class SingleLinkedListTest {
 
     @Test
     void size() {
-        SingleLinkedList<Integer> list=new SingleLinkedList();
+        SingleLinkedList<Integer> list=new SingleLinkedList<>();
         Integer a = 2,size=4;
 
         list.add(a);
@@ -65,7 +65,7 @@ class SingleLinkedListTest {
 
     @Test
     void find() {
-        SingleLinkedList<Integer> list=new SingleLinkedList();
+        SingleLinkedList<Integer> list=new SingleLinkedList<>();
         Integer a = 2, b=3, c=4, d=10, e=16;
         Integer t = 4;
 
@@ -75,7 +75,7 @@ class SingleLinkedListTest {
         list.add(d);
         list.add(e);
 
-        list.printAll(out);
+        list.printAll();
 
         Integer match = list.find(t);
         assertEquals(0, match.compareTo(t));
@@ -83,7 +83,7 @@ class SingleLinkedListTest {
 
     @Test
     void deleteHead() {
-        SingleLinkedList<Integer> list=new SingleLinkedList();
+        SingleLinkedList<Integer> list=new SingleLinkedList<>();
         Integer a = 2, b=3, c=4, d=10, e=16;
 
         list.add(a);
@@ -92,12 +92,12 @@ class SingleLinkedListTest {
         list.add(d);
         list.add(e);
 
-        out.println("Before deleting head: ");
-        list.printAll(out);
+        LoggerService.logInfo("Before deleting head: ");
+        list.printAll();
         Integer match = list.deleteHead();
 
-        out.println("After deleting head: ");
-        list.printAll(out);
+        LoggerService.logInfo("After deleting head: ");
+        list.printAll();
 
         Integer check =list.find(e);
         assertEquals(0, match.compareTo(e));
@@ -106,7 +106,7 @@ class SingleLinkedListTest {
 
     @Test
     void delete() {
-        SingleLinkedList<Integer> list=new SingleLinkedList();
+        SingleLinkedList<Integer> list=new SingleLinkedList<>();
         Integer a = 2, b=3, c=4, d=10, e=16;
 
         list.add(a);
@@ -115,12 +115,12 @@ class SingleLinkedListTest {
         list.add(d);
         list.add(e);
 
-        out.println("Before deleting " + c + ": ");
-        list.printAll(out);
+        LoggerService.logInfo("Before deleting " + c + ": ");
+        list.printAll();
         list.delete(c);
 
-        out.println("After deleting " + c + ": ");
-        list.printAll(out);
+        LoggerService.logInfo("After deleting " + c + ": ");
+        list.printAll();
 
         Integer check = list.find(c);
 
@@ -129,7 +129,7 @@ class SingleLinkedListTest {
 
     @Test
     void viewHead(){
-        SingleLinkedList<String> list = new SingleLinkedList();
+        SingleLinkedList<String> list = new SingleLinkedList<>();
         String test = "bye";
 
         list.add("Hi");
@@ -137,8 +137,8 @@ class SingleLinkedListTest {
         list.add("234.34");
         list.add("bye");
 
-        SingleLinkedListNode node = list.viewHeadNode();
-        out.println(node);
+        SingleLinkedListNode<String> node = list.viewHeadNode();
+        LoggerService.logInfo(node.toString());
         assertEquals(node.getData(), test);
     }
 }

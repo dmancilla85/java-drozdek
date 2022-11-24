@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
 
 class IntThreadedTreeTest {
@@ -41,7 +40,8 @@ class IntThreadedTreeTest {
         tree.insert(65);
         tree.insert(19);
 
-        tree.threadInOrder(out);
+        tree.threadInOrder(System.out);
+
 
         assertEquals(6, tree.size(), "The tree size is not the expected");
     }
@@ -56,7 +56,8 @@ class IntThreadedTreeTest {
         tree.insert(65);
         tree.insert(19);
 
-        tree.printInOrder(out);
+        tree.printInOrder(System.out);
+
 
         assertEquals(6, tree.size(), "The tree size is not the expected");
     }

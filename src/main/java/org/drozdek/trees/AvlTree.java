@@ -14,39 +14,31 @@ public class AvlTree {
 
     AvlTreeNode root;
 
-    public static void main(String[] args) {
-        AvlTree tree = new AvlTree();
-
-        /* Constructing tree given in the above figure */
-        tree.root = tree.insertNode(tree.root, 10);
-        tree.root = tree.insertNode(tree.root, 20);
-        tree.root = tree.insertNode(tree.root, 30);
-        tree.root = tree.insertNode(tree.root, 40);
-        tree.root = tree.insertNode(tree.root, 50);
-        tree.root = tree.insertNode(tree.root, 25);
-
-        /* The constructed AVL Tree would be
-             30
-            /  \
-          20   40
-         /  \     \
-        10  25    50
-        */
-        System.out.println("Preorder traversal" +
-                " of constructed tree is : ");
-        tree.preOrder(tree.root);
-    }
-
     // Get Balance factor of node N
-    int getBalance(AvlTreeNode N) {
+    private int getBalance(AvlTreeNode N) {
         if (N == null)
             return 0;
 
         return height(N.left) - height(N.right);
     }
 
+    private int countNodes(AvlTreeNode node) {
+
+        //base case
+        if (node == null)
+            return 0;
+
+        //recursive call to left child and right child and
+        // add the result of these with 1 ( 1 for counting the root)
+        return 1 + countNodes(node.left) + countNodes(node.right);
+    }
+
+    public int size() {
+        return countNodes(root);
+    }
+
     // A utility function to get the height of the tree
-    int height(AvlTreeNode n) {
+    public int height(AvlTreeNode n) {
         if (n == null)
             return 0;
 
@@ -57,7 +49,7 @@ public class AvlTree {
         root = insertNode(root, key);
     }
 
-    protected AvlTreeNode insertNode(AvlTreeNode node, int key) {
+    private AvlTreeNode insertNode(AvlTreeNode node, int key) {
 
         /* 1.  Perform the normal BST insertion */
         if (node == null)
@@ -105,7 +97,7 @@ public class AvlTree {
 
     // A utility function to left rotate subtree rooted with x
     // See the diagram given above.
-    AvlTreeNode leftRotate(AvlTreeNode a) {
+    private AvlTreeNode leftRotate(AvlTreeNode a) {
         AvlTreeNode b = a.right;
         AvlTreeNode t2 = b.left;
 
@@ -124,7 +116,7 @@ public class AvlTree {
     // A utility function to print preorder traversal
     // of the tree.
     // The function also prints height of every node
-    void preOrder(AvlTreeNode node) {
+    private void preOrder(AvlTreeNode node) {
         if (node != null) {
             System.out.print(node.key + " ");
             preOrder(node.left);
@@ -132,9 +124,51 @@ public class AvlTree {
         }
     }
 
+    // A utility function to print preorder traversal
+    // of the tree.
+    // The function also prints height of every node
+    private void inOrder(AvlTreeNode node) {
+        if (node != null) {
+            inOrder(node.left);
+            System.out.print(node.key + " ");
+            inOrder(node.right);
+        }
+    }
+
+    // A utility function to print preorder traversal
+    // of the tree.
+    // The function also prints height of every node
+    private void postOrder(AvlTreeNode node) {
+        if (node != null) {
+            postOrder(node.left);
+            postOrder(node.right);
+            System.out.print(node.key + " ");
+        }
+    }
+
+    @Override
+    public String toString(){
+        return root.toString();
+    }
+
+    public void preOrder(){
+        preOrder(root);
+        System.out.println();
+    }
+
+    public void postOrder(){
+        postOrder(root);
+        System.out.println();
+    }
+
+    public void inOrder(){
+        inOrder(root);
+        System.out.println();
+    }
+
     // A utility function to right rotate subtree rooted with y
     // See the diagram given above.
-    AvlTreeNode rightRotate(AvlTreeNode b) {
+    private AvlTreeNode rightRotate(AvlTreeNode b) {
         AvlTreeNode a = b.left;
         AvlTreeNode t2 = a.right;
 

@@ -1,6 +1,6 @@
 package org.drozdek.lists;
 
-import java.io.PrintStream;
+import org.drozdek.commons.LoggerService;
 
 /**
  * Circular linked list data structure.
@@ -81,16 +81,19 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
     }
 
     @Override
-    public void printAll(PrintStream out) {
-        String line;
+    public void printAll() {
+        StringBuilder line=new StringBuilder();
         int i = 0;
         int size = size();
-        out.println("Size: " + size);
+        line.append("[");
 
         for (SingleLinkedListNode<T> tmp = head; i++ < size; tmp = tmp.next) {
-            line = tmp == head ? "(*)" + tmp.data : "- " + tmp.data;
-            out.println(line);
+            line.append(tmp == head ? "*" + tmp.data : tmp.data);
+            line.append(i!=size? ", ":"");
         }
+        line.append("]");
+
+        LoggerService.logInfo(line.toString());
     }
 
     @Override

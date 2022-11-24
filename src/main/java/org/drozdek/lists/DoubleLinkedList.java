@@ -1,8 +1,8 @@
 package org.drozdek.lists;
 
+import org.drozdek.commons.LoggerService;
 import org.drozdek.lists.iterators.DoubleLinkedListIterator;
 
-import java.io.PrintStream;
 import java.util.Iterator;
 
 /**
@@ -117,27 +117,29 @@ public class DoubleLinkedList<T> implements Iterable<T> {
     /**
      * Print all nodes in the list.
      *
-     * @param out Print stream
      */
-    public void printAll(PrintStream out) {
-        String line;
+    public void printAll() {
+        StringBuilder line=new StringBuilder();
+        line.append("[");
 
         for(T element: this) {
-            line = "- " + element;
-            out.println(line);
+            line.append(element);
+            line.append(" ");
         }
+        line.append("]");
+
+        LoggerService.logInfo(line.toString());
     }
 
     /**
      * Print all nodes in the list from the tail.
      *
-     * @param out Print stream
      */
-    public void printReverse(PrintStream out) {
+    public void printReverse() {
         String line;
         for (DoubleLinkedListNode<T> tmp = tail; tmp != null; tmp = tmp.previous) {
             line = tmp == head ? "(*)" + tmp.data : "- " + tmp.data;
-            out.println(line);
+            LoggerService.logInfo(line);
         }
     }
 

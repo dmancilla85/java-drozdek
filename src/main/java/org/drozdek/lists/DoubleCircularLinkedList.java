@@ -1,6 +1,6 @@
 package org.drozdek.lists;
 
-import java.io.PrintStream;
+import org.drozdek.commons.LoggerService;
 
 /**
  * Double circular linked list data structure.
@@ -68,15 +68,20 @@ public class DoubleCircularLinkedList<T> extends DoubleLinkedList<T> {
     }
 
     @Override
-    public void printAll(PrintStream out) {
-        String line;
+    public void printAll() {
+        StringBuilder line=new StringBuilder();
         int i = 0;
         int size = size();
+        line.append("[");
 
         for (DoubleLinkedListNode<T> tmp = head; i++ < size; tmp = tmp.next) {
-            line = tmp == head ? "(*)" + tmp.data : "- " + tmp.data;
-            out.println(line);
+            line.append(tmp == head ? "*" + tmp.data : tmp.data);
+            line.append(i!=size? ", ":"");
         }
+
+        line.append("]");
+
+        LoggerService.logInfo(line.toString());
     }
 
     @Override

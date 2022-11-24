@@ -3,16 +3,14 @@ package org.drozdek.trees;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/**
+ * TODO: Is the same as the binary search node with height. Replace it.
+ */
 public class AvlTreeNode {
     protected int height;
     protected int key;
     protected AvlTreeNode left;
     protected AvlTreeNode right;
-
-    public AvlTreeNode() {
-        this(0, null, null);
-    }
-
     public AvlTreeNode(int data) {
         this(data, null, null);
     }
@@ -34,6 +32,10 @@ public class AvlTreeNode {
 
         for (Iterator<AvlTreeNode> it = children.iterator(); it.hasNext(); ) {
             AvlTreeNode next = it.next();
+
+            if(next== null)
+                continue;
+
             if (it.hasNext()) {
                 next.print(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
             } else {

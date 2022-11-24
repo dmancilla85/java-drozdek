@@ -24,12 +24,15 @@ public class BinarySearchTree<T> {
     public BinarySearchTree() {
         root = null;
     }
+    public BinarySearchTree(BinarySearchTreeNode<T> root) {
+        this.root = root;
+    }
 
     /**
      * Function to convert input BST to right linked list known as vine or backbone.
      *
-     * @param grand
-     * @return
+     * @param grand Grandfather node
+     * @return Count
      */
     private static int binarySearchTreeToVine(BinarySearchTreeNode<Integer> grand) {
         int count = 0;
@@ -62,7 +65,7 @@ public class BinarySearchTree<T> {
     /**
      * Function to compress given tree with its root as grand right
      *
-     * @param grand
+     * @param grand Grandfather node
      * @param m
      */
     private static void compress(BinarySearchTreeNode<Integer> grand, int m) {
@@ -86,8 +89,8 @@ public class BinarySearchTree<T> {
     /**
      * Function to calculate the log base 2 of an integer
      *
-     * @param n
-     * @return
+     * @param n An integer x
+     * @return Log base of x
      */
     private static int log2(int n) {
         // calculate log2 N indirectly using log() method
@@ -99,10 +102,12 @@ public class BinarySearchTree<T> {
      * minimum height, but also forces all the nodes on the bottommost level to be filled from left to right.
      * The running time is O(n), where 'n' is the number of nodes in tree.
      *
-     * @param root
-     * @return
+     * @param tree Tree to balance
+     * @return A balanced tree
      */
-    public static BinarySearchTreeNode<Integer> balanceWithDSW(BinarySearchTreeNode<Integer> root) {
+    public static BinarySearchTree<Integer> balanceWithDSW(BinarySearchTree<Integer> tree) {
+        BinarySearchTreeNode<Integer> root = tree.root;
+
         // create dummy node with value 0
         BinarySearchTreeNode<Integer> grand = new BinarySearchTreeNode<>(0);
 
@@ -127,18 +132,20 @@ public class BinarySearchTree<T> {
         }
 
         // return the balanced tree
-        return grand.right;
+        return new BinarySearchTree<>(grand.right);
     }
 
     /**
      * This balance algorithm requires a previously sorted additional array
      *
      * @param data  A sorted data array
-     * @param first First element
-     * @param last  Last element
      */
-    public void balanceWithDataArray(Comparable<T>[] data, int first, int last) {
-        if (first < last) {
+    public void balanceWithDataArray(Comparable<T>[] data){
+        balanceWithDataArray(data,0,data.length-1);
+    }
+
+    private void balanceWithDataArray(Comparable<T>[] data, int first, int last) {
+        if (first <=last) {
             int middle = (first + last) / 2;
             insert(data[middle]);
             balanceWithDataArray(data, first, middle - 1);
@@ -169,30 +176,38 @@ public class BinarySearchTree<T> {
         }
     }
 
-    private int countNodes(BinarySearchTreeNode<T> root) {
+    private int countNodes(BinarySearchTreeNode<T> node) {
 
         //base case
-        if (root == null)
+        if (node == null)
             return 0;
 
         //recursive call to left child and right child and
         // add the result of these with 1 ( 1 for counting the root)
-        return 1 + countNodes(root.left) + countNodes(root.right);
+        return 1 + countNodes(node.left) + countNodes(node.right);
     }
 
-    public int deleteByCopying(Comparable<T> data) {
+    /**
+     * Delete node by copying branches
+     * @param data Key to delete
+     * @return Operation code
+     */
+    public int deleteByCopying(T data) {
         BinarySearchTreeNode<T> node;
-        BinarySearchTreeNode<T> p = root;
-        BinarySearchTreeNode<T> prev = null;
+        BinarySearchTreeNode<T> p;
+        BinarySearchTreeNode<T> prev;
 
         BinarySearchTreeNode<T>[] results = setUpDelete(data);
         p = results[0];
         prev = results[1];
         node = p;
 
-        if (p == null || p.key != data)
+        if(p==null)
+            return 1;
+
+        if (p.key != data)
             // 1: empty tree  / -1:  key not found
-            return root != null ? -1 : 1;
+            return -1;
 
         if (node.right == null)
             node = node.left;
@@ -222,7 +237,12 @@ public class BinarySearchTree<T> {
         return 0;
     }
 
-    public int deleteByMerging(Comparable<T> data) {
+    /**
+     * Delete node by merging branches
+     * @param data Key to delete
+     * @return Operation code
+     */
+    public int deleteByMerging(T data) {
         BinarySearchTreeNode<T> tmp;
         BinarySearchTreeNode<T> node;
         BinarySearchTreeNode<T> p;
@@ -233,9 +253,12 @@ public class BinarySearchTree<T> {
         prev = results[1];
         node = p;
 
-        if (p == null || p.key != data)
+        if(p==null)
+            return 1;
+
+        if (p.key != data)
             // 1: empty tree  / -1:  key not found
-            return root != null ? -1 : 1;
+            return -1;
 
         if (node.right == null)
             node = node.left;
@@ -261,7 +284,8 @@ public class BinarySearchTree<T> {
     }
 
     /**
-     * @param out
+     * Print in-order
+     * @param out Printing in order
      */
     public void inorder(PrintStream out) {
         inorder(root, out);
@@ -270,8 +294,8 @@ public class BinarySearchTree<T> {
     /**
      * Recursive implementation for the in-order tree path
      *
-     * @param p
-     * @param out
+     * @param p Node to print
+     * @param out Print stream
      */
     protected void inorder(BinarySearchTreeNode<T> p, PrintStream out) {
         if (p == null)
@@ -282,6 +306,10 @@ public class BinarySearchTree<T> {
         inorder(p.right, out);
     }
 
+    /**
+     * Insert a new node in the tree.
+     * @param data Value to insert in the tree
+     */
     public void insert(Comparable<T> data) {
         BinarySearchTreeNode<T> p = root;
         BinarySearchTreeNode<T> previous = null;
@@ -438,29 +466,26 @@ public class BinarySearchTree<T> {
      * are rolled back to restore the original tree.
      */
     public void morrisPostOrder(PrintStream out) {
-        BinarySearchTreeNode<T> p = new BinarySearchTreeNode<>();
+        BinarySearchTreeNode<T> p = root;
         BinarySearchTreeNode<T> tmp;
 
-        p.left = root;
-
         while (p != null) {
-            if (p.left == null) {
+            if (p.right == null) {
                 visit(p, out);
-                p = p.right;
+                p = p.left;
             } else {
-                tmp = p.left;
+                tmp = p.right;
 
                 // moves to the rightmost node in left subtree, otherwise moves to the p temporal parent
-                while (tmp.right != null && tmp.right != p)
-                    tmp = tmp.right;
+                while (tmp.left != null && tmp.left != p)
+                    tmp = tmp.left;
 
                 // if the rightmost node was reached, it turns in a temporal parent of the current root
-                if (tmp.right == null) {
-                    // Node is visited before the tree transformation
-                    visit(p, out);
-                    // TODO: Check if it works
+                if (tmp.left == null) {
+                    // Node is visited after the tree transformation
                     tmp.left = p;
                     p = p.right;
+                    visit(p, out);
                 } else {
                     tmp.left = null;
                     p = p.left;
@@ -568,7 +593,7 @@ public class BinarySearchTree<T> {
         return search(this.root, key);
     }
 
-    private BinarySearchTreeNode<T>[] setUpDelete(Comparable<T> key) {
+    private BinarySearchTreeNode<T>[] setUpDelete(T key) {
         BinarySearchTreeNode<T>[] vars = new BinarySearchTreeNode[2];
         vars[0] = root;
         vars[1] = null;
@@ -576,7 +601,7 @@ public class BinarySearchTree<T> {
         while (vars[0] != null && vars[0].key != key) {
             vars[1] = vars[0];
 
-            if (vars[0].key.compareTo((T) key) > 0) // should be<
+            if (vars[0].key.compareTo(key) < 0)
                 vars[0] = vars[0].right;
             else
                 vars[0] = vars[0].left;
@@ -585,6 +610,10 @@ public class BinarySearchTree<T> {
         return vars;
     }
 
+    /**
+     * Number of nodes in the tree.
+     * @return The number of elements in node
+     */
     public int size() {
         return countNodes(root);
     }
@@ -594,7 +623,7 @@ public class BinarySearchTree<T> {
         return root.toString();
     }
 
-    protected void visit(BinarySearchTreeNode p, PrintStream out) {
+    protected void visit(BinarySearchTreeNode<T> p, PrintStream out) {
         out.println(p.key + " ");
     }
 }

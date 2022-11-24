@@ -16,6 +16,14 @@ public class ExpressionTree {
         root = null;
     }
 
+    public ExpressionTree(String postfix) {
+
+        if(postfix==null || postfix.isEmpty()) {
+            root=null;
+        } else
+            root = insertPostFix(postfix);
+    }
+
     public static boolean isOperator(char ch) {
         return ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^';
     }
@@ -62,8 +70,13 @@ public class ExpressionTree {
         return temp;
     }
 
-    // print the inorder traversal of tree
-    public static void inorder(ExpressionTreeNode root) {
+    /**
+     * Check if tree is empty
+     * @return True if the tree is empty
+     */
+    public boolean isEmpty(){return root==null;}
+
+    private static void inorder(ExpressionTreeNode root) {
         // return if root is null
         if (root == null) return;
 
@@ -73,22 +86,14 @@ public class ExpressionTree {
         inorder(root.right);
     }
 
-    // main function
-    public static void main(String[] args) {
-        // postfix expression
-        String expression = "AB*CD/+";
-        // is A*B+C/D
-
-        // calling our algorithm
-        ExpressionTreeNode root = insertPostFix(expression);
-
-        System.out.print("Inorder Expression: ");
-        // printing the expression tree inorder
-        inorder(root);
-        System.out.println();
+    /**
+     * Print the inorder traversal of tree
+     */
+    public void inorder(){
+        inorder(this.root);
     }
 
-    private int compute(int num2, int num1, char token) {
+    private static int compute(int num2, int num1, char token) {
         return switch (token) {
             case '+' -> num1 + num2;
             case '-' -> num1 - num2;
@@ -97,12 +102,18 @@ public class ExpressionTree {
         };
     }
 
-    public int evaluateExpression(String expression) {
+    /**
+     * Evaluate if an expression is well parsed.
+     * @param expression Expression to evaluate
+     * @return Zero if the expression is correct
+     */
+    public static int evaluateExpression(String expression) {
         if (expression == null || expression.length() == 0) {
             return 0;
         }
         Deque<Integer> numStack = new ArrayDeque<>();
         Deque<Character> opStack = new ArrayDeque<>();
+
         for (char token : expression.toCharArray()) {
             if (isNumber(token)) {
                 numStack.push((int) token);
@@ -114,7 +125,8 @@ public class ExpressionTree {
                 }
                 opStack.pop();  // pop out "("
             } else {
-                while (!opStack.isEmpty() && getPriority(opStack.peek()) >= getPriority(token)) {
+                while (!opStack.isEmpty() && getPriority(opStack.peek()) >= getPriority(token)
+                && !numStack.isEmpty()) {
                     numStack.push(compute(numStack.pop(), numStack.pop(), opStack.pop()));
                 }
                 opStack.push(token);
@@ -126,7 +138,7 @@ public class ExpressionTree {
         return numStack.isEmpty() ? 0 : numStack.pop();
     }
 
-    private int getPriority(char op) {
+    private static int getPriority(char op) {
         if (op == '(') {
             return 0;
         } else if (op == '+' || op == '-') {
@@ -136,7 +148,12 @@ public class ExpressionTree {
         }
     }
 
-    private boolean isNumber(char token) {
+
+    @Override
+    public String toString(){
+        return this.root.toString();
+    }
+    private static boolean isNumber(char token) {
         return Character.isDigit(token);
     }
 }

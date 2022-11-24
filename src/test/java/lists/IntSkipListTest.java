@@ -1,13 +1,11 @@
 package lists;
 
+import org.drozdek.commons.LoggerService;
 import org.drozdek.lists.IntSkipList;
-import org.drozdek.lists.IntSkipListNode;
-import org.drozdek.stacks.Stack;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
 
 class IntSkipListTest {
@@ -55,8 +53,8 @@ class IntSkipListTest {
         list.insert(676);
         list.insert(17);
 
-        out.println("List with inserted elements");
-        list.printAll(out);
+        LoggerService.logInfo("List with inserted elements");
+        list.printAll();
 
        assertEquals(16, list.size(), "The list size doesn't match with the expected");
     }
