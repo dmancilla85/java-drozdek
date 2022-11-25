@@ -1,5 +1,5 @@
-# Data Structures in Java
-## A small collection based on the book Data Structures and Algorithms in Java by Adam Drozdek
+# Data Structures and Algorithms in Java
+## A small collection of abstract data types and algorithms based on the book Data Structures and Algorithms in Java by Adam Drozdek.
 
 [![CodeQL](https://github.com/dmancilla85/java-drozdek/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/dmancilla85/java-drozdek/actions/workflows/codeql.yml)
 
