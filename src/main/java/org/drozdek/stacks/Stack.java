@@ -19,15 +19,6 @@ public class Stack<T> {
     /**
      * Constructor.
      *
-     * @param n size
-     */
-    public Stack(int n) {
-        this(n, new ArrayList<>());
-    }
-
-    /**
-     * Constructor.
-     *
      * @param n    size
      * @param pool Storage pool
      */

@@ -1,7 +1,6 @@
 package trees;
 
 import org.drozdek.trees.ExpressionTree;
-import org.drozdek.trees.ExpressionTreeNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

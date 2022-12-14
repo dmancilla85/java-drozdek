@@ -2,16 +2,15 @@ package org.drozdek.trees;
 
 import info.schnatterer.mobynamesgenerator.MobyNamesGenerator;
 
-import static java.lang.System.out;
 
 /**
  *
  */
 public class SuffixTree {
-    protected SuffixTreeNode root;
-    protected String name;
-    protected int size;
-    protected int offset;
+    protected final SuffixTreeNode root;
+    protected final String name;
+    protected final int size;
+    protected final int offset;
     protected String text;
     private int left = 1;
     private boolean endPoint;
@@ -50,36 +49,65 @@ public class SuffixTree {
         return p;
     }
 
-    private void printTree(SuffixTreeNode p, int lvl, int lt, int rt, int pos) {
-        for (int i = 1; i <= lvl; i++)
-            System.out.print("   ");
-        if (p != null) {                    // if a nonleaf
+    private String printTree(SuffixTreeNode p, int lvl, int lt, int rt, int pos) {
+
+        StringBuilder tree=new StringBuilder();
+
+        tree.append("   ".repeat(Math.max(0, lvl)));
+
+        if (p != null) { // if a nonleaf
             if (p == root)
-                System.out.println(p.id);
-            else if (p.suffixLink != null) // to print in the middle of
-                System.out.println(text.substring(lt, rt + 1) // update
-                        + " " + p.id + " " + p.suffixLink.id
-                        + " [" + lt + " " + rt + "]");
-            else System.out.println(text.substring(lt, pos + 1) + " " + p.id);
+                tree.append(p.id);
+            else if (p.suffixLink != null){
+                // to print in the middle of
+                tree.append(text, lt, rt + 1);
+                tree.append(" ");
+                tree.append(p.id);
+                tree.append(" ");
+                tree.append(p.suffixLink.id);
+                tree.append(" [");
+                tree.append(lt);
+                tree.append(" ");
+                tree.append(rt);
+                tree.append("]");
+            }
+            else {
+                tree.append(text, lt, pos + 1);
+                tree.append(" ");
+                tree.append(p.id);
+            }
             for (char i = 0; i < size; i++)
-                if (p.left[i] != -1)       // if a tree node
-                    printTree(p.descendants[i], lvl + 1, p.left[i], p.right[i], pos+1);
-        } else if(pos+1 < text.length() && pos>lt)
-            System.out.println(text.substring(lt, pos+1) + " [" + lt + " " + rt + "]");
-    }
-
-    private void printTree(int pos) {
-        printTree(root, 0, 0, 0, pos);
-    }
-
-    public void printTree(){
-        out.println("Name:  " + this.name);
-        out.println("Text: " + this.text);
-        out.println("---");
-        for (int i = 1; i < this.text.length(); i++) {
-            printTree(i);
+                if (p.left[i] != -1){// if a tree node
+                    tree.append(printTree(p.descendants[i], lvl + 1, p.left[i], p.right[i], pos+1));
+                }
+        } else if(pos+1 < text.length() && pos>lt){
+            tree.append(text, lt, pos+1);
+            tree.append(" [");
+            tree.append(lt);
+            tree.append(" ");
+            tree.append(rt);
+            tree.append("]");
         }
 
+        return tree.toString();
+    }
+
+    private String printTree(int pos) {
+        return printTree(root, 0, 0, 0, pos);
+    }
+
+    public String printTree(){
+        StringBuilder tree=new StringBuilder();
+        tree.append("Name:  ");
+        tree.append(this.name);
+        tree.append("Text: ");
+        tree.append(this.text);
+        tree.append("---");
+        for (int i = 1; i < this.text.length(); i++) {
+            tree.append(printTree(i));
+        }
+
+        return tree.toString();
     }
 
     SuffixTreeNode testAndSplit(SuffixTreeNode p, int i) {

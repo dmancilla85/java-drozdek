@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class ExpressionTreeNode {
-    protected char symbol;
+    protected final char symbol;
     protected ExpressionTreeNode left;
     protected ExpressionTreeNode right;
 

@@ -1,5 +1,6 @@
 package trees;
 
+import org.drozdek.commons.LoggerService;
 import org.drozdek.trees.AvlTree;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -26,10 +27,8 @@ class AvlTreeTest {
         /* Constructing tree given in the above figure */
         dumpData();
 
-        System.out.println("In-order traversal" +
-                " of constructed tree is : ");
-
-        tree.inOrder();
+        LoggerService.logInfo("In-order traversal of constructed tree is : ");
+        LoggerService.logInfo(tree.inOrder());
         assertEquals(6, tree.size(), "The size of the tree doesn't match with the expected");
     }
 
@@ -39,10 +38,9 @@ class AvlTreeTest {
         /* Constructing tree given in the above figure */
         dumpData();
 
-        System.out.println("Post-order traversal" +
-                " of constructed tree is : ");
+        LoggerService.logInfo("Post-order traversal of constructed tree is : ");
+        LoggerService.logInfo(tree.postOrder());
 
-        tree.postOrder();
         assertEquals(6, tree.size(), "The size of the tree doesn't match with the expected");
     }
 
@@ -59,10 +57,9 @@ class AvlTreeTest {
          /  \     \
         10  25    50
         */
-        System.out.println("Preorder traversal" +
-                " of constructed tree is : ");
+        LoggerService.logInfo("Preorder traversal of constructed tree is : ");
+        LoggerService.logInfo(tree.preOrder());
 
-        tree.preOrder();
         assertEquals(6, tree.size(), "The size of the tree doesn't match with the expected");
     }
 
@@ -75,7 +72,7 @@ class AvlTreeTest {
     @DisplayName("Create a balanced tree and print his structure")
     void treeToString() {
         dumpData();
-        System.out.println(tree);
+        LoggerService.logInfo(tree.toString());
         assertEquals(6, tree.size(), "The size of the tree doesn't match with the expected");
     }
 }

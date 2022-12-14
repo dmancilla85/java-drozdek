@@ -25,13 +25,6 @@ public class ArrayQueue {
     }
 
     /**
-     * Default constructor
-     */
-    public ArrayQueue() {
-        this(100);
-    }
-
-    /**
      * Dequeue the last element.
      *
      * @return The dequeued element

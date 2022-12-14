@@ -4,7 +4,7 @@ package org.drozdek.lists;
  * Node for double linked list.
  */
 public class DoubleLinkedListNode<T> {
-    protected T data;
+    protected final T data;
     protected DoubleLinkedListNode<T> next;
     protected DoubleLinkedListNode<T> previous;
 

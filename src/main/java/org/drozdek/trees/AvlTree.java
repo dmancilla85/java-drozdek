@@ -15,11 +15,11 @@ public class AvlTree {
     AvlTreeNode root;
 
     // Get Balance factor of node N
-    private int getBalance(AvlTreeNode N) {
-        if (N == null)
+    private int getBalance(AvlTreeNode node) {
+        if (node == null)
             return 0;
 
-        return height(N.left) - height(N.right);
+        return height(node.left) - height(node.right);
     }
 
     private int countNodes(AvlTreeNode node) {
@@ -116,34 +116,52 @@ public class AvlTree {
     // A utility function to print preorder traversal
     // of the tree.
     // The function also prints height of every node
-    private void preOrder(AvlTreeNode node) {
+    private String preOrder(AvlTreeNode node) {
+
+        StringBuilder tree = new StringBuilder();
+
         if (node != null) {
-            System.out.print(node.key + " ");
-            preOrder(node.left);
-            preOrder(node.right);
+            tree.append(node.key);
+            tree.append(" ");
+            tree.append(preOrder(node.left));
+            tree.append(preOrder(node.right));
         }
+
+        return tree.toString();
     }
 
     // A utility function to print preorder traversal
     // of the tree.
     // The function also prints height of every node
-    private void inOrder(AvlTreeNode node) {
+    private String inOrder(AvlTreeNode node) {
+
+        StringBuilder tree = new StringBuilder();
+        
         if (node != null) {
-            inOrder(node.left);
-            System.out.print(node.key + " ");
-            inOrder(node.right);
+            tree.append(inOrder(node.left));
+            tree.append(node.key);
+            tree.append(" ");
+            tree.append(inOrder(node.right));
         }
+
+        return tree.toString();
     }
 
     // A utility function to print preorder traversal
     // of the tree.
     // The function also prints height of every node
-    private void postOrder(AvlTreeNode node) {
+    private String postOrder(AvlTreeNode node) {
+
+        StringBuilder tree = new StringBuilder();
+        
         if (node != null) {
-            postOrder(node.left);
-            postOrder(node.right);
-            System.out.print(node.key + " ");
+            tree.append(postOrder(node.left));
+            tree.append(postOrder(node.right));
+            tree.append(node.key);
+            tree.append(" ");
         }
+        
+        return tree.toString();
     }
 
     @Override
@@ -151,19 +169,16 @@ public class AvlTree {
         return root.toString();
     }
 
-    public void preOrder(){
-        preOrder(root);
-        System.out.println();
+    public String preOrder(){
+        return preOrder(root);
     }
 
-    public void postOrder(){
-        postOrder(root);
-        System.out.println();
+    public String postOrder(){
+        return postOrder(root);
     }
 
-    public void inOrder(){
-        inOrder(root);
-        System.out.println();
+    public String inOrder(){
+        return inOrder(root);
     }
 
     // A utility function to right rotate subtree rooted with y

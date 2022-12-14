@@ -4,7 +4,7 @@ package org.drozdek.lists;
  * Node for single linked list.
  */
 public class SingleLinkedListNode<T> {
-    protected T data;
+    protected final T data;
     protected SingleLinkedListNode<T> next;
 
     /**

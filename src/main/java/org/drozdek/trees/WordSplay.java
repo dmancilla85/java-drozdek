@@ -11,8 +11,8 @@ public class WordSplay extends SplayTree<Word> {
     }
 
     public static void testSplaying(String[] args) {
-        String fileName = "";
-        InputStream fIn = null;
+        String fileName;
+        InputStream fIn;
         BufferedReader buffer = new BufferedReader(
                 new InputStreamReader(System.in));
 
@@ -48,15 +48,15 @@ public class WordSplay extends SplayTree<Word> {
 
                 if (ch == -1)
                     break;
-                String s = "";
+                StringBuilder s = new StringBuilder();
 
                 while (ch > -1 && Character.isLetter((char) ch)) {
-                    s += Character.toUpperCase((char) ch);
+                    s.append(Character.toUpperCase((char) ch));
                     ch = fIn.read();
                 }
 
-                if ((p = (Word) search(new Word(s))) == null)
-                    insert(new Word(s));
+                if ((p = (Word) search(new Word(s.toString()))) == null)
+                    insert(new Word(s.toString()));
                 else
                     p.freq++;
             }

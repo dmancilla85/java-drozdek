@@ -2,11 +2,11 @@ package org.drozdek.trees;
 
 class SuffixTreeNode {
     private static int cnt = 0; // for printing only
-    protected SuffixTreeNode[] descendants;
-    protected int[] left;
-    protected int[] right;
+    protected final SuffixTreeNode[] descendants;
+    protected final int[] left;
+    protected final int[] right;
     protected SuffixTreeNode suffixLink;
-    protected int id; // for printing only
+    protected final int id; // for printing only
 
     public SuffixTreeNode(int sz) {
         id = cnt++;

@@ -1,5 +1,6 @@
 package trees;
 
+import org.drozdek.commons.LoggerService;
 import org.drozdek.trees.SplayTree;
 import org.drozdek.trees.Word;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +35,7 @@ class SplayTreeTest {
         int size = 20;
 
         dumpData(size);
-        System.out.println(tree.toString());
+        LoggerService.logInfo(tree.toString());
         assertEquals(size, tree.size());
     }
 
@@ -45,28 +46,36 @@ class SplayTreeTest {
 
         dumpData(size);
         tree.semiSplay();
-        System.out.println(tree.toString());
+        LoggerService.logInfo(tree.toString());
         assertEquals(size, tree.size());
     }
 
     @Test
     @DisplayName("Semi-splay and print the tree with words")
     void semiSplayWithWords(){
-        int size = 10;
+        int size = 5;
+        SplayTree<Word> wordTree = new SplayTree<>();
+        wordTree.insert(new Word("Hello"));
+        wordTree.insert(new Word("my"));
+        wordTree.insert(new Word("name"));
+        wordTree.insert(new Word("is"));
+        wordTree.insert(new Word("David"));
+        LoggerService.logInfo(wordTree.toString());
+        wordTree.semiSplay();
+        LoggerService.logInfo(wordTree.toString());
+        assertEquals(size, wordTree.size());
+    }
 
-        tree.insert(new Word("Hello"));
-        tree.insert(new Word("my"));
-        tree.insert(new Word("name"));
-        tree.insert(new Word("is"));
-        tree.insert(new Word("Jack"));
-        tree.insert(new Word("I"));
-        tree.insert(new Word("hope"));
-        tree.insert(new Word("you"));
-        tree.insert(new Word("know"));
-        tree.insert(new Word("Jack"));
+    @Test
+    @DisplayName("Delete a splay tree node by merging")
+    void deleteByMerging(){
+        int size = 5;
 
-        tree.semiSplay();
-        System.out.println(tree.toString());
+        dumpData(5);
+        tree.insert(12);
+        LoggerService.logInfo(tree.toString());
+        tree.deleteByMerging(12);
+        LoggerService.logWarning(tree.toString());
         assertEquals(size, tree.size());
     }
 }

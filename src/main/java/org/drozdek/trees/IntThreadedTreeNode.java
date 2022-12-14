@@ -1,7 +1,7 @@
 package org.drozdek.trees;
 
 public class IntThreadedTreeNode {
-    protected int key;
+    protected final int key;
     protected boolean successor;
     protected IntThreadedTreeNode left;
     protected IntThreadedTreeNode right;

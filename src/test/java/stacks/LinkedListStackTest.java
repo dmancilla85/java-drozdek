@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LinkedListStackTest {
     LinkedListStack<Integer> stack;

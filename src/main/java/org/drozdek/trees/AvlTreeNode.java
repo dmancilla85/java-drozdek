@@ -3,12 +3,9 @@ package org.drozdek.trees;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-/**
- * TODO: Is the same as the binary search node with height. Replace it.
- */
 public class AvlTreeNode {
     protected int height;
-    protected int key;
+    protected final int key;
     protected AvlTreeNode left;
     protected AvlTreeNode right;
     public AvlTreeNode(int data) {

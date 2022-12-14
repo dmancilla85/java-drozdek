@@ -179,7 +179,7 @@ public class SplayTree<T> {
         while (vars[0] != null && vars[0].key != key) {
             vars[1] = vars[0];
 
-            if (vars[0].key.compareTo((T) key) > 0) // should be<
+            if (vars[0].key.compareTo((T) key) < 0)
                 vars[0] = vars[0].right;
             else
                 vars[0] = vars[0].left;

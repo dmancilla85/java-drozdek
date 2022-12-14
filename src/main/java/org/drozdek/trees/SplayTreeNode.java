@@ -1,11 +1,10 @@
 package org.drozdek.trees;
 
-import java.io.PrintStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 public class SplayTreeNode<T> {
-    protected Comparable<T> key;
+    protected final Comparable<T> key;
     protected SplayTreeNode<T> left;
     protected SplayTreeNode<T> right;
     protected SplayTreeNode<T> parent;

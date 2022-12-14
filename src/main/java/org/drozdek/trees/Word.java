@@ -1,28 +1,30 @@
 package org.drozdek.trees;
 
-public class Word implements Comparable {
-    public int freq = 1;
-    private String word = "";
-
-    public Word() {
-    }
+public class Word implements Comparable<Word> {
+    protected int freq;
+    private final String words;
 
     public Word(String s) {
-        this.word = s;
+        this.words = s;
+        freq=1;
+    }
+
+    /**
+     * @param o the object to be compared.
+     * @return
+     */
+    @Override
+    public int compareTo(Word o) {
+        return words.compareTo(o.words);
     }
 
     @Override
-    public int compareTo(Object el) {
-        return word.compareTo(((Word) el).word);
-    }
-
-    @Override
-    public boolean equals(Object el) {
-        return el != null && word.equals(((Word) el).word);
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 
     @Override
     public String toString() {
-        return word + " (" + freq + ") ";
+        return words + " (" + freq + ") ";
     }
 }

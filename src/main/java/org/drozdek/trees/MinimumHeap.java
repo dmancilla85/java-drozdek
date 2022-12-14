@@ -12,10 +12,10 @@ package org.drozdek.trees;
  */
 public class MinimumHeap {
     // To store array of elements in heap
-    protected int[] heapArray;
+    protected final int[] heapArray;
 
     // max size of the heap
-    protected int capacity;
+    protected final int capacity;
 
     // Current number of elements in the heap
     protected int currentHeapSize;

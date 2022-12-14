@@ -1,5 +1,7 @@
 package org.drozdek.trees;
 
+import org.drozdek.commons.LoggerService;
+
 /**
  * A Binary Heap is a Binary Tree with following properties:
  * <p>
@@ -12,10 +14,10 @@ package org.drozdek.trees;
  */
 public class MaximumHeap {
     // To store array of elements in heap
-    protected int[] heapArray;
+    protected final int[] heapArray;
 
     // max size of the heap
-    protected int capacity;
+    protected final int capacity;
 
     // Current number of elements in the heap
     protected int currentHeapSize;
@@ -60,7 +62,7 @@ public class MaximumHeap {
     public void deleteKey(int index) {
         decreaseKey(index, Integer.MAX_VALUE);
         int result = extractMax();
-        System.out.println(result);
+        LoggerService.logInfo("Element removed: " + result);
     }
 
     // Method to remove maximum element

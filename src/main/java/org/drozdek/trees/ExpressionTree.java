@@ -10,7 +10,7 @@ import java.util.Deque;
  * Source: <a href="https://wxx5433.gitbooks.io/interview-preparation/content/part_ii_leetcode_lintcode/stack/expression_tree_build.html">Here</a>
  */
 public class ExpressionTree {
-    ExpressionTreeNode root;
+    final ExpressionTreeNode root;
 
     public ExpressionTree() {
         root = null;
@@ -76,21 +76,21 @@ public class ExpressionTree {
      */
     public boolean isEmpty(){return root==null;}
 
-    private static void inorder(ExpressionTreeNode root) {
+    private static String inorder(ExpressionTreeNode root) {
         // return if root is null
-        if (root == null) return;
+        if (root == null) return "";
 
         // inorder traversal
-        inorder(root.left);
-        System.out.print(root.symbol);
-        inorder(root.right);
+        return inorder(root.left) +
+                root.symbol +
+                inorder(root.right);
     }
 
     /**
      * Print the inorder traversal of tree
      */
-    public void inorder(){
-        inorder(this.root);
+    public String inorder(){
+        return inorder(this.root);
     }
 
     private static int compute(int num2, int num1, char token) {
@@ -123,7 +123,7 @@ public class ExpressionTree {
                 while (opStack.peek() != '(') {
                     numStack.push(compute(numStack.pop(), numStack.pop(), opStack.pop()));
                 }
-                opStack.pop();  // pop out "("
+                opStack.pop();  // pop out (
             } else {
                 while (!opStack.isEmpty() && getPriority(opStack.peek()) >= getPriority(token)
                 && !numStack.isEmpty()) {

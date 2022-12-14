@@ -1,5 +1,6 @@
 package trees;
 
+import org.drozdek.commons.LoggerService;
 import org.drozdek.trees.SuffixTree;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,6 +18,6 @@ class SuffixTreeTest {
     @DisplayName("Print the expression tree")
     void test(){
         tree.ukkonen("Hello my dear friend!");
-        tree.printTree();
+        LoggerService.logInfo(tree.printTree());
     }
 }

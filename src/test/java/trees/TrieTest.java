@@ -1,5 +1,6 @@
 package trees;
 
+import org.drozdek.commons.LoggerService;
 import org.drozdek.trees.Trie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,14 +20,15 @@ class TrieTest {
     @Test
     @DisplayName("Print the trie and check that one word exists")
     void printAndFound(){
-        // TODO: Fix this code
-        /*tree.insert("world");
+        // TODO: Fix the insert method in Trie.java
+        LoggerService.logInfo(tree.print());
+        tree.insert("world");
         tree.insert("my");
         tree.insert("name");
         tree.insert("is");
-        tree.insert("Dave");*/
-        tree.printTrie();
+        tree.insert("Dave");
+        LoggerService.logWarning(tree.print());
         boolean ret = tree.found("wor");
-        assertTrue(true,"The result is not the expected.");
+        assertTrue(!ret,"The result is not the expected.");
     }
 }
