@@ -37,7 +37,7 @@ jobs:
       uses: Maes95/maven-action@1.0.0
       with:
         # If true, build jar of the project
-        package: drozdek
+        package: false
         # Test to exclude
         # exclude: # optional 
 
