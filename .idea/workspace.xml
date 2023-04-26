@@ -5,40 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2353015f-a0cd-436c-a160-c9975f5c6fdd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/commons/LogTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/commons/LoggerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/commons/LoggerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/DoubleLinkedListNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/DoubleLinkedListNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/IntSkipList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/IntSkipList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/SingleLinkedListNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/SingleLinkedListNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/iterators/DoubleLinkedListIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/iterators/DoubleLinkedListIterator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/iterators/SingleLinkedListIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/iterators/SingleLinkedListIterator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/ArrayQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/ArrayQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/Stack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/Stack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/AvlTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/AvlTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/AvlTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/AvlTreeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/ExpressionTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/ExpressionTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/ExpressionTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/ExpressionTreeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/IntThreadedTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/IntThreadedTreeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/MaximumHeap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/MaximumHeap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/MinimumHeap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/MinimumHeap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SplayTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SplayTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SplayTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SplayTreeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SuffixTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SuffixTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SuffixTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SuffixTreeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/Trie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/Trie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/TrieLeaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/TrieLeaf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/TrieNonLeaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/TrieNonLeaf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/Word.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/WordSplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/WordSplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/stacks/LinkedListStackTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/stacks/LinkedListStackTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/trees/AvlTreeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/trees/AvlTreeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/trees/ExpressionTreeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/trees/ExpressionTreeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/trees/IntThreadedTreeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/trees/IntThreadedTreeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/trees/SplayTreeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/trees/SplayTreeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/trees/SuffixTreeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/trees/SuffixTreeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/trees/TrieTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/trees/TrieTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,17 +154,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="JUnit.SplayTreeTest.deleteByMerging" />
       <item itemvalue="JUnit.TrieTest" />
@@ -238,28 +194,28 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/drozdek$trees_in_drozdek.ic" NAME="trees in drozdek Coverage Results" MODIFIED="1669327513001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>trees.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/drozdek$SingleLinkedListTest.ic" NAME="SingleLinkedListTest Coverage Results" MODIFIED="1667059022105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>basics.lists.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/drozdek$org_drozdek_trees_in_drozdek.ic" NAME="org.drozdek.trees in drozdek Coverage Results" MODIFIED="1669167730964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>org.drozdek.trees.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/drozdek$All_in_drozdek.ic" NAME="All in drozdek Coverage Results" MODIFIED="1670980057767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/drozdek$AvlTreeTest.ic" NAME="AvlTreeTest Coverage Results" MODIFIED="1669150899472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>trees.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/drozdek$MinimumHeapTest.ic" NAME="MinimumHeapTest Coverage Results" MODIFIED="1669169184062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>trees.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/drozdek$All_in_drozdek__1_.ic" NAME="All in drozdek (1) Coverage Results" MODIFIED="1668030528827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/drozdek$SingleLinkedListTest.ic" NAME="SingleLinkedListTest Coverage Results" MODIFIED="1667059022105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>basics.lists.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/drozdek$MaximumHeapTest.ic" NAME="MaximumHeapTest Coverage Results" MODIFIED="1669152538855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>trees.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/drozdek$org_drozdek_trees_in_drozdek.ic" NAME="org.drozdek.trees in drozdek Coverage Results" MODIFIED="1669167730964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.drozdek.trees.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/drozdek$trees_in_drozdek.ic" NAME="trees in drozdek Coverage Results" MODIFIED="1669327513001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>trees.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/drozdek$BinarySearchTreeTest.ic" NAME="BinarySearchTreeTest Coverage Results" MODIFIED="1668654580414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>trees.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/drozdek$All_in_drozdek.ic" NAME="All in drozdek Coverage Results" MODIFIED="1670980057767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/drozdek$All_in_drozdek__1_.ic" NAME="All in drozdek (1) Coverage Results" MODIFIED="1668030528827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
