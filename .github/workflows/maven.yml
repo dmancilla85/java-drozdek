@@ -18,8 +18,8 @@ jobs:
   build:
     permissions: read-all
     runs-on: ubuntu-latest
-
     steps:
+    
     - name: Check-out repository
       uses: actions/checkout@v3
     
