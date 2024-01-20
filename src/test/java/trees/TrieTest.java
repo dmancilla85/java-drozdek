@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TrieTest {
@@ -29,6 +30,6 @@ class TrieTest {
         tree.insert("Dave");
         LoggerService.logWarning(tree.print());
         boolean ret = tree.found("wor");
-        assertTrue(!ret,"The result is not the expected.");
+        assertFalse(ret, "The result is not the expected.");
     }
 }

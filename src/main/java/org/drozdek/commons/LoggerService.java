@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 public class LoggerService {
     protected static final Logger log = Logger.getLogger("Logger");
+
     private static final String GREEN = "\u001B[32m";
     private static final String WHITE = "\u001B[0m";
     private static final String YELLOW = "\u001B[33m";

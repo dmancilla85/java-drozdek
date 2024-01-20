@@ -1,11 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2353015f-a0cd-436c-a160-c9975f5c6fdd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/commons/ArrayUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/commons/CompareExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/Ejercicio3_2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/ElementoMochilaDyn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/SolucionEjercicio2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/TestMochilaDyn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Algoritmos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Arista.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Conjunto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/DigrafoPesado.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Grafo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/GrafoPesado.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Vertice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/Lista.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/ListaSimple.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/NodoVector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/Vector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/Cola.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaDinamica.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaEstatica.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaLlenaException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/Heap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/recursion/AlphabeticallySorted.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/recursion/MajorityElement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/searching/BinarySearch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/BubbleSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/BucketSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/CountingSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/Ejercicio2_7.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/HeapSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/InsertionSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/MergeSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/QuickSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/SelectionSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/ShellSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/TestEjercicio1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/Pila.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/PilaDinamica.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/PilaEstatica.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/PilaInteligente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/PilaLlenaException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolEstatico.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolHeap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolSimple.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/MonticuloMaximo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/MonticuloMinimo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/NodoArbol.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/NodoVector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/searching/BinarySearchTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/sorting/BubbleSortTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/sorting/BucketSortTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/sorting/CountingSortTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/sorting/HeapSortTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/sorting/InsertionSortTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/sorting/MergeSortTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/sorting/QuickSortTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/sorting/SelectionSortTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/sorting/ShellSortTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/commons/LoggerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/commons/LoggerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/trees/TrieTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/trees/TrieTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +95,9 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2DDqzb67gppVrsFEN4DBT4V94Mi" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -47,7 +115,7 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/sandbox/java/drozdek/src/main/java/org/drozdek/trees&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/sandbox/java/drozdek/src/main/java/org/drozdek/graphs/unlam&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
@@ -57,12 +125,17 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\sandbox\java\drozdek\src\main\java\org\drozdek\trees" />
+      <recent name="C:\sandbox\java\drozdek\src\main\java\org\drozdek\graphs\unlam" />
+      <recent name="C:\sandbox\java\drozdek\src\main\java\org\drozdek\dynamic" />
+      <recent name="C:\sandbox\java\drozdek\src\main\java\org\drozdek\sorting" />
+      <recent name="C:\sandbox\java\drozdek\src\main\java\org\drozdek\recursion" />
+      <recent name="C:\sandbox\java\drozdek\src\main\java\org\drozdek\stacks" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\sandbox\java\drozdek\src\main\java\org\drozdek\lists\unlam" />
       <recent name="C:\sandbox\java\drozdek\src\main\java\org" />
       <recent name="C:\sandbox\java\drozdek\src\test\java" />
       <recent name="C:\sandbox\java\drozdek\src\main\java\org\drozdek" />
@@ -82,92 +155,101 @@
       <recent name="basics.lists" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in drozdek">
-    <configuration name="All in drozdek" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="drozdek" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SplayTreeTest.deleteByMerging" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.QuickSortTest.printSortedArray">
+    <configuration name="BinarySearchTest.printBinarySearch" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="drozdek" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="trees.*" />
+          <option name="PATTERN" value="searching.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="trees" />
-      <option name="MAIN_CLASS_NAME" value="trees.SplayTreeTest" />
-      <option name="METHOD_NAME" value="deleteByMerging" />
+      <option name="PACKAGE_NAME" value="searching" />
+      <option name="MAIN_CLASS_NAME" value="searching.BinarySearchTest" />
+      <option name="METHOD_NAME" value="printBinarySearch" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SplayTreeTest.semiSplayWithWords" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CountingSortTest.printSortedList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="drozdek" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="trees.*" />
+          <option name="PATTERN" value="sorting.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="trees" />
-      <option name="MAIN_CLASS_NAME" value="trees.SplayTreeTest" />
-      <option name="METHOD_NAME" value="semiSplayWithWords" />
+      <option name="PACKAGE_NAME" value="sorting" />
+      <option name="MAIN_CLASS_NAME" value="sorting.CountingSortTest" />
+      <option name="METHOD_NAME" value="printSortedList" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TrieTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HeapSortTest.printSortedList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="drozdek" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="trees.*" />
+          <option name="PATTERN" value="sorting.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="trees" />
-      <option name="MAIN_CLASS_NAME" value="trees.TrieTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="sorting" />
+      <option name="MAIN_CLASS_NAME" value="sorting.HeapSortTest" />
+      <option name="METHOD_NAME" value="printSortedList" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TrieTest.printAndFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MergeSortTest.printSortedArray" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="drozdek" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="trees.*" />
+          <option name="PATTERN" value="searching.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="trees" />
-      <option name="MAIN_CLASS_NAME" value="trees.TrieTest" />
-      <option name="METHOD_NAME" value="printAndFound" />
+      <option name="PACKAGE_NAME" value="sorting" />
+      <option name="MAIN_CLASS_NAME" value="sorting.MergeSortTest" />
+      <option name="METHOD_NAME" value="printSortedArray" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QuickSortTest.printSortedArray" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="drozdek" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="searching.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="sorting" />
+      <option name="MAIN_CLASS_NAME" value="sorting.QuickSortTest" />
+      <option name="METHOD_NAME" value="printSortedArray" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.SplayTreeTest.deleteByMerging" />
-      <item itemvalue="JUnit.TrieTest" />
-      <item itemvalue="JUnit.SplayTreeTest.semiSplayWithWords" />
-      <item itemvalue="JUnit.TrieTest.printAndFound" />
-      <item itemvalue="JUnit.All in drozdek" />
+      <item itemvalue="JUnit.BinarySearchTest.printBinarySearch" />
+      <item itemvalue="JUnit.CountingSortTest.printSortedList" />
+      <item itemvalue="JUnit.HeapSortTest.printSortedList" />
+      <item itemvalue="JUnit.MergeSortTest.printSortedArray" />
+      <item itemvalue="JUnit.QuickSortTest.printSortedArray" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in drozdek" />
-        <item itemvalue="JUnit.TrieTest.printAndFound" />
-        <item itemvalue="JUnit.TrieTest" />
-        <item itemvalue="JUnit.SplayTreeTest.semiSplayWithWords" />
-        <item itemvalue="JUnit.SplayTreeTest.deleteByMerging" />
+        <item itemvalue="JUnit.QuickSortTest.printSortedArray" />
+        <item itemvalue="JUnit.CountingSortTest.printSortedList" />
+        <item itemvalue="JUnit.MergeSortTest.printSortedArray" />
+        <item itemvalue="JUnit.HeapSortTest.printSortedList" />
+        <item itemvalue="JUnit.BinarySearchTest.printBinarySearch" />
       </list>
     </recent_temporary>
   </component>
@@ -193,9 +275,27 @@
       </map>
     </option>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint type="java-exception">
+          <properties class="java.lang.OutOfMemoryError" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/drozdek$AvlTreeTest.ic" NAME="AvlTreeTest Coverage Results" MODIFIED="1669150899472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>trees.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/drozdek$All_in_drozdek.ic" NAME="All in drozdek Coverage Results" MODIFIED="1670980057767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/drozdek$BinarySearchTreeTest.ic" NAME="BinarySearchTreeTest Coverage Results" MODIFIED="1668654580414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>trees.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/drozdek$All_in_drozdek__1_.ic" NAME="All in drozdek (1) Coverage Results" MODIFIED="1668030528827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/drozdek$org_drozdek_trees_in_drozdek.ic" NAME="org.drozdek.trees in drozdek Coverage Results" MODIFIED="1669167730964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.drozdek.trees.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/drozdek$MinimumHeapTest.ic" NAME="MinimumHeapTest Coverage Results" MODIFIED="1669169184062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>trees.*</FILTER>
@@ -206,16 +306,8 @@
     <SUITE FILE_PATH="coverage/drozdek$MaximumHeapTest.ic" NAME="MaximumHeapTest Coverage Results" MODIFIED="1669152538855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>trees.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/drozdek$org_drozdek_trees_in_drozdek.ic" NAME="org.drozdek.trees in drozdek Coverage Results" MODIFIED="1669167730964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>org.drozdek.trees.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/drozdek$trees_in_drozdek.ic" NAME="trees in drozdek Coverage Results" MODIFIED="1669327513001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>trees.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/drozdek$BinarySearchTreeTest.ic" NAME="BinarySearchTreeTest Coverage Results" MODIFIED="1668654580414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>trees.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/drozdek$All_in_drozdek.ic" NAME="All in drozdek Coverage Results" MODIFIED="1670980057767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/drozdek$All_in_drozdek__1_.ic" NAME="All in drozdek (1) Coverage Results" MODIFIED="1668030528827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
