@@ -2,7 +2,7 @@ package org.drozdek.sorting;
 
 public class BubbleSort {
 
-    private BubbleSort(){
+    private BubbleSort() {
         // do nothing
     }
 

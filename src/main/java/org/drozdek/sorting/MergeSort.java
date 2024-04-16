@@ -1,11 +1,9 @@
 package org.drozdek.sorting;
 
 
-import static java.lang.System.out;
-
 public class MergeSort {
 
-    private MergeSort(){
+    private MergeSort() {
         // do nothing
     }
 
@@ -42,7 +40,7 @@ public class MergeSort {
         int[] rightArray = new int[n2];
 
         //Copiar los datos a los arreglos temporales
-        System.arraycopy(array, left + 0, leftArray, 0, n1);
+        System.arraycopy(array, left, leftArray, 0, n1);
         System.arraycopy(array, middle + 1, rightArray, 0, n2);
 
         //Unir los arreglos temporales

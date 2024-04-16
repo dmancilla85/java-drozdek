@@ -6,8 +6,8 @@ public class Trie {
     public static final int NOT_FOUND = -1;
     private TrieNonLeaf root;
 
-    public Trie(){
-        root=null;
+    public Trie() {
+        root = null;
     }
 
     public Trie(String word) {
@@ -168,15 +168,6 @@ public class Trie {
         }
     }
 
-    private int position(TrieNonLeaf p, char ch) {
-        int i = 0;
-        while (i < p.letters.length() && p.letters.charAt(i) != ch) {
-            i++;
-        }
-
-        return (i < p.letters.length()) ? i : NOT_FOUND;
-    }
-
     protected String oldPrintTrie(int depth, TrieNode p, String prefix) {
 
         StringBuilder trie = new StringBuilder();
@@ -207,7 +198,16 @@ public class Trie {
         return trie.toString();
     }
 
-    public String print(){
+    private int position(TrieNonLeaf p, char ch) {
+        int i = 0;
+        while (i < p.letters.length() && p.letters.charAt(i) != ch) {
+            i++;
+        }
+
+        return (i < p.letters.length()) ? i : NOT_FOUND;
+    }
+
+    public String print() {
         return root.toString();
     }
 

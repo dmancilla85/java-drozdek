@@ -33,7 +33,7 @@ public class BinarySearchTreeNode<T> {
         for (Iterator<BinarySearchTreeNode<T>> it = children.iterator(); it.hasNext(); ) {
             BinarySearchTreeNode<T> next = it.next();
 
-            if(next== null)
+            if (next == null)
                 continue;
 
             if (it.hasNext()) {

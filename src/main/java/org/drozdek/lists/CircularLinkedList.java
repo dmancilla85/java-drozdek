@@ -82,14 +82,14 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
 
     @Override
     public void printAll() {
-        StringBuilder line=new StringBuilder();
+        StringBuilder line = new StringBuilder();
         int i = 0;
         int size = size();
         line.append("[");
 
         for (SingleLinkedListNode<T> tmp = head; i++ < size; tmp = tmp.next) {
             line.append(tmp == head ? "*" + tmp.data : tmp.data);
-            line.append(i!=size? ", ":"");
+            line.append(i != size ? ", " : "");
         }
         line.append("]");
 

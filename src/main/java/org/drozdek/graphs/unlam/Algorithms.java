@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Algoritmos {
+public class Algorithms {
 
     /**
      * Algoritmo de Prim - Jarnik.
@@ -21,11 +21,11 @@ public class Algoritmos {
      * @param inicial Vértice inicial del recorrido.
      * @return árbol recubridor mínimo
      */
-    public static GrafoPesado algoritmoPrimJarnik(GrafoPesado g, int inicial) {
+    public static WeightedGraph algoritmoPrimJarnik(WeightedGraph g, int inicial) {
 
         Calendar ini = Calendar.getInstance();
 
-        GrafoPesado nuevo = new GrafoPesado(g.cardinality());
+        WeightedGraph nuevo = new WeightedGraph(g.cardinality());
         MonticuloMinimo aristas = new MonticuloMinimo(g.countEdges());
         ArrayList<Vertice> verticesVisitados = new ArrayList<>();
 
@@ -62,9 +62,9 @@ public class Algoritmos {
         return nuevo;
     }
 
-    public static GrafoPesado algoritmoKruskal(GrafoPesado g, int inicial) {
+    public static WeightedGraph algoritmoKruskal(WeightedGraph g, int inicial) {
 
-        GrafoPesado nuevo = new GrafoPesado(g.cardinality());
+        WeightedGraph nuevo = new WeightedGraph(g.cardinality());
 
         // Arcos ordenados por peso
         MonticuloMinimo cola = new MonticuloMinimo(g.countEdges());
@@ -178,7 +178,7 @@ public class Algoritmos {
      * @param g
      * @return
      */
-    public static int[][] algoritmoFloydMarshall(GrafoPesado g) {
+    public static int[][] algoritmoFloydMarshall(WeightedGraph g) {
 
         // MonticuloMinimo caminoMinimo = new MonticuloMinimo(g.cardinal());
 

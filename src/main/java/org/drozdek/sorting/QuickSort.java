@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class QuickSort {
 
-    private QuickSort(){
+    private QuickSort() {
         // do nothing
     }
 

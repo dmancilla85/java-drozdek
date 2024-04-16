@@ -2,7 +2,7 @@ package org.drozdek.sorting;
 
 public class ShellSort {
 
-    private ShellSort(){
+    private ShellSort() {
         // do nothing
     }
 

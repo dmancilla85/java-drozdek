@@ -43,7 +43,7 @@ public class MinimumHeap {
     // It is assumed that new_val is smaller than heapArray[key].
     public void decreaseKey(int index, int newValue) {
 
-        if(newValue >= heapArray[index])
+        if (newValue >= heapArray[index])
             return;
 
         heapArray[index] = newValue;
@@ -95,7 +95,7 @@ public class MinimumHeap {
     // Heapify from the given key
     public void increaseKey(int index, int newValue) {
 
-        if(newValue <= heapArray[index])
+        if (newValue <= heapArray[index])
             return;
 
         heapArray[index] = newValue;
@@ -167,14 +167,14 @@ public class MinimumHeap {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder array = new StringBuilder();
         array.append("[");
 
-        for (int j=0; j<heapArray.length;j++) {
+        for (int j = 0; j < heapArray.length; j++) {
             array.append(heapArray[j]);
 
-            if(j != heapArray.length-1){
+            if (j != heapArray.length - 1) {
                 array.append(", ");
             }
         }

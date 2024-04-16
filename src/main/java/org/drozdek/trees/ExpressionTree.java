@@ -18,8 +18,8 @@ public class ExpressionTree {
 
     public ExpressionTree(String postfix) {
 
-        if(postfix==null || postfix.isEmpty()) {
-            root=null;
+        if (postfix == null || postfix.isEmpty()) {
+            root = null;
         } else
             root = insertPostFix(postfix);
     }
@@ -70,12 +70,6 @@ public class ExpressionTree {
         return temp;
     }
 
-    /**
-     * Check if tree is empty
-     * @return True if the tree is empty
-     */
-    public boolean isEmpty(){return root==null;}
-
     private static String inorder(ExpressionTreeNode root) {
         // return if root is null
         if (root == null) return "";
@@ -84,13 +78,6 @@ public class ExpressionTree {
         return inorder(root.left) +
                 root.symbol +
                 inorder(root.right);
-    }
-
-    /**
-     * Print the inorder traversal of tree
-     */
-    public String inorder(){
-        return inorder(this.root);
     }
 
     private static int compute(int num2, int num1, char token) {
@@ -104,6 +91,7 @@ public class ExpressionTree {
 
     /**
      * Evaluate if an expression is well parsed.
+     *
      * @param expression Expression to evaluate
      * @return Zero if the expression is correct
      */
@@ -126,7 +114,7 @@ public class ExpressionTree {
                 opStack.pop();  // pop out (
             } else {
                 while (!opStack.isEmpty() && getPriority(opStack.peek()) >= getPriority(token)
-                && !numStack.isEmpty()) {
+                        && !numStack.isEmpty()) {
                     numStack.push(compute(numStack.pop(), numStack.pop(), opStack.pop()));
                 }
                 opStack.push(token);
@@ -148,12 +136,28 @@ public class ExpressionTree {
         }
     }
 
-
-    @Override
-    public String toString(){
-        return this.root.toString();
-    }
     private static boolean isNumber(char token) {
         return Character.isDigit(token);
+    }
+
+    /**
+     * Print the inorder traversal of tree
+     */
+    public String inorder() {
+        return inorder(this.root);
+    }
+
+    /**
+     * Check if tree is empty
+     *
+     * @return True if the tree is empty
+     */
+    public boolean isEmpty() {
+        return root == null;
+    }
+
+    @Override
+    public String toString() {
+        return this.root.toString();
     }
 }

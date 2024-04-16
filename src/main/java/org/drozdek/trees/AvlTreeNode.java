@@ -4,10 +4,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class AvlTreeNode {
-    protected int height;
     protected final int key;
+    protected int height;
     protected AvlTreeNode left;
     protected AvlTreeNode right;
+
     public AvlTreeNode(int data) {
         this(data, null, null);
     }
@@ -30,7 +31,7 @@ public class AvlTreeNode {
         for (Iterator<AvlTreeNode> it = children.iterator(); it.hasNext(); ) {
             AvlTreeNode next = it.next();
 
-            if(next== null)
+            if (next == null)
                 continue;
 
             if (it.hasNext()) {

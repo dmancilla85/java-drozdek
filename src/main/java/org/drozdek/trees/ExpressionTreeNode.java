@@ -32,7 +32,7 @@ public class ExpressionTreeNode {
         for (Iterator<ExpressionTreeNode> it = children.iterator(); it.hasNext(); ) {
             ExpressionTreeNode next = it.next();
 
-            if(next==null)
+            if (next == null)
                 continue;
 
             if (it.hasNext()) {

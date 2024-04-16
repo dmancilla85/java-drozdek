@@ -23,7 +23,7 @@ public class SingleLinkedListIterator<T> implements Iterator<T> {
 
     // moves the cursor/iterator to next element
     public T next() {
-        if(!hasNext())
+        if (!hasNext())
             throw new NoSuchElementException();
 
         T data = current.getData();

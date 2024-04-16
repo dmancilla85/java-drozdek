@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class BucketSort {
 
-    private BucketSort(){
+    private BucketSort() {
         // do nothing
     }
 

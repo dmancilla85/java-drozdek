@@ -128,3 +128,17 @@ m
 =src/main/java/org/drozdek/recursion/AlphabeticallySorted.java,6\7\67930d4ed80653624b4fea83def236ebdf6f75c9
 h
 8src/main/java/org/drozdek/recursion/MajorityElement.java,5\4\54b99b3fae302932c6fa2d3299027a48023b692c
+a
+1src/main/java/org/drozdek/commons/ArrayUtils.java,7\3\73200ed9d786b01ba1c6f3d3329d118b737a22b2
+d
+4src/main/java/org/drozdek/commons/LoggerService.java,4\0\408ddbb4e16e0e7938643ea937ab0bf77430cd58
+[
++src/main/java/org/drozdek/stacks/Stack.java,1\e\1eee0d9fe99a7a1b97eabd145927cd1b97caa5f9
+`
+0src/main/java/org/drozdek/stacks/unlam/Pila.java,e\1\e14ac3f34a917a2f94cb7b45e46e5c839705bf93
+g
+7src/main/java/org/drozdek/stacks/unlam/SimpleStack.java,d\a\dab5e062769d56a37b01de277619f212a3891898
+n
+>src/main/java/org/drozdek/stacks/unlam/FullStackException.java,d\5\d5b58579a009b77db1a85212deb6151c68e24092
+h
+8src/main/java/org/drozdek/stacks/unlam/DynamicStack.java,4\e\4e4346bc26a5aad6beeb6cb76903049aa3627cf8

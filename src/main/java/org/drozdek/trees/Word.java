@@ -1,12 +1,12 @@
 package org.drozdek.trees;
 
 public class Word implements Comparable<Word> {
-    protected int freq;
     private final String words;
+    protected int freq;
 
     public Word(String s) {
         this.words = s;
-        freq=1;
+        freq = 1;
     }
 
     /**

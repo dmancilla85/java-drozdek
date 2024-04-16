@@ -6,11 +6,11 @@ public class ArrayUtils {
 
     private static final Random r = new Random();
 
-    private ArrayUtils(){
+    private ArrayUtils() {
         // do nothing
     }
 
-    public static int getMaxValue(int []array){
+    public static int getMaxValue(int[] array) {
         int max = array[0];
 
         for (int i = 1; i < array.length; i++) {
@@ -22,7 +22,7 @@ public class ArrayUtils {
         return max;
     }
 
-    public static void swap(int[] array, int i, int j){
+    public static void swap(int[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
@@ -39,8 +39,8 @@ public class ArrayUtils {
         LoggerService.logInfo(msg.toString());
     }
 
-    public static int[] randomIntegerArray(int n, boolean naturals){
-        if(n <= 0){
+    public static int[] randomIntegerArray(int n, boolean naturals) {
+        if (n <= 0) {
             return new int[0];
         }
 

@@ -2,7 +2,7 @@ package org.drozdek.searching;
 
 public class BinarySearch {
 
-    private BinarySearch(){
+    private BinarySearch() {
         // do nothing
     }
 

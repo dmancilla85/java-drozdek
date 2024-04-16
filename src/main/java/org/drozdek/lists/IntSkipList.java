@@ -53,7 +53,7 @@ public class IntSkipList {
      */
     private int chooseLevel() {
         int i;
-        int r = Math.abs(rd.nextInt()+1) % powers[maximumLevel - 1] + 1;
+        int r = Math.abs(rd.nextInt() + 1) % powers[maximumLevel - 1] + 1;
 
         for (i = 1; i < maximumLevel; i++)
             if (r < powers[i])
@@ -149,11 +149,10 @@ public class IntSkipList {
 
     /**
      * Print all elements in the list
-     *
      */
     public void printAll() {
         IntSkipListNode tmp = root[0];
-        StringBuilder line=new StringBuilder();
+        StringBuilder line = new StringBuilder();
 
         while (tmp != null) {
             line.append("(key: ");

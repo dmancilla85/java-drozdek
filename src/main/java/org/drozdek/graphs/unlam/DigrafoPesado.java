@@ -1,11 +1,12 @@
 /**
- * 
+ *
  */
 package org.drozdek.graphs.unlam;
 
-import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import static java.lang.System.out;
 
 /**
  * @author David
@@ -13,124 +14,125 @@ import java.util.Calendar;
  */
 public class DigrafoPesado {
 
-	protected ArrayList<Vertice> v;
-	protected ArrayList<Vertice> []listaAdyacencias;
-	protected byte [][]matrizAdyacencias;
-	protected int [][]tablaDePesos;
-	protected int totalArcos;
-	
-	/**
-	 * 
-	 */
-	public DigrafoPesado(int n) {
-		// TODO Auto-generated constructor stub
-		this.listaAdyacencias = null;
-		this.matrizAdyacencias = new byte[n][n];
-		this.tablaDePesos = new int[n][n];
-		this.totalArcos = 0;
-		this.v = new ArrayList<Vertice>();
-		
-		for(int i = 0; i < cardinal(); i++)
-			v.add(new Vertice(i));
-				
-	}
-	
-	public int cardinal() {
-		return matrizAdyacencias[0].length;
-	}
+    protected ArrayList<Vertice> v;
+    protected ArrayList<Vertice>[] listaAdyacencias;
+    protected byte[][] matrizAdyacencias;
+    protected int[][] tablaDePesos;
+    protected int totalArcos;
 
-	public boolean crearArco(int nodo1, int nodo2, int peso) {
-		try {
-			if (matrizAdyacencias[nodo1][nodo2] == 1 || nodo1 == nodo2)
-				return false;
+    /**
+     *
+     */
+    public DigrafoPesado(int n) {
+        // TODO Auto-generated constructor stub
+        this.listaAdyacencias = null;
+        this.matrizAdyacencias = new byte[n][n];
+        this.tablaDePesos = new int[n][n];
+        this.totalArcos = 0;
+        this.v = new ArrayList<Vertice>();
 
-			matrizAdyacencias[nodo1][nodo2] = 1;
-			tablaDePesos[nodo1][nodo2] = peso;
+        for (int i = 0; i < cardinal(); i++)
+            v.add(new Vertice(i));
 
-			this.totalArcos++;
-			return true;
+    }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
-	
-	public boolean crearArco(char a1, char a2, int peso) {
-		int n1 = ((int) a1) - 97;
-		int n2 = ((int) a2) - 97;
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        DigrafoPesado dp = new DigrafoPesado(10);
+        dp.crearArco('a', 'e', 1);
+        dp.crearArco('d', 'a', 4);
+        dp.crearArco('a', 'h', 10);
+        dp.crearArco('d', 'h', 1);
+        dp.crearArco('h', 'e', 5);
+        dp.crearArco('h', 'i', 9);
+        dp.crearArco('e', 'f', 3);
+        dp.crearArco('f', 'c', 3);
+        dp.crearArco('f', 'b', 1);
+        dp.crearArco('f', 'g', 7);
+        dp.crearArco('b', 'c', 2);
+        dp.crearArco('f', 'i', 1);
+        dp.crearArco('g', 'j', 1);
+        dp.crearArco('i', 'j', 2);
 
-		return crearArco(n1, n2, peso);
-	}
-	
-	
-	public Integer eliminarArco(int nodo1, int nodo2) {
-		Integer aux = null;
+        dp.tablaAdyacencias();
+        dp.tablaPesoDeArcos();
 
-		if (totalArcos == 0)
-			return null;
+        DigrafoPesado nuev = dp.busquedaPrimeroEnProfundidad();
+        nuev.tablaPesoDeArcos();
+    }
 
-		try {
-			matrizAdyacencias[nodo1][nodo2] = 0;
-			tablaDePesos[nodo1][nodo2] = 0;
-			this.totalArcos--;
-			return aux;
+    public DigrafoPesado busquedaPrimeroEnProfundidad() {
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	public void tablaAdyacencias() {
+        Calendar ini = Calendar.getInstance();
 
-		int n = this.matrizAdyacencias[0].length;
+        DigrafoPesado busq = new DigrafoPesado(cardinal());
+        ArrayList<Integer> verticesVisitados = new ArrayList<Integer>();
 
-		out.println();
-		out.print("\\ ");
-		for (int i = 0; i < n; i++)
-			out.print((char) (i + 97) + " ");
-		out.println();
+        int i = 0;
 
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
+        while (i < cardinal() && verticesVisitados.size() < cardinal()) {
+            if (!verticesVisitados.contains(i)) {
+                verticesVisitados.add(i);
+                dfs(i, verticesVisitados, busq);
+            }
+            i++;
+        }
 
-				if (j == 0)
-					out.print((char) (i + j + 97) + " ");
+        Calendar fin = Calendar.getInstance();
+        out.println("Tiempo algoritmo b�squeda primero en profundidad: "
+                + (fin.getTimeInMillis() - ini.getTimeInMillis()));
 
-				out.print(matrizAdyacencias[i][j]);
-				if (j < n)
-					out.print(" ");
-			}
-			out.println();
-		}
-	}
-	
-	public void tablaPesoDeArcos() {
+        return busq;
+    }
 
-		int n = this.tablaDePesos[0].length;
+    public int cardinal() {
+        return matrizAdyacencias[0].length;
+    }
 
-		out.println();
-		out.print("\\ ");
-		for (int i = 0; i < n; i++)
-			out.print((char) (i + 97) + " ");
-		out.println();
+    public boolean crearArco(char a1, char a2, int peso) {
+        int n1 = ((int) a1) - 97;
+        int n2 = ((int) a2) - 97;
 
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
+        return crearArco(n1, n2, peso);
+    }
 
-				if (j == 0)
-					out.print((char) (i + j + 97) + " ");
+    public boolean crearArco(int nodo1, int nodo2, int peso) {
+        try {
+            if (matrizAdyacencias[nodo1][nodo2] == 1 || nodo1 == nodo2)
+                return false;
 
-				out.print(tablaDePesos[i][j]);
-				if (j < n)
-					out.print(" ");
-			}
-			out.println();
-	
-		}
-	}
+            matrizAdyacencias[nodo1][nodo2] = 1;
+            tablaDePesos[nodo1][nodo2] = peso;
+
+            this.totalArcos++;
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * B�squeda primero en profundidad (Hopcroft - Tarjan)
+     */
+    public void dfs(int v, ArrayList<Integer> verticesVisitados,
+                    DigrafoPesado nuevo) {
+
+        int j = 0;
+        while (verticesVisitados.size() < cardinal() && j < cardinal()) {
+            if (matrizAdyacencias[v][j] == 1 && !verticesVisitados.contains(j)) {
+                // out.println("vertices no contiene a : " + (char)(j + 97));
+                nuevo.crearArco(v, j, tablaDePesos[v][j]);
+                verticesVisitados.add(j);
+                dfs(j, verticesVisitados, nuevo);
+            }
+            j++;
+        }
+    }
 	
 	/*public static Integer buscarMinimo(ArrayList<Integer> lista){
 		
@@ -142,11 +144,24 @@ public class DigrafoPesado {
 		
 		return min;
 	}*/
-	
-	public boolean esAdyacente(int i, int j){
-		return matrizAdyacencias[i][j] == 1 ||
-				matrizAdyacencias[j][i] == 1;
-	}
+
+    public Integer eliminarArco(int nodo1, int nodo2) {
+        Integer aux = null;
+
+        if (totalArcos == 0)
+            return null;
+
+        try {
+            matrizAdyacencias[nodo1][nodo2] = 0;
+            tablaDePesos[nodo1][nodo2] = 0;
+            this.totalArcos--;
+            return aux;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 	
 /*	public int[] algoritmoDijkstra(int first){
 		int n = cardinal();
@@ -175,76 +190,59 @@ public class DigrafoPesado {
 		
 		return null;
 	}*/
-	
-	
-	/**
-	 * B�squeda primero en profundidad (Hopcroft - Tarjan)
-	 */
-	public void dfs(int v, ArrayList<Integer> verticesVisitados,
-			DigrafoPesado nuevo) {
 
-		int j = 0;
-		while (verticesVisitados.size() < cardinal() && j < cardinal()) {
-			if (matrizAdyacencias[v][j] == 1 && !verticesVisitados.contains(j)) {
-				// out.println("vertices no contiene a : " + (char)(j + 97));
-				nuevo.crearArco(v, j, tablaDePesos[v][j]);
-				verticesVisitados.add(j);
-				dfs(j, verticesVisitados, nuevo);
-			}
-			j++;
-		}
-	}
+    public boolean esAdyacente(int i, int j) {
+        return matrizAdyacencias[i][j] == 1 ||
+                matrizAdyacencias[j][i] == 1;
+    }
 
-	public DigrafoPesado busquedaPrimeroEnProfundidad() {
+    public void tablaAdyacencias() {
 
-		Calendar ini = Calendar.getInstance();
+        int n = this.matrizAdyacencias[0].length;
 
-		DigrafoPesado busq = new DigrafoPesado(cardinal());
-		ArrayList<Integer> verticesVisitados = new ArrayList<Integer>();
+        out.println();
+        out.print("\\ ");
+        for (int i = 0; i < n; i++)
+            out.print((char) (i + 97) + " ");
+        out.println();
 
-		int i = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
 
-		while (i < cardinal() && verticesVisitados.size() < cardinal()) {
-			if (!verticesVisitados.contains(i)) {
-				verticesVisitados.add(i);
-				dfs(i, verticesVisitados, busq);
-			}
-			i++;
-		}
+                if (j == 0)
+                    out.print((char) (i + j + 97) + " ");
 
-		Calendar fin = Calendar.getInstance();
-		out.println("Tiempo algoritmo b�squeda primero en profundidad: "
-				+ (fin.getTimeInMillis() - ini.getTimeInMillis()));
+                out.print(matrizAdyacencias[i][j]);
+                if (j < n)
+                    out.print(" ");
+            }
+            out.println();
+        }
+    }
 
-		return busq;
-	}
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		DigrafoPesado dp = new DigrafoPesado(10);
-		dp.crearArco('a', 'e', 1);
-		dp.crearArco('d', 'a', 4);
-		dp.crearArco('a', 'h', 10);
-		dp.crearArco('d', 'h', 1);
-		dp.crearArco('h', 'e', 5);
-		dp.crearArco('h', 'i', 9);
-		dp.crearArco('e', 'f', 3);
-		dp.crearArco('f', 'c', 3);
-		dp.crearArco('f', 'b', 1);
-		dp.crearArco('f', 'g', 7);
-		dp.crearArco('b', 'c', 2);
-		dp.crearArco('f', 'i', 1);
-		dp.crearArco('g', 'j', 1);
-		dp.crearArco('i', 'j', 2);
-		
-		dp.tablaAdyacencias();
-		dp.tablaPesoDeArcos();
-		
-		DigrafoPesado nuev = dp.busquedaPrimeroEnProfundidad();
-		nuev.tablaPesoDeArcos();
-	}
+    public void tablaPesoDeArcos() {
+
+        int n = this.tablaDePesos[0].length;
+
+        out.println();
+        out.print("\\ ");
+        for (int i = 0; i < n; i++)
+            out.print((char) (i + 97) + " ");
+        out.println();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+
+                if (j == 0)
+                    out.print((char) (i + j + 97) + " ");
+
+                out.print(tablaDePesos[i][j]);
+                if (j < n)
+                    out.print(" ");
+            }
+            out.println();
+
+        }
+    }
 
 }

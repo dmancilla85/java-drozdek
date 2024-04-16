@@ -4,7 +4,7 @@ import org.drozdek.commons.ArrayUtils;
 
 public class CountingSort {
 
-    private CountingSort(){
+    private CountingSort() {
         // do nothing
     }
 

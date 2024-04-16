@@ -84,6 +84,30 @@ public class SplayTree<T> {
     }
 
     /**
+     * Print in-order
+     *
+     * @param out Printing in order
+     */
+    public void inorder(PrintStream out) {
+        inorder(root, out);
+    }
+
+    /**
+     * Recursive implementation for the in-order tree path
+     *
+     * @param p   Node to print
+     * @param out Print stream
+     */
+    protected void inorder(SplayTreeNode<T> p, PrintStream out) {
+        if (p == null)
+            return;
+
+        inorder(p.left, out);
+        visit(p, out);
+        inorder(p.right, out);
+    }
+
+    /**
      * Insert a new node in the tree.
      *
      * @param data Value to insert in the tree
@@ -189,33 +213,6 @@ public class SplayTree<T> {
     }
 
     /**
-     * Print in-order
-     * @param out Printing in order
-     */
-    public void inorder(PrintStream out) {
-        inorder(root, out);
-    }
-
-    /**
-     * Recursive implementation for the in-order tree path
-     *
-     * @param p Node to print
-     * @param out Print stream
-     */
-    protected void inorder(SplayTreeNode<T> p, PrintStream out) {
-        if (p == null)
-            return;
-
-        inorder(p.left, out);
-        visit(p, out);
-        inorder(p.right, out);
-    }
-
-    protected void visit(SplayTreeNode<T> p, PrintStream out) {
-        out.println(p.key + " ");
-    }
-
-    /**
      * Number of nodes in the tree.
      *
      * @return The number of elements in node
@@ -227,5 +224,9 @@ public class SplayTree<T> {
     @Override
     public String toString() {
         return root.toString();
+    }
+
+    protected void visit(SplayTreeNode<T> p, PrintStream out) {
+        out.println(p.key + " ");
     }
 }

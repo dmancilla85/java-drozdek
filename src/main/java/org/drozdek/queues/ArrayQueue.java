@@ -86,12 +86,11 @@ public class ArrayQueue {
 
     /**
      * Print all elements in the queue.
-     *
      */
     public void printAll() {
-        StringBuilder line=new StringBuilder();
+        StringBuilder line = new StringBuilder();
 
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             line.append(storage[i]);
             line.append(" ");
         }
@@ -101,11 +100,12 @@ public class ArrayQueue {
 
     /**
      * Size of the queue
+     *
      * @return Number of elements in the queue
      */
     public int size() {
-        int i=0;
-        while(i<storage.length && storage[i]!=null){
+        int i = 0;
+        while (i < storage.length && storage[i] != null) {
             i++;
         }
 

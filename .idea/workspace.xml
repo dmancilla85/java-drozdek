@@ -8,7 +8,81 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2353015f-a0cd-436c-a160-c9975f5c6fdd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Set.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/WeightedGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/commons/ArrayUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/commons/ArrayUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/commons/CompareExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/commons/CompareExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/Ejercicio3_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/Ejercicio3_2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/ElementoMochilaDyn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/ElementoMochilaDyn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/SolucionEjercicio2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/SolucionEjercicio2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/TestMochilaDyn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/TestMochilaDyn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Algoritmos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Algorithms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Arista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Arista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Conjunto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/DigrafoPesado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/DigrafoPesado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Grafo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/GrafoPesado.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Vertice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Vertice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/CircularLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/CircularLinkedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/DoubleCircularLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/DoubleCircularLinkedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/DoubleLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/DoubleLinkedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/IntSkipList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/IntSkipList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/iterators/SingleLinkedListIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/iterators/SingleLinkedListIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/Lista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/Lista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/ListaSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/ListaSimple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/NodoVector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/NodoVector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/Vector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/ArrayQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/ArrayQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/Queue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/Queue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/Cola.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/Cola.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaDinamica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaDinamica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaEstatica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaEstatica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaLlenaException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaLlenaException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/Heap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/Heap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/recursion/AlphabeticallySorted.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/recursion/AlphabeticallySorted.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/recursion/MajorityElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/recursion/MajorityElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/searching/BinarySearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/searching/BinarySearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/BubbleSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/BubbleSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/BucketSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/BucketSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/CountingSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/CountingSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/Ejercicio2_7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/Ejercicio2_7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/HeapSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/HeapSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/InsertionSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/InsertionSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/MergeSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/MergeSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/QuickSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/QuickSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/SelectionSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/SelectionSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/ShellSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/ShellSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/TestEjercicio1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/TestEjercicio1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/Pila.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/SimpleStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/PilaDinamica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/DynamicStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/PilaEstatica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/StaticStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/PilaInteligente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/SmartStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/PilaLlenaException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/FullStackException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/AvlTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/AvlTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/AvlTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/AvlTreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/BinarySearchTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/BinarySearchTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/BinarySearchTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/BinarySearchTreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/ExpressionTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/ExpressionTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/ExpressionTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/ExpressionTreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/MaximumHeap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/MaximumHeap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/MinimumHeap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/MinimumHeap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SplayTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SplayTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SplayTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SplayTreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SuffixTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SuffixTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SuffixTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SuffixTreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/Trie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/Trie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/TrieLeaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/TrieLeaf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/TrieNonLeaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/TrieNonLeaf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/Word.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolEstatico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolEstatico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolHeap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolHeap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolSimple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/MonticuloMaximo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/MonticuloMaximo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/MonticuloMinimo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/MonticuloMinimo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/NodoArbol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/NodoArbol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/NodoVector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/NodoVector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,23 +118,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/sandbox/java/drozdek/src/main/java/org/drozdek/graphs/unlam&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "OverrideImplement.generate.javadoc": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "full.screen.before.presentation.mode": "false",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/sandbox/java/drozdek/src/main/java/org/drozdek/graphs/unlam",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\sandbox\java\drozdek\src\main\java\org\drozdek\graphs\unlam" />

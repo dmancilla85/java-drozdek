@@ -24,6 +24,7 @@ public class BinarySearchTree<T> {
     public BinarySearchTree() {
         root = null;
     }
+
     public BinarySearchTree(BinarySearchTreeNode<T> root) {
         this.root = root;
     }
@@ -138,14 +139,14 @@ public class BinarySearchTree<T> {
     /**
      * This balance algorithm requires a previously sorted additional array
      *
-     * @param data  A sorted data array
+     * @param data A sorted data array
      */
-    public void balanceWithDataArray(Comparable<T>[] data){
-        balanceWithDataArray(data,0,data.length-1);
+    public void balanceWithDataArray(Comparable<T>[] data) {
+        balanceWithDataArray(data, 0, data.length - 1);
     }
 
     private void balanceWithDataArray(Comparable<T>[] data, int first, int last) {
-        if (first <=last) {
+        if (first <= last) {
             int middle = (first + last) / 2;
             insert(data[middle]);
             balanceWithDataArray(data, first, middle - 1);
@@ -189,6 +190,7 @@ public class BinarySearchTree<T> {
 
     /**
      * Delete node by copying branches
+     *
      * @param data Key to delete
      * @return Operation code
      */
@@ -202,7 +204,7 @@ public class BinarySearchTree<T> {
         prev = results[1];
         node = p;
 
-        if(p==null)
+        if (p == null)
             return 1;
 
         if (p.key != data)
@@ -239,6 +241,7 @@ public class BinarySearchTree<T> {
 
     /**
      * Delete node by merging branches
+     *
      * @param data Key to delete
      * @return Operation code
      */
@@ -253,7 +256,7 @@ public class BinarySearchTree<T> {
         prev = results[1];
         node = p;
 
-        if(p==null)
+        if (p == null)
             return 1;
 
         if (p.key != data)
@@ -285,6 +288,7 @@ public class BinarySearchTree<T> {
 
     /**
      * Print in-order
+     *
      * @param out Printing in order
      */
     public void inorder(PrintStream out) {
@@ -294,7 +298,7 @@ public class BinarySearchTree<T> {
     /**
      * Recursive implementation for the in-order tree path
      *
-     * @param p Node to print
+     * @param p   Node to print
      * @param out Print stream
      */
     protected void inorder(BinarySearchTreeNode<T> p, PrintStream out) {
@@ -308,6 +312,7 @@ public class BinarySearchTree<T> {
 
     /**
      * Insert a new node in the tree.
+     *
      * @param data Value to insert in the tree
      */
     public void insert(Comparable<T> data) {
@@ -612,6 +617,7 @@ public class BinarySearchTree<T> {
 
     /**
      * Number of nodes in the tree.
+     *
      * @return The number of elements in node
      */
     public int size() {

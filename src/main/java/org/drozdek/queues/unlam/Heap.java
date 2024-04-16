@@ -14,6 +14,7 @@
 */
 
 package org.drozdek.queues.unlam;
+
 import java.util.Comparator;
 
 /**
@@ -28,121 +29,133 @@ import java.util.Comparator;
  * <p>[<a href="http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/intro.html"> Introduction to this package. </a>]
  **/
 
-public class Heap  {
-  protected Object[] nodes_;  // the tree nodes, packed into an array
-  protected int count_ = 0;   // number of used slots
-  protected final Comparator<Object> cmp_;  // for ordering
+public class Heap {
+    protected final Comparator<Object> cmp_;  // for ordering
+    protected Object[] nodes_;  // the tree nodes, packed into an array
+    protected int count_ = 0;   // number of used slots
 
-  /**
-   * Create a Heap with the given initial capacity and comparator
-   * @exception IllegalArgumentException if capacity less or equal to zero
-   **/
+    /**
+     * Create a Heap with the given initial capacity and comparator
+     *
+     * @throws IllegalArgumentException if capacity less or equal to zero
+     **/
 
-  public Heap(int capacity, Comparator<Object> cmp) 
-   throws IllegalArgumentException {
-    if (capacity <= 0) throw new IllegalArgumentException();
-    nodes_ = new Object[capacity];
-    cmp_ = cmp;
-  }
-
-  /**
-   * Create a Heap with the given capacity,
-   * and relying on natural ordering.
-   **/
-
-  public Heap(int capacity) { 
-    this(capacity, null); 
-  }
-
-
-  /** perform element comaprisons using comparator or natural ordering **/
-  @SuppressWarnings("unchecked")
-protected int compare(Object a, Object b) {
-    if (cmp_ == null) 
-      return ((Comparable<Object>)a).compareTo(b);
-    else
-      return cmp_.compare(a, b);
-  }
-
-
-  // indexes of heap parents and children
-  protected final int parent(int k) { return (k - 1) / 2;  }
-  protected final int left(int k)   { return 2 * k + 1; }
-  protected final int right(int k)  { return 2 * (k + 1); }
-
-  /**
-   * insert an element, resize if necessary
-   **/
-  public synchronized void insert(Object x) {
-    if (count_ >= nodes_.length) {
-      int newcap =  3 * nodes_.length / 2 + 1;
-      Object[] newnodes = new Object[newcap];
-      System.arraycopy(nodes_, 0, newnodes, 0, nodes_.length);
-      nodes_ = newnodes;
+    public Heap(int capacity, Comparator<Object> cmp)
+            throws IllegalArgumentException {
+        if (capacity <= 0) throw new IllegalArgumentException();
+        nodes_ = new Object[capacity];
+        cmp_ = cmp;
     }
 
-    int k = count_;
-    ++count_;
-    while (k > 0) {
-      int par = parent(k);
-      if (compare(x, nodes_[par]) < 0) {
-        nodes_[k] = nodes_[par];
-        k = par;
-      }
-      else break;
+    /**
+     * Create a Heap with the given capacity,
+     * and relying on natural ordering.
+     **/
+
+    public Heap(int capacity) {
+        this(capacity, null);
     }
-    nodes_[k] = x;
-  }
-    
 
-  /**
-   * Return and remove least element, or null if empty
-   **/
+    /**
+     * remove all elements
+     **/
+    public synchronized void clear() {
+        for (int i = 0; i < count_; ++i)
+            nodes_[i] = null;
+        count_ = 0;
+    }
 
-  public synchronized Object extract() {
-    if (count_ < 1) return null;
+    /**
+     * perform element comaprisons using comparator or natural ordering
+     **/
+    @SuppressWarnings("unchecked")
+    protected int compare(Object a, Object b) {
+        if (cmp_ == null)
+            return ((Comparable<Object>) a).compareTo(b);
+        else
+            return cmp_.compare(a, b);
+    }
 
-    int k = 0; // take element at root;
-    Object least = nodes_[k];
-    --count_;
-    Object x = nodes_[count_];
-    nodes_[count_] = null;
-    for (;;) {
-      int l = left(k);
-      if (l >= count_)
-        break;
-      else {
-        int r = right(k);
-        int child = (r >= count_ || compare(nodes_[l], nodes_[r]) < 0)? l : r; 
-        if (compare(x, nodes_[child]) > 0) {
-          nodes_[k] = nodes_[child];
-          k = child;
+    /**
+     * Return and remove least element, or null if empty
+     **/
+
+    public synchronized Object extract() {
+        if (count_ < 1) return null;
+
+        int k = 0; // take element at root;
+        Object least = nodes_[k];
+        --count_;
+        Object x = nodes_[count_];
+        nodes_[count_] = null;
+        for (; ; ) {
+            int l = left(k);
+            if (l >= count_)
+                break;
+            else {
+                int r = right(k);
+                int child = (r >= count_ || compare(nodes_[l], nodes_[r]) < 0) ? l : r;
+                if (compare(x, nodes_[child]) > 0) {
+                    nodes_[k] = nodes_[child];
+                    k = child;
+                } else break;
+            }
         }
-        else break;
-      }
+        nodes_[k] = x;
+        return least;
     }
-    nodes_[k] = x;
-    return least;
-  }
 
-  /** Return least element without removing it, or null if empty **/
-  public synchronized Object peek() {
-    if (count_ > 0) 
-      return nodes_[0];
-    else
-      return null;
-  }
+    /**
+     * insert an element, resize if necessary
+     **/
+    public synchronized void insert(Object x) {
+        if (count_ >= nodes_.length) {
+            int newcap = 3 * nodes_.length / 2 + 1;
+            Object[] newnodes = new Object[newcap];
+            System.arraycopy(nodes_, 0, newnodes, 0, nodes_.length);
+            nodes_ = newnodes;
+        }
 
-  /** Return number of elements **/
-  public synchronized int size() {
-    return count_;
-  }
-  
-  /** remove all elements **/
-  public synchronized void clear() {
-    for (int i = 0; i < count_; ++i)
-      nodes_[i] = null;
-    count_ = 0;
-  }
+        int k = count_;
+        ++count_;
+        while (k > 0) {
+            int par = parent(k);
+            if (compare(x, nodes_[par]) < 0) {
+                nodes_[k] = nodes_[par];
+                k = par;
+            } else break;
+        }
+        nodes_[k] = x;
+    }
+
+    protected final int left(int k) {
+        return 2 * k + 1;
+    }
+
+    // indexes of heap parents and children
+    protected final int parent(int k) {
+        return (k - 1) / 2;
+    }
+
+    /**
+     * Return least element without removing it, or null if empty
+     **/
+    public synchronized Object peek() {
+        if (count_ > 0)
+            return nodes_[0];
+        else
+            return null;
+    }
+
+    protected final int right(int k) {
+        return 2 * (k + 1);
+    }
+
+    /**
+     * Return number of elements
+     **/
+    public synchronized int size() {
+        return count_;
+    }
 
 }

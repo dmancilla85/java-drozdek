@@ -1,21 +1,25 @@
 package org.drozdek.trees;
 
-public class TrieNonLeaf extends TrieNode{
+public class TrieNonLeaf extends TrieNode {
     protected boolean endOfWord;
     protected String letters;
     protected TrieNode[] ptr;
 
-    public TrieNonLeaf(char ch){
-        letters= "";
-        letters+=ch;
-        isLeaf=false;
-        endOfWord=false;
-        ptr =new TrieNode[1];
+    public TrieNonLeaf(char ch) {
+        letters = "";
+        letters += ch;
+        isLeaf = false;
+        endOfWord = false;
+        ptr = new TrieNode[1];
     }
 
-    public String toString(){
+    public TrieNonLeaf() {
+        this(Character.MIN_VALUE);
+    }
 
-        StringBuilder node=new StringBuilder();
+    public String toString() {
+
+        StringBuilder node = new StringBuilder();
         node.append(letters);
         node.append("-");
 
@@ -24,10 +28,6 @@ public class TrieNonLeaf extends TrieNode{
             node.append(System.lineSeparator());
         }
         return node.toString();
-    }
-
-    public TrieNonLeaf(){
-      this(Character.MIN_VALUE);
     }
 
 

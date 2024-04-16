@@ -21,14 +21,6 @@ public class DoubleLinkedList<T> implements Iterable<T> {
     }
 
     /**
-     * @return iterator
-     */
-    @Override
-    public Iterator<T> iterator() {
-        return new DoubleLinkedListIterator<>(this);
-    }
-
-    /**
      * Add a node to the tail.
      *
      * @param data Data value
@@ -106,6 +98,14 @@ public class DoubleLinkedList<T> implements Iterable<T> {
     }
 
     /**
+     * @return iterator
+     */
+    @Override
+    public Iterator<T> iterator() {
+        return new DoubleLinkedListIterator<>(this);
+    }
+
+    /**
      * Last node in list.
      *
      * @return Last data value
@@ -116,13 +116,12 @@ public class DoubleLinkedList<T> implements Iterable<T> {
 
     /**
      * Print all nodes in the list.
-     *
      */
     public void printAll() {
-        StringBuilder line=new StringBuilder();
+        StringBuilder line = new StringBuilder();
         line.append("[");
 
-        for(T element: this) {
+        for (T element : this) {
             line.append(element);
             line.append(" ");
         }
@@ -133,7 +132,6 @@ public class DoubleLinkedList<T> implements Iterable<T> {
 
     /**
      * Print all nodes in the list from the tail.
-     *
      */
     public void printReverse() {
         String line;

@@ -2,7 +2,7 @@ package org.drozdek.sorting;
 
 public class HeapSort {
 
-    private HeapSort(){
+    private HeapSort() {
         // do nothing
     }
 

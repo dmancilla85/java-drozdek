@@ -33,7 +33,7 @@ public class SplayTreeNode<T> {
         for (Iterator<SplayTreeNode<T>> it = children.iterator(); it.hasNext(); ) {
             SplayTreeNode<T> next = it.next();
 
-            if(next== null)
+            if (next == null)
                 continue;
 
             if (it.hasNext()) {
@@ -43,6 +43,7 @@ public class SplayTreeNode<T> {
             }
         }
     }
+
     @Override
     public String toString() {
         StringBuilder buffer = new StringBuilder(50);

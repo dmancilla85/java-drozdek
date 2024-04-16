@@ -24,7 +24,7 @@ public class SuffixTree {
         offset = from;
         root = new SuffixTreeNode(size);
         root.suffixLink = root;
-        name= MobyNamesGenerator.getRandomName();
+        name = MobyNamesGenerator.getRandomName();
     }
 
     private SuffixTreeNode findCanonicalNode(SuffixTreeNode p, int rt) {
@@ -51,14 +51,14 @@ public class SuffixTree {
 
     private String printTree(SuffixTreeNode p, int lvl, int lt, int rt, int pos) {
 
-        StringBuilder tree=new StringBuilder();
+        StringBuilder tree = new StringBuilder();
 
         tree.append("   ".repeat(Math.max(0, lvl)));
 
         if (p != null) { // if a nonleaf
             if (p == root)
                 tree.append(p.id);
-            else if (p.suffixLink != null){
+            else if (p.suffixLink != null) {
                 // to print in the middle of
                 tree.append(text, lt, rt + 1);
                 tree.append(" ");
@@ -70,18 +70,17 @@ public class SuffixTree {
                 tree.append(" ");
                 tree.append(rt);
                 tree.append("]");
-            }
-            else {
+            } else {
                 tree.append(text, lt, pos + 1);
                 tree.append(" ");
                 tree.append(p.id);
             }
             for (char i = 0; i < size; i++)
-                if (p.left[i] != -1){// if a tree node
-                    tree.append(printTree(p.descendants[i], lvl + 1, p.left[i], p.right[i], pos+1));
+                if (p.left[i] != -1) {// if a tree node
+                    tree.append(printTree(p.descendants[i], lvl + 1, p.left[i], p.right[i], pos + 1));
                 }
-        } else if(pos+1 < text.length() && pos>lt){
-            tree.append(text, lt, pos+1);
+        } else if (pos + 1 < text.length() && pos > lt) {
+            tree.append(text, lt, pos + 1);
             tree.append(" [");
             tree.append(lt);
             tree.append(" ");
@@ -96,8 +95,8 @@ public class SuffixTree {
         return printTree(root, 0, 0, 0, pos);
     }
 
-    public String printTree(){
-        StringBuilder tree=new StringBuilder();
+    public String printTree() {
+        StringBuilder tree = new StringBuilder();
         tree.append("Name:  ");
         tree.append(this.name);
         tree.append("Text: ");

@@ -5,8 +5,8 @@ class SuffixTreeNode {
     protected final SuffixTreeNode[] descendants;
     protected final int[] left;
     protected final int[] right;
-    protected SuffixTreeNode suffixLink;
     protected final int id; // for printing only
+    protected SuffixTreeNode suffixLink;
 
     public SuffixTreeNode(int sz) {
         id = cnt++;
