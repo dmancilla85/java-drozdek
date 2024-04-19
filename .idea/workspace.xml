@@ -8,81 +8,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2353015f-a0cd-436c-a160-c9975f5c6fdd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Set.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/WeightedGraph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/commons/ArrayUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/commons/ArrayUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/commons/CompareExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/commons/CompareExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/Ejercicio3_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/Ejercicio3_2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/ElementoMochilaDyn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/ElementoMochilaDyn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/SolucionEjercicio2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/SolucionEjercicio2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/TestMochilaDyn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/dynamic/TestMochilaDyn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Algoritmos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Algorithms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Arista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Arista.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Conjunto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/DigrafoPesado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/DigrafoPesado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Grafo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/GrafoPesado.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Vertice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/graphs/unlam/Vertice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/CircularLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/CircularLinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/DoubleCircularLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/DoubleCircularLinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/DoubleLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/DoubleLinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/IntSkipList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/IntSkipList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/iterators/SingleLinkedListIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/iterators/SingleLinkedListIterator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/Lista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/Lista.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/ListaSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/ListaSimple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/NodoVector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/NodoVector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/lists/unlam/Vector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/ArrayQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/ArrayQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/Queue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/Queue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/Cola.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/Cola.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaDinamica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaDinamica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaEstatica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaEstatica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaLlenaException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/ColaLlenaException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/Heap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/queues/unlam/Heap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/recursion/AlphabeticallySorted.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/recursion/AlphabeticallySorted.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/recursion/MajorityElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/recursion/MajorityElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/searching/BinarySearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/searching/BinarySearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/BubbleSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/BubbleSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/BucketSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/BucketSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/CountingSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/CountingSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/Ejercicio2_7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/Ejercicio2_7.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/HeapSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/HeapSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/InsertionSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/InsertionSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/MergeSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/MergeSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/QuickSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/QuickSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/SelectionSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/SelectionSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/ShellSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/ShellSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/TestEjercicio1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/sorting/TestEjercicio1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/Pila.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/SimpleStack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/PilaDinamica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/DynamicStack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/PilaEstatica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/StaticStack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/PilaInteligente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/SmartStack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/PilaLlenaException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/stacks/unlam/FullStackException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/AvlTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/AvlTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/AvlTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/AvlTreeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/BinarySearchTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/BinarySearchTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/BinarySearchTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/BinarySearchTreeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/ExpressionTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/ExpressionTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/ExpressionTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/ExpressionTreeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/MaximumHeap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/MaximumHeap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/MinimumHeap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/MinimumHeap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SplayTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SplayTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SplayTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SplayTreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SuffixTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SuffixTree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SuffixTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/SuffixTreeNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/Trie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/Trie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/TrieLeaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/TrieLeaf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/TrieNonLeaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/TrieNonLeaf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/Word.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolEstatico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolEstatico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolHeap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolHeap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/ArbolSimple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/MonticuloMaximo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/MonticuloMaximo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/MonticuloMinimo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/MonticuloMinimo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/NodoArbol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/NodoArbol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/NodoVector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/drozdek/trees/unlam/NodoVector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/trees/SuffixTreeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/trees/SuffixTreeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/trees/TrieTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/trees/TrieTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +53,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.SplayTreeTest.executor": "Run",
+    "JUnit.SuffixTreeTest.executor": "Run",
+    "JUnit.SuffixTreeTest.test.executor": "Run",
+    "JUnit.TrieTest.printAndFound.executor": "Run",
     "OverrideImplement.generate.javadoc": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -168,71 +105,7 @@
       <recent name="basics.lists" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.QuickSortTest.printSortedArray">
-    <configuration name="BinarySearchTest.printBinarySearch" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="drozdek" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="searching.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="searching" />
-      <option name="MAIN_CLASS_NAME" value="searching.BinarySearchTest" />
-      <option name="METHOD_NAME" value="printBinarySearch" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CountingSortTest.printSortedList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="drozdek" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="sorting.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="sorting" />
-      <option name="MAIN_CLASS_NAME" value="sorting.CountingSortTest" />
-      <option name="METHOD_NAME" value="printSortedList" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HeapSortTest.printSortedList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="drozdek" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="sorting.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="sorting" />
-      <option name="MAIN_CLASS_NAME" value="sorting.HeapSortTest" />
-      <option name="METHOD_NAME" value="printSortedList" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MergeSortTest.printSortedArray" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="drozdek" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="searching.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="sorting" />
-      <option name="MAIN_CLASS_NAME" value="sorting.MergeSortTest" />
-      <option name="METHOD_NAME" value="printSortedArray" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.TrieTest.printAndFound">
     <configuration name="QuickSortTest.printSortedArray" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="drozdek" />
       <extension name="coverage">
@@ -249,20 +122,82 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SplayTreeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="drozdek" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="trees.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="trees" />
+      <option name="MAIN_CLASS_NAME" value="trees.SplayTreeTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SuffixTreeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="drozdek" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="trees.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="trees" />
+      <option name="MAIN_CLASS_NAME" value="trees.SuffixTreeTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SuffixTreeTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="drozdek" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="trees.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="trees" />
+      <option name="MAIN_CLASS_NAME" value="trees.SuffixTreeTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TrieTest.printAndFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="drozdek" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="trees.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="trees" />
+      <option name="MAIN_CLASS_NAME" value="trees.TrieTest" />
+      <option name="METHOD_NAME" value="printAndFound" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="JUnit.BinarySearchTest.printBinarySearch" />
-      <item itemvalue="JUnit.CountingSortTest.printSortedList" />
-      <item itemvalue="JUnit.HeapSortTest.printSortedList" />
-      <item itemvalue="JUnit.MergeSortTest.printSortedArray" />
+      <item itemvalue="JUnit.TrieTest.printAndFound" />
+      <item itemvalue="JUnit.SplayTreeTest" />
+      <item itemvalue="JUnit.SuffixTreeTest" />
+      <item itemvalue="JUnit.SuffixTreeTest.test" />
       <item itemvalue="JUnit.QuickSortTest.printSortedArray" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TrieTest.printAndFound" />
+        <item itemvalue="JUnit.SuffixTreeTest.test" />
+        <item itemvalue="JUnit.SplayTreeTest" />
+        <item itemvalue="JUnit.SuffixTreeTest" />
         <item itemvalue="JUnit.QuickSortTest.printSortedArray" />
-        <item itemvalue="JUnit.CountingSortTest.printSortedList" />
-        <item itemvalue="JUnit.MergeSortTest.printSortedArray" />
-        <item itemvalue="JUnit.HeapSortTest.printSortedList" />
-        <item itemvalue="JUnit.BinarySearchTest.printBinarySearch" />
       </list>
     </recent_temporary>
   </component>

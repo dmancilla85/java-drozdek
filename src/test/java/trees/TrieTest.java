@@ -28,7 +28,7 @@ class TrieTest {
         tree.insert("name");
         tree.insert("is");
         tree.insert("Dave");
-        LoggerService.logWarning(tree.print());
+        LoggerService.logWarning(tree.ol);
         boolean ret = tree.found("wor");
         assertFalse(ret, "The result is not the expected.");
     }

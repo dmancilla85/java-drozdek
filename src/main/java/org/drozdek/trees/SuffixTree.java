@@ -56,13 +56,15 @@ public class SuffixTree {
         tree.append("   ".repeat(Math.max(0, lvl)));
 
         if (p != null) { // if a nonleaf
-            if (p == root)
+            if (p == root) {
+                tree.append("ID: ");
                 tree.append(p.id);
+                tree.append(" ");
+                tree.append(text.charAt(p.id));
+            }
             else if (p.suffixLink != null) {
                 // to print in the middle of
                 tree.append(text, lt, rt + 1);
-                tree.append(" ");
-                tree.append(p.id);
                 tree.append(" ");
                 tree.append(p.suffixLink.id);
                 tree.append(" [");
@@ -75,19 +77,21 @@ public class SuffixTree {
                 tree.append(" ");
                 tree.append(p.id);
             }
+
             for (char i = 0; i < size; i++)
                 if (p.left[i] != -1) {// if a tree node
                     tree.append(printTree(p.descendants[i], lvl + 1, p.left[i], p.right[i], pos + 1));
                 }
         } else if (pos + 1 < text.length() && pos > lt) {
             tree.append(text, lt, pos + 1);
-            tree.append(" [");
+            tree.append(" *[");
             tree.append(lt);
             tree.append(" ");
             tree.append(rt);
             tree.append("]");
-        }
+            tree.append("\n");
 
+        }
         return tree.toString();
     }
 
@@ -99,14 +103,21 @@ public class SuffixTree {
         StringBuilder tree = new StringBuilder();
         tree.append("Name:  ");
         tree.append(this.name);
-        tree.append("Text: ");
+        tree.append(". Text: ");
         tree.append(this.text);
+        tree.append('\n');
         tree.append("---");
+        tree.append('\n');
         for (int i = 1; i < this.text.length(); i++) {
             tree.append(printTree(i));
         }
 
         return tree.toString();
+    }
+
+    @Override
+    public String toString() {
+        return root.toString();
     }
 
     SuffixTreeNode testAndSplit(SuffixTreeNode p, int i) {

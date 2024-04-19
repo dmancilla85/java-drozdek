@@ -17,7 +17,7 @@ class SuffixTreeTest {
     @Test
     @DisplayName("Print the expression tree")
     void test(){
-        tree.ukkonen("Hello my dear friend!");
+        tree.ukkonen("banana");
         LoggerService.logInfo(tree.printTree());
     }
 }

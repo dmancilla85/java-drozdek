@@ -106,8 +106,6 @@ e
 0src/main/java/org/drozdek/sorting/QuickSort.java,a\c\acf958d74d0b805d90e6df14169c3487ab2fd6d8
 X
 (src/test/java/sorting/QuickSortTest.java,5\e\5e7124ff17c5d22584eba950472e8105e8b46376
-d
-4src/main/java/org/drozdek/graphs/unlam/Conjunto.java,2\3\2374705731024e05e960a03f4f23123c4194d3aa
 c
 3src/main/java/org/drozdek/sorting/Ejercicio2_7.java,c\7\c7ffba90b226df61f93df7bef326a8ad7b8e4cf5
 d
@@ -116,10 +114,6 @@ d
 4src/main/java/org/drozdek/sorting/SelectionSort.java,5\2\52a178358fb093fdc79be8df890d5dd924aabde0
 `
 0src/main/java/org/drozdek/sorting/MergeSort.java,9\6\96f03f1b8d1e858680eaadd7877142ee0a2628a4
-f
-6src/main/java/org/drozdek/graphs/unlam/Algoritmos.java,d\8\d8fca9dc5e4e1a9fe2a10f32d3051874fc4fdcbf
-a
-1src/main/java/org/drozdek/graphs/unlam/Grafo.java,2\f\2f587f9e5b5f193b1d15fe03ee08f3c5bd188dff
 e
 5src/main/java/org/drozdek/sorting/TestEjercicio1.java,1\d\1d409dc30005fdd4e190e6b308a66713d77e0e00
 c
@@ -134,11 +128,17 @@ d
 4src/main/java/org/drozdek/commons/LoggerService.java,4\0\408ddbb4e16e0e7938643ea937ab0bf77430cd58
 [
 +src/main/java/org/drozdek/stacks/Stack.java,1\e\1eee0d9fe99a7a1b97eabd145927cd1b97caa5f9
-`
-0src/main/java/org/drozdek/stacks/unlam/Pila.java,e\1\e14ac3f34a917a2f94cb7b45e46e5c839705bf93
 g
 7src/main/java/org/drozdek/stacks/unlam/SimpleStack.java,d\a\dab5e062769d56a37b01de277619f212a3891898
 n
 >src/main/java/org/drozdek/stacks/unlam/FullStackException.java,d\5\d5b58579a009b77db1a85212deb6151c68e24092
 h
 8src/main/java/org/drozdek/stacks/unlam/DynamicStack.java,4\e\4e4346bc26a5aad6beeb6cb76903049aa3627cf8
+b
+2src/main/java/org/drozdek/trees/SplayTreeNode.java,d\8\d893e9b6c4ee9ea741857efbff91378d1845beda
+c
+3src/main/java/org/drozdek/trees/SuffixTreeNode.java,9\e\9ee11751f1f5c645daf67b17f8669c3d16e78813
+]
+-src/main/java/org/drozdek/trees/TrieNode.java,9\f\9f2bd1127e4207b931fb29c85f80b0b86a085685
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d

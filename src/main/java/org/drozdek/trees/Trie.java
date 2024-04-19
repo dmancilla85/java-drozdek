@@ -17,6 +17,22 @@ public class Trie {
         createLeaf(word.charAt(0), word.substring(1), root);
     }
 
+    /*
+    public String display(TrieNode node, String str, int level) {
+        StringBuilder trie = new StringBuilder();
+
+        if (node.isLeaf) {
+            trie.append(str + " (Level " + level + ")");
+            trie.append('\n');
+        }
+
+        for (TrieNode child : node. getChildren()) {
+            trie.append(display(child, str + child.c, level + 1));
+        }
+        return trie.toString();
+    }
+     */
+
     private void addCell(char ch, TrieNonLeaf p, int stop) {
         int i;
         int len = p.letters.length();
@@ -213,7 +229,7 @@ public class Trie {
 
     public String printTrie() {
         if (root != null)
-            return oldPrintTrie(0, root, "w");
+            return  oldPrintTrie(0, root, "w");
         else
             return "<EMPTY>";
     }
