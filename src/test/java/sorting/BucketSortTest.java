@@ -9,7 +9,6 @@ import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BucketSortTest {
-
     @Test
     @DisplayName("Run bucket sort algorithm.")
     void printSortedList(){

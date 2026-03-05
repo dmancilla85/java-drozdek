@@ -9,6 +9,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2353015f-a0cd-436c-a160-c9975f5c6fdd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sorting/BucketSortTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sorting/BucketSortTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/trees/TrieTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/trees/TrieTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,35 +40,48 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2DDqzb67gppVrsFEN4DBT4V94Mi" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.SplayTreeTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.SuffixTreeTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.SuffixTreeTest.test.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TrieTest.printAndFound.executor&quot;: &quot;Run&quot;,
-    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/sandbox/java/drozdek/src/main/java/org/drozdek/graphs/unlam&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.All in drozdek (1).executor": "Run",
+    "JUnit.All in drozdek (2).executor": "Run",
+    "JUnit.All in drozdek (3).executor": "Run",
+    "JUnit.All in drozdek.executor": "Run",
+    "JUnit.SplayTreeTest.executor": "Run",
+    "JUnit.SuffixTreeTest.executor": "Run",
+    "JUnit.SuffixTreeTest.test.executor": "Run",
+    "JUnit.TrieTest.printAndFound.executor": "Run",
+    "OverrideImplement.generate.javadoc": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/sandbox/java/drozdek",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.applicationServers",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\sandbox\java\drozdek\src\main\java\org\drozdek\graphs\unlam" />
@@ -98,65 +114,35 @@
       <recent name="basics.lists" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TrieTest.printAndFound">
-    <configuration name="QuickSortTest.printSortedArray" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.All in drozdek (3)">
+    <configuration name="All in drozdek (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="drozdek" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="searching.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="sorting" />
-      <option name="MAIN_CLASS_NAME" value="sorting.QuickSortTest" />
-      <option name="METHOD_NAME" value="printSortedArray" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SplayTreeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in drozdek (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="drozdek" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="trees.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="trees" />
-      <option name="MAIN_CLASS_NAME" value="trees.SplayTreeTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SuffixTreeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in drozdek (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="drozdek" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="trees.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="trees" />
-      <option name="MAIN_CLASS_NAME" value="trees.SuffixTreeTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SuffixTreeTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in drozdek" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="drozdek" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="trees.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="trees" />
-      <option name="MAIN_CLASS_NAME" value="trees.SuffixTreeTest" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -178,21 +164,28 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="JUnit.All in drozdek" />
+      <item itemvalue="JUnit.All in drozdek (1)" />
+      <item itemvalue="JUnit.All in drozdek (2)" />
+      <item itemvalue="JUnit.All in drozdek (3)" />
       <item itemvalue="JUnit.TrieTest.printAndFound" />
-      <item itemvalue="JUnit.SplayTreeTest" />
-      <item itemvalue="JUnit.SuffixTreeTest" />
-      <item itemvalue="JUnit.SuffixTreeTest.test" />
-      <item itemvalue="JUnit.QuickSortTest.printSortedArray" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in drozdek (3)" />
+        <item itemvalue="JUnit.All in drozdek (2)" />
+        <item itemvalue="JUnit.All in drozdek (1)" />
+        <item itemvalue="JUnit.All in drozdek" />
         <item itemvalue="JUnit.TrieTest.printAndFound" />
-        <item itemvalue="JUnit.SuffixTreeTest.test" />
-        <item itemvalue="JUnit.SplayTreeTest" />
-        <item itemvalue="JUnit.SuffixTreeTest" />
-        <item itemvalue="JUnit.QuickSortTest.printSortedArray" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -202,8 +195,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1660244270161</updated>
+      <workItem from="1772728600337" duration="2398000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -225,6 +222,10 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/drozdek$AvlTreeTest.ic" NAME="AvlTreeTest Coverage Results" MODIFIED="1669150899472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
