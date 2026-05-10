@@ -97,7 +97,7 @@ public class QuickSort {
                 }
             }
 
-            ArrayList<Integer> ans = new ArrayList<Integer>();
+            ArrayList<Integer> ans = new ArrayList<>();
             ArrayList<Integer> sa1 = stableQuickSort(smaller);
             ArrayList<Integer> sa2 = stableQuickSort(greater);
 

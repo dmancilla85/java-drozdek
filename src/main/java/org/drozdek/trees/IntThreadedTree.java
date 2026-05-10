@@ -63,12 +63,7 @@ public class IntThreadedTree {
     }
 
     public void printInOrder(PrintStream out) {
-        if (root == null)
-            return;
-        // TODO: Not working
-        visit(root, out);
-        visit(root.left, out);
-        visit(root.right, out);
+        threadInOrder(out);
     }
 
     public int size() {

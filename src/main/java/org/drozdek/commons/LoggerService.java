@@ -24,14 +24,14 @@ public class LoggerService {
         String msg = YELLOW +
                 message +
                 WHITE;
-        log.info(msg);
+        log.warning(msg);
     }
 
     public static void logError(String message) {
         String msg = RED +
                 message +
                 WHITE;
-        log.info(msg);
+        log.severe(msg);
 
     }
 

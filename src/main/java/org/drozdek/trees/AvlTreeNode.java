@@ -17,6 +17,7 @@ public class AvlTreeNode {
         this.key = data;
         this.left = left;
         this.right = right;
+        this.height = 1;
     }
 
     private void print(StringBuilder buffer, String prefix, String childrenPrefix) {

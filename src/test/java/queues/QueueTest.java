@@ -18,9 +18,9 @@ class QueueTest {
     }
 
     @Test
-    @DisplayName("A new stack always is empty")
+    @DisplayName("A new queue always is empty")
     void isEmpty() {
-        assertTrue(queue.isEmpty(), "The stack should be empty");
+        assertTrue(queue.isEmpty(), "The queue should be empty");
     }
 
     @Test
@@ -58,7 +58,7 @@ class QueueTest {
     }
 
     @Test
-    @DisplayName("Check if elements are correctly enqueued")
+    @DisplayName("Check if elements are correctly dequeued")
     void dequeue(){
         queue.enqueue(45);
         queue.enqueue(55);

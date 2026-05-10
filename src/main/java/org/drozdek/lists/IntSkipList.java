@@ -5,37 +5,92 @@ import org.drozdek.commons.LoggerService;
 import java.util.Random;
 
 /**
- * Skip list for integer values.
+ * Skip list for integer values - a probabilistic data structure that provides fast search,
+ * insertion, and deletion operations.
+ * 
+ * <p>
+ * Abstract Data Type: Skip list
+ * 
+ * <p>
+ * This implementation provides an expected O(log n) time complexity for search, insertion,
+ * and deletion operations, and O(n) space complexity. The skip list consists of multiple
+ * layers of linked lists, where each layer skips over a certain number of elements.
+ * 
+ * <p>
+ * The structure maintains an array of references to the head nodes at each level, and uses
+ * randomization to determine the level of newly inserted nodes.
+ * 
+ * <p>
+ * Time Complexities (expected):
+ * <ul>
+ *   <li>insert(): O(log n)</li>
+ *   <li>search(): O(log n)</li>
+ *   <li>isEmpty(): O(1)</li>
+ *   <li>printAll(): O(n)</li>
+ *   <li>size(): O(n)</li>
+ * </ul>
+ * 
+ * <p>
+ * Space Complexity: O(n)
+ * 
+ * <p>
+ * Bibliography:
+ * <ul>
+ *   <li>William Pugh. <cite>Skip Lists: A Probabilistic Alternative to Balanced Trees</cite>. 
+ *       Communications of the ACM, June 1990.</li>
+ *   <li>Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein. 
+ *       <cite>Introduction to Algorithms</cite>, Third Edition. MIT Press, 2009. Chapter 12: 
+ *       Binary Search Trees, Skip Lists section.</li>
+ *   <li>Eric W. Weisstein. <cite>Skip List</cite>. From MathWorld--A Wolfram Web Resource.</li>
+ * </ul>
  */
 public class IntSkipList {
+    /** Maximum level allowed in this skip list */
     private final int maximumLevel;
+    /** Array of references to head nodes at each level */
     private final IntSkipListNode[] root;
+    /** Precomputed powers used in level selection */
     private final int[] powers;
+    /** Random number generator for probabilistic level selection */
     private final Random rd = new Random();
 
     /**
-     * Default constructor.
+     * Constructs a skip list with the default maximum level of 4.
+     * 
+     * Time Complexity: O(1)
      */
     public IntSkipList() {
         this(4);
     }
 
     /**
-     * Constructor.
-     *
-     * @param maxLevel Maximum level allowed
+     * Constructs a skip list with the specified maximum level.
+     * 
+     * @param maxLevel the maximum level allowed in this skip list
+     *                  Higher values allow for taller towers but use more memory
+     * 
+     * Time Complexity: O(maxLevel) for initialization
      */
     public IntSkipList(int maxLevel) {
         maximumLevel = maxLevel;
         root = new IntSkipListNode[maximumLevel];
         powers = new int[maximumLevel];
 
+        // Initialize all head references to null
         for (int j = 0; j < maximumLevel; j++)
             root[j] = null;
 
         choosePowers();
     }
 
+    /**
+     * Checks for the current valid level starting from the given level and moving downward
+     * until a non-null next pointer is found or we reach level -1.
+     * 
+     * @param level the starting level to check from
+     * @param current the current node to check
+     * @return the highest level <= level where current.next[level] is not null, or -1 if none found
+     */
     private int checkForCurrentLevel(int level, IntSkipListNode current) {
         int lvl = level;
 
@@ -47,13 +102,14 @@ public class IntSkipList {
     }
 
     /**
-     * Choose randomly between the superior level or a level minor than superior.
-     *
-     * @return chosen level
+     * Chooses a random level for a new node based on a probability distribution.
+     * The method uses precomputed powers to determine the level probabilistically.
+     * 
+     * @return the chosen level for a new node (0 to maximumLevel-1)
      */
     private int chooseLevel() {
         int i;
-        int r = Math.abs(rd.nextInt() + 1) % powers[maximumLevel - 1] + 1;
+        int r = (rd.nextInt(Integer.MAX_VALUE) + 1) % powers[maximumLevel - 1] + 1;
 
         for (i = 1; i < maximumLevel; i++)
             if (r < powers[i])
@@ -62,19 +118,20 @@ public class IntSkipList {
     }
 
     /**
-     *
+     * Precomputes the powers array used in the probabilistic level selection.
+     * The powers array helps determine the probability distribution for node levels.
      */
     private void choosePowers() {
-        powers[maximumLevel - 1] = (2 << (maximumLevel - 1)) - 1; // 2^maximumLevel-1
+        powers[maximumLevel - 1] = (1 << maximumLevel) - 1; // 2^maximumLevel-1
 
         for (int i = maximumLevel - 2, j = 0; i >= 0; i--, j++)
-            powers[i] = powers[i + 1] - (2 << j); // 2^(j+1)
+            powers[i] = powers[i + 1] - (1 << (j + 1)); // 2^(j+1)
     }
 
     /**
-     * Finds the major not null value.
-     *
-     * @return
+     * Finds the highest level that has a non-null head reference.
+     * 
+     * @return the highest level with a non-null head reference, or -1 if the list is empty
      */
     private int findMajorNotNullValue() {
         int lvl = maximumLevel - 1;
@@ -86,69 +143,97 @@ public class IntSkipList {
     }
 
     /**
-     * Insert new node.
-     *
-     * @param key Data value
+     * Inserts a new element into the skip list.
+     * If an element with the same key already exists, the method returns without inserting.
+     * 
+     * @param key the integer key to insert
+     * 
+     * Time Complexity: O(log n) expected, where n is the number of elements
      */
     public void insert(int key) {
         IntSkipListNode[] previous = new IntSkipListNode[maximumLevel];
         IntSkipListNode[] current = new IntSkipListNode[maximumLevel];
         int currentLevel;
 
+        // Start from the highest level and work our way down
         current[maximumLevel - 1] = root[maximumLevel - 1];
         previous[maximumLevel - 1] = null;
 
         for (currentLevel = maximumLevel - 1; currentLevel >= 0; currentLevel--) {
-
+            // Move forward at the current level while the next node's key is less than the key to insert
             while (current[currentLevel] != null && current[currentLevel].key < key) {
                 previous[currentLevel] = current[currentLevel];
                 current[currentLevel] = current[currentLevel].next[currentLevel];
             }
 
+            // If we found a node with the same key, don't insert (no duplicates)
             if (current[currentLevel] != null && current[currentLevel].key == key)
                 return;
 
+            // Move down to the next lower level
             if (currentLevel > 0) {
                 if (previous[currentLevel] == null) {
+                    // We're at the beginning of the level
                     current[currentLevel - 1] = root[currentLevel - 1];
                     previous[currentLevel - 1] = null;
                 } else {
+                    // Move to the next node at the lower level
                     current[currentLevel - 1] = previous[currentLevel].next[currentLevel - 1];
                     previous[currentLevel - 1] = previous[currentLevel];
                 }
             }
-
         }
 
+        // Choose a random level for the new node
         currentLevel = chooseLevel();
 
+        // Insert the new node at the chosen level and all lower levels
         insertKeyValue(key, currentLevel, previous, current);
     }
 
+    /**
+     * Helper method to insert a new node with the given key at the specified level.
+     * 
+     * @param key the key value for the new node
+     * @param currentLevel the level at which to insert the node (0-based)
+     * @param previous array of nodes that should point to the new node at each level
+     * @param current array of nodes that the new node should point to at each level
+     */
     private void insertKeyValue(int key, int currentLevel, IntSkipListNode[] previous, IntSkipListNode[] current) {
+        // Create the new node with the appropriate number of levels
         IntSkipListNode newNode = new IntSkipListNode(key, currentLevel + 1);
 
+        // Update the forward pointers at each level from 0 to currentLevel
         for (int i = 0; i <= currentLevel; i++) {
             newNode.next[i] = current[i];
 
+            // If we're inserting at the beginning of the level, update the head reference
             if (previous[i] == null)
                 root[i] = newNode;
             else
+                // Otherwise, link the new node after the previous node
                 previous[i].next[i] = newNode;
         }
     }
 
     /**
-     * List is empty?
-     *
-     * @return True if list is empty
+     * Tests if this skip list contains no elements.
+     * 
+     * @return true if the skip list is empty, false otherwise
+     * 
+     * Time Complexity: O(1) - direct check of the level 0 head reference
      */
     public boolean isEmpty() {
         return root[0] == null;
     }
 
     /**
-     * Print all elements in the list
+     * Prints all elements in the skip list in order.
+     * Each element is printed on a separate line showing its key and level 0 next reference.
+     * 
+     * Time Complexity: O(n) where n is the number of elements, due to traversal and string building.
+     * 
+     * Note: This method uses LoggerService.logInfo() for output, not System.out.println().
      */
     public void printAll() {
         IntSkipListNode tmp = root[0];
@@ -168,44 +253,59 @@ public class IntSkipList {
     }
 
     /**
-     * Search by key.
-     *
-     * @param key Data value
-     * @return The key found
+     * Searches for an element with the specified key in the skip list.
+     * 
+     * @param key the key to search for
+     * @return the key if found, or 0 if not found or the list is empty
+     * 
+     * Time Complexity: O(log n) expected, where n is the number of elements
      */
     public int search(int key) {
-        int lvl;
+        // Start from the highest non-empty level
+        int lvl = findMajorNotNullValue();
+
+        if (lvl < 0)
+            return 0;
+
         IntSkipListNode previous;
         IntSkipListNode current;
 
-        lvl = findMajorNotNullValue();
-
+        // Start at the head of the highest non-empty level
         previous = current = root[lvl];
 
         while (true) {
+            // If we found the key, return it
             if (key == current.key)
                 return current.key;
 
+            // If the key is less than the current node's key, move down a level
             else if (key < current.key) {
                 if (lvl == 0)
-                    return 0;
+                    return 0;  // We've reached the bottom level and haven't found the key
                 else if (current == root[lvl])
+                    // We're at the head of this level, move to the head of the lower level
                     current = root[--lvl];
                 else
+                    // Move to the next node at the lower level
                     current = previous.next[--lvl];
             } else {
+                // The key is greater than the current node's key, move forward at the current level
                 previous = current;
 
                 if (current.next[lvl] != null)
+                    // Move forward at the current level
                     current = current.next[lvl];
                 else {
+                    // No forward pointer at this level, move down a level
                     lvl--;
 
                     lvl = checkForCurrentLevel(lvl, current);
 
                     if (lvl >= 0)
+                        // Move forward at the lower level
                         current = current.next[lvl];
                     else
+                        // We've moved below level 0, key not found
                         return 0;
                 }
             }
@@ -213,9 +313,14 @@ public class IntSkipList {
     }
 
     /**
-     * List size.
-     *
-     * @return Number of elements in list.
+     * Returns the number of elements in this skip list.
+     * 
+     * @return the number of elements in this skip list
+     * 
+     * Time Complexity: O(n) where n is the number of elements, due to traversal.
+     * 
+     * Note: This implementation does not maintain a size counter, so it requires
+     *        a full traversal of the level 0 linked list to count elements.
      */
     public int size() {
         int size = 0;

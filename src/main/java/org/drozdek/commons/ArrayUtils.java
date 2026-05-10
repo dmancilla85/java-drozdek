@@ -28,6 +28,13 @@ public class ArrayUtils {
         array[j] = temp;
     }
 
+    public static boolean isSorted(int[] array) {
+        for (int i = 1; i < array.length; i++) {
+            if (array[i - 1] > array[i]) return false;
+        }
+        return true;
+    }
+
     public static void printArray(int[] array) {
 
         StringBuilder msg = new StringBuilder();

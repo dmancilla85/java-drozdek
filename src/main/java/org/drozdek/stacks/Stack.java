@@ -3,10 +3,12 @@ package org.drozdek.stacks;
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 
+import org.drozdek.stacks.interfaces.StackInterface;
+
 /**
  * Stack implemented as an arraylist.
  */
-public class Stack<T> {
+public class Stack<T> implements StackInterface<T> {
     private final ArrayList<T> pool;
 
     /**

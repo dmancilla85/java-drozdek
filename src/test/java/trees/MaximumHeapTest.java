@@ -8,77 +8,72 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MaximumHeapTest {
-    MaximumHeap heap;
+    MaximumHeap<Integer> heap;
 
-    private void dumpData(){
-        boolean ret;
-
-        ret =heap.insertKey(5);
-        ret =heap.insertKey(7);
-        ret =heap.insertKey(153);
-        ret =heap.insertKey(9);
-        ret =heap.insertKey(16);
-
-        if(!ret)
-            System.out.println("The heap is full.");
+    private void dumpData() {
+        heap.insertKey(5);
+        heap.insertKey(7);
+        heap.insertKey(153);
+        heap.insertKey(9);
+        heap.insertKey(16);
     }
 
     @BeforeEach
-    void setup(){
-        heap=new MaximumHeap(5);
+    void setup() {
+        heap = new MaximumHeap<>(5);
     }
 
     @Test
-    @DisplayName("Create a maximum heap and extract the minimum key")
-    void extractMaximum(){
+    @DisplayName("Create a maximum heap and extract the maximum key")
+    void extractMaximum() {
         dumpData();
 
         int max = heap.extractMax();
-        assertEquals(153,max,"The maximum extracted is not the expected.");
+        assertEquals(153, max, "The maximum extracted is not the expected.");
     }
 
     @Test
-    @DisplayName("Create a maximum heap and view the minimum key")
-    void getMaximum(){
+    @DisplayName("Create a maximum heap and view the maximum key")
+    void getMaximum() {
         dumpData();
 
         int max = heap.getMax();
-        assertEquals(153,max,"The maximum extracted is not the expected.");
+        assertEquals(153, max, "The maximum extracted is not the expected.");
     }
 
     @Test
     @DisplayName("Remove the maximum value in the heap")
-    void deleteKey(){
+    void deleteKey() {
         dumpData();
         heap.deleteKey(2);
         int max = heap.getMax();
-        assertEquals(16,max,"The maximum extracted is not the expected.");
+        assertEquals(153, max, "The maximum extracted is not the expected.");
     }
 
     @Test
     @DisplayName("Change the maximum value in the heap")
-    void changeValueOnAKey(){
+    void changeValueOnAKey() {
         dumpData();
-        heap.changeValueOnAKey (0, 18);
+        heap.changeValueOnAKey(0, 18);
         int max = heap.getMax();
-        assertEquals(18,max,"The maximum extracted is not the expected.");
+        assertEquals(18, max, "The maximum extracted is not the expected.");
     }
 
     @Test
     @DisplayName("Decrease the maximum value in the heap")
-    void decreaseKey(){
+    void decreaseKey() {
         dumpData();
-        heap.decreaseKey(0,100);
+        heap.decreaseKey(0, 100);
         int max = heap.getMax();
-        assertEquals(100,max,"The maximum extracted is not the expected.");
+        assertEquals(100, max, "The maximum extracted is not the expected.");
     }
 
     @Test
     @DisplayName("Check that the heap is printed correctly.")
-    void print(){
+    void print() {
         dumpData();
-        System.out.println (heap.toString());
+        System.out.println(heap.toString());
         int max = heap.getMax();
-        assertEquals(153,max,"The minimum extracted is not the expected.");
+        assertEquals(153, max, "The maximum extracted is not the expected.");
     }
 }

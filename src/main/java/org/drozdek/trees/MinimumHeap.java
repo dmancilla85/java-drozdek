@@ -1,185 +1,222 @@
 package org.drozdek.trees;
 
-/**
- * A Binary Heap is a Binary Tree with following properties:
- * <p>
- * 1) It’s a complete tree (All levels are completely filled except possibly the last level and the last level has
- * all keys as left as possible). This property of Binary Heap makes them suitable to be stored in an array.
- * <p>
- * 2)In a Min Binary Heap, the key at root must be minimum among all keys present in Binary Heap.
- * <p>
- * Source: <a href="https://www.geeksforgeeks.org/binary-heap/">Geeks for Geeks</a>
- */
-public class MinimumHeap {
-    // To store array of elements in heap
-    protected final int[] heapArray;
+public class MinimumHeap<T extends Comparable<T>> {
 
-    // max size of the heap
-    protected final int capacity;
+    private static final int DEFAULT_CAPACITY = 10;
+    private Object[] heap;
+    private int size;
 
-    // Current number of elements in the heap
-    protected int currentHeapSize;
-
-    // Constructor
-    public MinimumHeap(int n) {
-        capacity = n;
-        heapArray = new int[capacity];
-        currentHeapSize = 0;
+    public MinimumHeap() {
+        this(DEFAULT_CAPACITY);
     }
 
-    // Changes value on a key
-    public void changeValueOnAKey(int index, int newValue) {
-        if (heapArray[index] == newValue) {
-            return;
+    public MinimumHeap(int capacity) {
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("Capacity must be positive");
         }
-        if (heapArray[index] < newValue) {
-            increaseKey(index, newValue);
-        } else {
-            decreaseKey(index, newValue);
-        }
+        this.heap = new Object[capacity];
+        this.size = 0;
     }
 
-    // Decreases value of given key to new_val.
-    // It is assumed that new_val is smaller than heapArray[key].
-    public void decreaseKey(int index, int newValue) {
-
-        if (newValue >= heapArray[index])
-            return;
-
-        heapArray[index] = newValue;
-
-        while (index != 0 && heapArray[index] < heapArray[parent(index)]) {
-            int temp = heapArray[index];
-            heapArray[index] = heapArray[parent(index)];
-            heapArray[parent(index)] = temp;
-            index = parent(index);
+    public void insert(T element) {
+        if (element == null) {
+            throw new IllegalArgumentException("Element cannot be null");
         }
+        if (size >= heap.length) {
+            resize();
+        }
+        heap[size] = element;
+        siftUp(size);
+        size++;
     }
 
-    // This function deletes key at the given index. It first reduced value to minus infinite, then calls extractMin()
-    public void deleteKey(int index) {
-        decreaseKey(index, Integer.MIN_VALUE);
-        extractMin();
+    public boolean insertKey(T key) {
+        insert(key);
+        return true;
     }
 
-    // Method to remove minimum element
-    // (or root) from min heap
-    public int extractMin() {
-        if (currentHeapSize <= 0) {
-            return Integer.MAX_VALUE;
+    @SuppressWarnings("unchecked")
+    public T extractMin() {
+        if (size <= 0) {
+            return null;
         }
 
-        if (currentHeapSize == 1) {
-            currentHeapSize--;
-            return heapArray[0];
+        if (size == 1) {
+            size--;
+            return (T) heap[0];
         }
 
-        // Store the minimum value,
-        // and remove it from heap
-        int root = heapArray[0];
-
-        heapArray[0] = heapArray[currentHeapSize - 1];
-        currentHeapSize--;
+        T root = (T) heap[0];
+        heap[0] = heap[size - 1];
+        size--;
         minHeapify(0);
 
         return root;
     }
 
-    // Returns the minimum key (key at root) from min heap
-    public int getMin() {
-        return heapArray[0];
+    @SuppressWarnings("unchecked")
+    public T getMin() {
+        if (size <= 0) {
+            return null;
+        }
+        return (T) heap[0];
     }
 
-    // Increases value of given key to new_val.
-    // It is assumed that new_val is greater than heapArray[key].
-    // Heapify from the given key
-    public void increaseKey(int index, int newValue) {
+    public int height(int node) {
+        if (!isLeaf(node))
+            return 1 + height(leftChild(node));
+        return 1;
+    }
 
-        if (newValue <= heapArray[index])
+    public boolean isLeaf(int node) {
+        if (node > size - 1)
+            return false;
+
+        if (node * 2 + 1 > size - 1 || node < 0)
+            return true;
+
+        return heap[node * 2 + 1] == null && heap[node * 2 + 2] == null;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public Object[] toArray() {
+        Object[] copy = new Object[heap.length];
+        System.arraycopy(heap, 0, copy, 0, heap.length);
+        return copy;
+    }
+
+    @SuppressWarnings("unchecked")
+    public void deleteKey(int index) {
+        if (index < 0 || index >= size)
             return;
 
-        heapArray[index] = newValue;
+        if (index == size - 1) {
+            size--;
+            return;
+        }
+
+        heap[index] = heap[size - 1];
+        size--;
         minHeapify(index);
     }
 
-    // Inserts a new key
-    public boolean insertKey(int key) {
-        if (currentHeapSize == capacity) {
-            // heap is full
-            return false;
+    @SuppressWarnings("unchecked")
+    public void changeValueOnAKey(int index, T newValue) {
+        if (index < 0 || index >= size)
+            return;
+
+        T oldValue = (T) heap[index];
+        int cmp = newValue.compareTo(oldValue);
+        if (cmp == 0)
+            return;
+        if (cmp < 0) {
+            decreaseKey(index, newValue);
+        } else {
+            increaseKey(index, newValue);
         }
-
-        // First insert the new key at the end
-        int i = currentHeapSize;
-        heapArray[i] = key;
-        currentHeapSize++;
-
-        // Fix the min heap property if it is violated
-        while (i != 0 && heapArray[i] <
-                heapArray[parent(i)]) {
-            // swap elements
-            int temp = heapArray[i];
-            heapArray[i] = heapArray[parent(i)];
-            heapArray[parent(i)] = temp;
-
-            i = parent(i);
-        }
-        return true;
     }
 
-    // Get the Left Child index for the given index
-    private int left(int key) {
-        return 2 * key + 1;
+    @SuppressWarnings("unchecked")
+    public void decreaseKey(int index, T newValue) {
+        if (index < 0 || index >= size)
+            return;
+
+        if (newValue.compareTo((T) heap[index]) >= 0)
+            return;
+
+        heap[index] = newValue;
+
+        while (index != 0 && ((T) heap[index]).compareTo((T) heap[parent(index)]) < 0) {
+            swap(index, parent(index));
+            index = parent(index);
+        }
     }
 
-    // A recursive method to heapify a subtree with the root at given index
-    // This method assumes that the subtrees are already heapified
-    private void minHeapify(int key) {
-        int l = left(key);
-        int r = right(key);
+    @SuppressWarnings("unchecked")
+    public void increaseKey(int index, T newValue) {
+        if (index < 0 || index >= size)
+            return;
 
-        int smallest = key;
-        if (l < currentHeapSize &&
-                heapArray[l] < heapArray[smallest]) {
-            smallest = l;
-        }
-        if (r < currentHeapSize &&
-                heapArray[r] < heapArray[smallest]) {
-            smallest = r;
-        }
+        if (newValue.compareTo((T) heap[index]) <= 0)
+            return;
 
-        if (smallest != key) {
-            int temp = heapArray[key];
-            heapArray[key] = heapArray[smallest];
-            heapArray[smallest] = temp;
+        heap[index] = newValue;
+        minHeapify(index);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void minHeapify(int index) {
+        int left = 2 * index + 1;
+        int right = 2 * index + 2;
+        int smallest = index;
+
+        if (left < size && ((T) heap[left]).compareTo((T) heap[smallest]) < 0)
+            smallest = left;
+        if (right < size && ((T) heap[right]).compareTo((T) heap[smallest]) < 0)
+            smallest = right;
+
+        if (smallest != index) {
+            swap(index, smallest);
             minHeapify(smallest);
         }
     }
 
-    // Get the Parent index for the given index
-    private int parent(int key) {
-        return (key - 1) / 2;
+    @SuppressWarnings("unchecked")
+    private void siftUp(int index) {
+        while (index > 0 && ((T) heap[index]).compareTo((T) heap[parent(index)]) < 0) {
+            swap(index, parent(index));
+            index = parent(index);
+        }
     }
 
-    // Get the Right Child index for the given index
-    private int right(int key) {
-        return 2 * key + 2;
+    private int parent(int node) {
+        if (node <= 0)
+            return node;
+        return (node - 1) / 2;
+    }
+
+    private int leftChild(int node) {
+        if (0 <= node && node < (heap.length - 1) / 2 && !isLeaf(node))
+            return node * 2 + 1;
+        return -1;
+    }
+
+    private int rightChild(int node) {
+        if (0 <= node && node < (heap.length - 2) / 2 && !isLeaf(node))
+            return node * 2 + 2;
+        return -1;
+    }
+
+    private void swap(int i, int j) {
+        Object temp = heap[i];
+        heap[i] = heap[j];
+        heap[j] = temp;
+    }
+
+    private void resize() {
+        Object[] newHeap = new Object[heap.length * 2];
+        System.arraycopy(heap, 0, newHeap, 0, heap.length);
+        heap = newHeap;
     }
 
     @Override
     public String toString() {
-        StringBuilder array = new StringBuilder();
-        array.append("[");
-
-        for (int j = 0; j < heapArray.length; j++) {
-            array.append(heapArray[j]);
-
-            if (j != heapArray.length - 1) {
-                array.append(", ");
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < size; i++) {
+            sb.append(heap[i]);
+            if (i < size - 1) {
+                sb.append(", ");
             }
         }
-
-        array.append("]");
-        return array.toString();
+        sb.append("]");
+        return sb.toString();
     }
 }

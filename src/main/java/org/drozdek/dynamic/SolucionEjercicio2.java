@@ -64,8 +64,7 @@ class Tarea implements Comparable<Tarea>, Comparator<Tarea> {
 
     @Override
     public int compareTo(Tarea arg0) {
-        // TODO Auto-generated method stub
-        return (this.fin) - (arg0.fin);
+        return Integer.compare(this.fin, arg0.fin);
     }
 
     public String toString() {

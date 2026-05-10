@@ -186,7 +186,7 @@ public class TestEjercicio1 {
             System.out.println("La cantidad de pasos " + minima.instrucciones);
         }
 
-        System.exit(0);
+        // System.exit(0) removed -- not appropriate in a library class
     }
 
     @SuppressWarnings("unused")

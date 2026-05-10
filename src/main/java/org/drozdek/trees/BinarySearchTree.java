@@ -558,8 +558,8 @@ public class BinarySearchTree<T> {
         if (p == null)
             return;
 
-        preorder(p.left, out);
-        preorder(p.right, out);
+        postorder(p.left, out);
+        postorder(p.right, out);
         visit(p, out);
     }
 

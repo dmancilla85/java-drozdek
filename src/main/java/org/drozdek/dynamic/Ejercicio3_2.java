@@ -32,41 +32,37 @@ public class Ejercicio3_2 {
      * */
 
     public static double getMaximum(double a, double b) {
-        if (a > b)
-            return a;
-        else
-            return b;
+        return Math.max(a, b);
     }
 
     public static double getMinimum(double a, double b) {
-        if (a < b)
-            return a;
-        else
-            return b;
+        return Math.min(a, b);
     }
 
     public static Double mochilaMaximizar(List<Objeto> mochila, int pesoMaximo) {
 
         List<Double> r = new ArrayList<Double>();
-        double suma;
-        int objeto;
 
         // Inicializar en 0
         for (int i = 0; i < mochila.size(); i++)
             r.add(0.00);
 
-        suma = 0;
-        objeto = 0;
+        double suma = 0;
+        int objeto = 0;
 
-        while (suma < pesoMaximo) {
-            r.set(objeto, getMinimum(1, (pesoMaximo - suma))
-                    / mochila.get(objeto).p);
+        while (suma < pesoMaximo && objeto < mochila.size()) {
+            double fraccion = getMinimum(1, (pesoMaximo - suma) / (double) mochila.get(objeto).p);
+            r.set(objeto, fraccion);
 
-            suma = suma + getMinimum(1, (pesoMaximo - suma))
-                    / mochila.get(objeto).p * mochila.get(objeto).p;
+            suma += fraccion * mochila.get(objeto).p;
+            objeto++;
         }
 
-        return 0.0;
+        double valorTotal = 0;
+        for (int i = 0; i < mochila.size(); i++) {
+            valorTotal += r.get(i) * mochila.get(i).v;
+        }
+        return valorTotal;
     }
 
     public static Double mochilaMaximizarDin(List<Objeto> mochila, int pesoMaximo) {
@@ -80,14 +76,14 @@ public class Ejercicio3_2 {
                 if (i == 0 || j == 0)
                     matriz[i][j] = 0.0;
                 else
-                    matriz[i][j] = Double.MIN_VALUE; // - Menos infinito
+                    matriz[i][j] = Double.NEGATIVE_INFINITY;
 
         for (int i = 1; i <= mochila.size(); i++)
             for (int j = 1; j <= pesoMaximo; j++) {
                 // Capacidad superada?
                 if (j - mochila.get(i - 1).p < 0)
                     matriz[i][j] = getMaximum(mochila.get(i - 1).v *
-                                    (j / mochila.get(i - 1).p)
+                                    ((double) j / mochila.get(i - 1).p)
                                     + matriz[i - 1][0],
                             matriz[i - 1][j]);
                 else {

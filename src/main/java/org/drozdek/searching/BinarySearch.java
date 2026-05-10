@@ -12,7 +12,7 @@ public class BinarySearch {
         if (left <= right) {
 
             //Calcular el índice del elemento medio
-            int mid = (left + right) / 2;
+            int mid = left + (right - left) / 2;
 
             //Comparar el elemento buscado con el elemento medio
             if (target == array[mid]) {

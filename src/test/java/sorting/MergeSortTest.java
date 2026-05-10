@@ -29,6 +29,6 @@ class MergeSortTest {
 
         stopTime = System.currentTimeMillis();
         LoggerService.logInfo(String.format("Total time elapsed: %s ms.%n", (stopTime - startTime)));
-        assertTrue(true, "Check if everything is printing OK.");
+        assertTrue(ArrayUtils.isSorted(array), "Array should be sorted after merge sort");
     }
 }

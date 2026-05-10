@@ -28,6 +28,6 @@ class InsertionSortTest {
 
         stopTime = System.currentTimeMillis();
         out.printf("Total time elapsed: %s ms.%n", (stopTime - startTime));
-        assertTrue(true, "Check if everything is printing OK.");
+        assertTrue(ArrayUtils.isSorted(array), "Array should be sorted after insertion sort");
     }
 }

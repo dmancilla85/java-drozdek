@@ -1,7 +1,7 @@
 package org.drozdek.graphs.unlam;
 
 import org.drozdek.commons.LoggerService;
-import org.drozdek.trees.unlam.MonticuloMinimo;
+import org.drozdek.trees.MinimumHeap;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,21 +26,21 @@ public class Algorithms {
         Calendar ini = Calendar.getInstance();
 
         WeightedGraph nuevo = new WeightedGraph(g.cardinality());
-        MonticuloMinimo aristas = new MonticuloMinimo(g.countEdges());
+        MinimumHeap<Arista> aristas = new MinimumHeap<>(g.countEdges());
         ArrayList<Vertice> verticesVisitados = new ArrayList<>();
 
         // Secuencia de todos los arcos de G ordenados por peso
         for (Arista element : g.edges)
-            aristas.agregar(element);
+            aristas.insert(element);
 
         // Agrego el v inicial
         verticesVisitados.add(g.vertices.get(inicial));
 
         for (int i = 0; i < g.cardinality(); i++)
             // Mientras la lista ver de vertices visitados no contenga todo V
-            for (int j = 0; j < aristas.totalNodos() && verticesVisitados.size() < g.cardinality(); j++) {
+            for (int j = 0; j < aristas.size() && verticesVisitados.size() < g.cardinality(); j++) {
                 // Obtengo el arco con la m�nima distancia
-                Arista aux = (Arista) aristas.extraerRaiz();
+                Arista aux = aristas.extractMin();
                 // Si uno de los dos v del arco se encuentra en "ver"
                 // y la cantidad de arcos es menor a N - 1 y no forma un ciclo.
                 if ((!verticesVisitados.contains(aux.destino) ||
@@ -67,16 +67,16 @@ public class Algorithms {
         WeightedGraph nuevo = new WeightedGraph(g.cardinality());
 
         // Arcos ordenados por peso
-        MonticuloMinimo cola = new MonticuloMinimo(g.countEdges());
+        MinimumHeap<Arista> cola = new MinimumHeap<>(g.countEdges());
         ArrayList<Vertice> arbol = new ArrayList<>();
 
         // Secuencia de todos los arcos de G ordenados por peso
         for (Arista element : g.edges) {
-            cola.agregar(element);
+            cola.insert(element);
         }
 
-        for (int i = 1; i <= g.countEdges() && arbol.size() < g.cardinality() - 1 && !cola.estaVacio(); i++) {
-            Arista e = (Arista) cola.extraerRaiz();
+        for (int i = 1; i <= g.countEdges() && arbol.size() < g.cardinality() - 1 && !cola.isEmpty(); i++) {
+            Arista e = cola.extractMin();
 
             if ((!arbol.contains(e.destino) || !arbol.contains(e.origen)) &&
                     nuevo.countEdges() < g.cardinality() - 1) {
@@ -180,7 +180,7 @@ public class Algorithms {
      */
     public static int[][] algoritmoFloydMarshall(WeightedGraph g) {
 
-        // MonticuloMinimo caminoMinimo = new MonticuloMinimo(g.cardinal());
+        // MinimumHeap caminoMinimo = new MinimumHeap(g.cardinal());
 
         /*
          * Una matriz bidimensional. En cada paso del algoritmo, camino[i][j] es

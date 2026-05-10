@@ -34,6 +34,7 @@ public class CountingSort {
         for (int i = n - 1; i >= 0; i--) {
             // Colocar el elemento actual en la posición indicada por el arreglo auxiliar
             output[count[array[i]] - 1] = array[i];
+            count[array[i]]--;
         }
 
         // Copiar el arreglo de salida al arreglo original

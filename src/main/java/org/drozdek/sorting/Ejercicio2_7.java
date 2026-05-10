@@ -6,62 +6,56 @@ import java.util.List;
 import static java.lang.System.out;
 
 public class Ejercicio2_7 {
-    /* Dado un Vector A  de números enteros, ordenarlo en forma creciente.
-     * Utilizar el método de ordenamiento Merge-Sort, pero dividiendo el
-     * vector en 3 subvectores y analizar el costo.
-     * */
 
     public static void mergeSortAlter(List<Integer> a, int inicio, int fin) {
-
-        int mitad = 0, aux;
-
-        if (a.size() <= 1) {
+        if (fin - inicio < 1) {
             return;
         }
 
-        // Casos triviales
-        if (a.size() == 2) {
-            if (a.get(0) > a.get(1)) {
-                aux = a.get(0);
-                a.set(0, a.get(1));
-                a.set(1, aux);
+        if (fin - inicio == 1) {
+            if (a.get(inicio) > a.get(fin)) {
+                int aux = a.get(inicio);
+                a.set(inicio, a.get(fin));
+                a.set(fin, aux);
             }
-        } else if (a.size() > 2) {
-            mitad = (fin + inicio) / 2;
-            mergeSortAlter(a, inicio, mitad);
-            mergeSortAlter(a, mitad + 1, fin);
-            merge(a, inicio, fin);
+            return;
         }
+
+        int tercio1 = inicio + (fin - inicio) / 3;
+        int tercio2 = inicio + 2 * (fin - inicio) / 3;
+
+        mergeSortAlter(a, inicio, tercio1);
+        mergeSortAlter(a, tercio1 + 1, tercio2);
+        mergeSortAlter(a, tercio2 + 1, fin);
+
+        merge(a, inicio, tercio1, tercio2, fin);
     }
 
-    public static void merge(List<Integer> a, int inicio, int fin) {
-        List<Integer> result = new ArrayList<Integer>();
-        int medio = ((inicio + fin) / 2) - 1;
-        int i = (inicio - 1), j = (medio + 1) - 1;
-
-        // Inicializar vector auxiliar
-        for (int k = 0; k < fin - inicio + 1; k++)
+    public static void merge(List<Integer> a, int inicio, int tercio1, int tercio2, int fin) {
+        int n = fin - inicio + 1;
+        List<Integer> result = new ArrayList<>();
+        for (int k = 0; k < n; k++)
             result.add(0);
 
-        for (int k = 0; k < fin - inicio; k++) {
-            if (j > fin || a.get(i) <= a.get(j)) {
-                result.set(k, a.get(i));
-                i++;
+        int i = inicio, j = tercio1 + 1, k = tercio2 + 1;
+
+        for (int idx = 0; idx < n; idx++) {
+            if (i <= tercio1 && (j > tercio2 || a.get(i) <= a.get(j))
+                    && (k > fin || a.get(i) <= a.get(k))) {
+                result.set(idx, a.get(i++));
+            } else if (j <= tercio2 && (k > fin || a.get(j) <= a.get(k))) {
+                result.set(idx, a.get(j++));
             } else {
-                result.set(k, a.get(j));
-                j++;
+                result.set(idx, a.get(k++));
             }
         }
 
-        for (int k = 0; k <= fin - inicio - 1; k++)
-            a.set(inicio + k, result.get(k));
+        for (int idx = 0; idx < n; idx++)
+            a.set(inicio + idx, result.get(idx));
     }
 
     public static void test(int n) {
-        List<Integer> valores = new ArrayList<Integer>();
-		
-		/*for(int i = 0; i < n; i++)
-			valores.add(0);*/
+        List<Integer> valores = new ArrayList<>();
         valores.add(2);
         valores.add(8);
         valores.add(1);
@@ -71,7 +65,7 @@ public class Ejercicio2_7 {
         valores.add(22);
         valores.add(25);
 
-        mergeSortAlter(valores, 1, valores.size());
+        mergeSortAlter(valores, 0, valores.size() - 1);
 
         for (int i = 0; i < valores.size(); i++)
             out.println(valores.get(i));

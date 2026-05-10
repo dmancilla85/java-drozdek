@@ -43,7 +43,7 @@ class ExpressionTreeTest {
 
         int result  = ExpressionTree.evaluateExpression(expression);
         System.out.println("Result is " + result);
-        assertEquals(101, result);
+        assertEquals(71, result);
     }
 
     @Test

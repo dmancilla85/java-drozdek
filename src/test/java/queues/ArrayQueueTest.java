@@ -18,13 +18,13 @@ class ArrayQueueTest {
     }
 
     @Test
-    @DisplayName("A new stack always is empty")
+    @DisplayName("A new queue always is empty")
     void isEmpty() {
-        assertTrue(queue.isEmpty(), "The stack should be empty");
+        assertTrue(queue.isEmpty(), "The queue should be empty");
     }
 
     @Test
-    @DisplayName("A full stack should be informed as full")
+    @DisplayName("A full queue should be informed as full")
     void isFull() {
         queue.enqueue(1);
         queue.enqueue(2);
@@ -33,7 +33,7 @@ class ArrayQueueTest {
         queue.enqueue(5);
         queue.enqueue(6);
 
-        assertTrue(queue.isFull(), "The stack should be marked as full");
+        assertTrue(queue.isFull(), "The queue should be marked as full");
     }
 
     @Test
@@ -57,7 +57,7 @@ class ArrayQueueTest {
     }
 
     @Test
-    @DisplayName("Check if elements are correctly enqueued")
+    @DisplayName("Check if elements are correctly dequeued")
     void dequeue(){
         queue.enqueue(45);
         queue.enqueue(55);

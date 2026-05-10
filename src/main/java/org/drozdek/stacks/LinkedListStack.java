@@ -3,10 +3,12 @@ package org.drozdek.stacks;
 import java.util.EmptyStackException;
 import java.util.LinkedList;
 
+import org.drozdek.stacks.interfaces.StackInterface;
+
 /**
  * Stack implemented as a linked list.
  */
-public class LinkedListStack<T> {
+public class LinkedListStack<T> implements StackInterface<T> {
     private final LinkedList<T> pool;
 
     /**

@@ -102,16 +102,23 @@ public class ExpressionTree {
         Deque<Integer> numStack = new ArrayDeque<>();
         Deque<Character> opStack = new ArrayDeque<>();
 
-        for (char token : expression.toCharArray()) {
+        for (int i = 0; i < expression.length(); i++) {
+            char token = expression.charAt(i);
             if (isNumber(token)) {
-                numStack.push((int) token);
+                int num = 0;
+                while (i < expression.length() && Character.isDigit(expression.charAt(i))) {
+                    num = num * 10 + (expression.charAt(i) - '0');
+                    i++;
+                }
+                i--;
+                numStack.push(num);
             } else if (token == '(') {
                 opStack.push(token);
             } else if (token == ')') {
                 while (opStack.peek() != '(') {
                     numStack.push(compute(numStack.pop(), numStack.pop(), opStack.pop()));
                 }
-                opStack.pop();  // pop out (
+                opStack.pop();
             } else {
                 while (!opStack.isEmpty() && getPriority(opStack.peek()) >= getPriority(token)
                         && !numStack.isEmpty()) {

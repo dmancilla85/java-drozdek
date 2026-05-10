@@ -67,8 +67,7 @@ public class ElementoMochilaDyn implements Comparable<ElementoMochilaDyn>, Compa
 
     @Override
     public int compareTo(ElementoMochilaDyn arg0) {
-        // TODO Auto-generated method stub
-        return this.ganancia - arg0.ganancia;
+        return Integer.compare(this.ganancia, arg0.ganancia);
     }
 
     public String toString() {
