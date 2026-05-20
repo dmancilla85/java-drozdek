@@ -15,6 +15,9 @@
 
 package org.drozdek.queues.unlam;
 
+import org.drozdek.commons.LoggerService;
+import org.drozdek.queues.interfaces.QueueInterface;
+
 import java.util.Comparator;
 
 /**
@@ -29,7 +32,7 @@ import java.util.Comparator;
  * <p>[<a href="http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/intro.html"> Introduction to this package. </a>]
  **/
 
-public class Heap {
+public class Heap implements QueueInterface<Object> {
     protected final Comparator<Object> cmp_;  // for ordering
     protected Object[] nodes_;  // the tree nodes, packed into an array
     protected int count_ = 0;   // number of used slots
@@ -149,6 +152,28 @@ public class Heap {
 
     protected final int right(int k) {
         return 2 * (k + 1);
+    }
+
+    public synchronized boolean enqueue(Object x) {
+        insert(x);
+        return true;
+    }
+
+    public synchronized Object dequeue() {
+        return extract();
+    }
+
+    public synchronized boolean isEmpty() {
+        return count_ == 0;
+    }
+
+    public synchronized void printAll() {
+        StringBuilder line = new StringBuilder();
+        for (int i = 0; i < count_; i++) {
+            line.append(nodes_[i]);
+            line.append(" ");
+        }
+        LoggerService.logInfo(line.toString());
     }
 
     /**

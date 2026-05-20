@@ -1,6 +1,7 @@
 package org.drozdek.lists;
 
 import org.drozdek.commons.LoggerService;
+import org.drozdek.lists.interfaces.ListInterface;
 import org.drozdek.lists.iterators.SingleLinkedListIterator;
 
 import java.util.Iterator;
@@ -27,7 +28,7 @@ import java.util.Iterator;
  *   <li>William Fiset. <cite>Data Structures: Linked Lists</cite>. YouTube, 2020.</li>
  * </ul>
  */
-public class SingleLinkedList<T> implements Iterable<T> {
+public class SingleLinkedList<T> implements Iterable<T>, ListInterface<T> {
     protected SingleLinkedListNode<T> head;
 
     /**

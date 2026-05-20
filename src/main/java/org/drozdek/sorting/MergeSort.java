@@ -11,47 +11,36 @@ public class MergeSort {
     // Memory O(n)
     public static void mergeSort(int[] array, int left, int right) {
 
-        //Verificar que el arreglo tenga al menos dos elementos
         if (left < right) {
 
-            //Encontrar el punto medio para dividir el arreglo en dos mitades
             int middle = (left + right) / 2;
 
-            //Ordenar recursivamente la primera mitad
+            // Recursively sort both halves
             mergeSort(array, left, middle);
-
-            //Ordenar recursivamente la segunda mitad
             mergeSort(array, middle + 1, right);
 
-            //Unir las dos mitades ordenadas
+            // Merge the sorted halves
             merge(array, left, middle, right);
         }
     }
 
-    //Método para unir dos subarreglos ordenados
+    // Merge two sorted subarrays into one sorted array
     public static void merge(int[] array, int left, int middle, int right) {
 
-        //Encontrar el tamaño de los subarreglos para unirlos
+        // Sizes of the two temporary subarrays
         int n1 = middle - left + 1;
         int n2 = right - middle;
 
-        //Crear arreglos temporales
         int[] leftArray = new int[n1];
         int[] rightArray = new int[n2];
 
-        //Copiar los datos a los arreglos temporales
+        // Copy data into temporary arrays
         System.arraycopy(array, left, leftArray, 0, n1);
         System.arraycopy(array, middle + 1, rightArray, 0, n2);
 
-        //Unir los arreglos temporales
-
-        //Índices iniciales de los subarreglos
+        // Merge the temporary arrays back into the original
         int i = 0, j = 0;
-
-        //Índice inicial del subarreglo resultante
         int k = left;
-
-        //Ordenar los elementos comparándolos entre los subarreglos
         while (i < n1 && j < n2) {
             if (leftArray[i] <= rightArray[j]) {
                 array[k] = leftArray[i];
@@ -63,7 +52,7 @@ public class MergeSort {
             k++;
         }
 
-        //Copiar los elementos restantes de los subarreglos si quedan
+        // Copy any remaining elements from either subarray
         while (i < n1) {
             array[k] = leftArray[i];
             i++;

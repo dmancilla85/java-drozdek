@@ -9,11 +9,10 @@ import static java.lang.System.out;
 
 public class AlphabeticallySorted {
 
-    // Determinar si una secuencia de n caracteres está ordenada alfabéticamente.
+    // Check if a sequence of characters is alphabetically sorted (case-insensitive)
     public static boolean run(List<Character> s, int llamada) {
 
-
-        // Solución trivial
+        // Base case: a single character (or empty) is always sorted
         if (s.size() <= 1)
             return true;
 
@@ -24,7 +23,7 @@ public class AlphabeticallySorted {
 
             s.remove(0);
 
-            // Combinar resultados
+            // Recurse on the remaining characters
             return run(s, ++llamada);
         } else
             return false;

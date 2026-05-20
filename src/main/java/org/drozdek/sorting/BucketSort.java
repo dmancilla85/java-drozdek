@@ -5,15 +5,13 @@ import java.util.Collections;
 
 public class BucketSort {
 
-    private BucketSort() {
-        // do nothing
-    }
+    private BucketSort() {}
 
     // Complexity: O(n)
     // Memory: O(n)
     public static void bucketSort(int[] array, int bucketSize) {
 
-        // Encontrar el valor mínimo y máximo en el arreglo
+        // Find min and max values in the array
         int min = array[0];
         int max = array[0];
 
@@ -25,22 +23,22 @@ public class BucketSort {
             }
         }
 
-        // Calcular el número de cubetas
+        // Calculate number of buckets
         int bucketCount = (max - min) / bucketSize + 1;
 
-        // Crear una lista de cubetas vacías
+        // Create empty bucket list
         ArrayList<ArrayList<Integer>> buckets = new ArrayList<>(bucketCount);
         for (int i = 0; i < bucketCount; i++) {
             buckets.add(new ArrayList<>());
         }
 
-        // Insertar los elementos del arreglo en las cubetas correspondientes
+        // Distribute elements into buckets
         for (int j : array) {
             int bucketIndex = (j - min) / bucketSize;
             buckets.get(bucketIndex).add(j);
         }
 
-        // Ordenar cada cubeta usando Collections.sort() y copiar los elementos al arreglo original
+        // Sort each bucket and copy back to the original array
         int index = 0;
 
         for (ArrayList<Integer> bucket : buckets) {

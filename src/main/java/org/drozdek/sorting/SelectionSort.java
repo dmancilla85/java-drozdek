@@ -16,7 +16,6 @@ public class SelectionSort {
             for (int j = i + 1; j < array.length; j++) {
                 if (array[minElementIndex] > array[j]) {
                     minElementIndex = j;
-                    // buscando el índice del menor elemento
                 }
             }
             if (minElementIndex != i) {

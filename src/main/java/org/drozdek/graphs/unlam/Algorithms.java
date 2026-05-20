@@ -10,16 +10,15 @@ import java.util.List;
 public class Algorithms {
 
     /**
-     * Algoritmo de Prim - Jarnik.
-     * Genera una cola de prioridad con todos los arcos, ordenada por distancia.
-     * Luego en cada iteración extrae un arco y verifica que alguno de sus vértices no
-     * haya sido visitado anteriormente y se lo añade al árbol recubridor mínimo (nuevo)
-     * hasta que todos los vértices hayan sido visitados y la cantidad de arcos sea menor que N - 1
-     * (mínima cantidad de arcos).
+     * Prim-Jarník minimum spanning tree algorithm.
+     * <p>
+     * Builds a priority queue of all edges sorted by weight. Repeatedly
+     * extracts the cheapest edge that connects a visited vertex to an
+     * unvisited one, adding its unvisited endpoint to the spanning tree.
      *
-     * @param g       Un grafo pesado no dirigido.
-     * @param inicial Vértice inicial del recorrido.
-     * @return árbol recubridor mínimo
+     * @param g       an undirected weighted graph
+     * @param inicial starting vertex
+     * @return minimum spanning tree
      */
     public static WeightedGraph primJarnikAlgorithm(WeightedGraph g, int inicial) {
 
@@ -29,23 +28,22 @@ public class Algorithms {
         MinimumHeap<Edge> edges = new MinimumHeap<>(g.countEdges());
         ArrayList<Vertex> visitedVertices = new ArrayList<>();
 
-        // Secuencia de todos los arcos de G ordenados por peso
+        // All edges sorted by weight
         for (Edge element : g.edges)
             edges.insert(element);
 
-        // Agrego el v inicial
+        // Add the starting vertex
         visitedVertices.add(g.vertices.get(inicial));
 
         for (int i = 0; i <                 g.cardinality(); i++)
-            // Mientras la lista ver de vertices visitados no contenga todo V
+            // While not all vertices have been visited
             for (int j = 0; j < edges.size() && visitedVertices.size() <                 g.cardinality(); j++) {
-                // Obtengo el arco con la m�nima distancia
                 Edge aux = edges.extractMin();
-                // Si uno de los dos v del arco se encuentra en "ver"
-                // y la cantidad de arcos es menor a N - 1 y no forma un ciclo.
+                // Pick the edge if exactly one of its endpoints is unvisited
+                // and adding it does not exceed N-1 edges (no cycle)
                 if ((!visitedVertices.contains(aux.destination) ||
                         !visitedVertices.contains(aux.origin)) && newGraph.countEdges() <                 g.cardinality() - 1) {
-                    // Agrego el vertice que no contiene "ver"
+                    // Add the unvisited endpoint
                     if (!visitedVertices.contains(aux.destination))
                         visitedVertices.add(aux.destination);
                     else
@@ -66,11 +64,10 @@ public class Algorithms {
 
         WeightedGraph newGraph = new WeightedGraph(                g.cardinality());
 
-        // Arcos ordenados por peso
         MinimumHeap<Edge> queue = new MinimumHeap<>(g.countEdges());
         ArrayList<Vertex> tree = new ArrayList<>();
 
-        // Secuencia de todos los arcos de G ordenados por peso
+        // All edges sorted by weight
         for (Edge element : g.edges) {
             queue.insert(element);
         }
@@ -81,7 +78,7 @@ public class Algorithms {
             if ((!tree.contains(e.destination) || !tree.contains(e.origin)) &&
                     newGraph.countEdges() <                 g.cardinality() - 1) {
 
-                // Agrego el vertice que no contiene "ver"
+                // Add the unvisited endpoint
                 if (!tree.contains(e.destination))
                     tree.add(e.destination);
                 else
@@ -114,11 +111,11 @@ public class Algorithms {
 
 
     /**
-     * Algoritmo de Dijkstra.
+     * Dijkstra's shortest path algorithm.
      *
-     * @param g       Grafo
-     * @param inicial Vertex inicial del recorrido
-     * @return Distancia
+     * @param g       weighted directed graph
+     * @param inicial source vertex
+     * @return array of shortest distances from the source to every vertex
      */
     public static Integer[] dijkstraAlgorithm(WeightedDigraph g, int inicial) {
 
@@ -126,35 +123,33 @@ public class Algorithms {
         ArrayList<Vertex> unvisited = new ArrayList<>();
         int v0;
 
-        /* Crear un vector D donde se guardar�n las distancias
-         * de nodoInicial a todos los dem�s.
-         */
+        // Create distance vector D: distance from start node to all others
         d = new Integer[                g.cardinality()];
 
         for (int i = 0; i <                 g.cardinality(); i++) {
-            // Inicializar todos los vertices en D
+            // Initialize all distances to INF, except the start node (= 0)
             if (i != inicial)
                 d[i] = Integer.MAX_VALUE;
             else
                 d[i] = 0;
 
-            // Agregar todos los vertices a la lista de verificaci�n
+            // Mark all vertices as unvisited
             unvisited.add(g.v.get(i));
         }
 
-        // Mientras haya alg�n vertice no visitado
+        // Process until all vertices are visited
         while (!unvisited.isEmpty()) {
 
-            // Obtener el v con dist. minima en D, que no fu� visitado
+            // Pick unvisited vertex with smallest distance
             v0 = minimum(d, unvisited, g);
 
-            // Quitar v de los unvisited
+            // Mark it as visited
             unvisited.remove(g.v.get(v0));
 
-            // Para todos los elementos adyacentes a v que no fueron visitados
+            // Relax all adjacent (unvisited) edges
             for (int u = 0; u <                 g.cardinality(); u++) {
 
-                // Si la distancia de nodoInicial a u es mayor que la distancia de
+                // If a shorter path to u is found through v0, update it
                 if (d[u] > d[v0] + g.weightTable[v0][u] && v0 != u
                         && unvisited.contains(g.v.get(u)) && g.weightTable[v0][u] != 0) {
                     d[u] = d[v0] + g.weightTable[v0][u];
@@ -167,36 +162,24 @@ public class Algorithms {
     }
 
     /**
-     * El algoritmo de Floyd-Warshall compara todos los posibles caminos a
-     * trav�s del grafo entre cada par de v�rtices. El algoritmo es capaz de
-     * hacer esto con s�lo V3 comparaciones (esto es notable considerando que
-     * puede haber hasta V2 edges en el grafo, y que cada combinaci�n de
-     * edges se prueba). Lo hace mejorando paulatinamente una estimaci�n del
-     * camino m�s corto entre dos v�rtices, hasta que se sabe que la estimaci�n
-     * es �ptima.
+     * Floyd-Warshall all-pairs shortest path algorithm.
+     * <p>
+     * Compares all possible paths through the graph for every pair of vertices.
+     * Improves the shortest-path estimate iteratively until optimal.
      *
-     * @param g
-     * @return
+     * @param g weighted graph
+     * @return matrix of shortest distances between every pair of vertices
      */
     public static int[][] floydMarshallAlgorithm(WeightedGraph g) {
 
-        // MinimumHeap shortestPath = new MinimumHeap(                g.cardinality());
-
-        /*
-         * Una matriz bidimensional. En cada paso del algoritmo, camino[i][j] es
-         * el camino m�nimo de i hasta j usando valores intermedios de (1..k-1).
-         * Cada camino[i][j] es inicializado a pesoEdge(i,j)
-         */
+        // shortestPath[i][j] is initialized to the direct edge weight (i, j)
         int[][] shortestPath = g.weightTable.clone();
 
-        /* Recorro todos los v�rtices que pueden estar en una trayectoria
-         * entre el v�rtice j y el v�rtice k */
+        // Consider each vertex k as an intermediate point
         for (int i = 0; i <                 g.cardinality(); i++) {
-            /* j es mi v�rtice actual, el que voy comparando con sus adyacentes k */
             for (int j = 0; j <                 g.cardinality(); j++) {
                 for (int k = 0; k <                 g.cardinality(); k++)
-                    /* Si la trayectoria de j, pasando por i hasta k es mejor, que yendo de j a k
-                     * me quedo con esa direcci�n */
+                    // If path j -> i -> k is shorter than the current j -> k path, update it
                     if (g.weightTable[j][k] > g.weightTable[j][i] + g.weightTable[i][k])
                         shortestPath[j][k] = g.weightTable[j][i] + g.weightTable[i][k];
             }

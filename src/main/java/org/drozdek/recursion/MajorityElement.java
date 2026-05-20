@@ -7,23 +7,20 @@ import static java.lang.System.out;
 
 public class MajorityElement {
 
-    /* Dado un vector A de números enteros, calcular elemento mayoritario.
-     * Si se tiene un vector A de n enteros, un elemento x se denomina
-     * mayoritario de A si x aparece en el vector A más de n/2 veces.
-     * Considerar que no puede haber más de un elemento mayoritario.
-     *
-     * */
+    // Given an integer array A, find the majority element.
+    // An element x is the majority if it appears more than n/2 times.
+    // At most one such element can exist.
 
     public static Integer run(List<Integer> a, int index) {
 
         int mitad = a.size() / 2;
         int count = 0, number;
 
-        // Caso Trivial
+        // Base case: with 2 or fewer elements there is no majority
         if (a.size() <= 2)
             return null;
 
-        // Descomponer
+        // Pick the element at current index as a candidate
         if (index < a.size())
             number = a.get(index);
         else

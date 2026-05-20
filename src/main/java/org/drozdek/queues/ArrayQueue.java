@@ -1,6 +1,7 @@
 package org.drozdek.queues;
 
 import org.drozdek.commons.LoggerService;
+import org.drozdek.queues.interfaces.QueueInterface;
 
 import java.util.Arrays;
 
@@ -14,7 +15,7 @@ import java.util.Arrays;
  * This implementation uses a fixed-size array with circular indexing,
  * providing O(1) enqueue and dequeue operations.
  */
-public class ArrayQueue {
+public class ArrayQueue implements QueueInterface<Object> {
     private final int capacity;
     private final Object[] storage;
     private int first;
@@ -63,7 +64,7 @@ public class ArrayQueue {
      * @param element the element to add to the queue
      * @throws IllegalStateException if the queue is full
      */
-    public void enqueue(Object element) {
+    public boolean enqueue(Object element) {
         if (isFull()) {
             throw new IllegalStateException("Queue is full");
         }
@@ -81,6 +82,11 @@ public class ArrayQueue {
             // Normal case: increment last and store
             storage[++last] = element;
         }
+        return true;
+    }
+
+    public Object peek() {
+        return firstElement();
     }
 
     /**
@@ -134,6 +140,10 @@ public class ArrayQueue {
             // Wrap-around: elements are in [first, capacity-1] and [0, last]
             return (capacity - first) + (last + 1);
         }
+    }
+
+    public void clear() {
+        first = last = -1;
     }
 
     /**

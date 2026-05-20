@@ -1,6 +1,7 @@
 package org.drozdek.lists;
 
 import org.drozdek.commons.LoggerService;
+import org.drozdek.lists.interfaces.ListInterface;
 import org.drozdek.lists.iterators.DoubleLinkedListIterator;
 
 import java.util.Iterator;
@@ -41,7 +42,7 @@ import java.util.Iterator;
  *       Section 2.2: Doubly-linked lists.</li>
  * </ul>
  */
-public class DoubleLinkedList<T> implements Iterable<T> {
+public class DoubleLinkedList<T> implements Iterable<T>, ListInterface<T> {
     protected DoubleLinkedListNode<T> head;
     protected DoubleLinkedListNode<T> tail;
 
@@ -265,6 +266,10 @@ public class DoubleLinkedList<T> implements Iterable<T> {
      * Note: This method exposes the internal node structure. Use with caution
      *        as it allows direct manipulation of the list's internal structure.
      */
+    public void add(T data) {
+        addToTail(data);
+    }
+
     public DoubleLinkedListNode<T> viewHeadNode() {
         return head;
     }

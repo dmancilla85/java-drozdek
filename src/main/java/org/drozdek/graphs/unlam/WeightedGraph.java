@@ -64,21 +64,7 @@ public class WeightedGraph extends Graph {
         // out.println(e.getAdjacencyTable());
         // out.println(e.getWeightTable());
 
-        // ArrayList<Vertex> min = GrafoPesado.algoritmoDeJarnik_Prim(g, 0);
-		/*GrafoPesado min = Algoritmos.algoritmoPrimJarnik(e, 0);
-		GrafoPesado mink = Algoritmos.algoritmoKruskal(e, 0);*/
-        //GrafoPesado m = Algoritmos.algoritmoPrimJarnik(g, 0);
-
-        // GrafoPesado m = GrafoPesado.algoritmoPrimJarnik(g, 0);
-
-        //out.println(m.getAdjacencyTable());
-        //out.println(m.getWeightTable());
         out.println("Prim");
-		/*out.println(min.getAdjacencyTable());
-		out.println(min.getWeightTable());
-		out.println("Kruskal");
-		out.println(mink.getAdjacencyTable());
-		out.println(mink.getWeightTable());*/
     }
 
     /**

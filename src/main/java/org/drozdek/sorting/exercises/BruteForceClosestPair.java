@@ -1,49 +1,26 @@
-package org.drozdek.sorting;
+package org.drozdek.sorting.exercises;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class Point {
-    int x;
-    int y;
-
-    public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public String toString() {
-        return "(" + x + "," + y + ")";
-    }
-
-}
-
-class Exercise1Solution {
+class PointPair {
     Point pointA, pointB;
     double distance;
     int instructions;
 
-    Exercise1Solution(Point a, Point b) {
+    PointPair(Point a, Point b) {
         pointA = a;
         pointB = b;
         instructions = 0;
         calculateDistance();
     }
 
-    public static void quickSort(List<Exercise1Solution> list, int left, int right) {
+    public static void quickSort(List<PointPair> list, int left, int right) {
 
-        Exercise1Solution pivot = list.get(left);
+        PointPair pivot = list.get(left);
         int i = left;
         int j = right;
-        Exercise1Solution temp;
+        PointPair temp;
 
         while (i < j) {
             while (list.get(i).distance <= pivot.distance && i < j)
@@ -72,14 +49,14 @@ class Exercise1Solution {
         }
     }
 
-    public static Exercise1Solution minimumDistanceBetweenPoints(List<Exercise1Solution> solutions) {
+    public static PointPair minimumDistanceBetweenPoints(List<PointPair> pairs) {
 
-        if (solutions.size() == 0)
+        if (pairs.isEmpty())
             return null;
 
-        quickSort(solutions, 0, solutions.size() - 1);
-        solutions.get(0).instructions++;
-        return solutions.get(0);
+        quickSort(pairs, 0, pairs.size() - 1);
+        pairs.getFirst().instructions++;
+        return pairs.getFirst();
     }
 
     void calculateDistance() {
@@ -93,32 +70,52 @@ class Exercise1Solution {
     }
 }
 
-public class Exercise1Test {
+/**
+ * Brute-force closest pair of points: generates every pair of 2D points,
+ * computes Euclidean distances, then sorts by distance using quicksort
+ * to find the minimum. Also tracks instruction counts for complexity
+ * analysis.
+ * <p>
+ * Point pairs are built recursively: take the first point, pair it with
+ * every remaining point, then recurse on the rest. The resulting list is
+ * sorted via {@link PointPair#quickSort} and the closest pair is
+ * reported.
+ */
+public class BruteForceClosestPair {
 
-    public static ArrayList<Exercise1Solution> testGenerateList(List<Point> points) {
+    /**
+     * Generates all unordered point pairs recursively.
+     * <p>
+     * For each call, pairs {@code points[0]} with every other point,
+     * removes the first element, and recurses on the shortened list.
+     *
+     * @param points list of points (modified during recursion)
+     * @return list of {@link PointPair} for every pair
+     */
+    public static ArrayList<PointPair> enumeratePairs(List<Point> points) {
 
-        ArrayList<Exercise1Solution> sol = new ArrayList<Exercise1Solution>();
-        int instr = 0;
+        ArrayList<PointPair> pairs = new ArrayList<PointPair>();
+        int stepCount = 0;
 
         if (points.size() <= 1) {
-            instr++;
-            return sol;
+            stepCount++;
+            return pairs;
         }
 
         for (int i = 1; i < points.size(); i++) {
-            instr++;
-            sol.add(new Exercise1Solution(points.get(0), points.get(i)));
+            stepCount++;
+            pairs.add(new PointPair(points.getFirst(), points.get(i)));
         }
 
-        points.remove(0);
-        instr++;
+        points.removeFirst();
+        stepCount++;
 
-        for (int i = 0; i < sol.size(); i++)
-            sol.get(i).instructions += instr;
+        for (int i = 0; i < pairs.size(); i++)
+            pairs.get(i).instructions += stepCount;
 
-        sol.addAll(testGenerateList(points));
+        pairs.addAll(enumeratePairs(points));
 
-        return sol;
+        return pairs;
     }
 
     public static void main(String[] args) {
@@ -159,18 +156,17 @@ public class Exercise1Test {
         points.add(new Point(21120, -121));
 
 
-        // Generar lista debería aparear todos los points de una colección
-        ArrayList<Exercise1Solution> solutions = testGenerateList(points);
+        // Generate all point pairs and find the one with minimum distance
+        ArrayList<PointPair> pairs = enumeratePairs(points);
 
-        for (int i = 0; i < solutions.size(); i++)
-            System.out.println(solutions.get(i));
+        for (PointPair pair : pairs)
+            System.out.println(pair);
 
-        Exercise1Solution closest = Exercise1Solution.minimumDistanceBetweenPoints(solutions); // nlogn + C
+        PointPair closest = PointPair.minimumDistanceBetweenPoints(pairs);
 
         if (closest == null) {
             System.out.println("No points to calculate distance.");
         } else {
-
             System.out.println();
             System.out.printf("Minimum distance is %.3f\n", closest.distance);
             System.out.println();
@@ -178,12 +174,5 @@ public class Exercise1Test {
             System.out.println();
             System.out.println("Number of steps: " + closest.instructions);
         }
-
-        // System.exit(0) removed -- not appropriate in a library class
-    }
-
-    @SuppressWarnings("unused")
-    private static double distance(int x, int y, int x2, int y2) {
-        return Math.sqrt((x2 - x) * (x2 - x) + (y2 - y) * (y2 - y));
     }
 }

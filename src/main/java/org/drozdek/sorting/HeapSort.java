@@ -11,27 +11,27 @@ public class HeapSort {
     public static void heapSort(int[] array) {
         int n = array.length;
 
-        // Construir el montículo máximo inicial
+        // Build initial max heap
         for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(array, n, i);
         }
 
-        // Extraer los elementos del montículo uno por uno
+        // Extract elements from the heap one by one
         for (int i = n - 1; i > 0; i--) {
 
-            // Intercambiar el elemento de la raíz con el último elemento
+            // Move the root (max) to the end
             int temp = array[0];
             array[0] = array[i];
             array[i] = temp;
 
-            // Restaurar la propiedad de montículo máximo en la nueva raíz
+            // Restore max-heap property on the reduced heap
             heapify(array, i, 0);
         }
     }
 
-    // Método para restaurar la propiedad de montículo máximo en un subárbol
+    // Restore max-heap property for the subtree rooted at i
     private static void heapify(int[] array, int n, int i) {
-        // Encontrar el índice del mayor elemento entre la raíz, el hijo izquierdo y el hijo derecho
+        // Find the largest among root, left child, and right child
         int largest = i;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
@@ -44,7 +44,7 @@ public class HeapSort {
             largest = right;
         }
 
-        // Si el mayor no es la raíz, intercambiarlos y aplicar recursivamente heapify al subárbol afectado
+        // If the largest is not the root, swap and recursively heapify the affected subtree
         if (largest != i) {
             int temp = array[i];
             array[i] = array[largest];

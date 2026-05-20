@@ -16,28 +16,28 @@ public class CountingSort {
         // find the maximum array value
         int max = ArrayUtils.getMaxValue(array);
 
-        // Crear un arreglo auxiliar para contar la frecuencia de cada elemento
+        // Count the frequency of each element
         int[] count = new int[max + 1];
 
         for (int j : array) {
             count[j]++;
         }
 
-        // Acumular la frecuencia de cada elemento para obtener su posición final
+        // Accumulate frequencies to determine final positions
         for (int i = 1; i <= max; i++) {
             count[i] += count[i - 1];
         }
 
-        // Crear un arreglo de salida para almacenar los elementos ordenados
+        // Build the sorted output array
         int[] output = new int[n];
 
         for (int i = n - 1; i >= 0; i--) {
-            // Colocar el elemento actual en la posición indicada por el arreglo auxiliar
+            // Place each element at its correct sorted position
             output[count[array[i]] - 1] = array[i];
             count[array[i]]--;
         }
 
-        // Copiar el arreglo de salida al arreglo original
+        // Copy output back to the original array
         System.arraycopy(output, 0, array, 0, n);
     }
 }

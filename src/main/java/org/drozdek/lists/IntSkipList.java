@@ -1,6 +1,7 @@
 package org.drozdek.lists;
 
 import org.drozdek.commons.LoggerService;
+import org.drozdek.lists.interfaces.ListInterface;
 
 import java.util.Random;
 
@@ -44,7 +45,7 @@ import java.util.Random;
  *   <li>Eric W. Weisstein. <cite>Skip List</cite>. From MathWorld--A Wolfram Web Resource.</li>
  * </ul>
  */
-public class IntSkipList {
+public class IntSkipList implements ListInterface<Integer> {
     /** Maximum level allowed in this skip list */
     private final int maximumLevel;
     /** Array of references to head nodes at each level */
@@ -140,6 +141,19 @@ public class IntSkipList {
         }
 
         return lvl;
+    }
+
+    /**
+     * Adds an element to the skip list.
+     *
+     * @param data the integer value to add
+     *
+     * Time Complexity: O(log n) expected
+     */
+    public void add(Integer data) {
+        if (data != null) {
+            insert(data);
+        }
     }
 
     /**
@@ -260,6 +274,83 @@ public class IntSkipList {
      * 
      * Time Complexity: O(log n) expected, where n is the number of elements
      */
+    /**
+     * Searches for the specified integer value in the skip list.
+     *
+     * @param data the integer value to search for
+     * @return the value if found, or null if not found or the list is empty
+     *
+     * Time Complexity: O(log n) expected
+     */
+    public Integer find(Integer data) {
+        if (data == null || isEmpty())
+            return null;
+        int key = data;
+        int result = search(key);
+        if (result == key) {
+            if (key != 0)
+                return result;
+            return root[0] != null && root[0].key == 0 ? 0 : null;
+        }
+        return null;
+    }
+
+    /**
+     * Deletes the first occurrence of the specified value from the skip list.
+     *
+     * @param data the integer value to delete
+     *
+     * Time Complexity: O(log n) expected
+     */
+    public void delete(Integer data) {
+        if (data == null || isEmpty())
+            return;
+        int key = data;
+
+        int lvl = findMajorNotNullValue();
+        if (lvl < 0)
+            return;
+
+        IntSkipListNode[] previous = new IntSkipListNode[maximumLevel];
+        IntSkipListNode current = root[lvl];
+
+        for (int i = lvl; i >= 0; i--) {
+            previous[i] = null;
+
+            while (current != null && current.key < key) {
+                previous[i] = current;
+                current = current.next[i];
+            }
+
+            if (current != null && current.key == key) {
+                if (previous[i] == null)
+                    root[i] = current.next[i];
+                else
+                    previous[i].next[i] = current.next[i];
+            }
+
+            if (i > 0) {
+                if (previous[i] == null)
+                    current = root[i - 1];
+                else
+                    current = previous[i].next[i - 1];
+            }
+        }
+    }
+
+    /**
+     * Returns the first element in the skip list without removing it.
+     *
+     * @return the first element, or null if the list is empty
+     *
+     * Time Complexity: O(1)
+     */
+    public Integer first() {
+        if (isEmpty())
+            return null;
+        return root[0].key;
+    }
+
     public int search(int key) {
         // Start from the highest non-empty level
         int lvl = findMajorNotNullValue();

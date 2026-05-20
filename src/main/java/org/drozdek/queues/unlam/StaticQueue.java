@@ -1,5 +1,8 @@
 package org.drozdek.queues.unlam;
 
+import org.drozdek.commons.LoggerService;
+import org.drozdek.queues.interfaces.QueueInterface;
+
 import static java.lang.Math.random;
 import static java.lang.System.err;
 import static java.lang.System.out;
@@ -15,7 +18,7 @@ import static java.lang.System.out;
  * providing O(1) enqueue and dequeue operations when not full.
  * When the queue becomes full, it automatically doubles its capacity.
  */
-public class StaticQueue implements UnlamQueue {
+public class StaticQueue implements UnlamQueue, QueueInterface<Object> {
 
     private static final int DEFAULT_SIZE = 5;
     private Object[] queue;
@@ -144,6 +147,20 @@ public class StaticQueue implements UnlamQueue {
         if (!isEmpty())
             return queue[first];
         return null;
+    }
+
+    public int size() {
+        return elementCount();
+    }
+
+    public void printAll() {
+        StringBuilder line = new StringBuilder();
+        int count = elementCount();
+        for (int i = 0; i < count; i++) {
+            line.append(queue[(first + i) % size]);
+            line.append(" ");
+        }
+        LoggerService.logInfo(line.toString());
     }
 
     @Override

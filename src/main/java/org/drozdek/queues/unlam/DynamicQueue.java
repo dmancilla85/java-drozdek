@@ -1,5 +1,8 @@
 package org.drozdek.queues.unlam;
 
+import org.drozdek.commons.LoggerService;
+import org.drozdek.queues.interfaces.QueueInterface;
+
 import static java.lang.Math.random;
 import static java.lang.System.out;
 
@@ -13,7 +16,7 @@ import static java.lang.System.out;
  * This implementation uses a singly-linked list with head and tail pointers,
  * providing O(1) enqueue and dequeue operations.
  */
-public class DynamicQueue implements UnlamQueue {
+public class DynamicQueue implements UnlamQueue, QueueInterface<Object> {
 
     private QueueNode first, last;
 
@@ -85,6 +88,27 @@ public class DynamicQueue implements UnlamQueue {
             return null;
         }
         return first.data;
+    }
+
+    public int size() {
+        int count = 0;
+        QueueNode current = first;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
+
+    public void printAll() {
+        StringBuilder line = new StringBuilder();
+        QueueNode current = first;
+        while (current != null) {
+            line.append(current.data);
+            line.append(" ");
+            current = current.next;
+        }
+        LoggerService.logInfo(line.toString());
     }
 
     @Override

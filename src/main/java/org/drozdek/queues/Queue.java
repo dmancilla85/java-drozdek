@@ -1,65 +1,51 @@
 package org.drozdek.queues;
 
+import org.drozdek.commons.LoggerService;
+import org.drozdek.queues.interfaces.QueueInterface;
+
 import java.util.LinkedList;
 
-public class Queue<T> {
+public class Queue<T> implements QueueInterface<T> {
     private final LinkedList<T> list;
 
-    /**
-     * Default constructor.
-     */
     public Queue() {
         list = new LinkedList<>();
     }
 
-    /**
-     * Clear queue.
-     */
     public void clear() {
         list.clear();
     }
 
-    /**
-     * Dequeue the last element.
-     *
-     * @return The dequeued element
-     */
     public T dequeue() {
         return list.removeFirst();
     }
 
-    /**
-     * Enqueue a new element
-     *
-     * @param element Element to add
-     */
-    public void enqueue(T element) {
+    public boolean enqueue(T element) {
         list.addLast(element);
+        return true;
     }
 
-    /**
-     * Get the first element.
-     *
-     * @return The first element in the queue.
-     */
     public T firstElement() {
         return list.getFirst();
     }
 
-    /**
-     * Is queue empty?
-     *
-     * @return true if queue is empty
-     */
     public boolean isEmpty() {
         return list.isEmpty();
     }
 
-    /**
-     * Size of the queue
-     *
-     * @return Number of elements in the queue
-     */
+    public T peek() {
+        return list.getFirst();
+    }
+
+    public void printAll() {
+        StringBuilder line = new StringBuilder();
+        for (T element : list) {
+            line.append(element);
+            line.append(" ");
+        }
+        LoggerService.logInfo(line.toString());
+    }
+
     public int size() {
         return list.size();
     }

@@ -14,45 +14,40 @@ public class QuickSort {
     // Memory: O(log n)
     // Type: Unstable
     public static void quickSort(int[] array, int left, int right) {
-        //Verificar que el arreglo tenga al menos dos elementos
 
         if (left < right) {
-            //Obtener el índice del pivote, usando el primer elemento como referencia
             int partitionPivotIndex = partition(array, left, right);
 
-            //Ordenar recursivamente el subarreglo izquierdo
+            // Recursively sort elements before and after the pivot
             quickSort(array, left, partitionPivotIndex - 1);
-            //Ordenar recursivamente el subarreglo derecho
             quickSort(array, partitionPivotIndex + 1, right);
         }
     }
 
-    //Método para particionar el arreglo y ubicar el pivote
+    // Partition the array using the first element as pivot
     public static int partition(int[] array, int left, int right) {
-        //Tomar el primer elemento como pivote
         int pivot = array[left];
         int i = left;
         int j = right;
 
         while (i < j) {
-            //Avanzar i mientras el elemento en i sea menor o igual al pivote
+            // Move i forward while element is <= pivot
             while (array[i] <= pivot && i < j) {
                 i++;
             }
-            //Retroceder j mientras el elemento en j sea mayor al pivote
+            // Move j backward while element is > pivot
             while (array[j] > pivot) {
                 j--;
             }
-            //Si i y j no se han cruzado, intercambiar los elementos en i y j
+            // Swap elements at i and j if they haven't crossed
             if (i < j) {
                 ArrayUtils.swap(array, i, j);
             }
         }
-        //Colocar el pivote en la posición j
+        // Place the pivot at its correct position
         array[left] = array[j];
         array[j] = pivot;
 
-        //Devolver el índice del pivote
         return j;
     }
 

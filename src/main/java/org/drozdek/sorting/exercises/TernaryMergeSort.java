@@ -1,11 +1,20 @@
-package org.drozdek.sorting;
+package org.drozdek.sorting.exercises;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.System.out;
 
-public class Exercise2_7 {
+/**
+ * Variation of merge sort that divides the array into three equal
+ * thirds instead of two halves (ternary merge sort). Each third is
+ * sorted recursively, then all three are merged together.
+ * <p>
+ * While the classic merge sort splits at n/2, this splits at n/3 and 2n/3,
+ * producing three sorted sub-ranges that are merged in O(n) using a
+ * three-way merge.
+ */
+public class TernaryMergeSort {
 
     public static void mergeSortAlter(List<Integer> a, int start, int end) {
         if (end - start < 1) {
@@ -31,6 +40,11 @@ public class Exercise2_7 {
         merge(a, start, tercio1, tercio2, end);
     }
 
+    /**
+     * Three-way merge: combines three sorted sub-ranges
+     * [start..tercio1], [tercio1+1..tercio2], [tercio2+1..end]
+     * into one sorted range using three pointers (i, j, k).
+     */
     public static void merge(List<Integer> a, int start, int tercio1, int tercio2, int end) {
         int n = end - start + 1;
         List<Integer> result = new ArrayList<>();
