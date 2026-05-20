@@ -13,23 +13,23 @@ import static java.lang.System.out;
  */
 public class WeightedGraph extends Graph {
 
-    protected int[][] tablaDePesos;
+    protected int[][] weightTable;
 
     /**
      * @param n
      */
     public WeightedGraph(int n) {
         super(n);
-        this.tablaDePesos = new int[n][n];
+        this.weightTable = new int[n][n];
     }
 
-    public static WeightedGraph crearAleatorio(int n, int conexividad) {
+    public static WeightedGraph createRandom(int n, int conexividad) {
         WeightedGraph al = new WeightedGraph(n);
 
         for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++)
                 if ((int) (Math.random() * 100 + 1) > 100 - (conexividad)) {
-                    al.crearArco(i, j, (int) (Math.random() * 100 + 1));
+                    al.createEdge(i, j, (int) (Math.random() * 100 + 1));
                 }
 
         return al;
@@ -42,64 +42,64 @@ public class WeightedGraph extends Graph {
         // TODO Auto-generated method stub
 
         WeightedGraph g = new WeightedGraph(6);
-        g.crearArco('a', 'b', 20);
-        g.crearArco('a', 'd', 40);
-        g.crearArco('a', 'c', 100);
-        g.crearArco('b', 'd', 120);
-        g.crearArco('b', 'e', 200);
-        g.crearArco('b', 'c', 30);
-        g.crearArco('c', 'e', 40);
-        g.crearArco('d', 'e', 60);
-        g.crearArco('d', 'f', 60);
-        g.crearArco('e', 'f', 30);
+        g.createEdge('a', 'b', 20);
+        g.createEdge('a', 'd', 40);
+        g.createEdge('a', 'c', 100);
+        g.createEdge('b', 'd', 120);
+        g.createEdge('b', 'e', 200);
+        g.createEdge('b', 'c', 30);
+        g.createEdge('c', 'e', 40);
+        g.createEdge('d', 'e', 60);
+        g.createEdge('d', 'f', 60);
+        g.createEdge('e', 'f', 30);
 
-        WeightedGraph e = WeightedGraph.crearAleatorio(10, 50);
-        out.println(e.verTablaAdyacencias());
-        out.println(e.verTablaDePesos());
+        WeightedGraph e = WeightedGraph.createRandom(10, 50);
+        out.println(e.getAdjacencyTable());
+        out.println(e.getWeightTable());
         /*
-         * out.println(g.verTablaAdyacencias());
-         * out.println(g.verTablaDePesos());
+         * out.println(g.getAdjacencyTable());
+         * out.println(g.getWeightTable());
          */
 
-        // out.println(e.verTablaAdyacencias());
-        // out.println(e.verTablaDePesos());
+        // out.println(e.getAdjacencyTable());
+        // out.println(e.getWeightTable());
 
-        // ArrayList<Vertice> min = GrafoPesado.algoritmoDeJarnik_Prim(g, 0);
+        // ArrayList<Vertex> min = GrafoPesado.algoritmoDeJarnik_Prim(g, 0);
 		/*GrafoPesado min = Algoritmos.algoritmoPrimJarnik(e, 0);
 		GrafoPesado mink = Algoritmos.algoritmoKruskal(e, 0);*/
         //GrafoPesado m = Algoritmos.algoritmoPrimJarnik(g, 0);
 
         // GrafoPesado m = GrafoPesado.algoritmoPrimJarnik(g, 0);
 
-        //out.println(m.verTablaAdyacencias());
-        //out.println(m.verTablaDePesos());
+        //out.println(m.getAdjacencyTable());
+        //out.println(m.getWeightTable());
         out.println("Prim");
-		/*out.println(min.verTablaAdyacencias());
-		out.println(min.verTablaDePesos());
+		/*out.println(min.getAdjacencyTable());
+		out.println(min.getWeightTable());
 		out.println("Kruskal");
-		out.println(mink.verTablaAdyacencias());
-		out.println(mink.verTablaDePesos());*/
+		out.println(mink.getAdjacencyTable());
+		out.println(mink.getWeightTable());*/
     }
 
     /**
      *
-     * @param nodo1
-     * @param nodo2
+     * @param node1
+     * @param node2
      * @param peso
      * @return
      */
-    public boolean crearArco(int nodo1, int nodo2, int peso) {
+    public boolean createEdge(int node1, int node2, int weight) {
         try {
-            if (adjacencyMatrix[nodo1][nodo2] == 1 || nodo1 == nodo2)
+            if (adjacencyMatrix[node1][node2] == 1 || node1 == node2)
                 return false;
 
-            adjacencyMatrix[nodo1][nodo2] = 1;
-            tablaDePesos[nodo1][nodo2] = peso;
-            adjacencyMatrix[nodo2][nodo1] = 1;
-            tablaDePesos[nodo2][nodo1] = peso;
-            edges.add(new Arista(new Vertice(nodo1), new Vertice(nodo2), peso));
-            vertices.get(nodo1).aumentarGrado();
-            vertices.get(nodo2).aumentarGrado();
+            adjacencyMatrix[node1][node2] = 1;
+            weightTable[node1][node2] = weight;
+            adjacencyMatrix[node2][node1] = 1;
+            weightTable[node2][node1] = weight;
+            edges.add(new Edge(new Vertex(node1), new Vertex(node2), weight));
+            vertices.get(node1).increaseDegree();
+            vertices.get(node2).increaseDegree();
             return true;
 
         } catch (Exception e) {
@@ -115,33 +115,33 @@ public class WeightedGraph extends Graph {
      * @param peso
      * @return
      */
-    public boolean crearArco(char a1, char a2, int peso) {
+    public boolean createEdge(char a1, char a2, int weight) {
         int n1 = ((int) a1) - 97;
         int n2 = ((int) a2) - 97;
 
-        return crearArco(n1, n2, peso);
+        return createEdge(n1, n2, weight);
     }
 
     /**
      *
-     * @param nodo1
-     * @param nodo2
+     * @param node1
+     * @param node2
      * @return
      */
-    public void removeEdge(int nodo1, int nodo2) {
+    public void removeEdge(int node1, int node2) {
 
 
         if (this.edges.isEmpty())
             return;
 
         try {
-            adjacencyMatrix[nodo1][nodo2] = 0;
-            tablaDePesos[nodo1][nodo2] = 0;
-            adjacencyMatrix[nodo2][nodo1] = 0;
-            tablaDePesos[nodo2][nodo1] = 0;
-            edges.remove(new Arista(new Vertice(nodo1), new Vertice(nodo2)));
-            vertices.get(nodo1).disminuirGrado();
-            vertices.get(nodo2).disminuirGrado();
+            adjacencyMatrix[node1][node2] = 0;
+            weightTable[node1][node2] = 0;
+            adjacencyMatrix[node2][node1] = 0;
+            weightTable[node2][node1] = 0;
+            edges.remove(new Edge(new Vertex(node1), new Vertex(node2)));
+            vertices.get(node1).decreaseDegree();
+            vertices.get(node2).decreaseDegree();
 
         } catch (Exception e) {
             LoggerService.logError(e.getMessage());
@@ -151,31 +151,31 @@ public class WeightedGraph extends Graph {
     /**
      *
      */
-    public StringBuffer verTablaDePesos() {
+    public StringBuffer getWeightTable() {
 
-        int n = this.tablaDePesos[0].length;
+        int n = this.weightTable[0].length;
 
-        StringBuffer tabla = new StringBuffer();
-        tabla.append("Tabla de Pesos\n\\ ");
+        StringBuffer table = new StringBuffer();
+        table.append("Tabla de Pesos\n\\ ");
         for (int i = 0; i < n; i++)
-            tabla.append((char) (i + 97) + " ");
-        tabla.append("\n");
+            table.append((char) (i + 97) + " ");
+        table.append("\n");
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
 
                 if (j == 0)
-                    tabla.append((char) (i + j + 97) + " ");
+                    table.append((char) (i + j + 97) + " ");
 
-                tabla.append(tablaDePesos[i][j]);
+                table.append(weightTable[i][j]);
                 if (j < n)
-                    tabla.append(" ");
+                    table.append(" ");
             }
-            tabla.append("\n");
+            table.append("\n");
 
         }
 
-        return tabla;
+        return table;
     }
 
 }

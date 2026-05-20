@@ -13,8 +13,8 @@ import java.util.*;
  */
 public class Graph {
 
-    protected ArrayList<Vertice> vertices;
-    protected ArrayList<Arista> edges;
+    protected ArrayList<Vertex> vertices;
+    protected ArrayList<Edge> edges;
     protected byte[][] adjacencyMatrix;
 
 
@@ -33,10 +33,10 @@ public class Graph {
         this.edges = new ArrayList<>();
 
         for (int i = 0; i < n; i++)
-            this.vertices.add(new Vertice(i));
+            this.vertices.add(new Vertex(i));
     }
 
-    public static Graph crearAleatorio(int n, int conexividad) {
+    public static Graph createRandom(int n, int conexividad) {
         Graph al = new Graph(n);
 
         for (int i = 0; i < n; i++)
@@ -53,32 +53,32 @@ public class Graph {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         /*
-         * GrafoSimple gs = crearAleatorio(10, 60); gs.tablaAdyacencias();
+         * GrafoSimple gs = createRandom(10, 60); gs.tablaAdyacencias();
          *
-         * GrafoSimple gs2 = gs.busquedaPrimeroEnProfundidad();
+         * GrafoSimple gs2 = gs.depthFirstSearch();
          * gs2.tablaAdyacencias();
          */
 
         Graph uno = new Graph(9);
-        uno.crearArco('a', 'e');
-        uno.crearArco('a', 'f');
-        uno.crearArco('a', 'i');
-        uno.crearArco('a', 'g');
-        uno.crearArco('e', 'f');
-        uno.crearArco('e', 'i');
-        uno.crearArco('e', 'f');
-        uno.crearArco('i', 'f');
-        uno.crearArco('b', 'g');
-        uno.crearArco('c', 'h');
-        uno.crearArco('h', 'd');
+        uno.createEdge('a', 'e');
+        uno.createEdge('a', 'f');
+        uno.createEdge('a', 'i');
+        uno.createEdge('a', 'g');
+        uno.createEdge('e', 'f');
+        uno.createEdge('e', 'i');
+        uno.createEdge('e', 'f');
+        uno.createEdge('i', 'f');
+        uno.createEdge('b', 'g');
+        uno.createEdge('c', 'h');
+        uno.createEdge('h', 'd');
 
 
-		/*GrafoSimple dos = uno.busquedaPrimeroEnProfundidad();
-		GrafoSimple tres = uno.busquedaPrimeroEnAmplitud();*/
+		/*GrafoSimple dos = uno.depthFirstSearch();
+		GrafoSimple tres = uno.breadthFirstSearch();*/
 
     }
 
-    public void addVertice(Vertice v) {
+    public void addVertex(Vertex v) {
         if (v != null)
             vertices.add(v);
     }
@@ -87,34 +87,34 @@ public class Graph {
      *
      * @return
      */
-    public Graph busquedaPrimeroEnAmplitud() {
+    public Graph breadthFirstSearch() {
 
         Calendar ini = Calendar.getInstance();
 
-        Graph busq = new Graph(cardinality());
-        Queue<Vertice> cola = new LinkedList<Vertice>();
-        ArrayList<Vertice> verticesVisitados = new ArrayList<Vertice>();
+        Graph result = new Graph(cardinality());
+        Queue<Vertex> queue = new LinkedList<Vertex>();
+        ArrayList<Vertex> visitedVertices = new ArrayList<Vertex>();
 
         int i = 0;
 
-        while (i < cardinality() && verticesVisitados.size() < cardinality()) {
-            if (!verticesVisitados.contains(vertices.get(i))) {
-                cola.add(vertices.get(i));
-                verticesVisitados.add(this.vertices.get(i));
+        while (i < cardinality() && visitedVertices.size() < cardinality()) {
+            if (!visitedVertices.contains(vertices.get(i))) {
+                queue.add(vertices.get(i));
+                visitedVertices.add(this.vertices.get(i));
 
                 try {
-                    while (!cola.isEmpty()) {
-                        Vertice a = cola.poll();
-                        int vertice = vertices.indexOf(a);
+                    while (!queue.isEmpty()) {
+                        Vertex a = queue.poll();
+                        int vertex = vertices.indexOf(a);
 
-                        for (int j = 0; j < cardinality() && vertice != -1; j++) {
-                            if (adjacencyMatrix[vertice][j] == 1
-                                    && !verticesVisitados.contains(this.vertices.get(j))) {
+                        for (int j = 0; j < cardinality() && vertex != -1; j++) {
+                            if (adjacencyMatrix[vertex][j] == 1
+                                    && !visitedVertices.contains(this.vertices.get(j))) {
                                 LoggerService.logInfo("vertices Visitados contiene a : "
                                         + (char) (j + 97));
-                                busq.newEdge(vertice, j);
-                                cola.add(this.vertices.get(j));
-                                verticesVisitados.add(this.vertices.get(j));
+                                result.newEdge(vertex, j);
+                                queue.add(this.vertices.get(j));
+                                visitedVertices.add(this.vertices.get(j));
                             }
                         }
 
@@ -127,39 +127,39 @@ public class Graph {
             i++;
         }
 
-        Calendar fin = Calendar.getInstance();
+        Calendar end = Calendar.getInstance();
         LoggerService.logInfo("Tiempo algoritmo b�squeda primero en amplitud: "
-                + (fin.getTimeInMillis() - ini.getTimeInMillis()));
+                + (end.getTimeInMillis() - ini.getTimeInMillis()));
 
-        return busq;
+        return result;
     }
 
     /**
      *
      * @return
      */
-    public Graph busquedaPrimeroEnProfundidad() {
+    public Graph depthFirstSearch() {
 
         Calendar ini = Calendar.getInstance();
 
-        Graph busq = new Graph(cardinality());
-        ArrayList<Vertice> verticesVisitados = new ArrayList<Vertice>();
+        Graph result = new Graph(cardinality());
+        ArrayList<Vertex> visitedVertices = new ArrayList<Vertex>();
 
         int i = 0;
 
-        while (i < cardinality() && verticesVisitados.size() < cardinality()) {
-            if (!verticesVisitados.contains(i)) {
-                verticesVisitados.add(this.vertices.get(i));
-                deepFirstSearch(i, verticesVisitados, busq);
+        while (i < cardinality() && visitedVertices.size() < cardinality()) {
+            if (!visitedVertices.contains(i)) {
+                visitedVertices.add(this.vertices.get(i));
+                deepFirstSearch(i, visitedVertices, result);
             }
             i++;
         }
 
-        Calendar fin = Calendar.getInstance();
+        Calendar end = Calendar.getInstance();
         LoggerService.logInfo("Tiempo algoritmo b�squeda primero en profundidad: "
-                + (fin.getTimeInMillis() - ini.getTimeInMillis()));
+                + (end.getTimeInMillis() - ini.getTimeInMillis()));
 
-        return busq;
+        return result;
     }
 
     public int cardinality() {
@@ -184,7 +184,7 @@ public class Graph {
      * @param a2
      * @return
      */
-    public boolean crearArco(char a1, char a2) {
+    public boolean createEdge(char a1, char a2) {
         int n1 = ((int) a1) - 97;
         int n2 = ((int) a2) - 97;
 
@@ -194,18 +194,18 @@ public class Graph {
     /**
      * B�squeda primero en profundidad (Hopcroft - Tarjan)
      * @param v
-     * @param verticesVisitados
-     * @param nuevo
+     * @param visitedVertices
+     * @param newGraph
      */
-    public void deepFirstSearch(int v, ArrayList<Vertice> verticesVisitados, Graph nuevo) {
+    public void deepFirstSearch(int v, ArrayList<Vertex> visitedVertices, Graph newGraph) {
 
         int j = 0;
-        while (verticesVisitados.size() < cardinality() && j < cardinality()) {
-            if (adjacencyMatrix[v][j] == 1 && !verticesVisitados.contains(this.vertices.get(j))) {
+        while (visitedVertices.size() < cardinality() && j < cardinality()) {
+            if (adjacencyMatrix[v][j] == 1 && !visitedVertices.contains(this.vertices.get(j))) {
                 LoggerService.logInfo("vertices no contiene a : " + (char) (j + 97));
-                nuevo.newEdge(v, j);
-                verticesVisitados.add(this.vertices.get(j));
-                deepFirstSearch(j, verticesVisitados, nuevo);
+                newGraph.newEdge(v, j);
+                visitedVertices.add(this.vertices.get(j));
+                deepFirstSearch(j, visitedVertices, newGraph);
             }
             j++;
         }
@@ -216,14 +216,14 @@ public class Graph {
      * @param vertice
      * @return
      */
-    public List<Vertice> getVerticesAdyacentes(int vertice) {
-        ArrayList<Vertice> ady = new ArrayList<>();
+    public List<Vertex> getAdjacentVertices(int vertex) {
+        ArrayList<Vertex> ady = new ArrayList<>();
 
-        if (vertice < 0 || vertice >= cardinality())
+        if (vertex < 0 || vertex >= cardinality())
             return null;
 
         for (int i = 0; i < cardinality(); i++)
-            if (this.adjacencyMatrix[vertice][i] == 1)
+            if (this.adjacencyMatrix[vertex][i] == 1)
                 ady.add(this.vertices.get(i));
 
         return ady;
@@ -234,14 +234,14 @@ public class Graph {
      * @param vertice
      * @return
      */
-    public List<Vertice> getVerticesNoAdyacentes(int vertice) {
-        ArrayList<Vertice> ady = new ArrayList<Vertice>();
+    public List<Vertex> getNonAdjacentVertices(int vertex) {
+        ArrayList<Vertex> ady = new ArrayList<Vertex>();
 
-        if (vertice < 0 || vertice >= cardinality())
+        if (vertex < 0 || vertex >= cardinality())
             return null;
 
         for (int i = 0; i < cardinality(); i++)
-            if (this.adjacencyMatrix[vertice][i] == 0 && vertice != i)
+            if (this.adjacencyMatrix[vertex][i] == 0 && vertex != i)
                 ady.add(this.vertices.get(i));
 
         return ady;
@@ -249,25 +249,25 @@ public class Graph {
 
     /**
      *
-     * @param nodo1
-     * @param nodo2
+     * @param node1
+     * @param node2
      * @return
      */
-    public boolean newEdge(int nodo1, int nodo2) {
+    public boolean newEdge(int node1, int node2) {
         try {
 
             if (adjacencyMatrix == null)
                 adjacencyMatrix = new byte[vertices.size()][vertices.size()];
 
-            if (adjacencyMatrix[nodo1][nodo2] == 1 || nodo1 == nodo2)
+            if (adjacencyMatrix[node1][node2] == 1 || node1 == node2)
                 return false;
 
-            edges.add(new Arista(new Vertice(nodo1), new Vertice(nodo2)));
+            edges.add(new Edge(new Vertex(node1), new Vertex(node2)));
 
-            adjacencyMatrix[nodo1][nodo2] = 1;
-            adjacencyMatrix[nodo2][nodo1] = 1;
-            vertices.get(nodo1).aumentarGrado();
-            vertices.get(nodo2).aumentarGrado();
+            adjacencyMatrix[node1][node2] = 1;
+            adjacencyMatrix[node2][node1] = 1;
+            vertices.get(node1).increaseDegree();
+            vertices.get(node2).increaseDegree();
 
             return true;
 
@@ -277,25 +277,25 @@ public class Graph {
         }
     }
 
-    public String porcentajeConexividad() {
+    public String connectivityPercentage() {
         double max = (cardinality() * (cardinality() - 1)) / 2;
         return String.format("Conexividad: %3.2f", ((edges.size() / max) * 100))
                 + "%";
     }
 
-    public void removeEdge(int nodo1, int nodo2) {
+    public void removeEdge(int node1, int node2) {
 
         if (edges.isEmpty())
             return;
 
         try {
-            adjacencyMatrix[nodo1][nodo2] = 0;
-            adjacencyMatrix[nodo2][nodo1] = 0;
+            adjacencyMatrix[node1][node2] = 0;
+            adjacencyMatrix[node2][node1] = 0;
 
-            edges.remove(new Arista(new Vertice(nodo1), new Vertice(nodo2)));
+            edges.remove(new Edge(new Vertex(node1), new Vertex(node2)));
 
-            vertices.get(nodo1).disminuirGrado();
-            vertices.get(nodo2).disminuirGrado();
+            vertices.get(node1).decreaseDegree();
+            vertices.get(node2).decreaseDegree();
 
         } catch (Exception e) {
             LoggerService.logError(e.getMessage());
@@ -303,34 +303,34 @@ public class Graph {
     }
 
     public String toString() {
-        return verTablaAdyacencias().toString();
+        return getAdjacencyTable().toString();
     }
 
-    public StringBuffer verTablaAdyacencias() {
+    public StringBuffer getAdjacencyTable() {
 
         int n = this.adjacencyMatrix[0].length;
 
-        StringBuffer tabla = new StringBuffer();
-        tabla.append("Tabla de Adyacencias\n\\ ");
+        StringBuffer table = new StringBuffer();
+        table.append("Tabla de Adyacencias\n\\ ");
         for (int i = 0; i < n; i++)
-            tabla.append((char) (i + 97) + " ");
-        tabla.append("\n");
+            table.append((char) (i + 97) + " ");
+        table.append("\n");
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
 
                 if (j == 0)
-                    tabla.append((char) (i + j + 97) + " ");
+                    table.append((char) (i + j + 97) + " ");
 
-                tabla.append(adjacencyMatrix[i][j]);
+                table.append(adjacencyMatrix[i][j]);
                 if (j < n)
-                    tabla.append(" ");
+                    table.append(" ");
             }
-            tabla.append("\n");
+            table.append("\n");
 
         }
 
-        return tabla;
+        return table;
     }
 
 }

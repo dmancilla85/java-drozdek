@@ -12,73 +12,65 @@ import java.util.List;
  */
 public class Set<T> {
 
-    private List<T> elementos;
+    private List<T> elements;
 
     /**
      *
      */
     public Set() {
-        // TODO Auto-generated constructor stub
-        elementos = new ArrayList<T>();
+        elements = new ArrayList<T>();
     }
 
     /**
      *
      */
     public Set(int n) {
-        // TODO Auto-generated constructor stub
         if (n > 0)
-            elementos = new ArrayList<T>(n);
+            elements = new ArrayList<T>(n);
     }
 
     /**
      * @param args
      */
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         Set<Object> A = new Set<Object>();
-        A.agregar("Hola");
-        A.agregar(324.4);
-        A.agregar(11);
-        A.agregar("Chau");
-
-
-        // desarrollo 20 minutos
-        // tiempo total 26 minutos
-
+        A.add("Hola");
+        A.add(324.4);
+        A.add(11);
+        A.add("Chau");
     }
 
-    public void agregar(T e) {
+    public void add(T e) {
         if (e != null)
-            elementos.add(e);
+            elements.add(e);
     }
 
-    public int cardinalidad() {
-        return elementos.size();
+    public int size() {
+        return elements.size();
     }
 
-    public boolean estaIncluido(Set<T> B) {
-        return this.elementos.containsAll(B.elementos);
+    public boolean isSubsetOf(Set<T> B) {
+        return this.elements.containsAll(B.elements);
     }
 
-    public boolean perteneceA(T e) {
+    public boolean contains(T e) {
         if (e != null)
-            return elementos.contains(e);
+            return elements.contains(e);
 
         return false;
     }
 
-    public void quitar(T e) {
+    public void remove(T e) {
         if (e != null)
-            elementos.remove(e);
+            elements.remove(e);
     }
 
-    public void quitarTodo(Set<T> B) {
-        this.elementos.removeAll(B.elementos);
+    public void removeAll(Set<T> B) {
+        this.elements.removeAll(B.elements);
     }
 
     public void union(Set<T> B) {
-        this.elementos.addAll(B.elementos);
+        this.elements.addAll(B.elements);
     }
 
 }
