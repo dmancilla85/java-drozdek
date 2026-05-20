@@ -6,8 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class QueueTest {
     Queue<Integer> queue;
@@ -84,5 +83,27 @@ class QueueTest {
 
         assertEquals(4,queue.size(), "It seems that the first element has been removed");
         assertEquals(45,first, "The first element doesn't match with the expected");
+    }
+
+    @Test
+    @DisplayName("Print all does not modify the queue")
+    void printAll() {
+        queue.enqueue(10);
+        queue.enqueue(20);
+        queue.enqueue(30);
+
+        int sizeBefore = queue.size();
+        Integer firstBefore = queue.peek();
+
+        queue.printAll();
+
+        assertEquals(sizeBefore, queue.size(), "Queue size unchanged after printAll");
+        assertEquals(firstBefore, queue.peek(), "First element unchanged after printAll");
+    }
+
+    @Test
+    @DisplayName("Print all on empty queue throws no exception")
+    void printAllOnEmptyQueue() {
+        assertDoesNotThrow(() -> queue.printAll());
     }
 }

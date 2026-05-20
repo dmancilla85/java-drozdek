@@ -62,13 +62,7 @@ public class LinkedListStack<T> implements StackInterface<T> {
      */
     @Override
     public String toString() {
-        StringBuilder content = new StringBuilder();
-
-        for (T element : pool) {
-            content.append(element.toString());
-            content.append(System.lineSeparator());
-        }
-        return content.toString();
+        return Stack.formatStackList(pool);
     }
 
     /**

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+
 import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,12 +53,11 @@ class LinkedListStackTest {
     @Test
     @DisplayName("Clear the stack")
     void clear() {
+        Random rand = new Random();
+        int size = 10;
 
-        stack.push(34);
-        stack.push(3);
-        stack.push(56);
-        stack.push(2);
-        stack.push(67);
+        for(int i = 0; i < size; i++)
+            stack.push(rand.nextInt(501));
 
         stack.clear();
 
@@ -66,16 +67,19 @@ class LinkedListStackTest {
     @Test
     @DisplayName("Print the stack")
     void print() {
+        Random rand = new Random();
+        int size = 5;
 
-        stack.push(34);
-        stack.push(3);
-        stack.push(56);
-        stack.push(2);
-        stack.push(67);
+        for(int i = 0; i < size; i++)
+            stack.push(rand.nextInt(1201));
 
+        assertFalse(stack.isEmpty(), "Stack should have elements before print");
+
+        Integer topBefore = stack.topElement();
         out.println(stack);
 
-        assertFalse(stack.isEmpty(),"The stack should not be empty");
+        assertFalse(stack.isEmpty(), "Stack should still have elements after print");
+        assertEquals(topBefore, stack.topElement(), "Top element unchanged after print");
     }
 
     @Test

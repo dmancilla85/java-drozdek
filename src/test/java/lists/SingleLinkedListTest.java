@@ -36,8 +36,13 @@ class SingleLinkedListTest {
         list.add("hello");
         list.add("12.34");
 
+        int sizeBefore = list.size();
+        String firstBefore = list.first();
+
         list.printAll();
-        assertNotNull(list);
+
+        assertEquals(sizeBefore, list.size(), "List size unchanged after printAll");
+        assertEquals(firstBefore, list.first(), "First element unchanged after printAll");
     }
 
     @Test

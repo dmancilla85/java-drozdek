@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import org.drozdek.commons.LoggerService;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class IntSkipListTest {
@@ -71,5 +73,20 @@ class IntSkipListTest {
         int match = list.search(6);
 
         assertEquals(6, match, "The expected key doesn't match with the result");
+    }
+
+    @Test
+    @DisplayName("Print all does not modify the list")
+    void printAll() {
+        list.insert(10);
+        list.insert(2);
+        list.insert(6);
+        list.insert(1);
+
+        int sizeBefore = list.size();
+
+        list.printAll();
+
+        assertEquals(sizeBefore, list.size(), "List size unchanged after printAll");
     }
 }

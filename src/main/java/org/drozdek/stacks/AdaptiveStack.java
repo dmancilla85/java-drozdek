@@ -43,6 +43,11 @@ public class AdaptiveStack<T> implements StackInterface<T> {
     }
 
     @Override
+    public String toString() {
+        return stack.toString();
+    }
+
+    @Override
     public boolean isEmpty() {
         return stack.isEmpty();
     }

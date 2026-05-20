@@ -74,9 +74,13 @@ class StackTest {
         stack.push(2);
         stack.push(67);
 
+        assertFalse(stack.isEmpty(), "Stack should have elements before print");
+
+        Integer topBefore = stack.topElement();
         out.println(stack);
 
-        assertFalse(stack.isEmpty(),"The stack should not be empty");
+        assertFalse(stack.isEmpty(), "Stack should still have elements after print");
+        assertEquals(topBefore, stack.topElement(), "Top element unchanged after print");
     }
 
     @Test

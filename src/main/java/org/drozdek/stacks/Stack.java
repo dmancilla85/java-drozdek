@@ -1,15 +1,18 @@
 package org.drozdek.stacks;
 
+import org.drozdek.stacks.interfaces.StackInterface;
+
 import java.util.ArrayList;
 import java.util.EmptyStackException;
-
-import org.drozdek.stacks.interfaces.StackInterface;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Stack implemented as an arraylist.
  */
 public class Stack<T> implements StackInterface<T> {
     private final ArrayList<T> pool;
+    public boolean printWithUnicode;
 
     /**
      * Default constructor.
@@ -26,6 +29,7 @@ public class Stack<T> implements StackInterface<T> {
      */
     private Stack(int n, ArrayList<T> pool) {
         this.pool = pool;
+        this.printWithUnicode = true;
         if (n > 0)
             this.pool.ensureCapacity(n);
     }
@@ -80,13 +84,116 @@ public class Stack<T> implements StackInterface<T> {
      */
     @Override
     public String toString() {
-        StringBuilder content = new StringBuilder();
+        return printWithUnicode ? formatStackList(pool) :
+                formatStackBox(pool.stream().map(Objects::toString).toList());
+    }
 
-        for (T element : pool) {
-            content.append(element.toString());
-            content.append(System.lineSeparator());
+    static String formatStackBox(List<String> elementStrings) {
+        if (elementStrings.isEmpty()) {
+            return "";
         }
-        return content.toString();
+
+        int n = elementStrings.size();
+        String[] contents = new String[n];
+        int contentWidth = 0;
+        for (int i = 0; i < n; i++) {
+            String suffix;
+            if (i == n - 1) {
+                suffix = "  <-- [TOP]";
+            } else if (i == 0) {
+                suffix = "  <-- [BOTTOM]";
+            } else {
+                suffix = "";
+            }
+            contents[i] = elementStrings.get(i) + suffix;
+            int len = contents[i].length();
+            if (len > contentWidth) contentWidth = len;
+        }
+
+        int boxWidth = contentWidth + 3;
+        String topBorder = "┌" + "─".repeat(boxWidth - 2) + "┐";
+        String sepBorder = "├" + "─".repeat(boxWidth - 2) + "┤";
+        String botBorder = "└" + "─".repeat(boxWidth - 2) + "┘";
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(topBorder).append(System.lineSeparator());
+
+        for (int i = 0; i < n; i++) {
+            sb.append("│ ");
+            sb.append(contents[i]);
+            sb.append(" ".repeat(contentWidth - contents[i].length()));
+            sb.append("│").append(System.lineSeparator());
+
+            if (i < n - 1) {
+                sb.append(sepBorder).append(System.lineSeparator());
+            }
+        }
+
+        sb.append(botBorder).append(System.lineSeparator());
+        return sb.toString();
+    }
+
+    static String formatStackList(List<?> elements) {
+        if (elements.isEmpty()) return "";
+
+        int n = elements.size();
+        String[] values = new String[n];
+        String[] types = new String[n];
+        int maxValueLen = 0;
+        int maxTypeLen = 0;
+
+        for (int i = 0; i < n; i++) {
+            Object e = elements.get(i);
+            values[i] = e.toString();
+            types[i] = e.getClass().getSimpleName();
+            if (values[i].length() > maxValueLen) maxValueLen = values[i].length();
+            if (types[i].length() > maxTypeLen) maxTypeLen = types[i].length();
+        }
+
+        int gap = 6;
+        int typeColPos = maxValueLen + gap;
+        String header = " ─ STACK (" + n + " Item" + (n == 1 ? "" : "s") + ") ";
+
+        int width = header.length();
+        for (int i = 0; i < n; i++) {
+            int padLen = Math.max(1, typeColPos - values[i].length());
+            int lineLen = 8 + values[i].length() + padLen + 2 + types[i].length();
+            if (i == n - 1) lineLen += 7;
+            if (lineLen > width) width = lineLen;
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(header);
+        sb.append("─".repeat(width - header.length() - 1));
+        sb.append(System.lineSeparator());
+
+        for (int i = n - 1; i >= 0; i--) {
+            String marker = (i == n - 1) ? "➔" : "·";
+            String topStr = (i == n - 1) ? "  ◄ TOP" : "";
+
+            sb.append(" │  ");
+            sb.append(marker).append("\t");
+            sb.append(values[i]);
+
+            int padToType = typeColPos - values[i].length();
+            if (padToType < 1) padToType = 1;
+            sb.append(" ".repeat(padToType));
+            sb.append("[").append(types[i]).append("]");
+
+            if (!topStr.isEmpty()) {
+                sb.append(topStr);
+            }
+
+            sb.append(System.lineSeparator());
+        }
+
+        sb.append(" ");
+        sb.append("─".repeat(width - 2));
+        sb.append(" ");
+        sb.append(System.lineSeparator());
+
+        return sb.toString();
     }
 
     /**

@@ -1,6 +1,8 @@
 package org.drozdek.stacks;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.List;
 
 import org.drozdek.stacks.interfaces.StackInterface;
 
@@ -36,6 +38,18 @@ public class LinkedStack<T> implements StackInterface<T> {
             throw new EmptyStackException();
         }
         return this.top.data;
+    }
+
+    @Override
+    public String toString() {
+        List<T> elements = new ArrayList<>();
+        Node<T> current = top;
+        while (current != null) {
+            elements.add(current.data);
+            current = current.next;
+        }
+        java.util.Collections.reverse(elements);
+        return Stack.formatStackList(elements);
     }
 
     @Override
