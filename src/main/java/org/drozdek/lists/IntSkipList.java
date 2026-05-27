@@ -241,29 +241,59 @@ public class IntSkipList implements ListInterface<Integer> {
         return root[0] == null;
     }
 
-    /**
-     * Prints all elements in the skip list in order.
-     * Each element is printed on a separate line showing its key and level 0 next reference.
-     * 
-     * Time Complexity: O(n) where n is the number of elements, due to traversal and string building.
-     * 
-     * Note: This method uses LoggerService.logInfo() for output, not System.out.println().
-     */
-    public void printAll() {
-        IntSkipListNode tmp = root[0];
-        StringBuilder line = new StringBuilder();
-
-        while (tmp != null) {
-            line.append("(key: ");
-            line.append(tmp.key);
-            line.append(", next: ");
-            line.append(tmp.next[0]);
-            line.append(")");
-            line.append(System.lineSeparator());
-            tmp = tmp.next[0];
+    @Override
+    public String toString() {
+        if (root[0] == null) {
+            return "";
         }
 
-        LoggerService.logInfo(line.toString());
+        int maxKeyLen = 0;
+        IntSkipListNode node = root[0];
+        while (node != null) {
+            maxKeyLen = Math.max(maxKeyLen, String.valueOf(node.key).length());
+            node = node.next[0];
+        }
+
+        int innerWidth = Math.max(4, maxKeyLen + 2);
+
+        int lvl = findMajorNotNullValue();
+        int height = lvl + 1;
+
+        StringBuilder sb = new StringBuilder();
+
+        // Head line
+        String headInner = "Head" + " ".repeat(Math.max(0, innerWidth - 4));
+        sb.append("[").append(headInner).append("]");
+        sb.append(" ── (Height: ").append(height).append(")").append(System.lineSeparator());
+
+        // Data nodes
+        node = root[0];
+        while (node != null) {
+            String keyStr = String.valueOf(node.key);
+            String padded = " " + keyStr + " ".repeat(Math.max(0, innerWidth - 1 - keyStr.length()));
+            sb.append("[").append(padded).append("]");
+            sb.append(" ── ");
+
+            int levelCount = node.next.length;
+            for (int i = 0; i < levelCount; i++) {
+                if (i > 0) sb.append(" ");
+                sb.append("█");
+            }
+            sb.append(System.lineSeparator());
+
+            node = node.next[0];
+        }
+
+        // Tail line
+        String tailInner = "Tail" + " ".repeat(Math.max(0, innerWidth - 4));
+        sb.append("[").append(tailInner).append("]");
+        sb.append(" ── (Height: ").append(height).append(")");
+
+        return sb.toString();
+    }
+
+    public void printAll() {
+        LoggerService.logInfo(this.toString());
     }
 
     /**

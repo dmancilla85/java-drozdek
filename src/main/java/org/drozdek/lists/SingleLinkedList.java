@@ -167,17 +167,21 @@ public class SingleLinkedList<T> implements Iterable<T>, ListInterface<T> {
      * 
      * Note: This method uses LoggerService.logInfo() for output, not System.out.println().
      */
-    public void printAll() {
-        StringBuilder line = new StringBuilder();
-        line.append("[");
-
-        for (T element : this) {
-            line.append(element);
-            line.append(" ");
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        SingleLinkedListNode<T> tmp = head;
+        while (tmp != null) {
+            sb.append(tmp.data);
+            sb.append(" -> ");
+            tmp = tmp.next;
         }
-        line.append("]");
+        sb.append("NULL");
+        return sb.toString();
+    }
 
-        LoggerService.logInfo(line.toString());
+    public void printAll() {
+        LoggerService.logInfo(this.toString());
     }
 
     /**

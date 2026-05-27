@@ -178,25 +178,24 @@ public class DoubleLinkedList<T> implements Iterable<T>, ListInterface<T> {
         return tail != null ? tail.data : null;
     }
 
-    /**
-     * Prints all elements in the list to the logger service in the format [e1 e2 e3 ...].
-     * Elements are printed in order from head to tail.
-     * 
-     * Time Complexity: O(n) where n is the number of elements, due to traversal and string building.
-     * 
-     * Note: This method uses LoggerService.logInfo() for output, not System.out.println().
-     */
-    public void printAll() {
-        StringBuilder line = new StringBuilder();
-        line.append("[");
-
-        for (T element : this) {
-            line.append(element);
-            line.append(" ");
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("NULL <-> ");
+        DoubleLinkedListNode<T> tmp = head;
+        while (tmp != null) {
+            sb.append(tmp.data);
+            if (tmp.next != null) {
+                sb.append(" <-> ");
+            }
+            tmp = tmp.next;
         }
-        line.append("]");
+        sb.append(" <-> NULL");
+        return sb.toString();
+    }
 
-        LoggerService.logInfo(line.toString());
+    public void printAll() {
+        LoggerService.logInfo(this.toString());
     }
 
     /**

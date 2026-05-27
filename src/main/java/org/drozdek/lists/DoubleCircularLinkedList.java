@@ -147,29 +147,35 @@ public class DoubleCircularLinkedList<T> extends DoubleLinkedList<T> {
         return !flag ? null : tmp.data;
     }
 
-    /**
-     * Prints all elements in the list to the logger service in the format [*e1, e2, e3, ...].
-     * The head element (most recently added) is marked with an asterisk.
-     * 
-     * Time Complexity: O(n) where n is the number of elements, due to traversal and string building.
-     * 
-     * Note: This method uses LoggerService.logInfo() for output, not System.out.println().
-     */
     @Override
-    public void printAll() {
-        StringBuilder line = new StringBuilder();
-        int i = 0;
-        int size = size();
-        line.append("[");
-
-        for (DoubleLinkedListNode<T> tmp = head; i++ < size; tmp = tmp.next) {
-            line.append(tmp == head ? "*" + tmp.data : tmp.data);
-            line.append(i != size ? ", " : "");
+    public String toString() {
+        int s = size();
+        if (s <= 0) {
+            return "";
         }
 
-        line.append("]");
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+        DoubleLinkedListNode<T> tmp = head;
 
-        LoggerService.logInfo(line.toString());
+        sb.append("┌⇄  ");
+        while (count < s) {
+            sb.append(tmp.data);
+            count++;
+            if (count < s) {
+                sb.append("  ⇄  ");
+            }
+            tmp = tmp.next;
+        }
+        sb.append("  ⇄┐");
+        String top = sb.toString();
+
+        return top + "\n"
+                + "└" + "─".repeat(top.length() - 2) + "┘";
+    }
+
+    public void printAll() {
+        LoggerService.logInfo(this.toString());
     }
 
     /**

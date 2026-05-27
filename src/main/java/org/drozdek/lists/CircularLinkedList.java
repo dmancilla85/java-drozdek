@@ -175,28 +175,33 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
         return !flag ? null : tmp.data;
     }
 
-    /**
-     * Prints all elements in the list to the logger service in the format [*e1, e2, e3, ...].
-     * The head element (most recently added) is marked with an asterisk.
-     * 
-     * Time Complexity: O(n) where n is the number of elements, due to traversal and string building.
-     * 
-     * Note: This method uses LoggerService.logInfo() for output, not System.out.println().
-     */
     @Override
-    public void printAll() {
-        StringBuilder line = new StringBuilder();
-        int i = 0;
-        int size = size();
-        line.append("[");
-
-        for (SingleLinkedListNode<T> tmp = head; i++ < size; tmp = tmp.next) {
-            line.append(tmp == head ? "*" + tmp.data : tmp.data);
-            line.append(i != size ? ", " : "");
+    public String toString() {
+        int s = size();
+        if (s <= 0) {
+            return "";
         }
-        line.append("]");
 
-        LoggerService.logInfo(line.toString());
+        StringBuilder middle = new StringBuilder();
+        int count = 0;
+        SingleLinkedListNode<T> tmp = head;
+        while (count < s) {
+            middle.append(tmp.data);
+            if (count < s - 1) {
+                middle.append(" -> ");
+            }
+            tmp = tmp.next;
+            count++;
+        }
+
+        int lineLen = ("┌--> " + middle + " --┐").length();
+
+        return "┌--> " + middle + " --┐" + "\n"
+                + "└" + "─".repeat(lineLen - 2) + "┘";
+    }
+
+    public void printAll() {
+        LoggerService.logInfo(this.toString());
     }
 
     /**
