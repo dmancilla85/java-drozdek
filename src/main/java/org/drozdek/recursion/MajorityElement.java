@@ -5,7 +5,8 @@ import java.util.List;
 
 import static java.lang.System.out;
 
-public class MajorityElement {
+public final class MajorityElement {
+private MajorityElement() {  }
 
     // Given an integer array A, find the majority element.
     // An element x is the majority if it appears more than n/2 times.
@@ -14,7 +15,8 @@ public class MajorityElement {
     public static Integer run(List<Integer> a, int index) {
 
         int mitad = a.size() / 2;
-        int count = 0, number;
+        int count = 0;
+        int number;
 
         // Base case: with 2 or fewer elements there is no majority
         if (a.size() <= 2)

@@ -1,6 +1,6 @@
 package org.drozdek.sorting;
 
-public class HeapSort {
+public final class HeapSort {
 
     private HeapSort() {
         // do nothing

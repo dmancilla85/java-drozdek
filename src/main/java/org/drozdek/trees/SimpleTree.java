@@ -22,14 +22,9 @@ public class SimpleTree<T> {
         protected T label;
         protected ArrayList<TreeNode> children;
 
-        public TreeNode(T label) {
+        TreeNode(T label) {
             this.label = label;
             children = new ArrayList<TreeNode>();
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return super.equals(obj);
         }
 
         public T getLabel() {
@@ -40,9 +35,5 @@ public class SimpleTree<T> {
             this.label = label;
         }
 
-        @Override
-        public int hashCode() {
-            return super.hashCode();
-        }
     }
 }

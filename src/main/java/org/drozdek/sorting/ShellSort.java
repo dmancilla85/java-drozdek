@@ -1,6 +1,6 @@
 package org.drozdek.sorting;
 
-public class ShellSort {
+public final class ShellSort {
 
     private ShellSort() {
         // do nothing

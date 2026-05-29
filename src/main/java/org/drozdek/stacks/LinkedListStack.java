@@ -5,40 +5,30 @@ import org.drozdek.stacks.interfaces.StackInterface;
 import java.util.EmptyStackException;
 import java.util.LinkedList;
 
-/**
- * Stack implemented as a linked list.
- */
+/// Stack implemented as a linked list.
 public class LinkedListStack<T> implements StackInterface<T> {
     private final LinkedList<T> pool;
 
-    /**
-     * Default constructor.
-     */
+    /// Default constructor.
     public LinkedListStack() {
         pool = new LinkedList<>();
     }
 
-    /**
-     * Clear stack.
-     */
+    /// Clear stack.
     public void clear() {
         pool.clear();
     }
 
-    /**
-     * Is stack empty?
-     *
-     * @return True if is empty
-     */
+    /// Is stack empty?
+    ///
+    /// @return True if is empty
     public boolean isEmpty() {
         return pool.isEmpty();
     }
 
-    /**
-     * Extract the last element.
-     *
-     * @return The element removed
-     */
+    /// Extract the last element.
+    ///
+    /// @return The element removed
     public T pop() {
         if (isEmpty())
             throw new EmptyStackException();
@@ -46,30 +36,24 @@ public class LinkedListStack<T> implements StackInterface<T> {
         return pool.removeLast();
     }
 
-    /**
-     * Add an element to stack.
-     *
-     * @param element Element to add to stack
-     */
+    /// Add an element to stack.
+    ///
+    /// @param element Element to add to stack
     public void push(T element) {
         pool.addLast(element);
     }
 
-    /**
-     * Convert to string.
-     *
-     * @return The stack as a string
-     */
+    /// Convert to string.
+    ///
+    /// @return The stack as a string
     @Override
     public String toString() {
         return Stack.formatStackList(pool);
     }
 
-    /**
-     * View element at top.
-     *
-     * @return Element at top
-     */
+    /// View element at top.
+    ///
+    /// @return Element at top
     public T topElement() {
         if (isEmpty())
             throw new EmptyStackException();

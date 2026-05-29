@@ -5,19 +5,17 @@ import org.drozdek.stacks.Stack;
 
 import java.io.PrintStream;
 
-/**
- * A binary Search Tree is a node-based binary tree data structure which has the following properties:
- * <p>
- * The left subtree of a node contains only nodes with keys lesser than the node’s key.
- * The right subtree of a node contains only nodes with keys greater than the node’s key.
- * The left and right subtree each must also be a binary search tree.
- * There must be no duplicate nodes.
- * <p>
- * Source: <a href="https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/">Geeks for Geeks</a>
- *
- * @author David
- * @version 1.0.0
- */
+/// A binary Search Tree is a node-based binary tree data structure which has the following properties:
+///
+/// The left subtree of a node contains only nodes with keys lesser than the node's key.
+/// The right subtree of a node contains only nodes with keys greater than the node's key.
+/// The left and right subtree each must also be a binary search tree.
+/// There must be no duplicate nodes.
+///
+/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/)
+///
+/// @author David
+/// @version 1.0.0
 public class BinarySearchTree<T> {
     protected BinarySearchTreeNode<T> root;
 
@@ -29,12 +27,10 @@ public class BinarySearchTree<T> {
         this.root = root;
     }
 
-    /**
-     * Function to convert input BST to right linked list known as vine or backbone.
-     *
-     * @param grand Grandfather node
-     * @return Count
-     */
+    /// Function to convert input BST to right linked list known as vine or backbone.
+    ///
+    /// @param grand Grandfather node
+    /// @return Count
     private static int binarySearchTreeToVine(BinarySearchTreeNode<Integer> grand) {
         int count = 0;
 
@@ -63,12 +59,10 @@ public class BinarySearchTree<T> {
         return count;
     }
 
-    /**
-     * Function to compress given tree with its root as grand right
-     *
-     * @param grand Grandfather node
-     * @param m
-     */
+    /// Function to compress given tree with its root as grand right
+    ///
+    /// @param grand Grandfather node
+    /// @param m
     private static void compress(BinarySearchTreeNode<Integer> grand, int m) {
         // Make tmp pointer to traverse and compress the given BST.
         BinarySearchTreeNode<Integer> tmp = grand.right;
@@ -87,25 +81,21 @@ public class BinarySearchTree<T> {
         }
     }
 
-    /**
-     * Function to calculate the log base 2 of an integer
-     *
-     * @param n An integer x
-     * @return Log base of x
-     */
+    /// Function to calculate the log base 2 of an integer
+    ///
+    /// @param n An integer x
+    /// @return Log base of x
     private static int log2(int n) {
         // calculate log2 N indirectly using log() method
         return (int) (Math.log(n) / Math.log(2));
     }
 
-    /**
-     * The Day-Stout-Warren algorithm balances a binary search tree. This balancing produces a tree that not only has a
-     * minimum height, but also forces all the nodes on the bottommost level to be filled from left to right.
-     * The running time is O(n), where 'n' is the number of nodes in tree.
-     *
-     * @param tree Tree to balance
-     * @return A balanced tree
-     */
+    /// The Day-Stout-Warren algorithm balances a binary search tree. This balancing produces a tree that not only has a
+    /// minimum height, but also forces all the nodes on the bottommost level to be filled from left to right.
+    /// The running time is O(n), where 'n' is the number of nodes in tree.
+    ///
+    /// @param tree Tree to balance
+    /// @return A balanced tree
     public static BinarySearchTree<Integer> balanceWithDSW(BinarySearchTree<Integer> tree) {
         BinarySearchTreeNode<Integer> root = tree.root;
 
@@ -136,11 +126,9 @@ public class BinarySearchTree<T> {
         return new BinarySearchTree<>(grand.right);
     }
 
-    /**
-     * This balance algorithm requires a previously sorted additional array
-     *
-     * @param data A sorted data array
-     */
+    /// This balance algorithm requires a previously sorted additional array
+    ///
+    /// @param data A sorted data array
     public void balanceWithDataArray(Comparable<T>[] data) {
         balanceWithDataArray(data, 0, data.length - 1);
     }
@@ -188,12 +176,10 @@ public class BinarySearchTree<T> {
         return 1 + countNodes(node.left) + countNodes(node.right);
     }
 
-    /**
-     * Delete node by copying branches
-     *
-     * @param data Key to delete
-     * @return Operation code
-     */
+    /// Delete node by copying branches
+    ///
+    /// @param data Key to delete
+    /// @return Operation code
     public int deleteByCopying(T data) {
         BinarySearchTreeNode<T> node;
         BinarySearchTreeNode<T> p;
@@ -239,12 +225,10 @@ public class BinarySearchTree<T> {
         return 0;
     }
 
-    /**
-     * Delete node by merging branches
-     *
-     * @param data Key to delete
-     * @return Operation code
-     */
+    /// Delete node by merging branches
+    ///
+    /// @param data Key to delete
+    /// @return Operation code
     public int deleteByMerging(T data) {
         BinarySearchTreeNode<T> tmp;
         BinarySearchTreeNode<T> node;
@@ -286,21 +270,17 @@ public class BinarySearchTree<T> {
         return 0;
     }
 
-    /**
-     * Print in-order
-     *
-     * @param out Printing in order
-     */
+    /// Print in-order
+    ///
+    /// @param out Printing in order
     public void inorder(PrintStream out) {
         inorder(root, out);
     }
 
-    /**
-     * Recursive implementation for the in-order tree path
-     *
-     * @param p   Node to print
-     * @param out Print stream
-     */
+    /// Recursive implementation for the in-order tree path
+    ///
+    /// @param p   Node to print
+    /// @param out Print stream
     protected void inorder(BinarySearchTreeNode<T> p, PrintStream out) {
         if (p == null)
             return;
@@ -310,11 +290,9 @@ public class BinarySearchTree<T> {
         inorder(p.right, out);
     }
 
-    /**
-     * Insert a new node in the tree.
-     *
-     * @param data Value to insert in the tree
-     */
+    /// Insert a new node in the tree.
+    ///
+    /// @param data Value to insert in the tree
     public void insert(Comparable<T> data) {
         BinarySearchTreeNode<T> p = root;
         BinarySearchTreeNode<T> previous = null;
@@ -336,11 +314,9 @@ public class BinarySearchTree<T> {
             previous.left = new BinarySearchTreeNode<>(data);
     }
 
-    /**
-     * Non-recursive implementation for the in-order tree path
-     *
-     * @param out
-     */
+    /// Non-recursive implementation for the in-order tree path
+    ///
+    /// @param out
     public void iterativeInorder(PrintStream out) {
         BinarySearchTreeNode<T> p = root;
         Stack<BinarySearchTreeNode<T>> stack = new Stack<>();
@@ -370,11 +346,9 @@ public class BinarySearchTree<T> {
         }
     }
 
-    /**
-     * Non-recursive implementation for the post-order tree path
-     *
-     * @param out
-     */
+    /// Non-recursive implementation for the post-order tree path
+    ///
+    /// @param out
     public void iterativePostorder(PrintStream out) {
         BinarySearchTreeNode<T> p = root;
         BinarySearchTreeNode<T> q = root;
@@ -402,11 +376,9 @@ public class BinarySearchTree<T> {
         }
     }
 
-    /**
-     * Non-recursive implementation for the pre-order tree path
-     *
-     * @param out
-     */
+    /// Non-recursive implementation for the pre-order tree path
+    ///
+    /// @param out
     public void iterativePreorder(PrintStream out) {
         BinarySearchTreeNode<T> p = root;
         Stack<BinarySearchTreeNode<T>> stack = new Stack<>();
@@ -430,11 +402,9 @@ public class BinarySearchTree<T> {
         }
     }
 
-    /**
-     * Morris (In-Order) traversal is a tree traversal algorithm that does not employ the use of recursion or a stack.
-     * In this traversal, links are created as successors and nodes are printed using these links. Finally, the changes
-     * are rolled back to restore the original tree.
-     */
+    /// Morris (In-Order) traversal is a tree traversal algorithm that does not employ the use of recursion or a stack.
+    /// In this traversal, links are created as successors and nodes are printed using these links. Finally, the changes
+    /// are rolled back to restore the original tree.
     public void morrisInOrder(PrintStream out) {
         BinarySearchTreeNode<T> p = root;
         BinarySearchTreeNode<T> tmp;
@@ -465,11 +435,9 @@ public class BinarySearchTree<T> {
         }
     }
 
-    /**
-     * Morris (Post-Order) traversal is a tree traversal algorithm that does not employ the use of recursion or a stack.
-     * In this traversal, links are created as successors and nodes are printed using these links. Finally, the changes
-     * are rolled back to restore the original tree.
-     */
+    /// Morris (Post-Order) traversal is a tree traversal algorithm that does not employ the use of recursion or a stack.
+    /// In this traversal, links are created as successors and nodes are printed using these links. Finally, the changes
+    /// are rolled back to restore the original tree.
     public void morrisPostOrder(PrintStream out) {
         BinarySearchTreeNode<T> p = root;
         BinarySearchTreeNode<T> tmp;
@@ -499,11 +467,9 @@ public class BinarySearchTree<T> {
         }
     }
 
-    /**
-     * Morris (Pre-Order) traversal is a tree traversal algorithm that does not employ the use of recursion or a stack.
-     * In this traversal, links are created as successors and nodes are printed using these links. Finally, the changes
-     * are rolled back to restore the original tree.
-     */
+    /// Morris (Pre-Order) traversal is a tree traversal algorithm that does not employ the use of recursion or a stack.
+    /// In this traversal, links are created as successors and nodes are printed using these links. Finally, the changes
+    /// are rolled back to restore the original tree.
     public void morrisPreOrder(PrintStream out) {
         BinarySearchTreeNode<T> p = root;
         BinarySearchTreeNode<T> tmp;
@@ -548,12 +514,10 @@ public class BinarySearchTree<T> {
         postorder(root, out);
     }
 
-    /**
-     * Recursive implementation for the post-order tree path
-     *
-     * @param p
-     * @param out
-     */
+    /// Recursive implementation for the post-order tree path
+    ///
+    /// @param p
+    /// @param out
     protected void postorder(BinarySearchTreeNode<T> p, PrintStream out) {
         if (p == null)
             return;
@@ -568,12 +532,10 @@ public class BinarySearchTree<T> {
         preorder(root, out);
     }
 
-    /**
-     * Recursive implementation for the pre-order tree path
-     *
-     * @param p
-     * @param out
-     */
+    /// Recursive implementation for the pre-order tree path
+    ///
+    /// @param p
+    /// @param out
     protected void preorder(BinarySearchTreeNode<T> p, PrintStream out) {
         if (p == null)
             return;
@@ -615,11 +577,9 @@ public class BinarySearchTree<T> {
         return vars;
     }
 
-    /**
-     * Number of nodes in the tree.
-     *
-     * @return The number of elements in node
-     */
+    /// Number of nodes in the tree.
+    ///
+    /// @return The number of elements in node
     public int size() {
         return countNodes(root);
     }

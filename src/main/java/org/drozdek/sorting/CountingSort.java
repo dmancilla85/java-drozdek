@@ -2,7 +2,7 @@ package org.drozdek.sorting;
 
 import org.drozdek.commons.ArrayUtils;
 
-public class CountingSort {
+public final class CountingSort {
 
     private CountingSort() {
         // do nothing

@@ -81,6 +81,7 @@ class ArrayQueueTest {
         queue.enqueue(55);
         queue.enqueue(15);
         queue.enqueue(65);
+
         LoggerService.logInfo(queue.showStorage());
         Integer first= (Integer) queue.dequeue();
 

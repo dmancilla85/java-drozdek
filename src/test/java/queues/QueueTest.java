@@ -87,8 +87,7 @@ class QueueTest {
         queue.enqueue(65);
 
         Integer first= queue.firstElement();
-
-        LoggerService.logInfo(queue.toString());
+        queue.print();
 
         assertEquals(4,queue.size(), "It seems that the first element has been removed");
         assertEquals(45,first, "The first element doesn't match with the expected");

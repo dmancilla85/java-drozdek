@@ -1,6 +1,6 @@
 package org.drozdek.searching;
 
-public class JumpSearch {
+public final class JumpSearch {
 
     private JumpSearch() {
         // do nothing

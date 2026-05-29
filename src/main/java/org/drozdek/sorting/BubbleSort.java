@@ -1,6 +1,6 @@
 package org.drozdek.sorting;
 
-public class BubbleSort {
+public final class BubbleSort {
 
     private BubbleSort() {
         // do nothing

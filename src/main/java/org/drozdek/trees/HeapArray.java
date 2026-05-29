@@ -15,7 +15,9 @@ public class HeapArray {
     }
 
     public void heapSort() {
-        int parent, child, previousKey;
+        int parent;
+        int child;
+        int previousKey;
         int last = position - 1;
         for (int i = 10; i >= 1; i--) {
             previousKey = keys[last];
@@ -44,7 +46,7 @@ public class HeapArray {
     }
 
     public int leftChild(int parentPosition) {
-        return (2 * parentPosition);
+        return 2 * parentPosition;
     }
 
     public void insert(int key) {
@@ -79,7 +81,7 @@ public class HeapArray {
             out.println("");
             out.println("-------------------------");
             out.close();
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 

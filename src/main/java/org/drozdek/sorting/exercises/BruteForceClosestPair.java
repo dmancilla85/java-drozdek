@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 class PointPair {
-    Point pointA, pointB;
+    Point pointA;
+    Point pointB;
     double distance;
     int instructions;
 
@@ -70,28 +71,24 @@ class PointPair {
     }
 }
 
-/**
- * Brute-force closest pair of points: generates every pair of 2D points,
- * computes Euclidean distances, then sorts by distance using quicksort
- * to find the minimum. Also tracks instruction counts for complexity
- * analysis.
- * <p>
- * Point pairs are built recursively: take the first point, pair it with
- * every remaining point, then recurse on the rest. The resulting list is
- * sorted via {@link PointPair#quickSort} and the closest pair is
- * reported.
- */
-public class BruteForceClosestPair {
+/// Brute-force closest pair of points: generates every pair of 2D points,
+/// computes Euclidean distances, then sorts by distance using quicksort
+/// to find the minimum. Also tracks instruction counts for complexity
+/// analysis.
+///
+/// Point pairs are built recursively: take the first point, pair it with
+/// every remaining point, then recurse on the rest. The resulting list is
+/// sorted via `PointPair::quickSort` and the closest pair is reported.
+public final class BruteForceClosestPair {
+private BruteForceClosestPair() {  }
 
-    /**
-     * Generates all unordered point pairs recursively.
-     * <p>
-     * For each call, pairs {@code points[0]} with every other point,
-     * removes the first element, and recurses on the shortened list.
-     *
-     * @param points list of points (modified during recursion)
-     * @return list of {@link PointPair} for every pair
-     */
+    /// Generates all unordered point pairs recursively.
+    ///
+    /// For each call, pairs `points[0]` with every other point,
+    /// removes the first element, and recurses on the shortened list.
+    ///
+    /// @param points list of points (modified during recursion)
+    /// @return list of PointPair for every pair
     public static ArrayList<PointPair> enumeratePairs(List<Point> points) {
 
         ArrayList<PointPair> pairs = new ArrayList<PointPair>();

@@ -188,11 +188,6 @@ public class MaximumHeap<T extends Comparable<T>> {
         return -1;
     }
 
-    private int rightChild(int node) {
-        if (0 <= node && node < (heap.length - 2) / 2 && !isLeaf(node))
-            return node * 2 + 2;
-        return -1;
-    }
 
     private void swap(int i, int j) {
         Object temp = heap[i];

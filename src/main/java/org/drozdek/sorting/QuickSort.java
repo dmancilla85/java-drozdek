@@ -4,7 +4,7 @@ import org.drozdek.commons.ArrayUtils;
 
 import java.util.ArrayList;
 
-public class QuickSort {
+public final class QuickSort {
 
     private QuickSort() {
         // do nothing

@@ -20,28 +20,25 @@ import org.drozdek.queues.interfaces.QueueInterface;
 
 import java.util.Comparator;
 
-/**
- * A heap-based priority queue, without any concurrency control
- * (i.e., no blocking on empty/full states).
- * This class provides the data structure mechanics for BoundedPriorityQueue.
- * <p>
- * The class currently uses a standard array-based heap, as described
- * in, for example, Sedgewick's Algorithms text. All methods
- * are fully synchronized. In the future,
- * it may instead use structures permitting finer-grained locking.
- * <p>[<a href="http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/intro.html"> Introduction to this package. </a>]
- **/
+/// A heap-based priority queue, without any concurrency control
+/// (i.e., no blocking on empty/full states).
+/// This class provides the data structure mechanics for BoundedPriorityQueue.
+///
+/// The class currently uses a standard array-based heap, as described
+/// in, for example, Sedgewick's Algorithms text. All methods
+/// are fully synchronized. In the future,
+/// it may instead use structures permitting finer-grained locking.
+///
+/// [Introduction to this package.](http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/intro.html)
 
 public class Heap implements QueueInterface<Object> {
     protected final Comparator<Object> cmp_;  // for ordering
     protected Object[] nodes_;  // the tree nodes, packed into an array
     protected int count_ = 0;   // number of used slots
 
-    /**
-     * Create a Heap with the given initial capacity and comparator
-     *
-     * @throws IllegalArgumentException if capacity less or equal to zero
-     **/
+    /// Create a Heap with the given initial capacity and comparator
+    ///
+    /// @throws IllegalArgumentException if capacity less or equal to zero
 
     public Heap(int capacity, Comparator<Object> cmp)
             throws IllegalArgumentException {
@@ -50,27 +47,21 @@ public class Heap implements QueueInterface<Object> {
         cmp_ = cmp;
     }
 
-    /**
-     * Create a Heap with the given capacity,
-     * and relying on natural ordering.
-     **/
+    /// Create a Heap with the given capacity,
+    /// and relying on natural ordering.
 
     public Heap(int capacity) {
         this(capacity, null);
     }
 
-    /**
-     * remove all elements
-     **/
+    /// Remove all elements.
     public synchronized void clear() {
         for (int i = 0; i < count_; ++i)
             nodes_[i] = null;
         count_ = 0;
     }
 
-    /**
-     * perform element comaprisons using comparator or natural ordering
-     **/
+    /// Perform element comparisons using comparator or natural ordering.
     @SuppressWarnings("unchecked")
     protected int compare(Object a, Object b) {
         if (cmp_ == null)
@@ -79,9 +70,7 @@ public class Heap implements QueueInterface<Object> {
             return cmp_.compare(a, b);
     }
 
-    /**
-     * Return and remove least element, or null if empty
-     **/
+    /// Return and remove least element, or null if empty.
 
     public synchronized Object extract() {
         if (count_ < 1) return null;
@@ -91,7 +80,7 @@ public class Heap implements QueueInterface<Object> {
         --count_;
         Object x = nodes_[count_];
         nodes_[count_] = null;
-        for (; ; ) {
+        for (;;) {
             int l = left(k);
             if (l >= count_)
                 break;
@@ -108,9 +97,7 @@ public class Heap implements QueueInterface<Object> {
         return least;
     }
 
-    /**
-     * insert an element, resize if necessary
-     **/
+    /// Insert an element, resize if necessary.
     public synchronized void insert(Object x) {
         if (count_ >= nodes_.length) {
             int newcap = 3 * nodes_.length / 2 + 1;
@@ -140,9 +127,7 @@ public class Heap implements QueueInterface<Object> {
         return (k - 1) / 2;
     }
 
-    /**
-     * Return least element without removing it, or null if empty
-     **/
+    /// Return least element without removing it, or null if empty.
     public synchronized Object peek() {
         if (count_ > 0)
             return nodes_[0];
@@ -170,14 +155,14 @@ public class Heap implements QueueInterface<Object> {
     @Override
     public synchronized String toString() {
         if (isEmpty()) {
-            return org.drozdek.queues.interfaces.QueueInterface.boxedQueue("[ EMPTY ]");
+            return QueueInterface.boxedQueue("[ EMPTY ]");
         }
         StringBuilder sb = new StringBuilder("FRONT");
         for (int i = 0; i < count_; i++) {
             sb.append(" ➔ [").append(nodes_[i]).append("]");
         }
         sb.append(" ➔ REAR");
-        return org.drozdek.queues.interfaces.QueueInterface.boxedQueue(sb.toString());
+        return QueueInterface.boxedQueue(sb.toString());
     }
 
     @Override
@@ -187,9 +172,7 @@ public class Heap implements QueueInterface<Object> {
                 toString());
     }
 
-    /**
-     * Return number of elements
-     **/
+    /// Return number of elements.
     public synchronized int size() {
         return count_;
     }

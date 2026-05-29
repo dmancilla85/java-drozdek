@@ -1,7 +1,7 @@
 package org.drozdek.sorting;
 
 
-public class MergeSort {
+public final class MergeSort {
 
     private MergeSort() {
         // do nothing
@@ -39,7 +39,8 @@ public class MergeSort {
         System.arraycopy(array, middle + 1, rightArray, 0, n2);
 
         // Merge the temporary arrays back into the original
-        int i = 0, j = 0;
+        int i = 0;
+        int j = 0;
         int k = left;
         while (i < n1 && j < n2) {
             if (leftArray[i] <= rightArray[j]) {

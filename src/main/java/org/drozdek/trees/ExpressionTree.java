@@ -3,12 +3,10 @@ package org.drozdek.trees;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-/**
- * The structure of Expression Tree is a binary tree to evaluate certain expressions. All leaves of the Expression Tree
- * have a number string value. All non-leaves of the Expression Tree have an operator string value.
- * <p>
- * Source: <a href="https://wxx5433.gitbooks.io/interview-preparation/content/part_ii_leetcode_lintcode/stack/expression_tree_build.html">Here</a>
- */
+/// The structure of Expression Tree is a binary tree to evaluate certain expressions. All leaves of the Expression Tree
+/// have a number string value. All non-leaves of the Expression Tree have an operator string value.
+///
+/// Source: [Here](https://wxx5433.gitbooks.io/interview-preparation/content/part_ii_leetcode_lintcode/stack/expression_tree_build.html)
 public class ExpressionTree {
     final ExpressionTreeNode root;
 
@@ -89,12 +87,10 @@ public class ExpressionTree {
         };
     }
 
-    /**
-     * Evaluate if an expression is well parsed.
-     *
-     * @param expression Expression to evaluate
-     * @return Zero if the expression is correct
-     */
+    /// Evaluate if an expression is well parsed.
+    ///
+    /// @param expression Expression to evaluate
+    /// @return Zero if the expression is correct
     public static int evaluateExpression(String expression) {
         if (expression == null || expression.length() == 0) {
             return 0;
@@ -107,7 +103,7 @@ public class ExpressionTree {
             if (isNumber(token)) {
                 int num = 0;
                 while (i < expression.length() && Character.isDigit(expression.charAt(i))) {
-                    num = num * 10 + (expression.charAt(i) - '0');
+                    num = num * 10 + expression.charAt(i) - '0';
                     i++;
                 }
                 i--;
@@ -147,18 +143,14 @@ public class ExpressionTree {
         return Character.isDigit(token);
     }
 
-    /**
-     * Print the inorder traversal of tree
-     */
+    /// Print the inorder traversal of tree
     public String inorder() {
         return inorder(this.root);
     }
 
-    /**
-     * Check if tree is empty
-     *
-     * @return True if the tree is empty
-     */
+    /// Check if tree is empty
+    ///
+    /// @return True if the tree is empty
     public boolean isEmpty() {
         return root == null;
     }

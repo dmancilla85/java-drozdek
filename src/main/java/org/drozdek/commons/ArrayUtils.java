@@ -2,7 +2,7 @@ package org.drozdek.commons;
 
 import java.util.Random;
 
-public class ArrayUtils {
+public final class ArrayUtils {
 
     private static final Random r = new Random();
 

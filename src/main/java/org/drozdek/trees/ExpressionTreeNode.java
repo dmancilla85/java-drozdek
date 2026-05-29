@@ -29,7 +29,7 @@ public class ExpressionTreeNode {
         buffer.append(" >");
         buffer.append('\n');
 
-        for (Iterator<ExpressionTreeNode> it = children.iterator(); it.hasNext(); ) {
+        for (Iterator<ExpressionTreeNode> it = children.iterator();it.hasNext();) {
             ExpressionTreeNode next = it.next();
 
             if (next == null)

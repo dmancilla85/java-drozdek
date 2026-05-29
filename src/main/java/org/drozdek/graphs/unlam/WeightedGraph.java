@@ -1,23 +1,15 @@
-/**
- *
- */
 package org.drozdek.graphs.unlam;
 
 import org.drozdek.commons.LoggerService;
 
 import static java.lang.System.out;
 
-/**
- * @author David
- *
- */
+/// @author David
 public class WeightedGraph extends Graph {
 
     protected int[][] weightTable;
 
-    /**
-     * @param n
-     */
+    /// @param n
     public WeightedGraph(int n) {
         super(n);
         this.weightTable = new int[n][n];
@@ -28,16 +20,14 @@ public class WeightedGraph extends Graph {
 
         for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++)
-                if ((int) (Math.random() * 100 + 1) > 100 - (conexividad)) {
+                if ((int) (Math.random() * 100 + 1) > 100 - conexividad) {
                     al.createEdge(i, j, (int) (Math.random() * 100 + 1));
                 }
 
         return al;
     }
 
-    /**
-     * @param args
-     */
+    /// @param args
     static void main(String[] args) {
         // TODO Auto-generated method stub
 
@@ -53,7 +43,7 @@ public class WeightedGraph extends Graph {
         g.createEdge('d', 'f', 60);
         g.createEdge('e', 'f', 30);
 
-        WeightedGraph e = WeightedGraph.createRandom(10, 50);
+        WeightedGraph e = createRandom(10, 50);
         out.println(e.getAdjacencyTable());
         out.println(e.getWeightTable());
         /*
@@ -67,13 +57,10 @@ public class WeightedGraph extends Graph {
         out.println("Prim");
     }
 
-    /**
-     *
-     * @param node1
-     * @param node2
-     * @param peso
-     * @return
-     */
+    /// @param node1
+    /// @param node2
+    /// @param peso
+    /// @return
     public boolean createEdge(int node1, int node2, int weight) {
         try {
             if (adjacencyMatrix[node1][node2] == 1 || node1 == node2)
@@ -94,13 +81,10 @@ public class WeightedGraph extends Graph {
         }
     }
 
-    /**
-     *
-     * @param a1
-     * @param a2
-     * @param peso
-     * @return
-     */
+    /// @param a1
+    /// @param a2
+    /// @param peso
+    /// @return
     public boolean createEdge(char a1, char a2, int weight) {
         int n1 = ((int) a1) - 97;
         int n2 = ((int) a2) - 97;
@@ -108,12 +92,9 @@ public class WeightedGraph extends Graph {
         return createEdge(n1, n2, weight);
     }
 
-    /**
-     *
-     * @param node1
-     * @param node2
-     * @return
-     */
+    /// @param node1
+    /// @param node2
+    /// @return
     public void removeEdge(int node1, int node2) {
 
 
@@ -134,9 +115,6 @@ public class WeightedGraph extends Graph {
         }
     }
 
-    /**
-     *
-     */
     public StringBuffer getWeightTable() {
 
         int n = this.weightTable[0].length;

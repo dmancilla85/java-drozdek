@@ -1,14 +1,8 @@
-/**
- *
- */
 package org.drozdek.graphs.unlam;
 
 import org.drozdek.commons.LoggerService;
 
-/**
- * @author David
- *
- */
+/// @author David
 public class Edge implements Comparable<Edge> {
 
     protected Vertex origin;
@@ -25,9 +19,10 @@ public class Edge implements Comparable<Edge> {
         this(v1, v2, weight, false);
     }
 
-    /**
-     *
-     */
+    /// @param v1
+    /// @param v2
+    /// @param weight
+    /// @param directed
     public Edge(Vertex v1, Vertex v2, int weight, boolean directed) {
         this.origin = v1;
         this.destination = v2;
@@ -79,44 +74,32 @@ public class Edge implements Comparable<Edge> {
         } else return origin.equals(other.origin);
     }
 
-    /**
-     * @return the destination
-     */
+    /// @return the destination
     public Vertex getDestination() {
         return destination;
     }
 
-    /**
-     * @param destination the destination to set
-     */
+    /// @param destination the destination to set
     public void setDestination(Vertex destination) {
         this.destination = destination;
     }
 
-    /**
-     * @return the origin
-     */
+    /// @return the origin
     public Vertex getOrigin() {
         return origin;
     }
 
-    /**
-     * @param origin the origin to set
-     */
+    /// @param origin the origin to set
     public void setOrigin(Vertex origin) {
         this.origin = origin;
     }
 
-    /**
-     * @return the weight
-     */
+    /// @return the weight
     public int getWeight() {
         return weight;
     }
 
-    /**
-     * @param weight the weight to set
-     */
+    /// @param weight the weight to set
     public void setWeight(int weight) {
         this.weight = weight;
     }

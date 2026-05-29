@@ -25,7 +25,7 @@ public class WordSplay extends SplayTree<Word> {
                 fIn = new FileInputStream(args[0]);
                 fileName = args[0];
             }
-            (new WordSplay()).run(fIn, fileName);
+            new WordSplay().run(fIn, fileName);
             fIn.close();
 
         } catch (IOException io) {

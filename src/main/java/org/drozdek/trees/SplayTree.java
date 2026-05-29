@@ -39,12 +39,10 @@ public class SplayTree<T> {
         return 1 + countNodes(node.left) + countNodes(node.right);
     }
 
-    /**
-     * Delete node by merging branches
-     *
-     * @param data Key to delete
-     * @return Operation code
-     */
+    /// Delete node by merging branches
+    ///
+    /// @param data Key to delete
+    /// @return Operation code
     public int deleteByMerging(Comparable<T> data) {
         SplayTreeNode<T> tmp;
         SplayTreeNode<T> node;
@@ -83,21 +81,17 @@ public class SplayTree<T> {
         return 0;
     }
 
-    /**
-     * Print in-order
-     *
-     * @param out Printing in order
-     */
+    /// Print in-order
+    ///
+    /// @param out Printing in order
     public void inorder(PrintStream out) {
         inorder(root, out);
     }
 
-    /**
-     * Recursive implementation for the in-order tree path
-     *
-     * @param p   Node to print
-     * @param out Print stream
-     */
+    /// Recursive implementation for the in-order tree path
+    ///
+    /// @param p   Node to print
+    /// @param out Print stream
     protected void inorder(SplayTreeNode<T> p, PrintStream out) {
         if (p == null)
             return;
@@ -107,11 +101,9 @@ public class SplayTree<T> {
         inorder(p.right, out);
     }
 
-    /**
-     * Insert a new node in the tree.
-     *
-     * @param data Value to insert in the tree
-     */
+    /// Insert a new node in the tree.
+    ///
+    /// @param data Value to insert in the tree
     public void insert(Comparable<T> data) {
         SplayTreeNode<T> p = root;
         SplayTreeNode<T> previous = null;
@@ -162,9 +154,7 @@ public class SplayTree<T> {
         return search(this.root, key);
     }
 
-    /**
-     *
-     */
+    /// Semi-splay the tree.
     public void semiSplay() {
         semiSplay(this.root);
     }
@@ -212,11 +202,9 @@ public class SplayTree<T> {
         return vars;
     }
 
-    /**
-     * Number of nodes in the tree.
-     *
-     * @return The number of elements in node
-     */
+    /// Number of nodes in the tree.
+    ///
+    /// @return The number of elements in node
     public int size() {
         return countNodes(root);
     }

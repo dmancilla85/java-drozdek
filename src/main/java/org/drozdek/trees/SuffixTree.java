@@ -3,9 +3,6 @@ package org.drozdek.trees;
 import info.schnatterer.mobynamesgenerator.MobyNamesGenerator;
 
 
-/**
- *
- */
 public class SuffixTree {
     protected final SuffixTreeNode root;
     protected final String name;
@@ -78,7 +75,7 @@ public class SuffixTree {
             }
 
             for (char i = 0; i < size; i++)
-                if (p.left[i] != -1) {// if a tree node
+                if (p.left[i] != -1) { // if a tree node
                     tree.append(printTree(p.descendants[i], lvl + 1, p.left[i], p.right[i], pos + 1));
                 }
         } else if (pos + 1 < text.length() && pos > lt) {
@@ -152,20 +149,18 @@ public class SuffixTree {
         return p;
     }
 
-    /**
-     * In 1995, Esko Ukkonen proposed a linear time algorithm for creating suffix trees i.e., Ukkonen's Algorithm.
-     * Initially, an implicit suffix tree is created that contains the first character of the string. Then, as you move
-     * forward, it keeps on adding the other characters till the tree is complete. The orderly addition of characters
-     * in the tree maintains the on-line property of this algorithm.
-     * <p>
-     * *Implicit Trees are those intermediate trees that we encounter while creating the suffix tree of a given string
-     * using Ukkonen's Algorithm.
-     * <p>
-     * We understand that the working example of such a complex algorithm could prove to be a very important step for
-     * your learning. But, first read the below 2 statements to understand the basics.
-     *
-     * @param text
-     */
+    /// In 1995, Esko Ukkonen proposed a linear time algorithm for creating suffix trees i.e., Ukkonen's Algorithm.
+    /// Initially, an implicit suffix tree is created that contains the first character of the string. Then, as you move
+    /// forward, it keeps on adding the other characters till the tree is complete. The orderly addition of characters
+    /// in the tree maintains the on-line property of this algorithm.
+    ///
+    /// *Implicit Trees are those intermediate trees that we encounter while creating the suffix tree of a given string
+    /// using Ukkonen's Algorithm.
+    ///
+    /// We understand that the working example of such a complex algorithm could prove to be a very important step for
+    /// your learning. But, first read the below 2 statements to understand the basics.
+    ///
+    /// @param text
     public void ukkonen(String text) {
         this.text = text;
         final int n = this.text.length();

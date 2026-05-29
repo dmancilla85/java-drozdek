@@ -7,7 +7,8 @@ import static java.lang.Character.getNumericValue;
 import static java.lang.Character.toUpperCase;
 import static java.lang.System.out;
 
-public class AlphabeticallySorted {
+public final class AlphabeticallySorted {
+private AlphabeticallySorted() {  }
 
     // Check if a sequence of characters is alphabetically sorted (case-insensitive)
     public static boolean run(List<Character> s, int llamada) {

@@ -1,6 +1,6 @@
 package org.drozdek.sorting;
 
-public class SelectionSort {
+public final class SelectionSort {
 
     private SelectionSort() {
         // do nothing

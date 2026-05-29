@@ -30,7 +30,7 @@ public class BinarySearchTreeNode<T> {
         buffer.append(this.key);
         buffer.append(System.lineSeparator());
 
-        for (Iterator<BinarySearchTreeNode<T>> it = children.iterator(); it.hasNext(); ) {
+        for (Iterator<BinarySearchTreeNode<T>> it = children.iterator();it.hasNext();) {
             BinarySearchTreeNode<T> next = it.next();
 
             if (next == null)

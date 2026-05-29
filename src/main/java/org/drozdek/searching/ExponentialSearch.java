@@ -1,6 +1,6 @@
 package org.drozdek.searching;
 
-public class ExponentialSearch {
+public final class ExponentialSearch {
 
     private ExponentialSearch() {
         // do nothing

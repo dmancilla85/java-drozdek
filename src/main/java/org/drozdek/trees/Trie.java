@@ -85,14 +85,14 @@ public class Trie {
             if (p.isLeaf) {
                 assert p instanceof TrieLeaf;
                 TrieLeaf lf = (TrieLeaf) p;
-                return (word.substring(i).equals(lf.suffix));
+                return word.substring(i).equals(lf.suffix);
             } else if ((pos = position((TrieNonLeaf) p, word.charAt(i))) != NOT_FOUND
                     && i + 1 == word.length()) {
                 if (((TrieNonLeaf) p).ptr[pos] == null)
                     return true;
                 else
-                    return (!(((TrieNonLeaf) p).ptr[pos]).isLeaf &&
-                            ((TrieNonLeaf) ((TrieNonLeaf) p).ptr[pos]).endOfWord);
+                    return !((TrieNonLeaf) p).ptr[pos].isLeaf &&
+                            ((TrieNonLeaf) ((TrieNonLeaf) p).ptr[pos]).endOfWord;
             } else if (pos != NOT_FOUND && ((TrieNonLeaf) p).ptr[pos] != null) {
                 p = ((TrieNonLeaf) p).ptr[pos];
                 i++;
@@ -125,10 +125,10 @@ public class Trie {
                 }
 
                 root.ptr[pos] = new TrieNonLeaf(word.charAt(i + 1));
-                ((TrieNonLeaf) (root.ptr[pos])).endOfWord = true;
+                ((TrieNonLeaf) root.ptr[pos]).endOfWord = true;
 
                 String s = (word.length() > i + 2) ? word.substring(i + 2) : null;
-                createLeaf(word.charAt(i + 1), s, (TrieNonLeaf) (root.ptr[pos]));
+                createLeaf(word.charAt(i + 1), s, (TrieNonLeaf) root.ptr[pos]);
                 return;
             } else if (pos != NOT_FOUND && root.ptr[pos].isLeaf) {
                 lf = (TrieLeaf) root.ptr[pos];

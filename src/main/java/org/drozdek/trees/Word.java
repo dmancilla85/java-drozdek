@@ -9,18 +9,10 @@ public class Word implements Comparable<Word> {
         freq = 1;
     }
 
-    /**
-     * @param o the object to be compared.
-     * @return
-     */
+    /// @param o the object to be compared.
     @Override
     public int compareTo(Word o) {
         return words.compareTo(o.words);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
     }
 
     @Override

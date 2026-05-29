@@ -1,15 +1,13 @@
 package org.drozdek.trees;
 
-/**
- * AVL tree is a self-balancing Binary Search Tree (BST) where the difference between heights of left and right
- * subtrees cannot be more than one for all nodes.
- * <p>
- * Complexity Analysis:
- * Time Complexity: O(n*log(n)), For Insertion
- * Auxiliary Space: O(1)
- * <p>
- * Source: <a href="https://www.geeksforgeeks.org/insertion-in-an-avl-tree/">Geeks for Geeks</a>
- */
+/// AVL tree is a self-balancing Binary Search Tree (BST) where the difference between heights of left and right
+/// subtrees cannot be more than one for all nodes.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(n*log(n)), For Insertion
+/// Auxiliary Space: O(1)
+///
+/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/insertion-in-an-avl-tree/)
 public class AvlTree {
 
     AvlTreeNode root;
@@ -70,7 +68,7 @@ public class AvlTree {
 
         /* 1.  Perform the normal BST insertion */
         if (node == null)
-            return (new AvlTreeNode(key));
+            return new AvlTreeNode(key);
 
         if (key < node.key)
             node.left = insertNode(node.left, key);

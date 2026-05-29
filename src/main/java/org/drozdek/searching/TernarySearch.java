@@ -1,6 +1,6 @@
 package org.drozdek.searching;
 
-public class TernarySearch {
+public final class TernarySearch {
 
     private TernarySearch() {
         // do nothing

@@ -7,19 +7,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Algorithms {
+public final class Algorithms {
+private Algorithms() {  }
 
-    /**
-     * Prim-Jarník minimum spanning tree algorithm.
-     * <p>
-     * Builds a priority queue of all edges sorted by weight. Repeatedly
-     * extracts the cheapest edge that connects a visited vertex to an
-     * unvisited one, adding its unvisited endpoint to the spanning tree.
-     *
-     * @param g       an undirected weighted graph
-     * @param inicial starting vertex
-     * @return minimum spanning tree
-     */
+    /// Prim-Jarník minimum spanning tree algorithm.
+    ///
+    /// Builds a priority queue of all edges sorted by weight. Repeatedly
+    /// extracts the cheapest edge that connects a visited vertex to an
+    /// unvisited one, adding its unvisited endpoint to the spanning tree.
+    ///
+    /// @param g       an undirected weighted graph
+    /// @param inicial starting vertex
+    /// @return minimum spanning tree
     public static WeightedGraph primJarnikAlgorithm(WeightedGraph g, int inicial) {
 
         Calendar ini = Calendar.getInstance();
@@ -94,7 +93,8 @@ public class Algorithms {
 
     public static Integer minimum(Integer[] v, List<Vertex> unvisited, WeightedDigraph g) {
 
-        int minimum = Integer.MAX_VALUE, index = 0;
+        int minimum = Integer.MAX_VALUE;
+        int index = 0;
 
         try {
             for (int i = 0; i < g.cardinality(); i++)
@@ -110,13 +110,11 @@ public class Algorithms {
     }
 
 
-    /**
-     * Dijkstra's shortest path algorithm.
-     *
-     * @param g       weighted directed graph
-     * @param inicial source vertex
-     * @return array of shortest distances from the source to every vertex
-     */
+    /// Dijkstra's shortest path algorithm.
+    ///
+    /// @param g       weighted directed graph
+    /// @param inicial source vertex
+    /// @return array of shortest distances from the source to every vertex
     public static Integer[] dijkstraAlgorithm(WeightedDigraph g, int inicial) {
 
         Integer[] d;
@@ -161,15 +159,13 @@ public class Algorithms {
         return d;
     }
 
-    /**
-     * Floyd-Warshall all-pairs shortest path algorithm.
-     * <p>
-     * Compares all possible paths through the graph for every pair of vertices.
-     * Improves the shortest-path estimate iteratively until optimal.
-     *
-     * @param g weighted graph
-     * @return matrix of shortest distances between every pair of vertices
-     */
+    /// Floyd-Warshall all-pairs shortest path algorithm.
+    ///
+    /// Compares all possible paths through the graph for every pair of vertices.
+    /// Improves the shortest-path estimate iteratively until optimal.
+    ///
+    /// @param g weighted graph
+    /// @return matrix of shortest distances between every pair of vertices
     public static int[][] floydMarshallAlgorithm(WeightedGraph g) {
 
         // shortestPath[i][j] is initialized to the direct edge weight (i, j)

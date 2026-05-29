@@ -1,37 +1,24 @@
-/**
- *
- */
 package org.drozdek.graphs.unlam;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author lab4
- *
- */
+/// @author lab4
 public class Set<T> {
 
     private List<T> elements;
 
-    /**
-     *
-     */
     public Set() {
         elements = new ArrayList<T>();
     }
 
-    /**
-     *
-     */
+    /// @param n
     public Set(int n) {
         if (n > 0)
             elements = new ArrayList<T>(n);
     }
 
-    /**
-     * @param args
-     */
+    /// @param args
     static void main(String[] args) {
         Set<Object> A = new Set<Object>();
         A.add("Hola");

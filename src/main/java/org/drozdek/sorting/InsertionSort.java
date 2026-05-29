@@ -1,6 +1,6 @@
 package org.drozdek.sorting;
 
-public class InsertionSort {
+public final class InsertionSort {
 
     private InsertionSort() {
         // do nothing

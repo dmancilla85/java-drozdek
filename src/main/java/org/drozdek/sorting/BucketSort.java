@@ -3,7 +3,7 @@ package org.drozdek.sorting;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class BucketSort {
+public final class BucketSort {
 
     private BucketSort() {
     }

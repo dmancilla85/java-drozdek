@@ -1,16 +1,10 @@
-/**
- *
- */
 package org.drozdek.graphs.unlam;
 
 import org.drozdek.commons.LoggerService;
 
 import java.util.*;
 
-/**
- * @author David
- *
- */
+/// @author David
 public class Graph {
 
     protected ArrayList<Vertex> vertices;
@@ -24,9 +18,7 @@ public class Graph {
         this.adjacencyMatrix = null;
     }
 
-    /**
-     *
-     */
+    /// @param n
     public Graph(int n) {
         this.adjacencyMatrix = new byte[n][n];
         this.vertices = new ArrayList<>();
@@ -41,15 +33,13 @@ public class Graph {
 
         for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++)
-                if ((int) (Math.random() * 100 + 1) > 100 - (conexividad))
+                if ((int) (Math.random() * 100 + 1) > 100 - conexividad)
                     al.newEdge(i, j);
 
         return al;
     }
 
-    /**
-     * @param args
-     */
+    /// @param args
     static void main(String[] args) {
         // TODO Auto-generated method stub
         /*
@@ -73,8 +63,8 @@ public class Graph {
         uno.createEdge('h', 'd');
 
 
-		/*GrafoSimple dos = uno.depthFirstSearch();
-		GrafoSimple tres = uno.breadthFirstSearch();*/
+        /*GrafoSimple dos = uno.depthFirstSearch();
+        GrafoSimple tres = uno.breadthFirstSearch();*/
 
     }
 
@@ -83,10 +73,7 @@ public class Graph {
             vertices.add(v);
     }
 
-    /**
-     *
-     * @return
-     */
+    /// @return
     public Graph breadthFirstSearch() {
 
         Calendar ini = Calendar.getInstance();
@@ -134,10 +121,7 @@ public class Graph {
         return result;
     }
 
-    /**
-     *
-     * @return
-     */
+    /// @return
     public Graph depthFirstSearch() {
 
         Calendar ini = Calendar.getInstance();
@@ -170,20 +154,14 @@ public class Graph {
         return adjacencyMatrix[0].length;
     }
 
-    /**
-     *
-     * @return
-     */
+    /// @return
     public int countEdges() {
         return this.edges.size();
     }
 
-    /**
-     *
-     * @param a1
-     * @param a2
-     * @return
-     */
+    /// @param a1
+    /// @param a2
+    /// @return
     public boolean createEdge(char a1, char a2) {
         int n1 = ((int) a1) - 97;
         int n2 = ((int) a2) - 97;
@@ -191,13 +169,11 @@ public class Graph {
         return newEdge(n1, n2);
     }
 
-    /**
-     * B�squeda primero en profundidad (Hopcroft - Tarjan)
-     *
-     * @param v
-     * @param visitedVertices
-     * @param newGraph
-     */
+    /// B\u00fasqueda primero en profundidad (Hopcroft - Tarjan)
+    ///
+    /// @param v
+    /// @param visitedVertices
+    /// @param newGraph
     public void deepFirstSearch(int v, ArrayList<Vertex> visitedVertices, Graph newGraph) {
 
         int j = 0;
@@ -212,11 +188,8 @@ public class Graph {
         }
     }
 
-    /**
-     *
-     * @param vertice
-     * @return
-     */
+    /// @param vertice
+    /// @return
     public List<Vertex> getAdjacentVertices(int vertex) {
         ArrayList<Vertex> ady = new ArrayList<>();
 
@@ -230,11 +203,8 @@ public class Graph {
         return ady;
     }
 
-    /**
-     *
-     * @param vertice
-     * @return
-     */
+    /// @param vertice
+    /// @return
     public List<Vertex> getNonAdjacentVertices(int vertex) {
         ArrayList<Vertex> ady = new ArrayList<Vertex>();
 
@@ -248,12 +218,9 @@ public class Graph {
         return ady;
     }
 
-    /**
-     *
-     * @param node1
-     * @param node2
-     * @return
-     */
+    /// @param node1
+    /// @param node2
+    /// @return
     public boolean newEdge(int node1, int node2) {
         try {
 
@@ -279,8 +246,8 @@ public class Graph {
     }
 
     public String connectivityPercentage() {
-        double max = (cardinality() * (cardinality() - 1)) / 2;
-        return String.format("Conexividad: %3.2f", ((edges.size() / max) * 100))
+        double max = cardinality() * (cardinality() - 1) / 2;
+        return String.format("Conexividad: %3.2f", edges.size() / max * 100)
                 + "%";
     }
 

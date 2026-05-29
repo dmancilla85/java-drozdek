@@ -2,7 +2,7 @@ package org.drozdek.commons;
 
 import java.util.logging.Logger;
 
-public class LoggerService {
+public final class LoggerService {
     protected static final Logger log = Logger.getLogger("Logger");
 
     private static final String GREEN = "\u001B[32m";

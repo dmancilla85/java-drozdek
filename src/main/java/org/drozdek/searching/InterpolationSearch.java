@@ -1,6 +1,6 @@
 package org.drozdek.searching;
 
-public class InterpolationSearch {
+public final class InterpolationSearch {
 
     private InterpolationSearch() {
         // do nothing
@@ -14,7 +14,7 @@ public class InterpolationSearch {
                 return array[left] == target ? left : -1;
             }
 
-            int pos = left + ((target - array[left]) * (right - left))
+            int pos = left + (target - array[left]) * (right - left)
                     / (array[right] - array[left]);
 
             if (array[pos] == target) {

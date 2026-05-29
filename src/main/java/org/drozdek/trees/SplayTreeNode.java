@@ -30,7 +30,7 @@ public class SplayTreeNode<T> {
         buffer.append(this.key);
         buffer.append(System.lineSeparator());
 
-        for (Iterator<SplayTreeNode<T>> it = children.iterator(); it.hasNext(); ) {
+        for (Iterator<SplayTreeNode<T>> it = children.iterator();it.hasNext();) {
             SplayTreeNode<T> next = it.next();
 
             if (next == null)

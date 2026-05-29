@@ -29,7 +29,7 @@ public class AvlTreeNode {
         buffer.append(this.key);
         buffer.append('\n');
 
-        for (Iterator<AvlTreeNode> it = children.iterator(); it.hasNext(); ) {
+        for (Iterator<AvlTreeNode> it = children.iterator();it.hasNext();) {
             AvlTreeNode next = it.next();
 
             if (next == null)

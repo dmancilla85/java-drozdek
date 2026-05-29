@@ -6,81 +6,59 @@ import org.drozdek.lists.nodes.IntSkipListNode;
 
 import java.util.Random;
 
-/**
- * Skip list for integer values - a probabilistic data structure that provides fast search,
- * insertion, and deletion operations.
- *
- * <p>
- * Abstract Data Type: Skip list
- *
- * <p>
- * This implementation provides an expected O(log n) time complexity for search, insertion,
- * and deletion operations, and O(n) space complexity. The skip list consists of multiple
- * layers of linked lists, where each layer skips over a certain number of elements.
- *
- * <p>
- * The structure maintains an array of references to the head nodes at each level, and uses
- * randomization to determine the level of newly inserted nodes.
- *
- * <p>
- * Time Complexities (expected):
- * <ul>
- *   <li>insert(): O(log n)</li>
- *   <li>search(): O(log n)</li>
- *   <li>isEmpty(): O(1)</li>
- *   <li>printAll(): O(n)</li>
- *   <li>size(): O(n)</li>
- * </ul>
- *
- * <p>
- * Space Complexity: O(n)
- *
- * <p>
- * Bibliography:
- * <ul>
- *   <li>William Pugh. <cite>Skip Lists: A Probabilistic Alternative to Balanced Trees</cite>.
- *       Communications of the ACM, June 1990.</li>
- *   <li>Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein.
- *       <cite>Introduction to Algorithms</cite>, Third Edition. MIT Press, 2009. Chapter 12:
- *       Binary Search Trees, Skip Lists section.</li>
- *   <li>Eric W. Weisstein. <cite>Skip List</cite>. From MathWorld--A Wolfram Web Resource.</li>
- * </ul>
- */
+/// Skip list for integer values - a probabilistic data structure that provides fast search,
+/// insertion, and deletion operations.
+///
+/// Abstract Data Type: Skip list
+///
+/// This implementation provides an expected O(log n) time complexity for search, insertion,
+/// and deletion operations, and O(n) space complexity. The skip list consists of multiple
+/// layers of linked lists, where each layer skips over a certain number of elements.
+///
+/// The structure maintains an array of references to the head nodes at each level, and uses
+/// randomization to determine the level of newly inserted nodes.
+///
+/// Time Complexities (expected):
+///
+/// - insert(): O(log n)
+/// - search(): O(log n)
+/// - isEmpty(): O(1)
+/// - printAll(): O(n)
+/// - size(): O(n)
+///
+/// Space Complexity: O(n)
+///
+/// Bibliography:
+///
+/// - William Pugh. *Skip Lists: A Probabilistic Alternative to Balanced Trees*.
+///   Communications of the ACM, June 1990.
+/// - Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein.
+///   *Introduction to Algorithms*, Third Edition. MIT Press, 2009. Chapter 12:
+///   Binary Search Trees, Skip Lists section.
+/// - Eric W. Weisstein. *Skip List*. From MathWorld--A Wolfram Web Resource.
 public class IntSkipList implements ListInterface<Integer> {
-    /**
-     * Maximum level allowed in this skip list
-     */
+    /// Maximum level allowed in this skip list
     private final int maximumLevel;
-    /**
-     * Array of references to head nodes at each level
-     */
+    /// Array of references to head nodes at each level
     private final IntSkipListNode[] root;
-    /**
-     * Precomputed powers used in level selection
-     */
+    /// Precomputed powers used in level selection
     private final int[] powers;
-    /**
-     * Random number generator for probabilistic level selection
-     */
+    /// Random number generator for probabilistic level selection
     private final Random rd = new Random();
 
-    /**
-     * Constructs a skip list with the default maximum level of 4.
-     * <p>
-     * Time Complexity: O(1)
-     */
+    /// Constructs a skip list with the default maximum level of 4.
+    ///
+    /// Time Complexity: O(1)
     public IntSkipList() {
         this(4);
     }
 
-    /**
-     * Constructs a skip list with the specified maximum level.
-     *
-     * @param maxLevel the maximum level allowed in this skip list
-     *                 Higher values allow for taller towers but use more memory
-     *                 <p>
-     *                 Time Complexity: O(maxLevel) for initialization
-     */
+    /// Constructs a skip list with the specified maximum level.
+    ///
+    /// @param maxLevel the maximum level allowed in this skip list
+    ///                 Higher values allow for taller towers but use more memory
+    ///
+    ///                 Time Complexity: O(maxLevel) for initialization
     public IntSkipList(int maxLevel) {
         maximumLevel = maxLevel;
         root = new IntSkipListNode[maximumLevel];
@@ -93,14 +71,12 @@ public class IntSkipList implements ListInterface<Integer> {
         choosePowers();
     }
 
-    /**
-     * Checks for the current valid level starting from the given level and moving downward
-     * until a non-null next pointer is found or we reach level -1.
-     *
-     * @param level   the starting level to check from
-     * @param current the current node to check
-     * @return the highest level <= level where current.next[level] is not null, or -1 if none found
-     */
+    /// Checks for the current valid level starting from the given level and moving downward
+    /// until a non-null next pointer is found or we reach level -1.
+    ///
+    /// @param level   the starting level to check from
+    /// @param current the current node to check
+    /// @return the highest level <= level where current.next[level] is not null, or -1 if none found
     private int checkForCurrentLevel(int level, IntSkipListNode current) {
         int lvl = level;
 
@@ -111,12 +87,10 @@ public class IntSkipList implements ListInterface<Integer> {
         return lvl;
     }
 
-    /**
-     * Chooses a random level for a new node based on a probability distribution.
-     * The method uses precomputed powers to determine the level probabilistically.
-     *
-     * @return the chosen level for a new node (0 to maximumLevel-1)
-     */
+    /// Chooses a random level for a new node based on a probability distribution.
+    /// The method uses precomputed powers to determine the level probabilistically.
+    ///
+    /// @return the chosen level for a new node (0 to maximumLevel-1)
     private int chooseLevel() {
         int i;
         int r = (rd.nextInt(Integer.MAX_VALUE) + 1) % powers[maximumLevel - 1] + 1;
@@ -127,10 +101,8 @@ public class IntSkipList implements ListInterface<Integer> {
         return i - 1;
     }
 
-    /**
-     * Precomputes the powers array used in the probabilistic level selection.
-     * The powers array helps determine the probability distribution for node levels.
-     */
+    /// Precomputes the powers array used in the probabilistic level selection.
+    /// The powers array helps determine the probability distribution for node levels.
     private void choosePowers() {
         powers[maximumLevel - 1] = (1 << maximumLevel) - 1; // 2^maximumLevel-1
 
@@ -138,11 +110,9 @@ public class IntSkipList implements ListInterface<Integer> {
             powers[i] = powers[i + 1] - (1 << (j + 1)); // 2^(j+1)
     }
 
-    /**
-     * Finds the highest level that has a non-null head reference.
-     *
-     * @return the highest level with a non-null head reference, or -1 if the list is empty
-     */
+    /// Finds the highest level that has a non-null head reference.
+    ///
+    /// @return the highest level with a non-null head reference, or -1 if the list is empty
     private int findMajorNotNullValue() {
         int lvl = maximumLevel - 1;
         while (lvl >= 0 && root[lvl] == null) {
@@ -152,27 +122,23 @@ public class IntSkipList implements ListInterface<Integer> {
         return lvl;
     }
 
-    /**
-     * Adds an element to the skip list.
-     *
-     * @param data the integer value to add
-     *             <p>
-     *             Time Complexity: O(log n) expected
-     */
+    /// Adds an element to the skip list.
+    ///
+    /// @param data the integer value to add
+    ///
+    ///             Time Complexity: O(log n) expected
     public void add(Integer data) {
         if (data != null) {
             insert(data);
         }
     }
 
-    /**
-     * Inserts a new element into the skip list.
-     * If an element with the same key already exists, the method returns without inserting.
-     *
-     * @param key the integer key to insert
-     *            <p>
-     *            Time Complexity: O(log n) expected, where n is the number of elements
-     */
+    /// Inserts a new element into the skip list.
+    /// If an element with the same key already exists, the method returns without inserting.
+    ///
+    /// @param key the integer key to insert
+    ///
+    ///            Time Complexity: O(log n) expected, where n is the number of elements
     public void insert(int key) {
         IntSkipListNode[] previous = new IntSkipListNode[maximumLevel];
         IntSkipListNode[] current = new IntSkipListNode[maximumLevel];
@@ -214,14 +180,12 @@ public class IntSkipList implements ListInterface<Integer> {
         insertKeyValue(key, currentLevel, previous, current);
     }
 
-    /**
-     * Helper method to insert a new node with the given key at the specified level.
-     *
-     * @param key          the key value for the new node
-     * @param currentLevel the level at which to insert the node (0-based)
-     * @param previous     array of nodes that should point to the new node at each level
-     * @param current      array of nodes that the new node should point to at each level
-     */
+    /// Helper method to insert a new node with the given key at the specified level.
+    ///
+    /// @param key          the key value for the new node
+    /// @param currentLevel the level at which to insert the node (0-based)
+    /// @param previous     array of nodes that should point to the new node at each level
+    /// @param current      array of nodes that the new node should point to at each level
     private void insertKeyValue(int key, int currentLevel, IntSkipListNode[] previous, IntSkipListNode[] current) {
         // Create the new node with the appropriate number of levels
         IntSkipListNode newNode = new IntSkipListNode(key, currentLevel + 1);
@@ -239,13 +203,11 @@ public class IntSkipList implements ListInterface<Integer> {
         }
     }
 
-    /**
-     * Tests if this skip list contains no elements.
-     *
-     * @return true if the skip list is empty, false otherwise
-     * <p>
-     * Time Complexity: O(1) - direct check of the level 0 head reference
-     */
+    /// Tests if this skip list contains no elements.
+    ///
+    /// @return true if the skip list is empty, false otherwise
+    ///
+    /// Time Complexity: O(1) - direct check of the level 0 head reference
     public boolean isEmpty() {
         return root[0] == null;
     }
@@ -307,22 +269,18 @@ public class IntSkipList implements ListInterface<Integer> {
                 this);
     }
 
-    /**
-     * Searches for an element with the specified key in the skip list.
-     *
-     * @param key the key to search for
-     * @return the key if found, or 0 if not found or the list is empty
-     *
-     * Time Complexity: O(log n) expected, where n is the number of elements
-     */
-    /**
-     * Searches for the specified integer value in the skip list.
-     *
-     * @param data the integer value to search for
-     * @return the value if found, or null if not found or the list is empty
-     * <p>
-     * Time Complexity: O(log n) expected
-     */
+    /// Searches for an element with the specified key in the skip list.
+    ///
+    /// @param key the key to search for
+    /// @return the key if found, or 0 if not found or the list is empty
+    ///
+    /// Time Complexity: O(log n) expected, where n is the number of elements
+    /// Searches for the specified integer value in the skip list.
+    ///
+    /// @param data the integer value to search for
+    /// @return the value if found, or null if not found or the list is empty
+    ///
+    /// Time Complexity: O(log n) expected
     public Integer find(Integer data) {
         if (data == null || isEmpty())
             return null;
@@ -336,13 +294,11 @@ public class IntSkipList implements ListInterface<Integer> {
         return null;
     }
 
-    /**
-     * Deletes the first occurrence of the specified value from the skip list.
-     *
-     * @param data the integer value to delete
-     *             <p>
-     *             Time Complexity: O(log n) expected
-     */
+    /// Deletes the first occurrence of the specified value from the skip list.
+    ///
+    /// @param data the integer value to delete
+    ///
+    ///             Time Complexity: O(log n) expected
     public void delete(Integer data) {
         if (data == null || isEmpty())
             return;
@@ -379,13 +335,11 @@ public class IntSkipList implements ListInterface<Integer> {
         }
     }
 
-    /**
-     * Returns the first element in the skip list without removing it.
-     *
-     * @return the first element, or null if the list is empty
-     * <p>
-     * Time Complexity: O(1)
-     */
+    /// Returns the first element in the skip list without removing it.
+    ///
+    /// @return the first element, or null if the list is empty
+    ///
+    /// Time Complexity: O(1)
     public Integer first() {
         if (isEmpty())
             return null;
@@ -444,16 +398,14 @@ public class IntSkipList implements ListInterface<Integer> {
         }
     }
 
-    /**
-     * Returns the number of elements in this skip list.
-     *
-     * @return the number of elements in this skip list
-     * <p>
-     * Time Complexity: O(n) where n is the number of elements, due to traversal.
-     * <p>
-     * Note: This implementation does not maintain a size counter, so it requires
-     * a full traversal of the level 0 linked list to count elements.
-     */
+    /// Returns the number of elements in this skip list.
+    ///
+    /// @return the number of elements in this skip list
+    ///
+    /// Time Complexity: O(n) where n is the number of elements, due to traversal.
+    ///
+    /// Note: This implementation does not maintain a size counter, so it requires
+    /// a full traversal of the level 0 linked list to count elements.
     public int size() {
         int size = 0;
         IntSkipListNode tmp = root[0];

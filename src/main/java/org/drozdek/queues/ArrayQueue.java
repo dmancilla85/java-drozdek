@@ -1,42 +1,33 @@
 package org.drozdek.queues;
 
-import org.drozdek.commons.LoggerService;
 import org.drozdek.queues.interfaces.QueueInterface;
 
 import java.util.Arrays;
 
-/**
- * Array-based circular queue implementation.
- *
- * <p>
- * Abstract Data Type: Queue (FIFO - First In, First Out)
- *
- * <p>
- * This implementation uses a fixed-size array with circular indexing,
- * providing O(1) enqueue and dequeue operations.
- */
+/// Array-based circular queue implementation.
+///
+/// Abstract Data Type: Queue (FIFO - First In, First Out)
+///
+/// This implementation uses a fixed-size array with circular indexing,
+/// providing O(1) enqueue and dequeue operations.
 public class ArrayQueue implements QueueInterface<Object> {
     private final int capacity;
     private final Object[] storage;
     private int first;
     private int last;
 
-    /**
-     * Constructs an array queue with the specified capacity.
-     *
-     * @param capacity the maximum number of elements this queue can hold
-     */
+    /// Constructs an array queue with the specified capacity.
+    ///
+    /// @param capacity the maximum number of elements this queue can hold
     public ArrayQueue(int capacity) {
         this.capacity = capacity;
         storage = new Object[capacity];
         first = last = -1;
     }
 
-    /**
-     * Removes and returns the element at the front of the queue.
-     *
-     * @return the element at the front of the queue, or null if the queue is empty
-     */
+    /// Removes and returns the element at the front of the queue.
+    ///
+    /// @return the element at the front of the queue, or null if the queue is empty
     public Object dequeue() {
         if (isEmpty()) {
             return null;
@@ -58,12 +49,10 @@ public class ArrayQueue implements QueueInterface<Object> {
         return data;
     }
 
-    /**
-     * Adds an element to the rear of the queue.
-     *
-     * @param element the element to add to the queue
-     * @throws IllegalStateException if the queue is full
-     */
+    /// Adds an element to the rear of the queue.
+    ///
+    /// @param element the element to add to the queue
+    /// @throws IllegalStateException if the queue is full
     public boolean enqueue(Object element) {
         if (isFull()) {
             throw new IllegalStateException("Queue is full");
@@ -89,11 +78,9 @@ public class ArrayQueue implements QueueInterface<Object> {
         return firstElement();
     }
 
-    /**
-     * Returns the element at the front of the queue without removing it.
-     *
-     * @return the element at the front of the queue, or null if the queue is empty
-     */
+    /// Returns the element at the front of the queue without removing it.
+    ///
+    /// @return the element at the front of the queue, or null if the queue is empty
     public Object firstElement() {
         if (isEmpty()) {
             return null;
@@ -101,20 +88,16 @@ public class ArrayQueue implements QueueInterface<Object> {
         return storage[first];
     }
 
-    /**
-     * Tests if this queue contains no elements.
-     *
-     * @return true if this queue contains no elements; false otherwise
-     */
+    /// Tests if this queue contains no elements.
+    ///
+    /// @return true if this queue contains no elements; false otherwise
     public boolean isEmpty() {
         return first == -1;
     }
 
-    /**
-     * Tests if this queue is full.
-     *
-     * @return true if this queue is full; false otherwise
-     */
+    /// Tests if this queue is full.
+    ///
+    /// @return true if this queue is full; false otherwise
     public boolean isFull() {
         // Queue is full if:
         // 1. first is at index 0 and last is at the last index, OR
@@ -123,11 +106,9 @@ public class ArrayQueue implements QueueInterface<Object> {
                 (first == (last + 1) % capacity);
     }
 
-    /**
-     * Returns the number of elements in this queue.
-     *
-     * @return the number of elements in this queue
-     */
+    /// Returns the number of elements in this queue.
+    ///
+    /// @return the number of elements in this queue
     public int size() {
         if (isEmpty()) {
             return 0;
@@ -138,7 +119,7 @@ public class ArrayQueue implements QueueInterface<Object> {
             return last - first + 1;
         } else {
             // Wrap-around: elements are in [first, capacity-1] and [0, last]
-            return (capacity - first) + (last + 1);
+            return capacity - first + last + 1;
         }
     }
 

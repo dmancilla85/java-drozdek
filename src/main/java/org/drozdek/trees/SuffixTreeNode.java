@@ -11,7 +11,7 @@ class SuffixTreeNode {
     protected final int id; // for printing only
     protected SuffixTreeNode suffixLink;
 
-    public SuffixTreeNode(int sz) {
+    SuffixTreeNode(int sz) {
         id = cnt++;
         suffixLink = null;
         descendants = new SuffixTreeNode[sz];
@@ -27,7 +27,7 @@ class SuffixTreeNode {
         buffer.append(this.id);
         buffer.append(System.lineSeparator());
 
-        for (Iterator<SuffixTreeNode> it = Arrays.stream(descendants).iterator(); it.hasNext(); ) {
+        for (Iterator<SuffixTreeNode> it = Arrays.stream(descendants).iterator();it.hasNext();) {
             SuffixTreeNode next = it.next();
 
             if (next == null)

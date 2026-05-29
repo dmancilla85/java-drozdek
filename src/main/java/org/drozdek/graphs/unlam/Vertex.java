@@ -1,13 +1,8 @@
-/**
- *
- */
 package org.drozdek.graphs.unlam;
 
 import java.util.Comparator;
 
-/**
- * @author David
- */
+/// @author David
 public class Vertex implements Comparable<Object>, Comparator<Object> {
 
     protected static final int A_MINUSC = 97;
@@ -29,9 +24,6 @@ public class Vertex implements Comparable<Object>, Comparator<Object> {
         this.name = Character.toString(generateName(key));
     }
 
-    /**
-     *
-     */
     public Vertex() {
         this(0, null);
     }

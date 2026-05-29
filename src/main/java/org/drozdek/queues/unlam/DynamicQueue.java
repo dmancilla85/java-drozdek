@@ -1,50 +1,26 @@
 package org.drozdek.queues.unlam;
 
+import org.drozdek.commons.LoggerService;
 import org.drozdek.queues.interfaces.QueueInterface;
 import org.drozdek.queues.interfaces.UnlamQueue;
 
 import static java.lang.Math.random;
 import static java.lang.System.out;
 
-/**
- * Dynamic queue implementation using a singly-linked list.
- *
- * <p>
- * Abstract Data Type: Dynamic Queue (FIFO - First In, First Out)
- *
- * <p>
- * This implementation uses a singly-linked list with head and tail pointers,
- * providing O(1) enqueue and dequeue operations.
- */
+/// Dynamic queue implementation using a singly-linked list.
+///
+/// Abstract Data Type: Dynamic Queue (FIFO - First In, First Out)
+///
+/// This implementation uses a singly-linked list with head and tail pointers,
+/// providing O(1) enqueue and dequeue operations.
 public class DynamicQueue implements UnlamQueue, QueueInterface<Object> {
 
-    private QueueNode first, last;
+    private QueueNode first;
+    private QueueNode last;
 
     public DynamicQueue() {
         this.first = null;
         this.last = null;
-    }
-
-    /**
-     * Main method for testing the dynamic queue implementation.
-     *
-     * @param args command line arguments (not used)
-     */
-    static void main(String[] args) {
-        UnlamQueue q1 = new DynamicQueue();
-
-        q1.enqueue("FIRST OBJECT");
-        q1.enqueue("B");
-        q1.enqueue("C");
-
-        int i = 0, n = 500;
-        while (i++ < n)
-            q1.enqueue(random() * 100 * i);
-
-        q1.enqueue("LAST OBJECT #" + i);
-
-        while (!q1.isEmpty())
-            out.println(q1.dequeue());
     }
 
     @Override
@@ -71,7 +47,7 @@ public class DynamicQueue implements UnlamQueue, QueueInterface<Object> {
                 last = node;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerService.logError(e.getMessage());
             return false;
         }
         return true;
@@ -103,7 +79,7 @@ public class DynamicQueue implements UnlamQueue, QueueInterface<Object> {
     @Override
     public String toString() {
         if (isEmpty()) {
-            return org.drozdek.queues.interfaces.QueueInterface.boxedQueue("[ EMPTY ]");
+            return QueueInterface.boxedQueue("[ EMPTY ]");
         }
         StringBuilder sb = new StringBuilder("FRONT");
         QueueNode current = first;
@@ -112,7 +88,7 @@ public class DynamicQueue implements UnlamQueue, QueueInterface<Object> {
             current = current.next;
         }
         sb.append(" ➔ REAR");
-        return org.drozdek.queues.interfaces.QueueInterface.boxedQueue(sb.toString());
+        return QueueInterface.boxedQueue(sb.toString());
     }
 
     @Override
@@ -121,19 +97,17 @@ public class DynamicQueue implements UnlamQueue, QueueInterface<Object> {
         this.last = null;
     }
 
-    /**
-     * Node for a singly-linked list used in the dynamic queue.
-     */
+    /// Node for a singly-linked list used in the dynamic queue.
     private static class QueueNode {
         private final Object data;
         private QueueNode next;
 
-        public QueueNode() {
+        QueueNode() {
             data = null;
             next = null;
         }
 
-        public QueueNode(Object obj) {
+        QueueNode(Object obj) {
             data = obj;
             next = null;
         }
