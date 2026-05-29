@@ -38,7 +38,7 @@ public class WeightedGraph extends Graph {
     /**
      * @param args
      */
-    public static void main(String[] args) {
+    static void main(String[] args) {
         // TODO Auto-generated method stub
 
         WeightedGraph g = new WeightedGraph(6);

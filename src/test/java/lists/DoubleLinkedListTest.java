@@ -2,7 +2,7 @@ package lists;
 
 import org.drozdek.commons.LoggerService;
 import org.drozdek.lists.DoubleLinkedList;
-import org.drozdek.lists.DoubleLinkedListNode;
+import org.drozdek.lists.nodes.DoubleLinkedListNode;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -63,10 +63,11 @@ class DoubleLinkedListTest {
         list.addToTail(c);
         list.addToTail(d);
         list.addToTail(e);
-
+        list.print();
         LoggerService.logInfo("Removing " + e + "...");
         list.delete(e);
         Integer check = list.last();
+        list.print();
         LoggerService.logInfo("Printing in reverse order:");
         list.printReverse();
         assertEquals(0, check.compareTo(d));
@@ -109,7 +110,7 @@ class DoubleLinkedListTest {
     }
 
     @Test
-    void printAll() {
+    void print() {
         DoubleLinkedList<String> list = new DoubleLinkedList<>();
         list.addToTail("<H>");
         list.addToTail("43");
@@ -122,7 +123,7 @@ class DoubleLinkedListTest {
         int sizeBefore = list.size();
         String firstBefore = list.first();
 
-        list.printAll();
+        list.print();
 
         assertEquals(sizeBefore, list.size(), "List size unchanged after printAll");
         assertEquals(firstBefore, list.first(), "First element unchanged after printAll");

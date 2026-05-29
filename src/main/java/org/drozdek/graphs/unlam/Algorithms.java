@@ -24,7 +24,7 @@ public class Algorithms {
 
         Calendar ini = Calendar.getInstance();
 
-        WeightedGraph newGraph = new WeightedGraph(                g.cardinality());
+        WeightedGraph newGraph = new WeightedGraph(g.cardinality());
         MinimumHeap<Edge> edges = new MinimumHeap<>(g.countEdges());
         ArrayList<Vertex> visitedVertices = new ArrayList<>();
 
@@ -35,14 +35,14 @@ public class Algorithms {
         // Add the starting vertex
         visitedVertices.add(g.vertices.get(inicial));
 
-        for (int i = 0; i <                 g.cardinality(); i++)
+        for (int i = 0; i < g.cardinality(); i++)
             // While not all vertices have been visited
-            for (int j = 0; j < edges.size() && visitedVertices.size() <                 g.cardinality(); j++) {
+            for (int j = 0; j < edges.size() && visitedVertices.size() < g.cardinality(); j++) {
                 Edge aux = edges.extractMin();
                 // Pick the edge if exactly one of its endpoints is unvisited
                 // and adding it does not exceed N-1 edges (no cycle)
                 if ((!visitedVertices.contains(aux.destination) ||
-                        !visitedVertices.contains(aux.origin)) && newGraph.countEdges() <                 g.cardinality() - 1) {
+                        !visitedVertices.contains(aux.origin)) && newGraph.countEdges() < g.cardinality() - 1) {
                     // Add the unvisited endpoint
                     if (!visitedVertices.contains(aux.destination))
                         visitedVertices.add(aux.destination);
@@ -54,7 +54,7 @@ public class Algorithms {
             }
 
         Calendar end = Calendar.getInstance();
-        LoggerService.logInfo("Tiempo algoritmo de Prim para N = " +                 g.cardinality() + ": "  //$NON-NLS-1$//$NON-NLS-2$
+        LoggerService.logInfo("Tiempo algoritmo de Prim para N = " + g.cardinality() + ": "  //$NON-NLS-1$//$NON-NLS-2$
                 + (end.getTimeInMillis() - ini.getTimeInMillis()));
 
         return newGraph;
@@ -62,7 +62,7 @@ public class Algorithms {
 
     public static WeightedGraph kruskalAlgorithm(WeightedGraph g, int inicial) {
 
-        WeightedGraph newGraph = new WeightedGraph(                g.cardinality());
+        WeightedGraph newGraph = new WeightedGraph(g.cardinality());
 
         MinimumHeap<Edge> queue = new MinimumHeap<>(g.countEdges());
         ArrayList<Vertex> tree = new ArrayList<>();
@@ -72,11 +72,11 @@ public class Algorithms {
             queue.insert(element);
         }
 
-        for (int i = 1; i <= g.countEdges() && tree.size() <                 g.cardinality() - 1 && !queue.isEmpty(); i++) {
+        for (int i = 1; i <= g.countEdges() && tree.size() < g.cardinality() - 1 && !queue.isEmpty(); i++) {
             Edge e = queue.extractMin();
 
             if ((!tree.contains(e.destination) || !tree.contains(e.origin)) &&
-                    newGraph.countEdges() <                 g.cardinality() - 1) {
+                    newGraph.countEdges() < g.cardinality() - 1) {
 
                 // Add the unvisited endpoint
                 if (!tree.contains(e.destination))
@@ -97,7 +97,7 @@ public class Algorithms {
         int minimum = Integer.MAX_VALUE, index = 0;
 
         try {
-            for (int i = 0; i <                 g.cardinality(); i++)
+            for (int i = 0; i < g.cardinality(); i++)
                 if ((i == 0 || minimum > v[i]) && unvisited.contains(g.v.get(i))) {
                     minimum = v[i];
                     index = i;
@@ -124,9 +124,9 @@ public class Algorithms {
         int v0;
 
         // Create distance vector D: distance from start node to all others
-        d = new Integer[                g.cardinality()];
+        d = new Integer[g.cardinality()];
 
-        for (int i = 0; i <                 g.cardinality(); i++) {
+        for (int i = 0; i < g.cardinality(); i++) {
             // Initialize all distances to INF, except the start node (= 0)
             if (i != inicial)
                 d[i] = Integer.MAX_VALUE;
@@ -147,7 +147,7 @@ public class Algorithms {
             unvisited.remove(g.v.get(v0));
 
             // Relax all adjacent (unvisited) edges
-            for (int u = 0; u <                 g.cardinality(); u++) {
+            for (int u = 0; u < g.cardinality(); u++) {
 
                 // If a shorter path to u is found through v0, update it
                 if (d[u] > d[v0] + g.weightTable[v0][u] && v0 != u
@@ -176,9 +176,9 @@ public class Algorithms {
         int[][] shortestPath = g.weightTable.clone();
 
         // Consider each vertex k as an intermediate point
-        for (int i = 0; i <                 g.cardinality(); i++) {
-            for (int j = 0; j <                 g.cardinality(); j++) {
-                for (int k = 0; k <                 g.cardinality(); k++)
+        for (int i = 0; i < g.cardinality(); i++) {
+            for (int j = 0; j < g.cardinality(); j++) {
+                for (int k = 0; k < g.cardinality(); k++)
                     // If path j -> i -> k is shorter than the current j -> k path, update it
                     if (g.weightTable[j][k] > g.weightTable[j][i] + g.weightTable[i][k])
                         shortestPath[j][k] = g.weightTable[j][i] + g.weightTable[i][k];

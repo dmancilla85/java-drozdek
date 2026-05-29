@@ -2,7 +2,7 @@ package lists;
 
 import org.drozdek.commons.LoggerService;
 import org.drozdek.lists.CircularLinkedList;
-import org.drozdek.lists.SingleLinkedListNode;
+import org.drozdek.lists.nodes.SingleLinkedListNode;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,7 +27,7 @@ class CircularLinkedListTest {
         list.add(a);
         list.add(b);
         list.addToTail(c);
-        list.printAll();
+        list.print();
         LoggerService.logInfo("Size is " + list.size());
         assertEquals(0, size.compareTo(list.size()));
     }
@@ -44,12 +44,12 @@ class CircularLinkedListTest {
         list.add(e);
 
         LoggerService.logInfo("Before deleting " + c + ":");
-        list.printAll();
+        list.print();
 
         list.delete(c);
 
         LoggerService.logInfo("After deleting " + c + ":");
-        list.printAll();
+        list.print();
 
         Integer check = list.find(c);
         assertNull(check);
@@ -66,10 +66,10 @@ class CircularLinkedListTest {
         list.add(d);
         list.add(e);
 
-        list.printAll();
+        list.print();
         Integer match =list.deleteHead();
 
-        list.printAll();
+        list.print();
         Integer check = list.find(a);
 
         assertEquals(0, match.compareTo(a));
@@ -88,7 +88,7 @@ class CircularLinkedListTest {
         list.add(d);
         list.add(e);
 
-        list.printAll();
+        list.print();
 
         Integer match = list.find(t);
         assertNotNull(match);
@@ -104,7 +104,7 @@ class CircularLinkedListTest {
         list.addToTail(a);
         list.addToTail(b);
         list.addToTail(c);
-        list.printAll();
+        list.print();
 
         Integer first = list.first();
         LoggerService.logInfo("First element is " + first + ".");
@@ -118,7 +118,7 @@ class CircularLinkedListTest {
     }
 
     @Test
-    void printAll() {
+    void print() {
         CircularLinkedList<Object> list = new CircularLinkedList<>();
         list.addToTail(43);
         list.addToTail("hello");
@@ -127,7 +127,7 @@ class CircularLinkedListTest {
         int sizeBefore = list.size();
         Object firstBefore = list.first();
 
-        list.printAll();
+        list.print();
 
         assertEquals(sizeBefore, list.size(), "List size unchanged after printAll");
         assertEquals(firstBefore, list.first(), "First element unchanged after printAll");

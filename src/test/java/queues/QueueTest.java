@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class QueueTest {
@@ -20,6 +22,13 @@ class QueueTest {
     @DisplayName("A new queue always is empty")
     void isEmpty() {
         assertTrue(queue.isEmpty(), "The queue should be empty");
+    }
+
+    @Test
+    @DisplayName("Queue is not empty after enqueue")
+    void isNotEmptyAfterEnqueue() {
+        queue.enqueue(1);
+        assertFalse(queue.isEmpty(), "Queue should not be empty after enqueue");
     }
 
     @Test
@@ -86,6 +95,32 @@ class QueueTest {
     }
 
     @Test
+    @DisplayName("Dequeue on empty queue throws NoSuchElementException")
+    void dequeueOnEmpty() {
+        assertThrows(NoSuchElementException.class, () -> queue.dequeue());
+    }
+
+    @Test
+    @DisplayName("Peek on empty queue throws NoSuchElementException")
+    void peekOnEmpty() {
+        assertThrows(NoSuchElementException.class, () -> queue.peek());
+    }
+
+    @Test
+    @DisplayName("toString on empty queue throws no exception")
+    void toStringOnEmpty() {
+        assertDoesNotThrow(() -> queue.toString());
+    }
+
+    @Test
+    @DisplayName("toString on non-empty queue throws no exception")
+    void toStringOnNonEmpty() {
+        queue.enqueue(1);
+        queue.enqueue(2);
+        assertDoesNotThrow(() -> queue.toString());
+    }
+
+    @Test
     @DisplayName("Print all does not modify the queue")
     void printAll() {
         queue.enqueue(10);
@@ -95,7 +130,7 @@ class QueueTest {
         int sizeBefore = queue.size();
         Integer firstBefore = queue.peek();
 
-        queue.printAll();
+        queue.print();
 
         assertEquals(sizeBefore, queue.size(), "Queue size unchanged after printAll");
         assertEquals(firstBefore, queue.peek(), "First element unchanged after printAll");
@@ -104,6 +139,6 @@ class QueueTest {
     @Test
     @DisplayName("Print all on empty queue throws no exception")
     void printAllOnEmptyQueue() {
-        assertDoesNotThrow(() -> queue.printAll());
+        assertDoesNotThrow(() -> queue.print());
     }
 }

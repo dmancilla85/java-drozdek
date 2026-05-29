@@ -167,13 +167,24 @@ public class Heap implements QueueInterface<Object> {
         return count_ == 0;
     }
 
-    public synchronized void printAll() {
-        StringBuilder line = new StringBuilder();
-        for (int i = 0; i < count_; i++) {
-            line.append(nodes_[i]);
-            line.append(" ");
+    @Override
+    public synchronized String toString() {
+        if (isEmpty()) {
+            return org.drozdek.queues.interfaces.QueueInterface.boxedQueue("[ EMPTY ]");
         }
-        LoggerService.logInfo(line.toString());
+        StringBuilder sb = new StringBuilder("FRONT");
+        for (int i = 0; i < count_; i++) {
+            sb.append(" ➔ [").append(nodes_[i]).append("]");
+        }
+        sb.append(" ➔ REAR");
+        return org.drozdek.queues.interfaces.QueueInterface.boxedQueue(sb.toString());
+    }
+
+    @Override
+    public synchronized void print() {
+        LoggerService.logInfo(this.showId() +
+                System.lineSeparator() +
+                toString());
     }
 
     /**

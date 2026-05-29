@@ -34,60 +34,6 @@ public class Stack<T> implements StackInterface<T> {
             this.pool.ensureCapacity(n);
     }
 
-    /**
-     * Clear stack.
-     */
-    public void clear() {
-        pool.clear();
-    }
-
-    /**
-     * Is stack empty?
-     *
-     * @return True if is empty
-     */
-    public boolean isEmpty() {
-        return pool.isEmpty();
-    }
-
-    private int lastIndex() {
-        if (pool.isEmpty())
-            return 0;
-        return pool.size() - 1;
-    }
-
-    /**
-     * Extract the last element.
-     *
-     * @return The element removed
-     */
-    public T pop() {
-        if (isEmpty())
-            throw new EmptyStackException();
-
-        return pool.remove(lastIndex());
-    }
-
-    /**
-     * Add an element to stack.
-     *
-     * @param element Element to add
-     */
-    public void push(T element) {
-        pool.add(element);
-    }
-
-    /**
-     * Convert to string.
-     *
-     * @return The stack as a string
-     */
-    @Override
-    public String toString() {
-        return printWithUnicode ? formatStackList(pool) :
-                formatStackBox(pool.stream().map(Objects::toString).toList());
-    }
-
     static String formatStackBox(List<String> elementStrings) {
         if (elementStrings.isEmpty()) {
             return "";
@@ -194,6 +140,60 @@ public class Stack<T> implements StackInterface<T> {
         sb.append(System.lineSeparator());
 
         return sb.toString();
+    }
+
+    /**
+     * Clear stack.
+     */
+    public void clear() {
+        pool.clear();
+    }
+
+    /**
+     * Is stack empty?
+     *
+     * @return True if is empty
+     */
+    public boolean isEmpty() {
+        return pool.isEmpty();
+    }
+
+    private int lastIndex() {
+        if (pool.isEmpty())
+            return 0;
+        return pool.size() - 1;
+    }
+
+    /**
+     * Extract the last element.
+     *
+     * @return The element removed
+     */
+    public T pop() {
+        if (isEmpty())
+            throw new EmptyStackException();
+
+        return pool.remove(lastIndex());
+    }
+
+    /**
+     * Add an element to stack.
+     *
+     * @param element Element to add
+     */
+    public void push(T element) {
+        pool.add(element);
+    }
+
+    /**
+     * Convert to string.
+     *
+     * @return The stack as a string
+     */
+    @Override
+    public String toString() {
+        return printWithUnicode ? formatStackList(pool) :
+                formatStackBox(pool.stream().map(Objects::toString).toList());
     }
 
     /**

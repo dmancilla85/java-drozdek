@@ -39,7 +39,7 @@ public class WeightedDigraph {
     /**
      * @param args
      */
-    public static void main(String[] args) {
+    static void main(String[] args) {
         // TODO Auto-generated method stub
         WeightedDigraph dp = new WeightedDigraph(10);
         dp.createArc('a', 'e', 1);

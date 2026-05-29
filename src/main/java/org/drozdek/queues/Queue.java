@@ -37,21 +37,20 @@ public class Queue<T> implements QueueInterface<T> {
         return list.getFirst();
     }
 
-    public void printAll() {
-        StringBuilder line = new StringBuilder();
-        for (T element : list) {
-            line.append(element);
-            line.append(" ");
+    @Override
+    public String toString() {
+        if (isEmpty()) {
+            return QueueInterface.boxedQueue("[ EMPTY ]");
         }
-        LoggerService.logInfo(line.toString());
+        StringBuilder sb = new StringBuilder("FRONT");
+        for (T element : list) {
+            sb.append(" ➔ [").append(element).append("]");
+        }
+        sb.append(" ➔ REAR");
+        return QueueInterface.boxedQueue(sb.toString());
     }
 
     public int size() {
         return list.size();
-    }
-
-    @Override
-    public String toString() {
-        return list.toString();
     }
 }

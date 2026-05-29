@@ -1,9 +1,9 @@
 package org.drozdek.stacks;
 
+import org.drozdek.stacks.interfaces.StackInterface;
+
 import java.util.EmptyStackException;
 import java.util.LinkedList;
-
-import org.drozdek.stacks.interfaces.StackInterface;
 
 /**
  * Stack implemented as a linked list.

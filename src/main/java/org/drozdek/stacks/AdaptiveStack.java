@@ -1,11 +1,11 @@
 package org.drozdek.stacks;
 
+import org.drozdek.stacks.interfaces.StackInterface;
+
 import java.util.Calendar;
 import java.util.Random;
 
 import static java.lang.System.out;
-
-import org.drozdek.stacks.interfaces.StackInterface;
 
 public class AdaptiveStack<T> implements StackInterface<T> {
 

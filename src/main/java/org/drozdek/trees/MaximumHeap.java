@@ -1,7 +1,5 @@
 package org.drozdek.trees;
 
-import org.drozdek.commons.LoggerService;
-
 public class MaximumHeap<T extends Comparable<T>> {
 
     private static final int DEFAULT_CAPACITY = 10;

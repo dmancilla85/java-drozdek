@@ -6,8 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import org.drozdek.commons.LoggerService;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class IntSkipListTest {
@@ -56,7 +54,7 @@ class IntSkipListTest {
         list.insert(17);
 
         LoggerService.logInfo("List with inserted elements");
-        list.printAll();
+        list.print();
 
        assertEquals(16, list.size(), "The list size doesn't match with the expected");
     }
@@ -77,7 +75,7 @@ class IntSkipListTest {
 
     @Test
     @DisplayName("Print all does not modify the list")
-    void printAll() {
+    void print() {
         list.insert(10);
         list.insert(2);
         list.insert(6);
@@ -85,7 +83,7 @@ class IntSkipListTest {
 
         int sizeBefore = list.size();
 
-        list.printAll();
+        list.print();
 
         assertEquals(sizeBefore, list.size(), "List size unchanged after printAll");
     }

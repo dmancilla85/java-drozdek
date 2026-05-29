@@ -1,18 +1,18 @@
 package org.drozdek.lists;
 
-import org.drozdek.commons.LoggerService;
+import org.drozdek.lists.nodes.SingleLinkedListNode;
 
 /**
  * Circular singly-linked list data structure where the last node points back to the first node.
- * 
+ *
  * <p>
  * Abstract Data Type: Circular singly-linked list
- * 
+ *
  * <p>
  * This implementation extends SingleLinkedList but modifies the add() method to add elements
  * to the tail instead of the head, and ensures the last node points back to the first node,
  * creating a circular structure. The head node still refers to the most recently added element.
- * 
+ *
  * <p>
  * Time Complexities:
  * <ul>
@@ -26,18 +26,18 @@ import org.drozdek.commons.LoggerService;
  *   <li>size(): O(n) - traversal to count elements</li>
  *   <li>viewHeadNode(): O(1) - direct access to head</li>
  * </ul>
- * 
+ *
  * <p>
  * Note: Due to the circular nature, special care is needed in traversal methods to avoid
  * infinite loops by checking if we've returned to the head node.
- * 
+ *
  * <p>
  * Bibliography:
  * <ul>
- *   <li>Donald E. Knuth. <cite>The Art of Computer Programming, Volume 1: Fundamental Algorithms</cite>, 
+ *   <li>Donald E. Knuth. <cite>The Art of Computer Programming, Volume 1: Fundamental Algorithms</cite>,
  *       Third Edition. Addison-Wesley, 1997. Section 2.2.3: Linked lists.</li>
- *   <li>Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein. 
- *       <cite>Introduction to Algorithms</cite>, Third Edition. MIT Press, 2009. Chapter 10: 
+ *   <li>Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein.
+ *       <cite>Introduction to Algorithms</cite>, Third Edition. MIT Press, 2009. Chapter 10:
  *       Elementary Data Structures.</li>
  *   <li>William Fiset. <cite>Data Structures: Circular Linked Lists</cite>. YouTube, 2020.</li>
  * </ul>
@@ -47,18 +47,18 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
     /**
      * Adds a new element to the tail (end) of the circular list.
      * Overrides the base class method to maintain circular structure.
-     * 
+     *
      * @param data the data value to store in the new node
-     * 
-     * Time Complexity: O(n) where n is the number of elements, due to traversal to find the tail
-     * 
-     * Example:
-     * <pre>
-     *   CircularLinkedList<Integer> list = new CircularLinkedList<>();
-     *   list.add(1);  // List: [1] (1 points to itself)
-     *   list.add(2);  // List: [1, 2] (2 points to 1)
-     *   list.add(3);  // List: [1, 2, 3] (3 points to 1)
-     * </pre>
+     *             <p>
+     *             Time Complexity: O(n) where n is the number of elements, due to traversal to find the tail
+     *             <p>
+     *             Example:
+     *             <pre>
+     *                           CircularLinkedList<Integer> list = new CircularLinkedList<>();
+     *                           list.add(1);  // List: [1] (1 points to itself)
+     *                           list.add(2);  // List: [1, 2] (2 points to 1)
+     *                           list.add(3);  // List: [1, 2, 3] (3 points to 1)
+     *                         </pre>
      */
     @Override
     public void add(T data) {
@@ -67,10 +67,10 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
 
     /**
      * Adds a new element to the tail (end) of the circular list.
-     * 
+     *
      * @param el the data value to store in the new node
-     * 
-     * Time Complexity: O(n) where n is the number of elements, due to traversal to find the tail
+     *           <p>
+     *           Time Complexity: O(n) where n is the number of elements, due to traversal to find the tail
      */
     public void addToTail(T el) {
         if (isEmpty()) {
@@ -91,13 +91,13 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
     /**
      * Deletes the first node containing the specified data value from the circular list.
      * If multiple nodes contain the same data, only the first occurrence is deleted.
-     * 
+     *
      * @param data the data value to search for and delete
-     * 
-     * Time Complexity: O(n) in the worst case, where n is the number of elements.
-     *                  O(1) in the best case when the element to delete is the head and there's only one element.
-     * 
-     * Note: If the list is empty or the data is not found, this method does nothing.
+     *             <p>
+     *             Time Complexity: O(n) in the worst case, where n is the number of elements.
+     *             O(1) in the best case when the element to delete is the head and there's only one element.
+     *             <p>
+     *             Note: If the list is empty or the data is not found, this method does nothing.
      */
     @Override
     public void delete(T data) {
@@ -131,13 +131,13 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
 
     /**
      * Deletes and returns the data value of the head node (most recently added element).
-     * 
+     *
      * @return the data value of the removed head node, or null if the list is empty
-     * 
+     * <p>
      * Time Complexity: O(n) where n is the number of elements, due to traversal to find the node that points to head
-     * 
+     * <p>
      * Note: After this operation, the second-most recently added node becomes the new head,
-     *        and the last node's next pointer is updated to point to the new head.
+     * and the last node's next pointer is updated to point to the new head.
      */
     @Override
     public T deleteHead() {
@@ -155,12 +155,12 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
 
     /**
      * Searches for the first occurrence of a node containing the specified data value.
-     * 
+     *
      * @param data the data value to search for
      * @return the data value if found, or null if not found or list is empty
-     * 
+     * <p>
      * Time Complexity: O(n) in the worst case, where n is the number of elements.
-     *                  O(1) in the best case when the element is at the head.
+     * O(1) in the best case when the element is at the head.
      */
     @Override
     public T find(T data) {
@@ -200,19 +200,15 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
                 + "└" + "─".repeat(lineLen - 2) + "┘";
     }
 
-    public void printAll() {
-        LoggerService.logInfo(this.toString());
-    }
-
     /**
      * Returns the number of elements in this circular singly-linked list.
-     * 
+     *
      * @return the number of elements in this list
-     * 
+     * <p>
      * Time Complexity: O(n) where n is the number of elements, due to traversal.
-     * 
+     * <p>
      * Note: This implementation does not maintain a size counter, so it requires
-     *        a full traversal to count elements, stopping when we return to the head.
+     * a full traversal to count elements, stopping when we return to the head.
      */
     @Override
     public int size() {

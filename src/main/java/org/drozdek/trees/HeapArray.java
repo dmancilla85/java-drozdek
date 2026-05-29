@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 
 public class HeapArray {
 
-    private int[] keys;
+    private final int[] keys;
     private int position;
 
     public HeapArray() {

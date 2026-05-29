@@ -1,11 +1,18 @@
 package org.drozdek.lists.interfaces;
 
-public interface ListInterface<T> {
+import org.drozdek.commons.DataTypeInterface;
+
+public interface ListInterface<T> extends DataTypeInterface {
+
     boolean isEmpty();
+
     int size();
-    void printAll();
+
     T find(T data);
+
     void delete(T data);
+
     void add(T data);
+
     T first();
 }

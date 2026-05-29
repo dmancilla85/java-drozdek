@@ -1,11 +1,8 @@
 package org.drozdek.stacks;
 
-import java.util.ArrayList;
-import java.util.EmptyStackException;
-import java.util.List;
-import java.util.Objects;
-
 import org.drozdek.stacks.interfaces.StackInterface;
+
+import java.util.*;
 
 public class ArrayStack<T> implements StackInterface<T> {
 
@@ -55,9 +52,7 @@ public class ArrayStack<T> implements StackInterface<T> {
     @Override
     public String toString() {
         List<Object> elements = new ArrayList<>(top + 1);
-        for (int i = 0; i <= top; i++) {
-            elements.add(array[i]);
-        }
+        elements.addAll(Arrays.asList(array).subList(0, top + 1));
         return Stack.formatStackList(elements);
     }
 

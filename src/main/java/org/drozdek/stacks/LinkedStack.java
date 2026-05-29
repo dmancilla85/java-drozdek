@@ -1,10 +1,10 @@
 package org.drozdek.stacks;
 
+import org.drozdek.stacks.interfaces.StackInterface;
+
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
-
-import org.drozdek.stacks.interfaces.StackInterface;
 
 public class LinkedStack<T> implements StackInterface<T> {
 

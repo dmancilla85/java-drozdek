@@ -50,7 +50,7 @@ public class Graph {
     /**
      * @param args
      */
-    public static void main(String[] args) {
+    static void main(String[] args) {
         // TODO Auto-generated method stub
         /*
          * GrafoSimple gs = createRandom(10, 60); gs.tablaAdyacencias();
@@ -193,6 +193,7 @@ public class Graph {
 
     /**
      * B�squeda primero en profundidad (Hopcroft - Tarjan)
+     *
      * @param v
      * @param visitedVertices
      * @param newGraph

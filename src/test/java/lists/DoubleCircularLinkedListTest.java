@@ -2,7 +2,7 @@ package lists;
 
 import org.drozdek.commons.LoggerService;
 import org.drozdek.lists.DoubleCircularLinkedList;
-import org.drozdek.lists.DoubleLinkedListNode;
+import org.drozdek.lists.nodes.DoubleLinkedListNode;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,13 +24,13 @@ class DoubleCircularLinkedListTest {
         list.addToTail(a);
         list.addToTail(b);
         list.addToTail(c);
-        list.printAll();
+        list.print();
         Integer first= list.first();
         assertEquals(0, first.compareTo(t));
     }
 
     @Test
-    void printAll() {
+    void print() {
         DoubleCircularLinkedList<String>  list = new DoubleCircularLinkedList<>();
         list.addToTail("43");
         list.addToTail("hello");
@@ -39,7 +39,7 @@ class DoubleCircularLinkedListTest {
         int sizeBefore = list.size();
         String firstBefore = list.first();
 
-        list.printAll();
+        list.print();
 
         assertEquals(sizeBefore, list.size(), "List size unchanged after printAll");
         assertEquals(firstBefore, list.first(), "First element unchanged after printAll");
@@ -55,7 +55,7 @@ class DoubleCircularLinkedListTest {
         list.addToTail("€12.34");
         list.addToTail("2021");
         list.addToTail("bye");
-        list.printAll();
+        list.print();
         assertEquals(0, size.compareTo(list.size()));
     }
 
@@ -98,7 +98,7 @@ class DoubleCircularLinkedListTest {
 
         Integer match = list.removeFromTail();
         Integer check =list.find(e);
-        list.printAll();
+        list.print();
 
         assertEquals(0, match.compareTo(e));
         assertNull(check);
@@ -114,9 +114,9 @@ class DoubleCircularLinkedListTest {
         list.addToTail(c);
         list.addToTail(d);
         list.addToTail(e);
-        list.printAll();
+        list.print();
         list.delete(c);
-        list.printAll();
+        list.print();
         Integer check =list.find(c);
 
         assertNull(check);
@@ -134,11 +134,11 @@ class DoubleCircularLinkedListTest {
         list.addToTail(e);
 
         LoggerService.logInfo("Before deleting head:");
-        list.printAll();
+        list.print();
         list.delete(a);
 
         LoggerService.logInfo("After deleting head:");
-        list.printAll();
+        list.print();
 
         Integer check =list.find(a);
 
@@ -157,7 +157,7 @@ class DoubleCircularLinkedListTest {
 
         DoubleLinkedListNode<Object> node = list.viewHeadNode();
         LoggerService.logInfo(node.toString());
-        assertEquals(node.getData(),test);
+        assertEquals(test, node.getData());
     }
 
     @Test
@@ -172,6 +172,6 @@ class DoubleCircularLinkedListTest {
 
         DoubleLinkedListNode<Object> node = list.viewTailNode();
         LoggerService.logInfo(node.toString());
-        assertEquals(node.getData(),test);
+        assertEquals(test, node.getData());
     }
 }

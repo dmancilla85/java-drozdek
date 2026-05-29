@@ -1,7 +1,7 @@
 package org.drozdek.queues.unlam;
 
-import org.drozdek.commons.LoggerService;
 import org.drozdek.queues.interfaces.QueueInterface;
+import org.drozdek.queues.interfaces.UnlamQueue;
 
 import static java.lang.Math.random;
 import static java.lang.System.err;
@@ -9,10 +9,10 @@ import static java.lang.System.out;
 
 /**
  * Static array-based circular queue implementation.
- * 
+ *
  * <p>
  * Abstract Data Type: Static Queue (FIFO - First In, First Out)
- * 
+ *
  * <p>
  * This implementation uses a fixed-size array with circular indexing,
  * providing O(1) enqueue and dequeue operations when not full.
@@ -40,10 +40,10 @@ public class StaticQueue implements UnlamQueue, QueueInterface<Object> {
 
     /**
      * Main method for testing the static queue implementation.
-     * 
+     *
      * @param args command line arguments (not used)
      */
-    public static void main(String[] args) {
+    static void main(String[] args) {
         UnlamQueue q1 = new StaticQueue();
 
         q1.enqueue("A");
@@ -99,7 +99,7 @@ public class StaticQueue implements UnlamQueue, QueueInterface<Object> {
 
     /**
      * Checks if the queue is full.
-     * 
+     *
      * @return true if the queue is full, false otherwise
      */
     public boolean isFull() {
@@ -153,14 +153,18 @@ public class StaticQueue implements UnlamQueue, QueueInterface<Object> {
         return elementCount();
     }
 
-    public void printAll() {
-        StringBuilder line = new StringBuilder();
+    @Override
+    public String toString() {
         int count = elementCount();
-        for (int i = 0; i < count; i++) {
-            line.append(queue[(first + i) % size]);
-            line.append(" ");
+        if (count == 0) {
+            return org.drozdek.queues.interfaces.QueueInterface.boxedQueue("[ EMPTY ]");
         }
-        LoggerService.logInfo(line.toString());
+        StringBuilder sb = new StringBuilder("FRONT");
+        for (int i = 0; i < count; i++) {
+            sb.append(" ➔ [").append(queue[(first + i) % size]).append("]");
+        }
+        sb.append(" ➔ REAR");
+        return org.drozdek.queues.interfaces.QueueInterface.boxedQueue(sb.toString());
     }
 
     @Override

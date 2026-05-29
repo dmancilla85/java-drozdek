@@ -61,8 +61,7 @@ public class SuffixTree {
                 tree.append(p.id);
                 tree.append(" ");
                 tree.append(text.charAt(p.id));
-            }
-            else if (p.suffixLink != null) {
+            } else if (p.suffixLink != null) {
                 // to print in the middle of
                 tree.append(text, lt, rt + 1);
                 tree.append(" ");

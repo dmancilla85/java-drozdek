@@ -3,21 +3,22 @@ package org.drozdek.lists;
 import org.drozdek.commons.LoggerService;
 import org.drozdek.lists.interfaces.ListInterface;
 import org.drozdek.lists.iterators.DoubleLinkedListIterator;
+import org.drozdek.lists.nodes.DoubleLinkedListNode;
 
 import java.util.Iterator;
 
 /**
  * Doubly-linked list data structure with references to both head and tail nodes.
- * 
+ *
  * <p>
  * Abstract Data Type: Doubly-linked list
- * 
+ *
  * <p>
- * This implementation maintains references to both the head (first) and tail (last) 
+ * This implementation maintains references to both the head (first) and tail (last)
  * nodes, enabling efficient O(1) insertions and deletions at both ends of the list.
- * Each node contains references to both its next and previous nodes, allowing 
+ * Each node contains references to both its next and previous nodes, allowing
  * bidirectional traversal.
- * 
+ *
  * <p>
  * Time Complexities:
  * <ul>
@@ -29,14 +30,14 @@ import java.util.Iterator;
  *   <li>isEmpty(): O(1)</li>
  *   <li>size(): O(n)</li>
  * </ul>
- * 
+ *
  * <p>
  * Bibliography:
  * <ul>
- *   <li>Donald E. Knuth. <cite>The Art of Computer Programming, Volume 1: Fundamental Algorithms</cite>, 
+ *   <li>Donald E. Knuth. <cite>The Art of Computer Programming, Volume 1: Fundamental Algorithms</cite>,
  *       Third Edition. Addison-Wesley, 1997. Section 2.2.3: Linked lists.</li>
- *   <li>Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein. 
- *       <cite>Introduction to Algorithms</cite>, Third Edition. MIT Press, 2009. Chapter 10: 
+ *   <li>Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein.
+ *       <cite>Introduction to Algorithms</cite>, Third Edition. MIT Press, 2009. Chapter 10:
  *       Elementary Data Structures.</li>
  *   <li>Peter Brass. <cite>Advanced Data Structures</cite>. Cambridge University Press, 2008.
  *       Section 2.2: Doubly-linked lists.</li>
@@ -48,7 +49,7 @@ public class DoubleLinkedList<T> implements Iterable<T>, ListInterface<T> {
 
     /**
      * Constructs an empty doubly-linked list.
-     * 
+     * <p>
      * Time Complexity: O(1)
      */
     public DoubleLinkedList() {
@@ -57,23 +58,23 @@ public class DoubleLinkedList<T> implements Iterable<T>, ListInterface<T> {
 
     /**
      * Adds a new element to the tail (end) of the list.
-     * 
+     *
      * @param data the data value to store in the new node
-     * 
-     * Time Complexity: O(1) - constant time insertion at the tail
-     * 
-     * Example:
-     * <pre>
-     *   DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
-     *   list.addToTail(1);  // List: [1]
-     *   list.addToTail(2);  // List: [1, 2]
-     *   list.addToTail(3);  // List: [1, 2, 3]
-     * </pre>
+     *             <p>
+     *             Time Complexity: O(1) - constant time insertion at the tail
+     *             <p>
+     *             Example:
+     *             <pre>
+     *               DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+     *               list.addToTail(1);  // List: [1]
+     *               list.addToTail(2);  // List: [1, 2]
+     *               list.addToTail(3);  // List: [1, 2, 3]
+     *             </pre>
      */
     public void addToTail(T data) {
         if (!isEmpty()) {
             tail = new DoubleLinkedListNode<>(data, null, tail);
-            tail.previous.next = tail;
+            tail.getPrevious().setNext(tail);
         } else head = tail = new DoubleLinkedListNode<>(data);
     }
 
@@ -81,32 +82,33 @@ public class DoubleLinkedList<T> implements Iterable<T>, ListInterface<T> {
      * Deletes the first node containing the specified data value from the list.
      * If multiple nodes contain the same data, only the first occurrence is deleted.
      * Special handling is implemented for head and tail deletions to maintain references.
-     * 
+     *
      * @param data the data value to search for and delete
-     * 
-     * Time Complexity: O(n) in the worst case, where n is the number of elements.
-     *                  O(1) for deletions at head or tail.
-     * 
-     * Note: If the list is empty or the data is not found, this method does nothing.
+     *             <p>
+     *             Time Complexity: O(n) in the worst case, where n is the number of elements.
+     *             O(1) for deletions at head or tail.
+     *             <p>
+     *             Note: If the list is empty or the data is not found, this method does nothing.
      */
     public void delete(T data) {
         if (head == null) return;
-        if (data.equals(head.data)) {
-            head = head.next;
-            if (head != null) head.previous = null;
+        if (data.equals(head.getData())) {
+            head = head.getNext();
+            if (head != null) head.setPrevious(null);
             if (head == null) tail = null;
         } else {
-            if (data.equals(tail.data)) { removeFromTail(); }
-            else {
+            if (data.equals(tail.getData())) {
+                removeFromTail();
+            } else {
                 DoubleLinkedListNode<T> predecessor = head;
-                DoubleLinkedListNode<T> tmp = head.next;
-                while (tmp != null && !(tmp.data.equals(data))) {
-                    predecessor = predecessor.next;
-                    tmp = tmp.next;
+                DoubleLinkedListNode<T> tmp = head.getNext();
+                while (tmp != null && !(tmp.getData().equals(data))) {
+                    predecessor = predecessor.getNext();
+                    tmp = tmp.getNext();
                 }
                 if (tmp != null) {
-                    predecessor.next = tmp.next;
-                    if (tmp.next != null) tmp.next.previous = predecessor;
+                    predecessor.setNext(tmp.getNext());
+                    if (tmp.getNext() != null) tmp.getNext().setPrevious(predecessor);
                 }
             }
         }
@@ -114,40 +116,40 @@ public class DoubleLinkedList<T> implements Iterable<T>, ListInterface<T> {
 
     /**
      * Searches for the first occurrence of a node containing the specified data value.
-     * 
+     *
      * @param data the data value to search for
      * @return the data value if found, or null if not found or list is empty
-     * 
+     * <p>
      * Time Complexity: O(n) in the worst case, where n is the number of elements.
-     *                  O(1) in the best case when the element is at the head.
+     * O(1) in the best case when the element is at the head.
      */
     public T find(T data) {
         DoubleLinkedListNode<T> tmp = head;
-        while (tmp != null && !data.equals(tmp.data)) {
-            tmp = tmp.next;
+        while (tmp != null && !data.equals(tmp.getData())) {
+            tmp = tmp.getNext();
         }
         if (tmp == null)
             return null;
 
-        else return tmp.data;
+        else return tmp.getData();
     }
 
     /**
      * Returns the data value of the head node (first element) without removing it.
-     * 
+     *
      * @return the data value of the head node, or null if the list is empty
-     * 
+     * <p>
      * Time Complexity: O(1) - constant time access to the head
      */
     public T first() {
-        return head != null ? head.data : null;
+        return head != null ? head.getData() : null;
     }
 
     /**
      * Tests if this doubly-linked list contains no elements.
-     * 
+     *
      * @return true if the list is empty (head is null), false otherwise
-     * 
+     * <p>
      * Time Complexity: O(1) - constant time check
      */
     public boolean isEmpty() {
@@ -157,25 +159,25 @@ public class DoubleLinkedList<T> implements Iterable<T>, ListInterface<T> {
     /**
      * Returns an iterator over the elements in this list in proper sequence.
      * The iterator will traverse the list from head to tail.
-     * 
+     *
      * @return an iterator over the elements in this list
-     * 
+     * <p>
      * Time Complexity: O(1) to create the iterator, O(n) for full traversal
      */
     @Override
     public Iterator<T> iterator() {
-        return new DoubleLinkedListIterator<>(this);
+        return new DoubleLinkedListIterator<T>(this);
     }
 
     /**
      * Returns the data value of the tail node (last element) without removing it.
-     * 
+     *
      * @return the data value of the tail node, or null if the list is empty
-     * 
+     * <p>
      * Time Complexity: O(1) - constant time access to the tail
      */
     public T last() {
-        return tail != null ? tail.data : null;
+        return tail != null ? tail.getData() : null;
     }
 
     @Override
@@ -184,52 +186,67 @@ public class DoubleLinkedList<T> implements Iterable<T>, ListInterface<T> {
         sb.append("NULL <-> ");
         DoubleLinkedListNode<T> tmp = head;
         while (tmp != null) {
-            sb.append(tmp.data);
-            if (tmp.next != null) {
+            sb.append(tmp.getData());
+            if (tmp.getNext() != null) {
                 sb.append(" <-> ");
             }
-            tmp = tmp.next;
+            tmp = tmp.getNext();
         }
         sb.append(" <-> NULL");
         return sb.toString();
     }
 
-    public void printAll() {
-        LoggerService.logInfo(this.toString());
+    /**
+     * Returns a string representation of this list in reverse order (tail to head).
+     *
+     * @return a string in the format "NULL <-> data_n <-> ... <-> data_1 <-> NULL"
+     * <p>
+     * Time Complexity: O(n) where n is the number of elements.
+     */
+    public String toStringReverse() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("NULL <-> ");
+        DoubleLinkedListNode<T> tmp = tail;
+        while (tmp != null) {
+            sb.append(tmp.getData());
+            if (tmp.getPrevious() != null) {
+                sb.append(" <-> ");
+            }
+            tmp = tmp.getPrevious();
+        }
+        sb.append(" <-> NULL");
+        return sb.toString();
     }
 
     /**
      * Prints all elements in the list in reverse order (from tail to head) to the logger service.
-     * Each element is printed on a separate line with special formatting to indicate the head.
-     * 
+     * <p>
      * Time Complexity: O(n) where n is the number of elements, due to traversal and logging.
-     * 
+     * <p>
      * Note: This method uses LoggerService.logInfo() for output, not System.out.println().
      */
     public void printReverse() {
-        String line;
-        for (DoubleLinkedListNode<T> tmp = tail; tmp != null; tmp = tmp.previous) {
-            line = tmp == head ? "(*)" + tmp.data : "- " + tmp.data;
-            LoggerService.logInfo(line);
-        }
+        LoggerService.logInfo(this.showId() +
+                System.lineSeparator() +
+                toStringReverse());
     }
 
     /**
      * Removes and returns the data value of the tail node (last element).
-     * 
+     *
      * @return the data value of the removed tail node, or null if the list is empty
-     * 
+     * <p>
      * Time Complexity: O(1) - constant time removal from the tail
-     * 
+     * <p>
      * Note: After this operation, the second-to-last node becomes the new tail.
      */
     public T removeFromTail() {
-        T el = tail.data;
+        T el = tail.getData();
         if (head == tail) {
             head = tail = null;
         } else {
-            tail = tail.previous;
-            tail.next = null;
+            tail = tail.getPrevious();
+            tail.setNext(null);
         }
 
         return el;
@@ -237,33 +254,33 @@ public class DoubleLinkedList<T> implements Iterable<T>, ListInterface<T> {
 
     /**
      * Returns the number of elements in this doubly-linked list.
-     * 
+     *
      * @return the number of elements in this list
-     * 
+     * <p>
      * Time Complexity: O(n) where n is the number of elements, due to traversal.
-     * 
+     * <p>
      * Note: This implementation does not maintain a size counter, so it requires
-     *        a full traversal to count elements.
+     * a full traversal to count elements.
      */
     public int size() {
         int size = 0;
         DoubleLinkedListNode<T> tmp = head;
         while (tmp != null) {
             ++size;
-            tmp = tmp.next;
+            tmp = tmp.getNext();
         }
         return size;
     }
 
     /**
      * Returns the head node of this doubly-linked list without removing it.
-     * 
+     *
      * @return the head node, or null if the list is empty
-     * 
+     * <p>
      * Time Complexity: O(1) - constant time access to the head reference
-     * 
+     * <p>
      * Note: This method exposes the internal node structure. Use with caution
-     *        as it allows direct manipulation of the list's internal structure.
+     * as it allows direct manipulation of the list's internal structure.
      */
     public void add(T data) {
         addToTail(data);
@@ -275,13 +292,13 @@ public class DoubleLinkedList<T> implements Iterable<T>, ListInterface<T> {
 
     /**
      * Returns the tail node of this doubly-linked list without removing it.
-     * 
+     *
      * @return the tail node, or null if the list is empty
-     * 
+     * <p>
      * Time Complexity: O(1) - constant time access to the tail reference
-     * 
+     * <p>
      * Note: This method exposes the internal node structure. Use with caution
-     *        as it allows direct manipulation of the list's internal structure.
+     * as it allows direct manipulation of the list's internal structure.
      */
     public DoubleLinkedListNode<T> viewTailNode() {
         return tail;

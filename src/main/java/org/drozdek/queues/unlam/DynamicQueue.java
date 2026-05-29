@@ -1,17 +1,17 @@
 package org.drozdek.queues.unlam;
 
-import org.drozdek.commons.LoggerService;
 import org.drozdek.queues.interfaces.QueueInterface;
+import org.drozdek.queues.interfaces.UnlamQueue;
 
 import static java.lang.Math.random;
 import static java.lang.System.out;
 
 /**
  * Dynamic queue implementation using a singly-linked list.
- * 
+ *
  * <p>
  * Abstract Data Type: Dynamic Queue (FIFO - First In, First Out)
- * 
+ *
  * <p>
  * This implementation uses a singly-linked list with head and tail pointers,
  * providing O(1) enqueue and dequeue operations.
@@ -27,10 +27,10 @@ public class DynamicQueue implements UnlamQueue, QueueInterface<Object> {
 
     /**
      * Main method for testing the dynamic queue implementation.
-     * 
+     *
      * @param args command line arguments (not used)
      */
-    public static void main(String[] args) {
+    static void main(String[] args) {
         UnlamQueue q1 = new DynamicQueue();
 
         q1.enqueue("FIRST OBJECT");
@@ -100,15 +100,19 @@ public class DynamicQueue implements UnlamQueue, QueueInterface<Object> {
         return count;
     }
 
-    public void printAll() {
-        StringBuilder line = new StringBuilder();
+    @Override
+    public String toString() {
+        if (isEmpty()) {
+            return org.drozdek.queues.interfaces.QueueInterface.boxedQueue("[ EMPTY ]");
+        }
+        StringBuilder sb = new StringBuilder("FRONT");
         QueueNode current = first;
         while (current != null) {
-            line.append(current.data);
-            line.append(" ");
+            sb.append(" ➔ [").append(current.data).append("]");
             current = current.next;
         }
-        LoggerService.logInfo(line.toString());
+        sb.append(" ➔ REAR");
+        return org.drozdek.queues.interfaces.QueueInterface.boxedQueue(sb.toString());
     }
 
     @Override
@@ -121,7 +125,7 @@ public class DynamicQueue implements UnlamQueue, QueueInterface<Object> {
      * Node for a singly-linked list used in the dynamic queue.
      */
     private static class QueueNode {
-        private Object data;
+        private final Object data;
         private QueueNode next;
 
         public QueueNode() {

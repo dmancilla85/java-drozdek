@@ -32,7 +32,7 @@ public class Set<T> {
     /**
      * @param args
      */
-    public static void main(String[] args) {
+    static void main(String[] args) {
         Set<Object> A = new Set<Object>();
         A.add("Hola");
         A.add(324.4);

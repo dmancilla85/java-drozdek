@@ -229,7 +229,7 @@ public class Trie {
 
     public String printTrie() {
         if (root != null)
-            return  oldPrintTrie(0, root, "w");
+            return oldPrintTrie(0, root, "w");
         else
             return "<EMPTY>";
     }

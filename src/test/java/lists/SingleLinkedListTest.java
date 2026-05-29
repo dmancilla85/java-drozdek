@@ -2,7 +2,7 @@ package lists;
 
 import org.drozdek.commons.LoggerService;
 import org.drozdek.lists.SingleLinkedList;
-import org.drozdek.lists.SingleLinkedListNode;
+import org.drozdek.lists.nodes.SingleLinkedListNode;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,7 +39,7 @@ class SingleLinkedListTest {
         int sizeBefore = list.size();
         String firstBefore = list.first();
 
-        list.printAll();
+        list.print();
 
         assertEquals(sizeBefore, list.size(), "List size unchanged after printAll");
         assertEquals(firstBefore, list.first(), "First element unchanged after printAll");
@@ -80,7 +80,7 @@ class SingleLinkedListTest {
         list.add(d);
         list.add(e);
 
-        list.printAll();
+        list.print();
 
         Integer match = list.find(t);
         assertEquals(0, match.compareTo(t));
@@ -98,11 +98,11 @@ class SingleLinkedListTest {
         list.add(e);
 
         LoggerService.logInfo("Before deleting head: ");
-        list.printAll();
+        list.print();
         Integer match = list.deleteHead();
 
         LoggerService.logInfo("After deleting head: ");
-        list.printAll();
+        list.print();
 
         Integer check =list.find(e);
         assertEquals(0, match.compareTo(e));
@@ -121,11 +121,11 @@ class SingleLinkedListTest {
         list.add(e);
 
         LoggerService.logInfo("Before deleting " + c + ": ");
-        list.printAll();
+        list.print();
         list.delete(c);
 
         LoggerService.logInfo("After deleting " + c + ": ");
-        list.printAll();
+        list.print();
 
         Integer check = list.find(c);
 

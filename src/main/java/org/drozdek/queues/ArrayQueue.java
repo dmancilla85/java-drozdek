@@ -7,10 +7,10 @@ import java.util.Arrays;
 
 /**
  * Array-based circular queue implementation.
- * 
+ *
  * <p>
  * Abstract Data Type: Queue (FIFO - First In, First Out)
- * 
+ *
  * <p>
  * This implementation uses a fixed-size array with circular indexing,
  * providing O(1) enqueue and dequeue operations.
@@ -23,7 +23,7 @@ public class ArrayQueue implements QueueInterface<Object> {
 
     /**
      * Constructs an array queue with the specified capacity.
-     * 
+     *
      * @param capacity the maximum number of elements this queue can hold
      */
     public ArrayQueue(int capacity) {
@@ -34,14 +34,14 @@ public class ArrayQueue implements QueueInterface<Object> {
 
     /**
      * Removes and returns the element at the front of the queue.
-     * 
+     *
      * @return the element at the front of the queue, or null if the queue is empty
      */
     public Object dequeue() {
         if (isEmpty()) {
             return null;
         }
-        
+
         Object data = storage[first];
 
         if (first == last) {
@@ -60,7 +60,7 @@ public class ArrayQueue implements QueueInterface<Object> {
 
     /**
      * Adds an element to the rear of the queue.
-     * 
+     *
      * @param element the element to add to the queue
      * @throws IllegalStateException if the queue is full
      */
@@ -68,12 +68,12 @@ public class ArrayQueue implements QueueInterface<Object> {
         if (isFull()) {
             throw new IllegalStateException("Queue is full");
         }
-        
+
         if (last == capacity - 1 || last == -1) {
             // Wrap around to beginning or first element
             storage[0] = element;
             last = 0;
-            
+
             if (first == -1) {
                 // First element being added
                 first = 0;
@@ -91,7 +91,7 @@ public class ArrayQueue implements QueueInterface<Object> {
 
     /**
      * Returns the element at the front of the queue without removing it.
-     * 
+     *
      * @return the element at the front of the queue, or null if the queue is empty
      */
     public Object firstElement() {
@@ -103,7 +103,7 @@ public class ArrayQueue implements QueueInterface<Object> {
 
     /**
      * Tests if this queue contains no elements.
-     * 
+     *
      * @return true if this queue contains no elements; false otherwise
      */
     public boolean isEmpty() {
@@ -112,7 +112,7 @@ public class ArrayQueue implements QueueInterface<Object> {
 
     /**
      * Tests if this queue is full.
-     * 
+     *
      * @return true if this queue is full; false otherwise
      */
     public boolean isFull() {
@@ -120,19 +120,19 @@ public class ArrayQueue implements QueueInterface<Object> {
         // 1. first is at index 0 and last is at the last index, OR
         // 2. first is exactly one position after last (in circular sense)
         return (first == 0 && last == capacity - 1) ||
-               (first == (last + 1) % capacity);
+                (first == (last + 1) % capacity);
     }
 
     /**
      * Returns the number of elements in this queue.
-     * 
+     *
      * @return the number of elements in this queue
      */
     public int size() {
         if (isEmpty()) {
             return 0;
         }
-        
+
         if (first <= last) {
             // No wrap-around: elements are in [first, last]
             return last - first + 1;
@@ -146,24 +146,23 @@ public class ArrayQueue implements QueueInterface<Object> {
         first = last = -1;
     }
 
-    /**
-     * Prints all elements in the queue to the logger service.
-     * Elements are printed in order from front to rear.
-     */
-    public void printAll() {
-        StringBuilder line = new StringBuilder();
-        
-        for (int i = 0; i < size(); i++) {
-            int index = (first + i) % capacity;
-            line.append(storage[index]);
-            line.append(" ");
-        }
-        
-        LoggerService.logInfo(line.toString());
-    }
-
     @Override
     public String toString() {
+        if (isEmpty()) {
+            return QueueInterface.boxedQueue("[ EMPTY ]");
+        }
+        StringBuilder sb = new StringBuilder("FRONT");
+        for (int i = 0; i < size(); i++) {
+            int index = (first + i) % capacity;
+            if (storage[index] != null) {
+                sb.append(" ➔ [").append(storage[index]).append("]");
+            }
+        }
+        sb.append(" ➔ REAR");
+        return QueueInterface.boxedQueue(sb.toString());
+    }
+
+    public String showStorage() {
         return Arrays.toString(storage);
     }
 }

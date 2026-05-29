@@ -15,7 +15,7 @@ public class TestDynamicKnapsack {
     /**
      * @param args
      */
-    public static void main(String[] args) {
+    static void main(String[] args) {
         ArrayList<DynamicKnapsackItem> knapsack = new ArrayList<DynamicKnapsackItem>();
 
         knapsack.add(new DynamicKnapsackItem(3, 4));

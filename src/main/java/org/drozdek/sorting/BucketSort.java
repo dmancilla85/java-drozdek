@@ -5,7 +5,8 @@ import java.util.Collections;
 
 public class BucketSort {
 
-    private BucketSort() {}
+    private BucketSort() {
+    }
 
     // Complexity: O(n)
     // Memory: O(n)
