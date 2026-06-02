@@ -3,6 +3,14 @@ package org.drozdek.trees;
 import java.util.Arrays;
 import java.util.Iterator;
 
+/// Node for suffix tree. Stores descendant pointers, left/right interval arrays, and a suffix link
+/// used during Ukkonen's algorithm.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1)
+/// Auxiliary Space: O(|alphabet|) per node
+///
+/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/ukkonens-suffix-tree-construction-part-1/)
 class SuffixTreeNode {
     private static int cnt = 0; // for printing only
     protected final SuffixTreeNode[] descendants;

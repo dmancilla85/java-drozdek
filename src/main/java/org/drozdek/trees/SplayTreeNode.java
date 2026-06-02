@@ -3,6 +3,13 @@ package org.drozdek.trees;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/// Node for splay tree. Stores a comparable key, left/right child references, and a parent reference for splaying.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1)
+/// Auxiliary Space: O(1)
+///
+/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/splay-tree/)
 public class SplayTreeNode<T> {
     protected final Comparable<T> key;
     protected SplayTreeNode<T> left;

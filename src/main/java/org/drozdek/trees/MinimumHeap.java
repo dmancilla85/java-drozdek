@@ -1,6 +1,8 @@
 package org.drozdek.trees;
 
-public class MinimumHeap<T extends Comparable<T>> {
+import org.drozdek.trees.interfaces.TreeInterface;
+
+public class MinimumHeap<T extends Comparable<T>> implements TreeInterface {
 
     private static final int DEFAULT_CAPACITY = 10;
     private Object[] heap;

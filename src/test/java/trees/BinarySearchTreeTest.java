@@ -231,6 +231,39 @@ class BinarySearchTreeTest {
         assertEquals(5, result, "The search result is not the expected");
     }
 
+    @Test
+    @DisplayName("New tree should be empty")
+    void isEmpty() {
+        assertTrue(tree.isEmpty());
+        assertEquals(0, tree.size());
+    }
+
+    @Test
+    @DisplayName("After inserting elements tree is not empty")
+    void notEmpty() {
+        tree.insert(5);
+        assertFalse(tree.isEmpty());
+        assertEquals(1, tree.size());
+    }
+
+    @Test
+    @DisplayName("Search returns null for empty tree")
+    void searchEmptyTree() {
+        assertNull(tree.search(42));
+    }
+
+    @Test
+    @DisplayName("Delete by copying on empty tree returns error code")
+    void deleteByCopyingEmptyTree() {
+        assertEquals(1, tree.deleteByCopying(5));
+    }
+
+    @Test
+    @DisplayName("Delete by merging on empty tree returns error code")
+    void deleteByMergingEmptyTree() {
+        assertEquals(1, tree.deleteByMerging(5));
+    }
+
     @BeforeEach
     void setUp() {
         tree = new BinarySearchTree<>();

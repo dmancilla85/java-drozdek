@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class AvlTreeTest {
 
@@ -74,5 +74,20 @@ class AvlTreeTest {
         dumpData();
         LoggerService.logInfo(tree.toString());
         assertEquals(6, tree.size(), "The size of the tree doesn't match with the expected");
+    }
+
+    @Test
+    @DisplayName("New tree should be empty")
+    void isEmpty() {
+        assertTrue(tree.isEmpty());
+        assertEquals(0, tree.size());
+    }
+
+    @Test
+    @DisplayName("After insert tree is not empty")
+    void notEmptyAfterInsert() {
+        tree.insert(1);
+        assertFalse(tree.isEmpty());
+        assertEquals(1, tree.size());
     }
 }

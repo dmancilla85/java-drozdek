@@ -2,6 +2,7 @@ package org.drozdek.trees;
 
 import org.drozdek.queues.Queue;
 import org.drozdek.stacks.Stack;
+import org.drozdek.trees.interfaces.TreeInterface;
 
 import java.io.PrintStream;
 
@@ -16,7 +17,7 @@ import java.io.PrintStream;
 ///
 /// @author David
 /// @version 1.0.0
-public class BinarySearchTree<T> {
+public class BinarySearchTree<T> implements TreeInterface {
     protected BinarySearchTreeNode<T> root;
 
     public BinarySearchTree() {
@@ -575,6 +576,10 @@ public class BinarySearchTree<T> {
         }
 
         return vars;
+    }
+
+    public boolean isEmpty() {
+        return root == null;
     }
 
     /// Number of nodes in the tree.

@@ -1,5 +1,12 @@
 package org.drozdek.trees;
 
+/// Node for static binary tree. Wraps an Integer value and implements Comparable for heap operations.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1)
+/// Auxiliary Space: O(1)
+///
+/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/heap-data-structure/)
 public class HeapNode implements Comparable<HeapNode> {
 
     private Integer value;

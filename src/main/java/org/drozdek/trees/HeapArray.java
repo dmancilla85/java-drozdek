@@ -4,6 +4,13 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
+/// Array-based heap sort implementation. Uses an array to represent a binary heap and sorts elements in-place.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(n*log(n)) for heap sort, O(log n) for insert, O(n) for heapify
+/// Auxiliary Space: O(1)
+///
+/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/heap-data-structure/)
 public class HeapArray {
 
     private final int[] keys;

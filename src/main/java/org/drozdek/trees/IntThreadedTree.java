@@ -1,23 +1,38 @@
 package org.drozdek.trees;
 
+import org.drozdek.trees.interfaces.TreeInterface;
 import java.io.PrintStream;
 
-public class IntThreadedTree {
+/// In-threaded binary tree with threaded inorder traversal. Uses successor threads to perform
+/// efficient in-order traversal without recursion or a stack.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(n) for traversal, O(log n) for search/insert on balanced
+/// Auxiliary Space: O(1) for traversal, O(1) for insert
+///
+/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/threaded-binary-tree/)
+public class IntThreadedTree implements TreeInterface {
     private IntThreadedTreeNode root;
 
     public IntThreadedTree() {
         root = null;
     }
 
-    private int countNodes(IntThreadedTreeNode root) {
+    private int countNodes(IntThreadedTreeNode node) {
 
-        //base case
-        if (root == null)
+        if (node == null)
             return 0;
 
-        //recursive call to left child and right child and
-        // add the result of these with 1 ( 1 for counting the root)
-        return 1 + (!root.successor ? countNodes(root.left) + countNodes(root.right) : 0);
+        int count = 1;
+        if (node.left != null)
+            count += countNodes(node.left);
+        if (!node.successor && node.right != null)
+            count += countNodes(node.right);
+        return count;
+    }
+
+    public boolean isEmpty() {
+        return root == null;
     }
 
     public void insert(int value) {

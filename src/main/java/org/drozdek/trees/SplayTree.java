@@ -1,8 +1,17 @@
 package org.drozdek.trees;
 
+import org.drozdek.trees.interfaces.TreeInterface;
 import java.io.PrintStream;
 
-public class SplayTree<T> {
+/// Self-adjusting splay tree. Recently accessed elements are moved to the root via splay operations,
+/// providing amortized O(log n) performance.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(log n) amortized for search/insert/delete
+/// Auxiliary Space: O(1)
+///
+/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/splay-tree/)
+public class SplayTree<T> implements TreeInterface {
 
     SplayTreeNode<T> root;
 
@@ -200,6 +209,10 @@ public class SplayTree<T> {
         }
 
         return vars;
+    }
+
+    public boolean isEmpty() {
+        return root == null;
     }
 
     /// Number of nodes in the tree.

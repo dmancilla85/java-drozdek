@@ -1,5 +1,12 @@
 package org.drozdek.trees;
 
+/// Simple binary tree node. Stores an Object label and left/right child references.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1)
+/// Auxiliary Space: O(1)
+///
+/// Source: Generic binary tree node
 public class TreeNode {
     private Object label;
     private TreeNode leftChild;

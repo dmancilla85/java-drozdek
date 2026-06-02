@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MaximumHeapTest {
     MaximumHeap<Integer> heap;
@@ -75,5 +75,47 @@ class MaximumHeapTest {
         System.out.println(heap.toString());
         int max = heap.getMax();
         assertEquals(153, max, "The maximum extracted is not the expected.");
+    }
+
+    @Test
+    @DisplayName("New heap should be empty")
+    void isEmpty() {
+        assertTrue(heap.isEmpty());
+        assertEquals(0, heap.size());
+    }
+
+    @Test
+    @DisplayName("After insert heap is not empty")
+    void notEmpty() {
+        heap.insertKey(10);
+        assertFalse(heap.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Extract max from empty heap returns null")
+    void extractMaxEmpty() {
+        assertNull(heap.extractMax());
+    }
+
+    @Test
+    @DisplayName("Get max from empty heap returns null")
+    void getMaxEmpty() {
+        assertNull(heap.getMax());
+    }
+
+    @Test
+    @DisplayName("Delete key at invalid index does nothing")
+    void deleteKeyInvalidIndex() {
+        dumpData();
+        heap.deleteKey(99);
+        assertEquals(5, heap.size());
+    }
+
+    @Test
+    @DisplayName("Change value at invalid index does nothing")
+    void changeValueInvalidIndex() {
+        dumpData();
+        heap.changeValueOnAKey(99, 100);
+        assertEquals(5, heap.size());
     }
 }

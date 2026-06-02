@@ -48,6 +48,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.5</version>
             </plugin>
+            <!-- JaCoCo temporarily disabled - requires Java 25 support -->
         </plugins>
     </build>
 

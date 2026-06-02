@@ -3,6 +3,13 @@ package org.drozdek.trees;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/// ADT node for binary search tree. Stores a comparable key and left/right child references.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1)
+/// Auxiliary Space: O(1)
+///
+/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/binary-search-tree-data-structure/)
 public class BinarySearchTreeNode<T> {
     protected Comparable<T> key;
     protected BinarySearchTreeNode<T> left;

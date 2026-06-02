@@ -3,6 +3,13 @@ package org.drozdek.trees;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/// ADT node for AVL tree. Stores key, height, and left/right child references.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1)
+/// Auxiliary Space: O(1)
+///
+/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/introduction-to-avl-tree/)
 public class AvlTreeNode {
     protected final int key;
     protected int height;
@@ -27,7 +34,7 @@ public class AvlTreeNode {
 
         buffer.append(prefix);
         buffer.append(this.key);
-        buffer.append('\n');
+        buffer.append(System.lineSeparator());
 
         for (Iterator<AvlTreeNode> it = children.iterator();it.hasNext();) {
             AvlTreeNode next = it.next();
@@ -46,6 +53,7 @@ public class AvlTreeNode {
     @Override
     public String toString() {
         StringBuilder buffer = new StringBuilder(50);
+        buffer.append(System.lineSeparator());
         print(buffer, "", "");
         return buffer.toString();
     }

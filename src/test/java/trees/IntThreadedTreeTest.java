@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class IntThreadedTreeTest {
     IntThreadedTree tree;
@@ -60,5 +60,20 @@ class IntThreadedTreeTest {
 
 
         assertEquals(6, tree.size(), "The tree size is not the expected");
+    }
+
+    @Test
+    @DisplayName("New tree should be empty")
+    void isEmpty() {
+        assertTrue(tree.isEmpty());
+        assertEquals(0, tree.size());
+    }
+
+    @Test
+    @DisplayName("After insert tree is not empty")
+    void notEmptyAfterInsert() {
+        tree.insert(1);
+        assertFalse(tree.isEmpty());
+        assertEquals(1, tree.size());
     }
 }

@@ -1,8 +1,15 @@
 package org.drozdek.trees;
 
+/// Word with frequency for splay tree. Stores a word string and its occurrence count.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1)
+/// Auxiliary Space: O(1)
+///
+/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/splay-tree/)
 public class Word implements Comparable<Word> {
     private final String words;
-    protected int freq;
+    public int freq;
 
     public Word(String s) {
         this.words = s;

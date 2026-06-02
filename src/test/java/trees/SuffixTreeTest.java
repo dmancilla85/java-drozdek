@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 class SuffixTreeTest {
     SuffixTree tree;
 
@@ -19,5 +21,12 @@ class SuffixTreeTest {
     void test(){
         tree.ukkonen("banana");
         LoggerService.logInfo(tree.printTree());
+    }
+
+    @Test
+    @DisplayName("Ukkonen builds suffix tree")
+    void ukkonenBuild() {
+        tree.ukkonen("banana");
+        assertNotNull(tree.toString());
     }
 }

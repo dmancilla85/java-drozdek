@@ -1,6 +1,16 @@
 package org.drozdek.trees;
 
-public class StaticBinaryTree {
+import org.drozdek.trees.interfaces.TreeInterface;
+
+/// Array-based static binary tree. Uses an array to store HeapNode elements with implicit parent-child
+/// indexing (left child at 2*parent, right child at 2*parent+1).
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) for get/set operations
+/// Auxiliary Space: O(n) for storage
+///
+/// Source: Array-based binary tree
+public class StaticBinaryTree implements TreeInterface {
 
     private static final int CAPACITY = 10;
     private final HeapNode[] tree;
@@ -88,6 +98,10 @@ public class StaticBinaryTree {
 
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    public int size() {
+        return size;
     }
 
     public HeapNode leftChild(int parent, HeapNode node) {

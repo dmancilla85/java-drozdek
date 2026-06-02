@@ -2,7 +2,14 @@ package org.drozdek.trees;
 
 import info.schnatterer.mobynamesgenerator.MobyNamesGenerator;
 
-
+/// Ukkonen's suffix tree implementation. Builds a suffix tree in linear time for efficient
+/// substring and pattern matching operations.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(n) for construction (Ukkonen's algorithm)
+/// Auxiliary Space: O(n) for storage
+///
+/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/ukkonens-suffix-tree-construction-part-1/)
 public class SuffixTree {
     protected final SuffixTreeNode root;
     protected final String name;

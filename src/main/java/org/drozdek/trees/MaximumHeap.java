@@ -1,6 +1,8 @@
 package org.drozdek.trees;
 
-public class MaximumHeap<T extends Comparable<T>> {
+import org.drozdek.trees.interfaces.TreeInterface;
+
+public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
 
     private static final int DEFAULT_CAPACITY = 10;
     private Object[] heap;

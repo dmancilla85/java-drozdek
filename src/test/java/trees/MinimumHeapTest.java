@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MinimumHeapTest {
     MinimumHeap<Integer> heap;
@@ -75,5 +75,47 @@ class MinimumHeapTest {
         System.out.println(heap.toString());
         int min = heap.getMin();
         assertEquals(1, min, "The minimum extracted is not the expected.");
+    }
+
+    @Test
+    @DisplayName("New heap should be empty")
+    void isEmpty() {
+        assertTrue(heap.isEmpty());
+        assertEquals(0, heap.size());
+    }
+
+    @Test
+    @DisplayName("After insert heap is not empty")
+    void notEmpty() {
+        heap.insertKey(10);
+        assertFalse(heap.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Extract min from empty heap returns null")
+    void extractMinEmpty() {
+        assertNull(heap.extractMin());
+    }
+
+    @Test
+    @DisplayName("Get min from empty heap returns null")
+    void getMinEmpty() {
+        assertNull(heap.getMin());
+    }
+
+    @Test
+    @DisplayName("Delete key at invalid index does nothing")
+    void deleteKeyInvalidIndex() {
+        dumpData();
+        heap.deleteKey(99);
+        assertEquals(5, heap.size());
+    }
+
+    @Test
+    @DisplayName("Change value at invalid index does nothing")
+    void changeValueInvalidIndex() {
+        dumpData();
+        heap.changeValueOnAKey(99, 100);
+        assertEquals(5, heap.size());
     }
 }

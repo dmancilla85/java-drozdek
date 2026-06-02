@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SplayTreeTest {
 
@@ -77,5 +77,32 @@ class SplayTreeTest {
         tree.deleteByMerging(12);
         LoggerService.logWarning(tree.toString());
         assertEquals(size, tree.size());
+    }
+
+    @Test
+    @DisplayName("New tree should be empty")
+    void isEmpty() {
+        assertTrue(tree.isEmpty());
+        assertEquals(0, tree.size());
+    }
+
+    @Test
+    @DisplayName("After insert tree is not empty")
+    void notEmpty() {
+        tree.insert(5);
+        assertFalse(tree.isEmpty());
+        assertEquals(1, tree.size());
+    }
+
+    @Test
+    @DisplayName("Search returns null for empty tree")
+    void searchEmptyTree() {
+        assertNull(tree.search(42));
+    }
+
+    @Test
+    @DisplayName("Delete by merging on empty tree")
+    void deleteByMergingEmpty() {
+        assertEquals(1, tree.deleteByMerging(5));
     }
 }

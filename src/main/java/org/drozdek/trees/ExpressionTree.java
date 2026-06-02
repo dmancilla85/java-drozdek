@@ -1,5 +1,6 @@
 package org.drozdek.trees;
 
+import org.drozdek.trees.interfaces.TreeInterface;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -7,7 +8,7 @@ import java.util.Deque;
 /// have a number string value. All non-leaves of the Expression Tree have an operator string value.
 ///
 /// Source: [Here](https://wxx5433.gitbooks.io/interview-preparation/content/part_ii_leetcode_lintcode/stack/expression_tree_build.html)
-public class ExpressionTree {
+public class ExpressionTree implements TreeInterface {
     final ExpressionTreeNode root;
 
     public ExpressionTree() {
@@ -146,6 +147,15 @@ public class ExpressionTree {
     /// Print the inorder traversal of tree
     public String inorder() {
         return inorder(this.root);
+    }
+
+    public int size() {
+        return countNodes(root);
+    }
+
+    private int countNodes(ExpressionTreeNode node) {
+        if (node == null) return 0;
+        return 1 + countNodes(node.left) + countNodes(node.right);
     }
 
     /// Check if tree is empty

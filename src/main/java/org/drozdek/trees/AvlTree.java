@@ -1,5 +1,7 @@
 package org.drozdek.trees;
 
+import org.drozdek.trees.interfaces.TreeInterface;
+
 /// AVL tree is a self-balancing Binary Search Tree (BST) where the difference between heights of left and right
 /// subtrees cannot be more than one for all nodes.
 ///
@@ -8,7 +10,7 @@ package org.drozdek.trees;
 /// Auxiliary Space: O(1)
 ///
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/insertion-in-an-avl-tree/)
-public class AvlTree {
+public class AvlTree implements TreeInterface {
 
     AvlTreeNode root;
 
@@ -188,6 +190,10 @@ public class AvlTree {
 
         // Return new root
         return a;
+    }
+
+    public boolean isEmpty() {
+        return root == null;
     }
 
     public int size() {

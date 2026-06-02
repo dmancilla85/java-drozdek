@@ -5,8 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ExpressionTreeTest {
     ExpressionTree tree;
@@ -58,5 +57,48 @@ class ExpressionTreeTest {
         System.out.println(tree);
 
         assertFalse(tree.isEmpty(),"The tree shouldn't be empty");
+    }
+
+    @Test
+    @DisplayName("New tree should be empty")
+    void isEmpty() {
+        assertTrue(tree.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Size of non-empty tree")
+    void size() {
+        tree = new ExpressionTree("AB+");
+        assertFalse(tree.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Evaluate simple expression")
+    void evaluateSimple() {
+        assertEquals(5, ExpressionTree.evaluateExpression("2+3"));
+    }
+
+    @Test
+    @DisplayName("Evaluate expression with parentheses")
+    void evaluateWithParens() {
+        assertEquals(35, ExpressionTree.evaluateExpression("(2+3)*7"));
+    }
+
+    @Test
+    @DisplayName("Null return from evaluateExpression")
+    void evaluateNull() {
+        assertEquals(0, ExpressionTree.evaluateExpression(""));
+        assertEquals(0, ExpressionTree.evaluateExpression(null));
+    }
+
+    @Test
+    @DisplayName("Check operator")
+    void isOperator() {
+        assertTrue(ExpressionTree.isOperator('+'));
+        assertTrue(ExpressionTree.isOperator('-'));
+        assertTrue(ExpressionTree.isOperator('*'));
+        assertTrue(ExpressionTree.isOperator('/'));
+        assertTrue(ExpressionTree.isOperator('^'));
+        assertFalse(ExpressionTree.isOperator('a'));
     }
 }

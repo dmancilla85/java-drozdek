@@ -2,6 +2,14 @@ package org.drozdek.trees;
 
 import java.io.*;
 
+/// Splay tree specialized for Word objects. Reads a file, inserts words with frequency counting,
+/// and prints the result in-order.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(n * log n) amortized for building the tree
+/// Auxiliary Space: O(n) for storage
+///
+/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/splay-tree/)
 public class WordSplay extends SplayTree<Word> {
     private int differentWords;
     private int wordCnt;
@@ -70,8 +78,4 @@ public class WordSplay extends SplayTree<Word> {
 
     }
 
-    protected void visit(BinarySearchTreeNode<Word> p) {
-        differentWords++;
-        wordCnt += ((Word) p.key).freq;
-    }
 }

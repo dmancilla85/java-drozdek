@@ -3,6 +3,13 @@ package org.drozdek.trees;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/// ADT node for expression tree. Stores a symbol and left/right child references.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1)
+/// Auxiliary Space: O(1)
+///
+/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/expression-tree/)
 public class ExpressionTreeNode {
     protected final char symbol;
     protected ExpressionTreeNode left;
@@ -24,10 +31,8 @@ public class ExpressionTreeNode {
         children.add(this.right);
 
         buffer.append(prefix);
-        buffer.append("< ");
         buffer.append(this.symbol);
-        buffer.append(" >");
-        buffer.append('\n');
+        buffer.append(System.lineSeparator());
 
         for (Iterator<ExpressionTreeNode> it = children.iterator();it.hasNext();) {
             ExpressionTreeNode next = it.next();
@@ -46,6 +51,7 @@ public class ExpressionTreeNode {
     @Override
     public String toString() {
         StringBuilder buffer = new StringBuilder(50);
+        buffer.append(System.lineSeparator());
         print(buffer, "", "");
         return buffer.toString();
     }
