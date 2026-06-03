@@ -27,8 +27,7 @@ class ExpressionTreeTest {
 
         System.out.print("Inorder Expression: ");
         // printing the expression tree inorder
-        tree.inorder();
-        System.out.println();
+        System.out.println(tree.inorder());
 
         assertFalse(tree.isEmpty(),"The tree shouldn't be empty");
     }

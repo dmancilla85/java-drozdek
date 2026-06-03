@@ -1,5 +1,7 @@
 package org.drozdek.trees;
 
+import org.drozdek.trees.nodes.AvlTreeNode;
+
 import org.drozdek.trees.interfaces.TreeInterface;
 
 /// AVL tree is a self-balancing Binary Search Tree (BST) where the difference between heights of left and right
@@ -22,7 +24,7 @@ public class AvlTree implements TreeInterface {
 
         //recursive call to left child and right child and
         // add the result of these with 1 ( 1 for counting the root)
-        return 1 + countNodes(node.left) + countNodes(node.right);
+        return 1 + countNodes(node.getLeft()) + countNodes(node.getRight());
     }
 
     // Get Balance factor of node N
@@ -30,7 +32,7 @@ public class AvlTree implements TreeInterface {
         if (node == null)
             return 0;
 
-        return height(node.left) - height(node.right);
+        return height(node.getLeft()) - height(node.getRight());
     }
 
     // A utility function to get the height of the tree
@@ -38,7 +40,7 @@ public class AvlTree implements TreeInterface {
         if (n == null)
             return 0;
 
-        return n.height;
+        return n.getHeight();
     }
 
     // A utility function to print preorder traversal
@@ -49,10 +51,10 @@ public class AvlTree implements TreeInterface {
         StringBuilder tree = new StringBuilder();
 
         if (node != null) {
-            tree.append(inOrder(node.left));
-            tree.append(node.key);
+            tree.append(inOrder(node.getLeft()));
+            tree.append(node.getKey());
             tree.append(" ");
-            tree.append(inOrder(node.right));
+            tree.append(inOrder(node.getRight()));
         }
 
         return tree.toString();
@@ -72,15 +74,15 @@ public class AvlTree implements TreeInterface {
         if (node == null)
             return new AvlTreeNode(key);
 
-        if (key < node.key)
-            node.left = insertNode(node.left, key);
-        else if (key > node.key)
-            node.right = insertNode(node.right, key);
+        if (key < node.getKey())
+            node.setLeft( insertNode(node.getLeft(), key));
+        else if (key > node.getKey())
+            node.setRight( insertNode(node.getRight(), key));
         else // Duplicate keys not allowed
             return node;
 
         /* 2. Update height of this ancestor node */
-        node.height = 1 + Math.max(height(node.left), height(node.right));
+        node.setHeight( 1 + Math.max(height(node.getLeft()), height(node.getRight())));
 
         /* 3. Get the balance factor of this ancestor
               node to check whether this node became
@@ -89,22 +91,22 @@ public class AvlTree implements TreeInterface {
 
         // If this node becomes unbalanced, then there
         // are 4 cases  left-left Case
-        if (balance > 1 && key < node.left.key)
+        if (balance > 1 && key < node.getLeft().getKey())
             return rightRotate(node);
 
         // right-right Case
-        if (balance < -1 && key > node.right.key)
+        if (balance < -1 && key > node.getRight().getKey())
             return leftRotate(node);
 
         // left-right Case
-        if (balance > 1 && key > node.left.key) {
-            node.left = leftRotate(node.left);
+        if (balance > 1 && key > node.getLeft().getKey()) {
+            node.setLeft( leftRotate(node.getLeft()));
             return rightRotate(node);
         }
 
         // Right Left Case
-        if (balance < -1 && key < node.right.key) {
-            node.right = rightRotate(node.right);
+        if (balance < -1 && key < node.getRight().getKey()) {
+            node.setRight( rightRotate(node.getRight()));
             return leftRotate(node);
         }
 
@@ -115,16 +117,16 @@ public class AvlTree implements TreeInterface {
     // A utility function to left rotate subtree rooted with x
     // See the diagram given above.
     private AvlTreeNode leftRotate(AvlTreeNode a) {
-        AvlTreeNode b = a.right;
-        AvlTreeNode t2 = b.left;
+        AvlTreeNode b = a.getRight();
+        AvlTreeNode t2 = b.getLeft();
 
         // Perform rotation
-        b.left = a;
-        a.right = t2;
+        b.setLeft( a);
+        a.setRight( t2);
 
         //  Update heights
-        a.height = Math.max(height(a.left), height(a.right)) + 1;
-        b.height = Math.max(height(b.left), height(b.right)) + 1;
+        a.setHeight( Math.max(height(a.getLeft()), height(a.getRight())) + 1);
+        b.setHeight( Math.max(height(b.getLeft()), height(b.getRight())) + 1);
 
         // Return new root
         return b;
@@ -138,9 +140,9 @@ public class AvlTree implements TreeInterface {
         StringBuilder tree = new StringBuilder();
 
         if (node != null) {
-            tree.append(postOrder(node.left));
-            tree.append(postOrder(node.right));
-            tree.append(node.key);
+            tree.append(postOrder(node.getLeft()));
+            tree.append(postOrder(node.getRight()));
+            tree.append(node.getKey());
             tree.append(" ");
         }
 
@@ -159,10 +161,10 @@ public class AvlTree implements TreeInterface {
         StringBuilder tree = new StringBuilder();
 
         if (node != null) {
-            tree.append(node.key);
+            tree.append(node.getKey());
             tree.append(" ");
-            tree.append(preOrder(node.left));
-            tree.append(preOrder(node.right));
+            tree.append(preOrder(node.getLeft()));
+            tree.append(preOrder(node.getRight()));
         }
 
         return tree.toString();
@@ -175,18 +177,18 @@ public class AvlTree implements TreeInterface {
     // A utility function to right rotate subtree rooted with y
     // See the diagram given above.
     private AvlTreeNode rightRotate(AvlTreeNode b) {
-        AvlTreeNode a = b.left;
-        AvlTreeNode t2 = a.right;
+        AvlTreeNode a = b.getLeft();
+        AvlTreeNode t2 = a.getRight();
 
         // Perform rotation
-        a.right = b;
-        b.left = t2;
+        a.setRight( b);
+        b.setLeft( t2);
 
         // Update heights
-        b.height = Math.max(height(b.left),
-                height(b.right)) + 1;
-        a.height = Math.max(height(a.left),
-                height(a.right)) + 1;
+        b.setHeight( Math.max(height(b.getLeft()),
+                height(b.getRight())) + 1);
+        a.setHeight( Math.max(height(a.getLeft()),
+                height(a.getRight())) + 1);
 
         // Return new root
         return a;

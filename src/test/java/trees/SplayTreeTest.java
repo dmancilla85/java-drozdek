@@ -21,7 +21,6 @@ class SplayTreeTest {
     }
 
     void dumpData(int n){
-
         Random rnd = new Random(System.currentTimeMillis());
 
         for(int i = 0; i < n;i++){
@@ -104,5 +103,182 @@ class SplayTreeTest {
     @DisplayName("Delete by merging on empty tree")
     void deleteByMergingEmpty() {
         assertEquals(1, tree.deleteByMerging(5));
+    }
+
+    @Test
+    @DisplayName("Search finds existing element")
+    void searchExisting() {
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(70);
+        assertNotNull(tree.search(50));
+        assertNotNull(tree.search(30));
+        assertNotNull(tree.search(70));
+    }
+
+    @Test
+    @DisplayName("Search returns null for missing element")
+    void searchMissing() {
+        tree.insert(10);
+        tree.insert(20);
+        assertNull(tree.search(99));
+    }
+
+    @Test
+    @DisplayName("Delete by merging non-existent key")
+    void deleteByMergingNotFound() {
+        tree.insert(10);
+        tree.insert(20);
+        assertEquals(-1, tree.deleteByMerging(99));
+    }
+
+    @Test
+    @DisplayName("Delete by merging node with only left child")
+    void deleteByMergingLeftChildOnly() {
+        tree.insert(50);
+        tree.insert(30);
+        assertEquals(0, tree.deleteByMerging(30));
+        assertEquals(1, tree.size());
+    }
+
+    @Test
+    @DisplayName("Delete by merging node with only right child")
+    void deleteByMergingRightChildOnly() {
+        tree.insert(50);
+        tree.insert(70);
+        assertEquals(0, tree.deleteByMerging(70));
+        assertEquals(1, tree.size());
+    }
+
+    @Test
+    @DisplayName("Delete by merging root node")
+    void deleteByMergingRoot() {
+        tree.insert(50);
+        tree.deleteByMerging(50);
+        assertTrue(tree.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Insert multiple values and check size")
+    void insertMultiple() {
+        tree.insert(5);
+        tree.insert(3);
+        tree.insert(7);
+        tree.insert(1);
+        tree.insert(9);
+        assertEquals(5, tree.size());
+    }
+
+    @Test
+    @DisplayName("Semi-splay on empty tree does nothing")
+    void semiSplayEmpty() {
+        assertDoesNotThrow(() -> tree.semiSplay());
+        assertTrue(tree.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Delete node with two children")
+    void deleteByMergingTwoChildren() {
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(70);
+        tree.insert(20);
+        tree.insert(40);
+        // node 30 has left(20) and right(40) children
+        assertEquals(0, tree.deleteByMerging(30));
+        assertEquals(4, tree.size());
+    }
+
+    @Test
+    @DisplayName("Delete non-root node with two children")
+    void deleteNonRootTwoChildren() {
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(70);
+        tree.insert(20);
+        tree.insert(40);
+        // delete non-root node 70 (right child of root, no children)
+        assertEquals(0, tree.deleteByMerging(70));
+        assertEquals(4, tree.size());
+    }
+
+    @Test
+    @DisplayName("Delete node with right child only as non-root")
+    void deleteNonRootRightChild() {
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(70);
+        tree.insert(80);
+        // node 70 has right child 80
+        assertEquals(0, tree.deleteByMerging(70));
+    }
+
+    @Test
+    @DisplayName("Semi-splay on single node tree")
+    void semiSplaySingleNode() {
+        tree.insert(42);
+        assertDoesNotThrow(() -> tree.semiSplay());
+        assertEquals(1, tree.size());
+    }
+
+    @Test
+    @DisplayName("Semi-splay on two-node tree")
+    void semiSplayTwoNodes() {
+        tree.insert(10);
+        tree.insert(20);
+        assertDoesNotThrow(() -> tree.semiSplay());
+        assertEquals(2, tree.size());
+    }
+
+    @Test
+    @DisplayName("Semi-splay with zig-zig pattern (left-left)")
+    void semiSplayZigZigLeft() {
+        tree.insert(30);
+        tree.insert(20);
+        tree.insert(10);
+        assertDoesNotThrow(() -> tree.semiSplay());
+        assertEquals(3, tree.size());
+    }
+
+    @Test
+    @DisplayName("Semi-splay with zig-zag pattern (left-right)")
+    void semiSplayZigZagLeft() {
+        tree.insert(30);
+        tree.insert(10);
+        tree.insert(20);
+        assertDoesNotThrow(() -> tree.semiSplay());
+        assertEquals(3, tree.size());
+    }
+
+    @Test
+    @DisplayName("Semi-splay with zig-zig pattern (right-right)")
+    void semiSplayZigZigRight() {
+        tree.insert(10);
+        tree.insert(20);
+        tree.insert(30);
+        assertDoesNotThrow(() -> tree.semiSplay());
+        assertEquals(3, tree.size());
+    }
+
+    @Test
+    @DisplayName("Semi-splay with zig-zag pattern (right-left)")
+    void semiSplayZigZagRight() {
+        tree.insert(10);
+        tree.insert(30);
+        tree.insert(20);
+        assertDoesNotThrow(() -> tree.semiSplay());
+        assertEquals(3, tree.size());
+    }
+
+    @Test
+    @DisplayName("Inorder on empty tree does nothing")
+    void inorderEmpty() {
+        assertDoesNotThrow(() -> tree.inorder(System.out));
+    }
+
+    @Test
+    @DisplayName("ToString on empty tree returns null")
+    void toStringEmpty() {
+        assertThrows(NullPointerException.class, () -> tree.toString());
     }
 }

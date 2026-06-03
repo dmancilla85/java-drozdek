@@ -1,4 +1,4 @@
-package org.drozdek.trees;
+package org.drozdek.trees.nodes;
 
 /// Non-leaf node for Trie. Stores an ordered string of branching letters and pointers to child nodes.
 ///
@@ -8,14 +8,14 @@ package org.drozdek.trees;
 ///
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/trie-data-structure/)
 public class TrieNonLeaf extends TrieNode {
-    protected boolean endOfWord;
-    protected String letters;
-    protected TrieNode[] ptr;
+    private boolean endOfWord;
+    private String letters;
+    private TrieNode[] ptr;
 
     public TrieNonLeaf(char ch) {
         letters = "";
         letters += ch;
-        isLeaf = false;
+        setLeaf(false);
         endOfWord = false;
         ptr = new TrieNode[1];
     }
@@ -44,15 +44,39 @@ public class TrieNonLeaf extends TrieNode {
             String childPrefix = isLast ? childrenPrefix + "└── " : childrenPrefix + "├── ";
             String childChildrenPrefix = isLast ? childrenPrefix + "    " : childrenPrefix + "│   ";
 
-            if (child.isLeaf) {
+            if (child.isLeaf()) {
                 buffer.append(childPrefix);
                 buffer.append("leaf: ");
-                buffer.append(((TrieLeaf) child).suffix);
+                buffer.append(((TrieLeaf) child).getSuffix());
                 buffer.append(System.lineSeparator());
             } else {
                 ((TrieNonLeaf) child).print(buffer, childPrefix, childChildrenPrefix);
             }
         }
+    }
+
+    public boolean isEndOfWord() {
+        return endOfWord;
+    }
+
+    public void setEndOfWord(boolean endOfWord) {
+        this.endOfWord = endOfWord;
+    }
+
+    public String getLetters() {
+        return letters;
+    }
+
+    public void setLetters(String letters) {
+        this.letters = letters;
+    }
+
+    public TrieNode[] getPtr() {
+        return ptr;
+    }
+
+    public void setPtr(TrieNode[] ptr) {
+        this.ptr = ptr;
     }
 
     @Override

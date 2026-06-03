@@ -1,4 +1,4 @@
-package org.drozdek.trees;
+package org.drozdek.trees.nodes;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -11,10 +11,10 @@ import java.util.LinkedList;
 ///
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/introduction-to-avl-tree/)
 public class AvlTreeNode {
-    protected final int key;
-    protected int height;
-    protected AvlTreeNode left;
-    protected AvlTreeNode right;
+    private final int key;
+    private int height;
+    private AvlTreeNode left;
+    private AvlTreeNode right;
 
     public AvlTreeNode(int data) {
         this(data, null, null);
@@ -25,6 +25,34 @@ public class AvlTreeNode {
         this.left = left;
         this.right = right;
         this.height = 1;
+    }
+
+    public int getKey() {
+        return key;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public AvlTreeNode getLeft() {
+        return left;
+    }
+
+    public void setLeft(AvlTreeNode left) {
+        this.left = left;
+    }
+
+    public AvlTreeNode getRight() {
+        return right;
+    }
+
+    public void setRight(AvlTreeNode right) {
+        this.right = right;
     }
 
     private void print(StringBuilder buffer, String prefix, String childrenPrefix) {

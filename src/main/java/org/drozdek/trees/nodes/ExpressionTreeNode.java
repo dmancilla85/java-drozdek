@@ -1,4 +1,4 @@
-package org.drozdek.trees;
+package org.drozdek.trees.nodes;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -11,9 +11,9 @@ import java.util.LinkedList;
 ///
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/expression-tree/)
 public class ExpressionTreeNode {
-    protected final char symbol;
-    protected ExpressionTreeNode left;
-    protected ExpressionTreeNode right;
+    private final char symbol;
+    private ExpressionTreeNode left;
+    private ExpressionTreeNode right;
 
     public ExpressionTreeNode(char data) {
         this(data, null, null);
@@ -22,6 +22,26 @@ public class ExpressionTreeNode {
     public ExpressionTreeNode(char data, ExpressionTreeNode left, ExpressionTreeNode right) {
         this.symbol = data;
         this.left = left;
+        this.right = right;
+    }
+
+    public char getSymbol() {
+        return symbol;
+    }
+
+    public ExpressionTreeNode getLeft() {
+        return left;
+    }
+
+    public void setLeft(ExpressionTreeNode left) {
+        this.left = left;
+    }
+
+    public ExpressionTreeNode getRight() {
+        return right;
+    }
+
+    public void setRight(ExpressionTreeNode right) {
         this.right = right;
     }
 

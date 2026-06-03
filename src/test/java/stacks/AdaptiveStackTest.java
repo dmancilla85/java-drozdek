@@ -77,4 +77,77 @@ class AdaptiveStackTest {
         stack.push(2);
         assertEquals(2, stack.topElement(), "Should work like a normal stack");
     }
+
+    @Test
+    @DisplayName("Push and pop many elements (stress test)")
+    void pushPopMany() {
+        for (int i = 0; i < 100; i++)
+            stack.push(i);
+        for (int i = 99; i >= 0; i--)
+            assertEquals(i, stack.pop());
+        assertTrue(stack.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Top element after sequence of operations")
+    void topElementAfterSequence() {
+        stack.push(10);
+        stack.push(20);
+        assertEquals(20, stack.topElement());
+        stack.pop();
+        assertEquals(10, stack.topElement());
+    }
+
+    @Test
+    @DisplayName("ToString returns non-null")
+    void testToString() {
+        stack.push(1);
+        stack.push(2);
+        assertNotNull(stack.toString());
+    }
+
+    @Test
+    @DisplayName("Clear on empty stack does not throw")
+    void clearEmpty() {
+        assertDoesNotThrow(() -> stack.clear());
+        assertTrue(stack.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Push more than 2000 triggers dynamic switch")
+    void pushTriggersDynamicSwitch() {
+        for (int i = 0; i < 2500; i++)
+            stack.push(i);
+        assertEquals(2499, stack.topElement());
+
+        // clear should still work on dynamic stack
+        stack.clear();
+        assertTrue(stack.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Pop after dynamic switch works correctly")
+    void popAfterDynamicSwitch() {
+        for (int i = 0; i < 2500; i++)
+            stack.push(i);
+        for (int i = 0; i < 2500; i++)
+            assertNotNull(stack.pop());
+        assertTrue(stack.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Top element on dynamic stack")
+    void topOnDynamic() {
+        for (int i = 0; i < 2500; i++)
+            stack.push(i);
+        assertEquals(2499, stack.topElement());
+    }
+
+    @Test
+    @DisplayName("ToString on dynamic stack")
+    void toStringDynamic() {
+        for (int i = 0; i < 2500; i++)
+            stack.push(i);
+        assertNotNull(stack.toString());
+    }
 }

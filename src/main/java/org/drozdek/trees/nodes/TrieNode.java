@@ -1,4 +1,4 @@
-package org.drozdek.trees;
+package org.drozdek.trees.nodes;
 
 /// Base class for Trie nodes. Holds a boolean flag indicating whether this is a leaf node.
 ///
@@ -8,5 +8,13 @@ package org.drozdek.trees;
 ///
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/trie-data-structure/)
 public class TrieNode {
-    protected boolean isLeaf;
+    private boolean isLeaf;
+
+    public boolean isLeaf() {
+        return isLeaf;
+    }
+
+    public void setLeaf(boolean leaf) {
+        isLeaf = leaf;
+    }
 }

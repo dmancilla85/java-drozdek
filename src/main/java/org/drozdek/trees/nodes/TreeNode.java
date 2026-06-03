@@ -1,4 +1,4 @@
-package org.drozdek.trees;
+package org.drozdek.trees.nodes;
 
 /// Simple binary tree node. Stores an Object label and left/right child references.
 ///

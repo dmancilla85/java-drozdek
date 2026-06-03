@@ -1,4 +1,4 @@
-package org.drozdek.trees;
+package org.drozdek.trees.nodes;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -11,9 +11,9 @@ import java.util.LinkedList;
 ///
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/binary-search-tree-data-structure/)
 public class BinarySearchTreeNode<T> {
-    protected Comparable<T> key;
-    protected BinarySearchTreeNode<T> left;
-    protected BinarySearchTreeNode<T> right;
+    private Comparable<T> key;
+    private BinarySearchTreeNode<T> left;
+    private BinarySearchTreeNode<T> right;
 
     public BinarySearchTreeNode() {
         this(null, null, null);
@@ -26,6 +26,30 @@ public class BinarySearchTreeNode<T> {
     public BinarySearchTreeNode(Comparable<T> data, BinarySearchTreeNode<T> left, BinarySearchTreeNode<T> right) {
         this.key = data;
         this.left = left;
+        this.right = right;
+    }
+
+    public Comparable<T> getKey() {
+        return key;
+    }
+
+    public void setKey(Comparable<T> key) {
+        this.key = key;
+    }
+
+    public BinarySearchTreeNode<T> getLeft() {
+        return left;
+    }
+
+    public void setLeft(BinarySearchTreeNode<T> left) {
+        this.left = left;
+    }
+
+    public BinarySearchTreeNode<T> getRight() {
+        return right;
+    }
+
+    public void setRight(BinarySearchTreeNode<T> right) {
         this.right = right;
     }
 

@@ -1,6 +1,8 @@
 package org.drozdek.trees;
 
 import org.drozdek.trees.interfaces.TreeInterface;
+import org.drozdek.trees.nodes.ExpressionTreeNode;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -54,8 +56,8 @@ public class ExpressionTree implements TreeInterface {
 
                 // attaching the above two items as the left and right child of our
                 // temp node
-                temp.left = r;
-                temp.right = l;
+                temp.setLeft( r);
+                temp.setRight( l);
 
                 // pushing the temp node into our stack
                 st.push(temp);
@@ -74,9 +76,9 @@ public class ExpressionTree implements TreeInterface {
         if (root == null) return "";
 
         // inorder traversal
-        return inorder(root.left) +
-                root.symbol +
-                inorder(root.right);
+        return inorder(root.getLeft()) +
+                root.getSymbol() +
+                inorder(root.getRight());
     }
 
     private static int compute(int num2, int num1, char token) {
@@ -155,7 +157,7 @@ public class ExpressionTree implements TreeInterface {
 
     private int countNodes(ExpressionTreeNode node) {
         if (node == null) return 0;
-        return 1 + countNodes(node.left) + countNodes(node.right);
+        return 1 + countNodes(node.getLeft()) + countNodes(node.getRight());
     }
 
     /// Check if tree is empty

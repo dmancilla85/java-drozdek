@@ -1,4 +1,4 @@
-package org.drozdek.trees;
+package org.drozdek.trees.nodes;
 
 /// Node for static binary tree. Wraps an Integer value and implements Comparable for heap operations.
 ///

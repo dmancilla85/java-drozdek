@@ -17,16 +17,87 @@ class SuffixTreeTest {
     }
 
     @Test
-    @DisplayName("Print the expression tree")
-    void test(){
-        tree.ukkonen("banana");
-        LoggerService.logInfo(tree.printTree());
-    }
-
-    @Test
     @DisplayName("Ukkonen builds suffix tree")
     void ukkonenBuild() {
         tree.ukkonen("banana");
         assertNotNull(tree.toString());
+    }
+
+    @Test
+    @DisplayName("Print tree for banana")
+    void printBanana() {
+        tree.ukkonen("banana");
+        String output = tree.printTree();
+        assertNotNull(output);
+        assertTrue(output.contains("banana"));
+        LoggerService.logInfo(output);
+    }
+
+    @Test
+    @DisplayName("Ukkonen builds suffix tree for abcabc")
+    void ukkonenAbcabc() {
+        tree.ukkonen("abcabc");
+        assertNotNull(tree.toString());
+        String output = tree.printTree();
+        assertNotNull(output);
+        LoggerService.logInfo(output);
+    }
+
+    @Test
+    @DisplayName("Ukkonen builds suffix tree for aaaaa")
+    void ukkonenAaaaa() {
+        tree.ukkonen("aaaaa");
+        assertNotNull(tree.toString());
+    }
+
+    @Test
+    @DisplayName("Ukkonen builds suffix tree for single char")
+    void ukkonenSingleChar() {
+        tree.ukkonen("aa");
+        assertNotNull(tree.toString());
+    }
+
+    @Test
+    @DisplayName("Constructor with custom range")
+    void constructorCustomRange() {
+        SuffixTree t = new SuffixTree(0, 255);
+        assertNotNull(t);
+    }
+
+    @Test
+    @DisplayName("Ukkonen with different text pattern")
+    void ukkonenAbab() {
+        tree.ukkonen("abab");
+        assertNotNull(tree.toString());
+    }
+
+    @Test
+    @DisplayName("Ukkonen builds suffix tree for repeating char")
+    void ukkonenRepeating() {
+        tree.ukkonen("aaa");
+        assertNotNull(tree.toString());
+    }
+
+    @Test
+    @DisplayName("Ukkonen builds suffix tree for short text")
+    void ukkonenShort() {
+        tree.ukkonen("ab");
+        assertNotNull(tree.toString());
+    }
+
+    @Test
+    @DisplayName("Ukkonen with no repeated chars")
+    void ukkonenNoRepeat() {
+        tree.ukkonen("abcd");
+        assertNotNull(tree.toString());
+    }
+
+    @Test
+    @DisplayName("Check print tree returns correct format with long text")
+    void printTreeFormat() {
+        tree.ukkonen("banana");
+        String output = tree.printTree();
+        assertTrue(output.contains("Name:"));
+        assertTrue(output.contains("Text:"));
     }
 }

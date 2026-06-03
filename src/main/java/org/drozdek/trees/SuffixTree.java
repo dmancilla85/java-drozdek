@@ -1,6 +1,7 @@
 package org.drozdek.trees;
 
 import info.schnatterer.mobynamesgenerator.MobyNamesGenerator;
+import org.drozdek.trees.nodes.SuffixTreeNode;
 
 /// Ukkonen's suffix tree implementation. Builds a suffix tree in linear time for efficient
 /// substring and pattern matching operations.
@@ -27,24 +28,24 @@ public class SuffixTree {
         size = to - from + 1;
         offset = from;
         root = new SuffixTreeNode(size);
-        root.suffixLink = root;
+        root.setSuffixLink(root);
         name = MobyNamesGenerator.getRandomName();
     }
 
     private SuffixTreeNode findCanonicalNode(SuffixTreeNode p, int rt) {
         if (rt >= left) {
             int pos = text.charAt(left) - offset;
-            SuffixTreeNode pp = p.descendants[pos];
-            int lt = p.left[pos];
-            int rt2 = p.right[pos];
+            SuffixTreeNode pp = p.getDescendants()[pos];
+            int lt = p.getLeft()[pos];
+            int rt2 = p.getRight()[pos];
             while (rt2 - lt <= rt - left) {
                 left = left + rt2 - lt + 1;
                 p = pp;
                 if (left <= rt) {
                     pos = text.charAt(left) - offset;
-                    pp = p.descendants[pos];
-                    lt = p.left[pos];
-                    rt2 = p.right[pos];
+                    pp = p.getDescendants()[pos];
+                    lt = p.getLeft()[pos];
+                    rt2 = p.getRight()[pos];
                     if (p == root)
                         pp = root;
                 }
@@ -62,14 +63,12 @@ public class SuffixTree {
         if (p != null) { // if a nonleaf
             if (p == root) {
                 tree.append("ID: ");
-                tree.append(p.id);
-                tree.append(" ");
-                tree.append(text.charAt(p.id));
-            } else if (p.suffixLink != null) {
+                    tree.append(p.getId());
+                } else if (p.getSuffixLink() != null) {
                 // to print in the middle of
                 tree.append(text, lt, rt + 1);
                 tree.append(" ");
-                tree.append(p.suffixLink.id);
+                tree.append(p.getSuffixLink().getId());
                 tree.append(" [");
                 tree.append(lt);
                 tree.append(" ");
@@ -78,12 +77,12 @@ public class SuffixTree {
             } else {
                 tree.append(text, lt, pos + 1);
                 tree.append(" ");
-                tree.append(p.id);
+                tree.append(p.getId());
             }
 
             for (char i = 0; i < size; i++)
-                if (p.left[i] != -1) { // if a tree node
-                    tree.append(printTree(p.descendants[i], lvl + 1, p.left[i], p.right[i], pos + 1));
+                if (p.getLeft()[i] != -1) { // if a tree node
+                    tree.append(printTree(p.getDescendants()[i], lvl + 1, p.getLeft()[i], p.getRight()[i], pos + 1));
                 }
         } else if (pos + 1 < text.length() && pos > lt) {
             tree.append(text, lt, pos + 1);
@@ -128,9 +127,9 @@ public class SuffixTree {
 
         if (left <= rt) {
             int pos = text.charAt(left) - offset;
-            SuffixTreeNode pp = p.descendants[pos];
-            int lt = p.left[pos];
-            int rt2 = p.right[pos];
+            SuffixTreeNode pp = p.getDescendants()[pos];
+            int lt = p.getLeft()[pos];
+            int rt2 = p.getRight()[pos];
 
             if (text.charAt(i) == text.charAt(lt + rt - left + 1)) { // if T(lt..rt) is
                 endPoint = true;                      // and extension of
@@ -143,16 +142,16 @@ public class SuffixTree {
                  edge(r,pp) = T(lt+Rt-Lt+1..rt)
                 */
                 pos = text.charAt(lt) - offset;
-                SuffixTreeNode r = p.descendants[pos] = new SuffixTreeNode(size);
-                p.right[pos] = lt + rt - left;
+                SuffixTreeNode r = p.getDescendants()[pos] = new SuffixTreeNode(size);
+                p.getRight()[pos] = lt + rt - left;
                 pos = text.charAt(lt + rt - left + 1) - offset;
-                r.descendants[pos] = pp;
-                r.left[pos] = lt + rt - left + 1;
-                r.right[pos] = rt2;
+                r.getDescendants()[pos] = pp;
+                r.getLeft()[pos] = lt + rt - left + 1;
+                r.getRight()[pos] = rt2;
                 endPoint = false;
                 return r;
             }
-        } else endPoint = p.left[text.charAt(i) - offset] != -1;
+        } else endPoint = p.getLeft()[text.charAt(i) - offset] != -1;
         return p;
     }
 
@@ -174,8 +173,8 @@ public class SuffixTree {
         final int pos = this.text.charAt(0) - offset;
         SuffixTreeNode canonicalNodeAP = root;
         SuffixTreeNode canonicalNodeEP;
-        root.left[pos] = 0;
-        root.right[pos] = n - 1;
+        root.getLeft()[pos] = 0;
+        root.getRight()[pos] = n - 1;
 
         for (int i = 1; i < n; i++) {
             canonicalNodeEP = update(canonicalNodeAP, i);
@@ -190,23 +189,23 @@ public class SuffixTree {
         SuffixTreeNode r = testAndSplit(p, i);
         while (!endPoint) {
             int pos = text.charAt(i) - offset;
-            r.left[pos] = i;      // add a T(i)-edge to r
-            r.right[pos] = text.length() - 1;
+            r.getLeft()[pos] = i;      // add a T(i)-edge to r
+            r.getRight()[pos] = text.length() - 1;
 
             if (prev != null)
-                prev.suffixLink = r;
+                prev.setSuffixLink(r);
 
             prev = r;
 
             if (p == root)
                 left++;
-            else p = p.suffixLink;
+            else p = p.getSuffixLink();
 
             p = findCanonicalNode(p, i - 1);
             r = testAndSplit(p, i); // check if not the endpoint
         }
         if (prev != null)
-            prev.suffixLink = p;
+            prev.setSuffixLink(p);
         return p;
     }
 

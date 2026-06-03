@@ -1,4 +1,4 @@
-package org.drozdek.trees;
+package org.drozdek.trees.nodes;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -11,10 +11,10 @@ import java.util.LinkedList;
 ///
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/splay-tree/)
 public class SplayTreeNode<T> {
-    protected final Comparable<T> key;
-    protected SplayTreeNode<T> left;
-    protected SplayTreeNode<T> right;
-    protected SplayTreeNode<T> parent;
+    private final Comparable<T> key;
+    private SplayTreeNode<T> left;
+    private SplayTreeNode<T> right;
+    private SplayTreeNode<T> parent;
 
 
     public SplayTreeNode(Comparable<T> element, SplayTreeNode<T> left,
@@ -27,6 +27,34 @@ public class SplayTreeNode<T> {
 
     public SplayTreeNode(Comparable<T> element) {
         this(element, null, null, null);
+    }
+
+    public Comparable<T> getKey() {
+        return key;
+    }
+
+    public SplayTreeNode<T> getLeft() {
+        return left;
+    }
+
+    public void setLeft(SplayTreeNode<T> left) {
+        this.left = left;
+    }
+
+    public SplayTreeNode<T> getRight() {
+        return right;
+    }
+
+    public void setRight(SplayTreeNode<T> right) {
+        this.right = right;
+    }
+
+    public SplayTreeNode<T> getParent() {
+        return parent;
+    }
+
+    public void setParent(SplayTreeNode<T> parent) {
+        this.parent = parent;
     }
 
     private void print(StringBuilder buffer, String prefix, String childrenPrefix) {

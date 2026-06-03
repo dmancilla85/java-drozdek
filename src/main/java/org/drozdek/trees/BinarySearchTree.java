@@ -1,5 +1,7 @@
 package org.drozdek.trees;
 
+import org.drozdek.trees.nodes.BinarySearchTreeNode;
+
 import org.drozdek.queues.Queue;
 import org.drozdek.stacks.Stack;
 import org.drozdek.trees.interfaces.TreeInterface;
@@ -36,24 +38,24 @@ public class BinarySearchTree<T> implements TreeInterface {
         int count = 0;
 
         // Make tmp pointer to traverse and right flatten the given BST.
-        BinarySearchTreeNode<Integer> tmp = grand.right;
+        BinarySearchTreeNode<Integer> tmp = grand.getRight();
 
         // Traverse until tmp becomes NULL
         while (tmp != null) {
             // If left exist for node pointed by tmp then right rotate it.
-            if (tmp.left != null) {
+            if (tmp.getLeft() != null) {
                 BinarySearchTreeNode<Integer> oldTmp = tmp;
-                tmp = tmp.left;
-                oldTmp.left = tmp.right;
-                tmp.right = oldTmp;
-                grand.right = tmp;
+                tmp = tmp.getLeft();
+                oldTmp.setLeft( tmp.getRight());
+                tmp.setRight( oldTmp);
+                grand.setRight( tmp);
             }
 
             // If left doesn't exist add 1 to count and traverse further right to flatten remaining BST.
             else {
                 count++;
                 grand = tmp;
-                tmp = tmp.right;
+                tmp = tmp.getRight();
             }
         }
 
@@ -66,18 +68,18 @@ public class BinarySearchTree<T> implements TreeInterface {
     /// @param m
     private static void compress(BinarySearchTreeNode<Integer> grand, int m) {
         // Make tmp pointer to traverse and compress the given BST.
-        BinarySearchTreeNode<Integer> tmp = grand.right;
+        BinarySearchTreeNode<Integer> tmp = grand.getRight();
 
         // Traverse and left-rotate root m times to compress given vine form of BST.
         int i = 0;
         while (i < m) {
             BinarySearchTreeNode<Integer> oldTmp = tmp;
-            tmp = tmp.right;
-            grand.right = tmp;
-            oldTmp.right = tmp.left;
-            tmp.left = oldTmp;
+            tmp = tmp.getRight();
+            grand.setRight( tmp);
+            oldTmp.setRight( tmp.getLeft());
+            tmp.setLeft( oldTmp);
             grand = tmp;
-            tmp = tmp.right;
+            tmp = tmp.getRight();
             i++;
         }
     }
@@ -104,7 +106,7 @@ public class BinarySearchTree<T> implements TreeInterface {
         BinarySearchTreeNode<Integer> grand = new BinarySearchTreeNode<>(0);
 
         // assign the right of dummy node as our input BST
-        grand.right = root;
+        grand.setRight( root);
 
         // get the number of nodes in input BST and simultaneously convert it into right linked list.
         int count = binarySearchTreeToVine(grand);
@@ -124,7 +126,7 @@ public class BinarySearchTree<T> implements TreeInterface {
         }
 
         // return the balanced tree
-        return new BinarySearchTree<>(grand.right);
+        return new BinarySearchTree<>(grand.getRight());
     }
 
     /// This balance algorithm requires a previously sorted additional array
@@ -156,11 +158,11 @@ public class BinarySearchTree<T> implements TreeInterface {
 
                 visit(p, out);
 
-                if (p.left != null)
-                    queue.enqueue(p.left);
+                if (p.getLeft() != null)
+                    queue.enqueue(p.getLeft());
 
-                if (p.right != null) {
-                    queue.enqueue(p.right);
+                if (p.getRight() != null) {
+                    queue.enqueue(p.getRight());
                 }
             }
         }
@@ -174,7 +176,7 @@ public class BinarySearchTree<T> implements TreeInterface {
 
         //recursive call to left child and right child and
         // add the result of these with 1 ( 1 for counting the root)
-        return 1 + countNodes(node.left) + countNodes(node.right);
+        return 1 + countNodes(node.getLeft()) + countNodes(node.getRight());
     }
 
     /// Delete node by copying branches
@@ -194,34 +196,34 @@ public class BinarySearchTree<T> implements TreeInterface {
         if (p == null)
             return 1;
 
-        if (p.key != data)
+        if (p.getKey() != data)
             // 1: empty tree  / -1:  key not found
             return -1;
 
-        if (node.right == null)
-            node = node.left;
-        else if (node.left == null)
-            node = node.right;
+        if (node.getRight() == null)
+            node = node.getLeft();
+        else if (node.getLeft() == null)
+            node = node.getRight();
         else {
             BinarySearchTreeNode<T>[] aux = moveToRightmostNode(node);
 
             BinarySearchTreeNode<T> tmp = aux[0];
             BinarySearchTreeNode<T> previous = aux[1];
 
-            node.key = tmp.key;
+            node.setKey( tmp.getKey());
 
             if (previous == node)
-                previous.left = tmp.left;
+                previous.setLeft( tmp.getLeft());
             else
-                previous.right = tmp.left;
+                previous.setRight( tmp.getLeft());
         }
 
         if (p == root)
             root = node;
-        else if (prev.left == p)
-            prev.left = node;
+        else if (prev.getLeft() == p)
+            prev.setLeft( node);
         else
-            prev.right = node;
+            prev.setRight( node);
 
         return 0;
     }
@@ -244,30 +246,30 @@ public class BinarySearchTree<T> implements TreeInterface {
         if (p == null)
             return 1;
 
-        if (p.key != data)
+        if (p.getKey() != data)
             // 1: empty tree  / -1:  key not found
             return -1;
 
-        if (node.right == null)
-            node = node.left;
-        else if (node.left == null)
-            node = node.right;
+        if (node.getRight() == null)
+            node = node.getLeft();
+        else if (node.getLeft() == null)
+            node = node.getRight();
         else {
-            tmp = node.left;
+            tmp = node.getLeft();
 
-            while (tmp.right != null)
-                tmp = tmp.right;
+            while (tmp.getRight() != null)
+                tmp = tmp.getRight();
 
-            tmp.right = node.right;
-            node = node.left;
+            tmp.setRight( node.getRight());
+            node = node.getLeft();
         }
 
         if (p == root)
             root = node;
-        else if (prev.left == p)
-            prev.left = node;
+        else if (prev.getLeft() == p)
+            prev.setLeft( node);
         else
-            prev.right = node;
+            prev.setRight( node);
         return 0;
     }
 
@@ -286,9 +288,9 @@ public class BinarySearchTree<T> implements TreeInterface {
         if (p == null)
             return;
 
-        inorder(p.left, out);
+        inorder(p.getLeft(), out);
         visit(p, out);
-        inorder(p.right, out);
+        inorder(p.getRight(), out);
     }
 
     /// Insert a new node in the tree.
@@ -301,18 +303,18 @@ public class BinarySearchTree<T> implements TreeInterface {
         while (p != null) {
             previous = p;
 
-            if (p.key.compareTo((T) data) < 0) // should be <
-                p = p.right;
+            if (p.getKey().compareTo((T) data) < 0) // should be <
+                p = p.getRight();
             else
-                p = p.left;
+                p = p.getLeft();
         }
 
         if (root == null)
             root = new BinarySearchTreeNode<>(data);
-        else if (previous.key.compareTo((T) data) < 0)
-            previous.right = new BinarySearchTreeNode<>(data);
+        else if (previous.getKey().compareTo((T) data) < 0)
+            previous.setRight( new BinarySearchTreeNode<>(data));
         else
-            previous.left = new BinarySearchTreeNode<>(data);
+            previous.setLeft( new BinarySearchTreeNode<>(data));
     }
 
     /// Non-recursive implementation for the in-order tree path
@@ -325,18 +327,18 @@ public class BinarySearchTree<T> implements TreeInterface {
         while (p != null) {
             while (p != null) {
                 // stacks the right child (if any) and the same node when it moves to the left
-                if (p.right != null)
-                    stack.push(p.right);
+                if (p.getRight() != null)
+                    stack.push(p.getRight());
 
                 stack.push(p);
-                p = p.left;
+                p = p.getLeft();
             }
 
             // extracts a node without left child
             p = stack.pop();
 
             // visits the node and all the nodes without right child
-            while (!stack.isEmpty() && p.right == null) {
+            while (!stack.isEmpty() && p.getRight() == null) {
                 visit(p, out);
                 p = stack.pop();
             }
@@ -356,12 +358,12 @@ public class BinarySearchTree<T> implements TreeInterface {
         Stack<BinarySearchTreeNode<T>> stack = new Stack<>();
 
         while (p != null) {
-            while (p.left != null) {
+            while (p.getLeft() != null) {
                 stack.push(p);
-                p = p.left;
+                p = p.getLeft();
             }
 
-            while (p.right == null || p.left == q) {
+            while (p.getRight() == null || p.getLeft() == q) {
                 visit(p, out);
                 q = p;
 
@@ -372,7 +374,7 @@ public class BinarySearchTree<T> implements TreeInterface {
             }
 
             stack.push(p);
-            p = p.right;
+            p = p.getRight();
 
         }
     }
@@ -393,13 +395,13 @@ public class BinarySearchTree<T> implements TreeInterface {
             p = stack.pop();
             visit(p, out);
 
-            if (p.right != null)
-                stack.push(p.right);
+            if (p.getRight() != null)
+                stack.push(p.getRight());
 
             // the leftmost child is inserted after the rightmost child so that the leftmost child is at the top
             // of the stack
-            if (p.left != null)
-                stack.push(p.left);
+            if (p.getLeft() != null)
+                stack.push(p.getLeft());
         }
     }
 
@@ -411,26 +413,26 @@ public class BinarySearchTree<T> implements TreeInterface {
         BinarySearchTreeNode<T> tmp;
 
         while (p != null) {
-            if (p.left == null) {
+            if (p.getLeft() == null) {
                 visit(p, out);
-                p = p.right;
+                p = p.getRight();
             } else {
-                tmp = p.left;
+                tmp = p.getLeft();
 
                 // moves to the rightmost node in left subtree, otherwise moves to the p temporal parent
-                while (tmp.right != null && tmp.right != p)
-                    tmp = tmp.right;
+                while (tmp.getRight() != null && tmp.getRight() != p)
+                    tmp = tmp.getRight();
 
                 // if the rightmost node was reached, it turns in a temporal parent of the current root
-                if (tmp.right == null) {
-                    tmp.right = p;
-                    p = p.left;
+                if (tmp.getRight() == null) {
+                    tmp.setRight( p);
+                    p = p.getLeft();
                 } else {
                     // Otherwise it reached a temporal parent, visits p node and then cuts the current parent's
                     // right pointer, whereby it ceases to be a father
                     visit(p, out);
-                    tmp.right = null;
-                    p = p.right;
+                    tmp.setRight( null);
+                    p = p.getRight();
                 }
             }
         }
@@ -444,25 +446,25 @@ public class BinarySearchTree<T> implements TreeInterface {
         BinarySearchTreeNode<T> tmp;
 
         while (p != null) {
-            if (p.right == null) {
+            if (p.getRight() == null) {
                 visit(p, out);
-                p = p.left;
+                p = p.getLeft();
             } else {
-                tmp = p.right;
+                tmp = p.getRight();
 
                 // moves to the rightmost node in left subtree, otherwise moves to the p temporal parent
-                while (tmp.left != null && tmp.left != p)
-                    tmp = tmp.left;
+                while (tmp.getLeft() != null && tmp.getLeft() != p)
+                    tmp = tmp.getLeft();
 
                 // if the rightmost node was reached, it turns in a temporal parent of the current root
-                if (tmp.left == null) {
+                if (tmp.getLeft() == null) {
                     // Node is visited after the tree transformation
-                    tmp.left = p;
-                    p = p.right;
+                    tmp.setLeft( p);
+                    p = p.getRight();
                     visit(p, out);
                 } else {
-                    tmp.left = null;
-                    p = p.left;
+                    tmp.setLeft( null);
+                    p = p.getLeft();
                 }
             }
         }
@@ -476,36 +478,36 @@ public class BinarySearchTree<T> implements TreeInterface {
         BinarySearchTreeNode<T> tmp;
 
         while (p != null) {
-            if (p.left == null) {
+            if (p.getLeft() == null) {
                 visit(p, out);
-                p = p.right;
+                p = p.getRight();
             } else {
-                tmp = p.left;
+                tmp = p.getLeft();
 
                 // moves to the rightmost node in left subtree, otherwise moves to the p temporal parent
-                while (tmp.right != null && tmp.right != p)
-                    tmp = tmp.right;
+                while (tmp.getRight() != null && tmp.getRight() != p)
+                    tmp = tmp.getRight();
 
                 // if the rightmost node was reached, it turns in a temporal parent of the current root
-                if (tmp.right == null) {
+                if (tmp.getRight() == null) {
                     // Node is visited before the tree transformation
                     visit(p, out);
-                    tmp.right = p;
-                    p = p.left;
+                    tmp.setRight( p);
+                    p = p.getLeft();
                 } else {
-                    tmp.right = null;
-                    p = p.right;
+                    tmp.setRight( null);
+                    p = p.getRight();
                 }
             }
         }
     }
 
     private BinarySearchTreeNode<T>[] moveToRightmostNode(BinarySearchTreeNode<T> node) {
-        BinarySearchTreeNode<T>[] results = new BinarySearchTreeNode[]{node.left, node};
+        BinarySearchTreeNode<T>[] results = new BinarySearchTreeNode[]{node.getLeft(), node};
 
-        while (results[0].right != null) {
+        while (results[0].getRight() != null) {
             results[1] = results[0];
-            results[0] = results[0].right;
+            results[0] = results[0].getRight();
         }
 
         return results;
@@ -523,8 +525,8 @@ public class BinarySearchTree<T> implements TreeInterface {
         if (p == null)
             return;
 
-        postorder(p.left, out);
-        postorder(p.right, out);
+        postorder(p.getLeft(), out);
+        postorder(p.getRight(), out);
         visit(p, out);
     }
 
@@ -542,17 +544,17 @@ public class BinarySearchTree<T> implements TreeInterface {
             return;
 
         visit(p, out);
-        preorder(p.left, out);
-        preorder(p.right, out);
+        preorder(p.getLeft(), out);
+        preorder(p.getRight(), out);
     }
 
     public Comparable<T> search(BinarySearchTreeNode<T> p, Comparable<T> element) {
         while (p != null) {
-            if (element == p.key)
-                return p.key;
-            else if (element.compareTo((T) p.key) < 0)
-                p = p.left;
-            else p = p.right;
+            if (element == p.getKey())
+                return p.getKey();
+            else if (element.compareTo((T) p.getKey()) < 0)
+                p = p.getLeft();
+            else p = p.getRight();
         }
         return null;
     }
@@ -566,13 +568,13 @@ public class BinarySearchTree<T> implements TreeInterface {
         vars[0] = root;
         vars[1] = null;
 
-        while (vars[0] != null && vars[0].key != key) {
+        while (vars[0] != null && vars[0].getKey() != key) {
             vars[1] = vars[0];
 
-            if (vars[0].key.compareTo(key) < 0)
-                vars[0] = vars[0].right;
+            if (vars[0].getKey().compareTo(key) < 0)
+                vars[0] = vars[0].getRight();
             else
-                vars[0] = vars[0].left;
+                vars[0] = vars[0].getLeft();
         }
 
         return vars;
@@ -595,6 +597,6 @@ public class BinarySearchTree<T> implements TreeInterface {
     }
 
     protected void visit(BinarySearchTreeNode<T> p, PrintStream out) {
-        out.println(p.key + " ");
+        out.println(p.getKey() + " ");
     }
 }

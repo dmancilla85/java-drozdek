@@ -2,6 +2,9 @@ package org.drozdek.trees;
 
 import org.drozdek.commons.LoggerService;
 import org.drozdek.trees.interfaces.TreeInterface;
+import org.drozdek.trees.nodes.TrieLeaf;
+import org.drozdek.trees.nodes.TrieNode;
+import org.drozdek.trees.nodes.TrieNonLeaf;
 
 /// Trie (prefix tree) data structure. Supports insertion and lookup of strings with shared prefixes,
 /// using a hybrid non-leaf/leaf node structure.
@@ -28,29 +31,29 @@ public class Trie implements TreeInterface {
 
     private void addCell(char ch, TrieNonLeaf p, int stop) {
         int i;
-        int len = p.letters.length();
+        int len = p.getLetters().length();
         char[] s = new char[len + 1];
-        TrieNode[] tmp = p.ptr;
-        p.ptr = new TrieNode[len + 1];
+        TrieNode[] tmp = p.getPtr();
+        p.setPtr(new TrieNode[len + 1]);
 
         for (i = 0; i < len + 1; i++)
-            p.ptr[i] = null;
+            p.getPtr()[i] = null;
 
         if (stop < len) {
             for (i = len; i >= stop + 1; i--) {
-                p.ptr[i] = tmp[i - 1];
-                s[i] = p.letters.charAt(i - 1);
+                p.getPtr()[i] = tmp[i - 1];
+                s[i] = p.getLetters().charAt(i - 1);
             }
         }
 
         s[stop] = ch;
 
         for (i = stop - 1; i >= 0; i--) {
-            p.ptr[i] = tmp[i];
-            s[i] = p.letters.charAt(i);
+            p.getPtr()[i] = tmp[i];
+            s[i] = p.getLetters().charAt(i);
         }
 
-        p.letters = new String(s);
+        p.setLetters(new String(s));
     }
 
     private void createLeaf(char ch, String suffix, TrieNonLeaf p) {
@@ -62,12 +65,12 @@ public class Trie implements TreeInterface {
         }
 
         if (pos == NOT_FOUND) {
-            for (pos = 0; pos < p.letters.length() && p.letters.charAt(pos) < ch; pos++)
+            for (pos = 0; pos < p.getLetters().length() && p.getLetters().charAt(pos) < ch; pos++)
                 ;
             addCell(ch, p, pos);
         }
 
-        p.ptr[pos] = lf;
+        p.getPtr()[pos] = lf;
     }
 
     public boolean found(String word) {
@@ -79,26 +82,26 @@ public class Trie implements TreeInterface {
             if (p == null)
                 return false;
 
-            if (p.isLeaf) {
+            if (p.isLeaf()) {
                 assert p instanceof TrieLeaf;
                 TrieLeaf lf = (TrieLeaf) p;
-                return word.substring(i).equals(lf.suffix);
+                return word.substring(i).equals(lf.getSuffix());
             }
 
             if (i >= word.length()) {
-                return ((TrieNonLeaf) p).endOfWord;
+                return ((TrieNonLeaf) p).isEndOfWord();
             }
 
             pos = position((TrieNonLeaf) p, word.charAt(i));
 
             if (pos != NOT_FOUND && i + 1 == word.length()) {
-                if (((TrieNonLeaf) p).ptr[pos] == null)
+                if (((TrieNonLeaf) p).getPtr()[pos] == null)
                     return true;
                 else
-                    return !((TrieNonLeaf) p).ptr[pos].isLeaf &&
-                            ((TrieNonLeaf) ((TrieNonLeaf) p).ptr[pos]).endOfWord;
-            } else if (pos != NOT_FOUND && ((TrieNonLeaf) p).ptr[pos] != null) {
-                p = ((TrieNonLeaf) p).ptr[pos];
+                    return !((TrieNonLeaf) p).getPtr()[pos].isLeaf() &&
+                            ((TrieNonLeaf) ((TrieNonLeaf) p).getPtr()[pos]).isEndOfWord();
+            } else if (pos != NOT_FOUND && ((TrieNonLeaf) p).getPtr()[pos] != null) {
+                p = ((TrieNonLeaf) p).getPtr()[pos];
                 i++;
             } else
                 return false;
@@ -118,28 +121,28 @@ public class Trie implements TreeInterface {
 
         while (true) {
             if (i == word.length()) {
-                current.endOfWord = true;
+                current.setEndOfWord(true);
                 return;
             }
 
             int pos = position(current, word.charAt(i));
 
-            if (pos != NOT_FOUND && current.ptr[pos] == null) {
+            if (pos != NOT_FOUND && current.getPtr()[pos] == null) {
                 if (i + 1 == word.length()) {
-                    current.endOfWord = true;
+                    current.setEndOfWord(true);
                     return;
                 }
 
-                current.ptr[pos] = new TrieNonLeaf(word.charAt(i + 1));
-                ((TrieNonLeaf) current.ptr[pos]).endOfWord = true;
+                current.getPtr()[pos] = new TrieNonLeaf(word.charAt(i + 1));
+                ((TrieNonLeaf) current.getPtr()[pos]).setEndOfWord(true);
 
                 String s = (word.length() > i + 2) ? word.substring(i + 2) : null;
-                createLeaf(word.charAt(i + 1), s, (TrieNonLeaf) current.ptr[pos]);
+                createLeaf(word.charAt(i + 1), s, (TrieNonLeaf) current.getPtr()[pos]);
                 return;
-            } else if (pos != NOT_FOUND && current.ptr[pos].isLeaf) {
-                TrieLeaf lf = (TrieLeaf) current.ptr[pos];
+            } else if (pos != NOT_FOUND && current.getPtr()[pos].isLeaf()) {
+                TrieLeaf lf = (TrieLeaf) current.getPtr()[pos];
 
-                if (lf.suffix.equals(word.substring(i + 1))) {
+                if (lf.getSuffix().equals(word.substring(i + 1))) {
                     LoggerService.logError("Duplicate entry (#3): " + word);
                     return;
                 }
@@ -150,23 +153,23 @@ public class Trie implements TreeInterface {
                     pos = position(current, word.charAt(i + offset));
 
                     if (word.length() == i + offset + 1) {
-                        current.ptr[pos] = new TrieNonLeaf(lf.suffix.charAt(offset));
-                        current = (TrieNonLeaf) current.ptr[pos];
-                        current.endOfWord = true;
-                        createLeaf(lf.suffix.charAt(offset), lf.suffix.substring(offset + 1), current);
+                        current.getPtr()[pos] = new TrieNonLeaf(lf.getSuffix().charAt(offset));
+                        current = (TrieNonLeaf) current.getPtr()[pos];
+                        current.setEndOfWord(true);
+                        createLeaf(lf.getSuffix().charAt(offset), lf.getSuffix().substring(offset + 1), current);
                         return;
-                    } else if (lf.suffix.length() == offset) {
-                        current.ptr[pos] = new TrieNonLeaf(word.charAt(i + offset + 1));
-                        current = (TrieNonLeaf) current.ptr[pos];
-                        current.endOfWord = true;
+                    } else if (lf.getSuffix().length() == offset) {
+                        current.getPtr()[pos] = new TrieNonLeaf(word.charAt(i + offset + 1));
+                        current = (TrieNonLeaf) current.getPtr()[pos];
+                        current.setEndOfWord(true);
                         createLeaf(word.charAt(i + offset + 1), word.substring(i + offset + 2), current);
                         return;
                     }
 
-                    current.ptr[pos] = new TrieNonLeaf(word.charAt(i + offset + 1));
-                    current = (TrieNonLeaf) current.ptr[pos];
+                    current.getPtr()[pos] = new TrieNonLeaf(word.charAt(i + offset + 1));
+                    current = (TrieNonLeaf) current.getPtr()[pos];
                     offset++;
-                } while (word.charAt(i + offset) == lf.suffix.charAt(offset - 1));
+                } while (word.charAt(i + offset) == lf.getSuffix().charAt(offset - 1));
 
                 offset--;
                 String s = null;
@@ -176,24 +179,24 @@ public class Trie implements TreeInterface {
 
                 createLeaf(word.charAt(i + offset + 1), s, current);
 
-                if (lf.suffix.length() > offset + 1)
-                    s = lf.suffix.substring(offset + 1);
+                if (lf.getSuffix().length() > offset + 1)
+                    s = lf.getSuffix().substring(offset + 1);
                 else
                     s = null;
-                createLeaf(lf.suffix.charAt(offset), s, current);
+                createLeaf(lf.getSuffix().charAt(offset), s, current);
                 return;
             } else if (pos != NOT_FOUND) {
-                current = (TrieNonLeaf) current.ptr[pos];
+                current = (TrieNonLeaf) current.getPtr()[pos];
                 i++;
             } else {
                 addCell(word.charAt(i), current, 0);
                 pos = position(current, word.charAt(i));
                 if (i + 1 == word.length()) {
-                    current.endOfWord = true;
+                    current.setEndOfWord(true);
                     return;
                 }
                 String suffix = word.substring(i + 1);
-                current.ptr[pos] = new TrieLeaf(suffix);
+                current.getPtr()[pos] = new TrieLeaf(suffix);
                 return;
             }
         }
@@ -203,24 +206,24 @@ public class Trie implements TreeInterface {
 
         StringBuilder trie = new StringBuilder();
 
-        if (p.isLeaf) {
+        if (p.isLeaf()) {
             trie.append("\t".repeat(Math.max(0, depth)));
             trie.append(" >")
                     .append(prefix)
                     .append("|")
-                    .append(((TrieLeaf) p).suffix);
+                    .append(((TrieLeaf) p).getSuffix());
         } else {
-            for (int i = ((TrieNonLeaf) p).letters.length() - 1; i >= 0; i--) {
-                if (((TrieNonLeaf) p).ptr[i] != null) {
-                    prefix = prefix.substring(0, depth) + ((TrieNonLeaf) p).letters.charAt(i);
+            for (int i = ((TrieNonLeaf) p).getLetters().length() - 1; i >= 0; i--) {
+                if (((TrieNonLeaf) p).getPtr()[i] != null) {
+                    prefix = prefix.substring(0, depth) + ((TrieNonLeaf) p).getLetters().charAt(i);
                 } else {
                     trie.append("\t".repeat(Math.max(0, depth + 1)));
                     trie.append(" >>").append(prefix, 0, depth)
-                            .append(((TrieNonLeaf) p).letters.charAt(i));
+                            .append(((TrieNonLeaf) p).getLetters().charAt(i));
                 }
             }
 
-            if (((TrieNonLeaf) p).endOfWord) {
+            if (((TrieNonLeaf) p).isEndOfWord()) {
                 trie.append("\t".repeat(Math.max(0, depth + 1)));
                 trie.append(" >>").append(prefix, 0, depth);
             }
@@ -231,11 +234,11 @@ public class Trie implements TreeInterface {
 
     private int position(TrieNonLeaf p, char ch) {
         int i = 0;
-        while (i < p.letters.length() && p.letters.charAt(i) != ch) {
+        while (i < p.getLetters().length() && p.getLetters().charAt(i) != ch) {
             i++;
         }
 
-        return (i < p.letters.length()) ? i : NOT_FOUND;
+        return (i < p.getLetters().length()) ? i : NOT_FOUND;
     }
 
     public boolean isEmpty() {
@@ -248,13 +251,13 @@ public class Trie implements TreeInterface {
 
     private int sizeRecursive(TrieNode node) {
         if (node == null) return 0;
-        if (node.isLeaf) return 1;
+        if (node.isLeaf()) return 1;
 
         TrieNonLeaf n = (TrieNonLeaf) node;
-        int count = n.endOfWord ? 1 : 0;
-        for (int i = 0; i < n.letters.length(); i++) {
-            if (n.ptr[i] != null) {
-                count += sizeRecursive(n.ptr[i]);
+        int count = n.isEndOfWord() ? 1 : 0;
+        for (int i = 0; i < n.getLetters().length(); i++) {
+            if (n.getPtr()[i] != null) {
+                count += sizeRecursive(n.getPtr()[i]);
             }
         }
         return count;
@@ -271,28 +274,28 @@ public class Trie implements TreeInterface {
     private void printNode(StringBuilder buffer, String prefix, String childrenPrefix, TrieNode node) {
         if (node == null) return;
 
-        if (node.isLeaf) {
+        if (node.isLeaf()) {
             buffer.append(prefix);
             buffer.append("leaf: ");
-            buffer.append(((TrieLeaf) node).suffix);
+            buffer.append(((TrieLeaf) node).getSuffix());
             buffer.append(System.lineSeparator());
             return;
         }
 
         TrieNonLeaf n = (TrieNonLeaf) node;
         buffer.append(prefix);
-        buffer.append(n.letters);
-        if (n.endOfWord) buffer.append(" ($)");
+        buffer.append(n.getLetters());
+        if (n.isEndOfWord()) buffer.append(" ($)");
         buffer.append(System.lineSeparator());
 
         int childCount = 0;
-        for (TrieNode child : n.ptr) {
+        for (TrieNode child : n.getPtr()) {
             if (child != null) childCount++;
         }
 
         int shown = 0;
-        for (int i = n.letters.length() - 1; i >= 0; i--) {
-            TrieNode child = n.ptr[i];
+        for (int i = n.getLetters().length() - 1; i >= 0; i--) {
+            TrieNode child = n.getPtr()[i];
             if (child == null) continue;
             shown++;
             boolean isLast = (shown == childCount);

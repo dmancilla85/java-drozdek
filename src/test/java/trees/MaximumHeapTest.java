@@ -118,4 +118,117 @@ class MaximumHeapTest {
         heap.changeValueOnAKey(99, 100);
         assertEquals(5, heap.size());
     }
+
+    @Test
+    @DisplayName("Increase key value")
+    void increaseKey() {
+        dumpData();
+        heap.increaseKey(1, 200);
+        assertEquals(200, heap.getMax());
+    }
+
+    @Test
+    @DisplayName("Increase key with smaller value does nothing")
+    void increaseKeySmallerValue() {
+        dumpData();
+        heap.increaseKey(0, 10);
+        assertEquals(153, heap.getMax());
+    }
+
+    @Test
+    @DisplayName("Increase key at invalid index does nothing")
+    void increaseKeyInvalidIndex() {
+        dumpData();
+        heap.increaseKey(99, 100);
+        assertEquals(5, heap.size());
+    }
+
+    @Test
+    @DisplayName("Decrease key at invalid index does nothing")
+    void decreaseKeyInvalidIndex() {
+        dumpData();
+        heap.decreaseKey(99, 1);
+        assertEquals(5, heap.size());
+    }
+
+    @Test
+    @DisplayName("Decrease key with larger value does nothing")
+    void decreaseKeyLargerValue() {
+        dumpData();
+        heap.decreaseKey(0, 999);
+        assertEquals(153, heap.getMax());
+    }
+
+    @Test
+    @DisplayName("Change value with equal value does nothing")
+    void changeValueEqual() {
+        dumpData();
+        heap.changeValueOnAKey(0, 153);
+        assertEquals(153, heap.getMax());
+    }
+
+    @Test
+    @DisplayName("Height of a heap")
+    void height() {
+        heap.insertKey(10);
+        heap.insertKey(20);
+        heap.insertKey(30);
+        assertTrue(heap.height(0) >= 1);
+    }
+
+    @Test
+    @DisplayName("ToArray returns copy of internal array")
+    void toArray() {
+        dumpData();
+        Object[] arr = heap.toArray();
+        assertEquals(5, arr.length);
+    }
+
+    @Test
+    @DisplayName("Constructor with negative capacity throws")
+    void constructorNegativeCapacity() {
+        assertThrows(IllegalArgumentException.class, () -> new MaximumHeap<>(-1));
+    }
+
+    @Test
+    @DisplayName("Insert null element throws")
+    void insertNull() {
+        assertThrows(IllegalArgumentException.class, () -> heap.insert(null));
+    }
+
+    @Test
+    @DisplayName("Insert triggers resize when full")
+    void insertAndResize() {
+        heap.insertKey(1);
+        heap.insertKey(2);
+        heap.insertKey(3);
+        heap.insertKey(4);
+        heap.insertKey(5);
+        heap.insertKey(6);
+        assertEquals(6, heap.size());
+    }
+
+    @Test
+    @DisplayName("Delete last element")
+    void deleteLastElement() {
+        heap.insertKey(10);
+        heap.insertKey(20);
+        heap.deleteKey(1);
+        assertEquals(1, heap.size());
+    }
+
+    @Test
+    @DisplayName("Extract max with single element")
+    void extractMaxSingle() {
+        heap.insertKey(42);
+        assertEquals(42, heap.extractMax());
+        assertTrue(heap.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Default constructor uses default capacity")
+    void defaultConstructor() {
+        MaximumHeap<Integer> h = new MaximumHeap<>();
+        assertTrue(h.isEmpty());
+    }
 }

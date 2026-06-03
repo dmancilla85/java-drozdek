@@ -1,6 +1,7 @@
 package org.drozdek.trees;
 
 import org.drozdek.trees.interfaces.TreeInterface;
+import org.drozdek.trees.nodes.HeapNode;
 
 /// Array-based static binary tree. Uses an array to store HeapNode elements with implicit parent-child
 /// indexing (left child at 2*parent, right child at 2*parent+1).

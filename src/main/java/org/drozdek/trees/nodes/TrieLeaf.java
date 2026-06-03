@@ -1,4 +1,4 @@
-package org.drozdek.trees;
+package org.drozdek.trees.nodes;
 
 /// Leaf node for Trie. Stores the remaining suffix of a word after the branching path.
 ///
@@ -8,11 +8,15 @@ package org.drozdek.trees;
 ///
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/trie-data-structure/)
 public class TrieLeaf extends TrieNode {
-    protected final String suffix;
+    private final String suffix;
 
     public TrieLeaf(String suffix) {
         this.suffix = suffix;
-        isLeaf = true;
+        setLeaf(true);
+    }
+
+    public String getSuffix() {
+        return suffix;
     }
 
     @Override

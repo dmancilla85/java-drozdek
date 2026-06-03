@@ -1,25 +1,17 @@
-package org.drozdek.trees;
+package org.drozdek.trees.nodes;
 
 import java.util.Arrays;
 import java.util.Iterator;
 
-/// Node for suffix tree. Stores descendant pointers, left/right interval arrays, and a suffix link
-/// used during Ukkonen's algorithm.
-///
-/// Complexity Analysis:
-/// Time Complexity: O(1)
-/// Auxiliary Space: O(|alphabet|) per node
-///
-/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/ukkonens-suffix-tree-construction-part-1/)
-class SuffixTreeNode {
-    private static int cnt = 0; // for printing only
-    protected final SuffixTreeNode[] descendants;
-    protected final int[] left;
-    protected final int[] right;
-    protected final int id; // for printing only
-    protected SuffixTreeNode suffixLink;
+public class SuffixTreeNode {
+    private static int cnt = 0;
+    private final SuffixTreeNode[] descendants;
+    private final int[] left;
+    private final int[] right;
+    private final int id;
+    private SuffixTreeNode suffixLink;
 
-    SuffixTreeNode(int sz) {
+    public SuffixTreeNode(int sz) {
         id = cnt++;
         suffixLink = null;
         descendants = new SuffixTreeNode[sz];
@@ -28,6 +20,30 @@ class SuffixTreeNode {
 
         for (int i = 0; i < sz; i++)
             left[i] = -1;
+    }
+
+    public SuffixTreeNode[] getDescendants() {
+        return descendants;
+    }
+
+    public int[] getLeft() {
+        return left;
+    }
+
+    public int[] getRight() {
+        return right;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public SuffixTreeNode getSuffixLink() {
+        return suffixLink;
+    }
+
+    public void setSuffixLink(SuffixTreeNode suffixLink) {
+        this.suffixLink = suffixLink;
     }
 
     private void print(StringBuilder buffer, String prefix, String childrenPrefix) {
