@@ -10,7 +10,11 @@ import java.util.Objects;
 /// Stack implemented as an arraylist.
 public class Stack<T> implements StackInterface<T> {
     private final ArrayList<T> pool;
-    public boolean printWithUnicode;
+    private boolean printWithUnicode;
+
+    public void setPrintWithUnicode(boolean enabled) {
+        this.printWithUnicode = enabled;
+    }
 
     /// Default constructor.
     public Stack() {
