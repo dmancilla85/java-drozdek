@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/heap-data-structure/)
 public class HeapArray {
 
-    private final int[] keys;
+    private int[] keys;
     private int position;
 
     public HeapArray() {
@@ -58,6 +58,9 @@ public class HeapArray {
     }
 
     public void insert(int key) {
+        if (position >= keys.length)
+            resize();
+
         int parent;
         int temp;
         int next;
@@ -76,13 +79,19 @@ public class HeapArray {
         position++;
     }
 
+    private void resize() {
+        int[] newKeys = new int[keys.length * 2];
+        System.arraycopy(keys, 0, newKeys, 0, keys.length);
+        keys = newKeys;
+    }
+
     public void displayToFile() {
         try {
             FileWriter fw = new FileWriter("HeapArray.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw);
             int i = 0;
-            while (i <= 9) {
+            while (i < keys.length) {
                 out.print(keys[i] + " ");
                 i++;
             }
@@ -97,7 +106,7 @@ public class HeapArray {
     public String display() {
         String result = "";
         int i = 0;
-        while (i <= 9) {
+        while (i < keys.length) {
             if (keys[i] == 0) {
                 result = result + "--" + "  ";
             } else {
