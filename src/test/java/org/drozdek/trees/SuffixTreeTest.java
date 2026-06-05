@@ -1,4 +1,4 @@
-package trees;
+package org.drozdek.trees;
 
 import org.drozdek.commons.LoggerService;
 import org.drozdek.trees.SuffixTree;
@@ -135,5 +135,12 @@ class SuffixTreeTest {
     void ukkonenOverlapping() {
         tree.ukkonen("ababa");
         assertNotNull(tree.toString());
+    }
+
+    @Test
+    @DisplayName("Print method executes without error")
+    void testPrint() {
+        tree.ukkonen("banana");
+        assertDoesNotThrow(() -> tree.print());
     }
 }

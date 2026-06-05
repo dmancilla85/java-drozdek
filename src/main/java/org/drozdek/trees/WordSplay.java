@@ -42,32 +42,8 @@ public class WordSplay extends SplayTree<Word> {
     }
 
     public void run(InputStream fIn, String filename) {
-        int ch = 1;
-        Word p;
-
         try {
-            while (ch > -1) {
-                while (true) {
-                    if (ch > -1 && !Character.isLetter((char) ch))
-                        ch = fIn.read();
-                    else
-                        break;
-                }
-
-                if (ch == -1)
-                    break;
-                StringBuilder s = new StringBuilder();
-
-                while (ch > -1 && Character.isLetter((char) ch)) {
-                    s.append(Character.toUpperCase((char) ch));
-                    ch = fIn.read();
-                }
-
-                if ((p = (Word) search(new Word(s.toString()))) == null)
-                    insert(new Word(s.toString()));
-                else
-                    p.freq++;
-            }
+            processWords(fIn);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -75,7 +51,36 @@ public class WordSplay extends SplayTree<Word> {
         inorder(System.out);
         System.out.println("\nFile " + filename + " contains " + wordCnt + " words whose " + differentWords +
                 " are different.\n");
+    }
 
+    private void processWords(InputStream fIn) throws IOException {
+        String word;
+        while ((word = nextWord(fIn)) != null) {
+            Word p = (Word) search(new Word(word));
+            if (p == null) {
+                insert(new Word(word));
+                differentWords++;
+            } else {
+                p.freq++;
+            }
+            wordCnt++;
+        }
+    }
+
+    private static String nextWord(InputStream fIn) throws IOException {
+        int ch = fIn.read();
+        while (ch > -1 && !Character.isLetter((char) ch)) {
+            ch = fIn.read();
+        }
+        if (ch == -1)
+            return null;
+
+        StringBuilder s = new StringBuilder();
+        while (ch > -1 && Character.isLetter((char) ch)) {
+            s.append(Character.toUpperCase((char) ch));
+            ch = fIn.read();
+        }
+        return s.toString();
     }
 
 }

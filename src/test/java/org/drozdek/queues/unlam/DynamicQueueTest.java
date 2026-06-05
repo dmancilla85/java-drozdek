@@ -1,4 +1,4 @@
-package queues.unlam;
+package org.drozdek.queues.unlam;
 
 import org.drozdek.queues.unlam.DynamicQueue;
 import org.junit.jupiter.api.BeforeEach;

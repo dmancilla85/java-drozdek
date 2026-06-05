@@ -1,4 +1,4 @@
-package trees;
+package org.drozdek.trees;
 
 import org.drozdek.commons.LoggerService;
 import org.drozdek.trees.Trie;
@@ -48,7 +48,7 @@ class TrieTest {
     @Test
     @DisplayName("Print trie")
     void printTrie() {
-        String output = tree.print();
+        String output = tree.toString();
         assertNotNull(output);
         LoggerService.logInfo(output);
     }
@@ -102,7 +102,7 @@ class TrieTest {
     @Test
     @DisplayName("Print returns non-empty for populated trie")
     void printNotEmpty() {
-        String output = tree.print();
+        String output = tree.toString();
         assertTrue(output.length() > 0);
     }
 
@@ -110,7 +110,7 @@ class TrieTest {
     @DisplayName("Empty trie print shows empty marker")
     void emptyTriePrint() {
         Trie t = new Trie();
-        String output = t.print();
+        String output = t.toString();
         assertNotNull(output);
     }
 

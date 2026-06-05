@@ -1,4 +1,4 @@
-package trees;
+package org.drozdek.trees;
 
 import org.drozdek.commons.LoggerService;
 import org.drozdek.trees.AvlTree;
@@ -89,5 +89,12 @@ class AvlTreeTest {
         tree.insert(1);
         assertFalse(tree.isEmpty());
         assertEquals(1, tree.size());
+    }
+
+    @Test
+    @DisplayName("Print method executes without error")
+    void testPrint() {
+        dumpData();
+        assertDoesNotThrow(() -> tree.print());
     }
 }

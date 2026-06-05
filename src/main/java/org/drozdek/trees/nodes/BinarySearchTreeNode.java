@@ -10,8 +10,8 @@ import java.util.LinkedList;
 /// Auxiliary Space: O(1)
 ///
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/binary-search-tree-data-structure/)
-public class BinarySearchTreeNode<T> {
-    private Comparable<T> key;
+public class BinarySearchTreeNode<T extends Comparable<T>> {
+    private T key;
     private BinarySearchTreeNode<T> left;
     private BinarySearchTreeNode<T> right;
 
@@ -19,21 +19,21 @@ public class BinarySearchTreeNode<T> {
         this(null, null, null);
     }
 
-    public BinarySearchTreeNode(Comparable<T> data) {
+    public BinarySearchTreeNode(T data) {
         this(data, null, null);
     }
 
-    public BinarySearchTreeNode(Comparable<T> data, BinarySearchTreeNode<T> left, BinarySearchTreeNode<T> right) {
+    public BinarySearchTreeNode(T data, BinarySearchTreeNode<T> left, BinarySearchTreeNode<T> right) {
         this.key = data;
         this.left = left;
         this.right = right;
     }
 
-    public Comparable<T> getKey() {
+    public T getKey() {
         return key;
     }
 
-    public void setKey(Comparable<T> key) {
+    public void setKey(T key) {
         this.key = key;
     }
 

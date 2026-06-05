@@ -1,4 +1,4 @@
-package dynamic;
+package org.drozdek.dynamic;
 
 import org.drozdek.dynamic.ScheduledTask;
 import org.drozdek.dynamic.TaskSchedulingSolution;

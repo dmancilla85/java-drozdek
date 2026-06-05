@@ -1,4 +1,4 @@
-package trees;
+package org.drozdek.trees;
 
 import org.drozdek.trees.HeapArray;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,5 +42,14 @@ class HeapArrayTest {
             heap.insert(i);
         heap.heapSort();
         assertNotNull(heap.display());
+    }
+
+    @Test
+    @DisplayName("Print method executes without error")
+    void testPrint() {
+        heap.insert(5);
+        heap.insert(3);
+        heap.insert(8);
+        assertDoesNotThrow(() -> heap.print());
     }
 }

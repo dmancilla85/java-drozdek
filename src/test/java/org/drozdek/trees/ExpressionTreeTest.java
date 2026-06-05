@@ -1,4 +1,4 @@
-package trees;
+package org.drozdek.trees;
 
 import org.drozdek.trees.ExpressionTree;
 import org.junit.jupiter.api.BeforeEach;
@@ -88,6 +88,13 @@ class ExpressionTreeTest {
     void evaluateNull() {
         assertEquals(0, ExpressionTree.evaluateExpression(""));
         assertEquals(0, ExpressionTree.evaluateExpression(null));
+    }
+
+    @Test
+    @DisplayName("Print method executes without error")
+    void testPrint() {
+        tree = new ExpressionTree("AB*CD/+");
+        assertDoesNotThrow(() -> tree.print());
     }
 
     @Test

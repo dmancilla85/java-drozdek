@@ -12,6 +12,7 @@ public class AdaptiveStack<T> implements StackInterface<T> {
     public static final char STATIC = 0;
     public static final char DYNAMIC = 1;
     public static final int CRITICAL_VALUE = 2000;
+    private static final Random RANDOM = new Random();
     private char type;
     private StackInterface<T> stack;
     private int pushCount = 0;
@@ -93,77 +94,87 @@ public class AdaptiveStack<T> implements StackInterface<T> {
     }
 
     public void benchmark() {
-        Calendar ini;
-        Calendar fin;
-
         int benchmarkPushCount = 0;
         int benchmarkPopCount = 0;
 
         int maxIncrement = 5000000;
         int repetitions = 1000;
-        ArrayStack<Integer> arrayStack;
-        LinkedStack<Integer> linkedStack;
+        ArrayStack<Integer> arrayStack = new ArrayStack<>();
+        LinkedStack<Integer> linkedStack = new LinkedStack<>();
 
-        arrayStack = new ArrayStack<>();
-        linkedStack = new LinkedStack<>();
-        Random random = new Random();
         for (int j = 0; j < maxIncrement; j += 1000) {
-            long pushStaticDelays = 0;
-            long pushDynamicDelays = 0;
-            long popStaticDelays = 0;
-            long popDynamicDelays = 0;
+            long[] delays = runTimedIterations(repetitions, arrayStack, linkedStack);
+            benchmarkPushCount += delays[4];
+            benchmarkPopCount += delays[5];
 
-            for (int i = 0; i < repetitions; i++) {
-                if (i % 2 == 0) {
-                    ini = Calendar.getInstance();
-                    arrayStack.push(random.nextInt());
-                    fin = Calendar.getInstance();
-                    pushStaticDelays += fin.getTimeInMillis() - ini.getTimeInMillis();
-
-                    ini = Calendar.getInstance();
-                    linkedStack.push(random.nextInt());
-                    fin = Calendar.getInstance();
-                    pushDynamicDelays += fin.getTimeInMillis() - ini.getTimeInMillis();
-
-                    benchmarkPushCount++;
-                } else {
-                    ini = Calendar.getInstance();
-                    arrayStack.pop();
-                    fin = Calendar.getInstance();
-                    popStaticDelays += fin.getTimeInMillis() - ini.getTimeInMillis();
-
-                    ini = Calendar.getInstance();
-                    linkedStack.pop();
-                    fin = Calendar.getInstance();
-                    popDynamicDelays += fin.getTimeInMillis() - ini.getTimeInMillis();
-
-                    benchmarkPopCount++;
-                }
-            }
             for (int i = benchmarkPushCount - benchmarkPopCount; i < j; i++) {
-                arrayStack.push(random.nextInt());
-                linkedStack.push(random.nextInt());
+                arrayStack.push(RANDOM.nextInt());
+                linkedStack.push(RANDOM.nextInt());
                 benchmarkPushCount++;
             }
 
-            StringBuilder message = new StringBuilder("PUSH::More Efficient::");
-            if (pushDynamicDelays == pushStaticDelays) {
-                message.append("EQUAL(").append(pushStaticDelays).append(")");
-            } else if (pushDynamicDelays > pushStaticDelays) {
-                message.append("STATIC");
-            } else {
-                message.append("DYNAMIC");
-            }
-            message.append("                POP::More Efficient::");
-            if (popDynamicDelays == popStaticDelays) {
-                message.append("EQUAL(").append(popStaticDelays).append(")");
-            } else if (popDynamicDelays > popStaticDelays) {
-                message.append("STATIC");
-            } else {
-                message.append("DYNAMIC");
-            }
-
+            String message = buildEfficiencyMessage(delays);
             out.printf("%09d - %S - %d%n", j, message, benchmarkPushCount - benchmarkPopCount);
+        }
+    }
+
+    private long[] runTimedIterations(int repetitions, ArrayStack<Integer> arrayStack,
+                                      LinkedStack<Integer> linkedStack) {
+        long pushStaticDelays = 0;
+        long pushDynamicDelays = 0;
+        long popStaticDelays = 0;
+        long popDynamicDelays = 0;
+        int pushCount = 0;
+        int popCount = 0;
+
+        for (int i = 0; i < repetitions; i++) {
+            if (i % 2 == 0) {
+                Calendar ini = Calendar.getInstance();
+                arrayStack.push(RANDOM.nextInt());
+                Calendar fin = Calendar.getInstance();
+                pushStaticDelays += fin.getTimeInMillis() - ini.getTimeInMillis();
+
+                ini = Calendar.getInstance();
+                linkedStack.push(RANDOM.nextInt());
+                fin = Calendar.getInstance();
+                pushDynamicDelays += fin.getTimeInMillis() - ini.getTimeInMillis();
+                pushCount++;
+            } else {
+                Calendar ini = Calendar.getInstance();
+                arrayStack.pop();
+                Calendar fin = Calendar.getInstance();
+                popStaticDelays += fin.getTimeInMillis() - ini.getTimeInMillis();
+
+                ini = Calendar.getInstance();
+                linkedStack.pop();
+                fin = Calendar.getInstance();
+                popDynamicDelays += fin.getTimeInMillis() - ini.getTimeInMillis();
+                popCount++;
+            }
+        }
+        return new long[]{pushStaticDelays, pushDynamicDelays, popStaticDelays, popDynamicDelays, pushCount, popCount};
+    }
+
+    private String buildEfficiencyMessage(long[] delays) {
+        long pushStaticDelays = delays[0];
+        long pushDynamicDelays = delays[1];
+        long popStaticDelays = delays[2];
+        long popDynamicDelays = delays[3];
+
+        StringBuilder message = new StringBuilder("PUSH::More Efficient::");
+        appendEfficiency(message, pushDynamicDelays, pushStaticDelays);
+        message.append("                POP::More Efficient::");
+        appendEfficiency(message, popDynamicDelays, popStaticDelays);
+        return message.toString();
+    }
+
+    private void appendEfficiency(StringBuilder message, long dynamicDelays, long staticDelays) {
+        if (dynamicDelays == staticDelays) {
+            message.append("EQUAL(").append(staticDelays).append(")");
+        } else if (dynamicDelays > staticDelays) {
+            message.append("STATIC");
+        } else {
+            message.append("DYNAMIC");
         }
     }
 }

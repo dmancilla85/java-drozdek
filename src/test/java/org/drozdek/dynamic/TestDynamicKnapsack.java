@@ -1,4 +1,4 @@
-package dynamic;
+package org.drozdek.dynamic;
 
 import org.drozdek.dynamic.DynamicKnapsackItem;
 import org.drozdek.dynamic.KnapsackSolution;

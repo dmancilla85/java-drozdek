@@ -2,11 +2,13 @@ package org.drozdek.trees;
 
 import org.drozdek.trees.interfaces.TreeInterface;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MinimumHeap<T extends Comparable<T>> implements TreeInterface {
 
     private static final int DEFAULT_CAPACITY = 10;
-    private Object[] heap;
-    private int size;
+    private List<T> heap;
 
     public MinimumHeap() {
         this(DEFAULT_CAPACITY);
@@ -16,20 +18,15 @@ public class MinimumHeap<T extends Comparable<T>> implements TreeInterface {
         if (capacity <= 0) {
             throw new IllegalArgumentException("Capacity must be positive");
         }
-        this.heap = new Object[capacity];
-        this.size = 0;
+        this.heap = new ArrayList<>(capacity);
     }
 
     public void insert(T element) {
         if (element == null) {
             throw new IllegalArgumentException("Element cannot be null");
         }
-        if (size >= heap.length) {
-            resize();
-        }
-        heap[size] = element;
-        siftUp(size);
-        size++;
+        heap.add(element);
+        siftUp(heap.size() - 1);
     }
 
     public boolean insertKey(T key) {
@@ -37,31 +34,28 @@ public class MinimumHeap<T extends Comparable<T>> implements TreeInterface {
         return true;
     }
 
-    @SuppressWarnings("unchecked")
     public T extractMin() {
-        if (size <= 0) {
+        if (heap.isEmpty()) {
             return null;
         }
 
-        if (size == 1) {
-            size--;
-            return (T) heap[0];
+        if (heap.size() == 1) {
+            return heap.remove(0);
         }
 
-        T root = (T) heap[0];
-        heap[0] = heap[size - 1];
-        size--;
+        T root = heap.get(0);
+        T last = heap.remove(heap.size() - 1);
+        heap.set(0, last);
         minHeapify(0);
 
         return root;
     }
 
-    @SuppressWarnings("unchecked")
     public T getMin() {
-        if (size <= 0) {
+        if (heap.isEmpty()) {
             return null;
         }
-        return (T) heap[0];
+        return heap.get(0);
     }
 
     public int height(int node) {
@@ -71,50 +65,40 @@ public class MinimumHeap<T extends Comparable<T>> implements TreeInterface {
     }
 
     public boolean isLeaf(int node) {
-        if (node > size - 1)
-            return false;
-
-        if (node * 2 + 1 > size - 1 || node < 0)
-            return true;
-
-        return heap[node * 2 + 1] == null && heap[node * 2 + 2] == null;
+        return node >= 0 && node < heap.size() && (node * 2 + 1) >= heap.size();
     }
 
     public boolean isEmpty() {
-        return size == 0;
+        return heap.isEmpty();
     }
 
     public int size() {
-        return size;
+        return heap.size();
     }
 
     public Object[] toArray() {
-        Object[] copy = new Object[heap.length];
-        System.arraycopy(heap, 0, copy, 0, heap.length);
-        return copy;
+        return heap.toArray();
     }
 
-    @SuppressWarnings("unchecked")
     public void deleteKey(int index) {
-        if (index < 0 || index >= size)
+        if (index < 0 || index >= heap.size())
             return;
 
-        if (index == size - 1) {
-            size--;
+        if (index == heap.size() - 1) {
+            heap.remove(index);
             return;
         }
 
-        heap[index] = heap[size - 1];
-        size--;
+        T last = heap.remove(heap.size() - 1);
+        heap.set(index, last);
         minHeapify(index);
     }
 
-    @SuppressWarnings("unchecked")
     public void changeValueOnAKey(int index, T newValue) {
-        if (index < 0 || index >= size)
+        if (index < 0 || index >= heap.size())
             return;
 
-        T oldValue = (T) heap[index];
+        T oldValue = heap.get(index);
         int cmp = newValue.compareTo(oldValue);
         if (cmp == 0)
             return;
@@ -125,43 +109,40 @@ public class MinimumHeap<T extends Comparable<T>> implements TreeInterface {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    public void decreaseKey(int index, T newValue) {
-        if (index < 0 || index >= size)
+     public void decreaseKey(int index, T newValue) {
+        if (index < 0 || index >= heap.size())
             return;
 
-        if (newValue.compareTo((T) heap[index]) >= 0)
+        if (newValue.compareTo(heap.get(index)) >= 0)
             return;
 
-        heap[index] = newValue;
+        heap.set(index, newValue);
 
-        while (index != 0 && ((T) heap[index]).compareTo((T) heap[parent(index)]) < 0) {
+        while (index != 0 && heap.get(index).compareTo(heap.get(parent(index))) < 0) {
             swap(index, parent(index));
             index = parent(index);
         }
     }
 
-    @SuppressWarnings("unchecked")
     public void increaseKey(int index, T newValue) {
-        if (index < 0 || index >= size)
+        if (index < 0 || index >= heap.size())
             return;
 
-        if (newValue.compareTo((T) heap[index]) <= 0)
+        if (newValue.compareTo(heap.get(index)) <= 0)
             return;
 
-        heap[index] = newValue;
+        heap.set(index, newValue);
         minHeapify(index);
     }
 
-    @SuppressWarnings("unchecked")
     private void minHeapify(int index) {
         int left = 2 * index + 1;
         int right = 2 * index + 2;
         int smallest = index;
 
-        if (left < size && ((T) heap[left]).compareTo((T) heap[smallest]) < 0)
+        if (left < heap.size() && heap.get(left).compareTo(heap.get(smallest)) < 0)
             smallest = left;
-        if (right < size && ((T) heap[right]).compareTo((T) heap[smallest]) < 0)
+        if (right < heap.size() && heap.get(right).compareTo(heap.get(smallest)) < 0)
             smallest = right;
 
         if (smallest != index) {
@@ -170,9 +151,8 @@ public class MinimumHeap<T extends Comparable<T>> implements TreeInterface {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void siftUp(int index) {
-        while (index > 0 && ((T) heap[index]).compareTo((T) heap[parent(index)]) < 0) {
+        while (index > 0 && heap.get(index).compareTo(heap.get(parent(index))) < 0) {
             swap(index, parent(index));
             index = parent(index);
         }
@@ -185,31 +165,24 @@ public class MinimumHeap<T extends Comparable<T>> implements TreeInterface {
     }
 
     private int leftChild(int node) {
-        if (0 <= node && node < (heap.length - 1) / 2 && !isLeaf(node))
+        if (!isLeaf(node))
             return node * 2 + 1;
         return -1;
     }
 
-
     private void swap(int i, int j) {
-        Object temp = heap[i];
-        heap[i] = heap[j];
-        heap[j] = temp;
-    }
-
-    private void resize() {
-        Object[] newHeap = new Object[heap.length * 2];
-        System.arraycopy(heap, 0, newHeap, 0, heap.length);
-        heap = newHeap;
+        T temp = heap.get(i);
+        heap.set(i, heap.get(j));
+        heap.set(j, temp);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        for (int i = 0; i < size; i++) {
-            sb.append(heap[i]);
-            if (i < size - 1) {
+        for (int i = 0; i < heap.size(); i++) {
+            sb.append(heap.get(i));
+            if (i < heap.size() - 1) {
                 sb.append(", ");
             }
         }

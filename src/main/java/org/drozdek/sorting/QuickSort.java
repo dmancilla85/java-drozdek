@@ -51,64 +51,38 @@ public final class QuickSort {
         return j;
     }
 
-    // A sorting algorithm is said to be stable if it maintains the relative order of records
-    // in the case of equality of keys.
     public static ArrayList<Integer> stableQuickSort(ArrayList<Integer> array) {
-
-        // Base case
-        if (array.size() <= 1) {
+        if (array.size() <= 1)
             return array;
-        } else {
 
-            // Let us choose middle element a pivot
-            int middle = array.size() / 2;
-            int pivot = array.get(middle);
+        int middle = array.size() / 2;
+        int pivot = array.get(middle);
 
-            // key element is used to break the array
-            // into 2 halves according to their values
-            ArrayList<Integer> smaller = new ArrayList<>();
-            ArrayList<Integer> greater = new ArrayList<>();
+        ArrayList<Integer> smaller = new ArrayList<>();
+        ArrayList<Integer> greater = new ArrayList<>();
+        classifyForStableSort(array, pivot, middle, smaller, greater);
 
-            // Put greater elements in greater list,
-            // smaller elements in smaller list. Also,
-            // compare positions to decide where to put.
-            for (int i = 0; i < array.size(); i++) {
-                int val = array.get(i);
-                if (i != middle) {
-                    if (val < pivot) {
-                        smaller.add(val);
-                    } else if (val > pivot) {
-                        greater.add(val);
-                    } else {
+        ArrayList<Integer> ans = new ArrayList<>();
+        ans.addAll(stableQuickSort(smaller));
+        ans.add(pivot);
+        ans.addAll(stableQuickSort(greater));
+        return ans;
+    }
 
-                        // If value is same, then considering
-                        // position to decide the list.
-                        if (i < middle) {
-                            smaller.add(val);
-                        } else {
-                            greater.add(val);
-                        }
-                    }
-                }
-            }
-
-            ArrayList<Integer> ans = new ArrayList<>();
-            ArrayList<Integer> sa1 = stableQuickSort(smaller);
-            ArrayList<Integer> sa2 = stableQuickSort(greater);
-
-            // add all elements of smaller list into ans list
-            for (Integer val1 : sa1)
-                ans.add(val1);
-
-            // add pivat element into ans list
-            ans.add(pivot);
-
-            // add all elements of greater list into ans list
-            for (Integer val2 : sa2)
-                ans.add(val2);
-
-            // return ans list
-            return ans;
+    private static void classifyForStableSort(ArrayList<Integer> array, int pivot, int middle,
+                                              ArrayList<Integer> smaller, ArrayList<Integer> greater) {
+        for (int i = 0; i < array.size(); i++) {
+            int val = array.get(i);
+            if (i == middle)
+                continue;
+            if (val < pivot)
+                smaller.add(val);
+            else if (val > pivot)
+                greater.add(val);
+            else if (i < middle)
+                smaller.add(val);
+            else
+                greater.add(val);
         }
     }
 }

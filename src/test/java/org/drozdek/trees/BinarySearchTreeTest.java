@@ -1,4 +1,4 @@
-package trees;
+package org.drozdek.trees;
 
 import org.drozdek.commons.LoggerService;
 import org.drozdek.trees.BinarySearchTree;
@@ -262,6 +262,15 @@ class BinarySearchTreeTest {
     @DisplayName("Delete by merging on empty tree returns error code")
     void deleteByMergingEmptyTree() {
         assertEquals(1, tree.deleteByMerging(5));
+    }
+
+    @Test
+    @DisplayName("Print method executes without error")
+    void testPrint() {
+        tree.insert(3);
+        tree.insert(5);
+        tree.insert(6);
+        assertDoesNotThrow(() -> tree.print());
     }
 
     @BeforeEach

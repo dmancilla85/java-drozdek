@@ -1,6 +1,5 @@
-package queues.unlam;
+package org.drozdek.queues.unlam;
 
-import org.drozdek.queues.unlam.Heap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,11 +9,11 @@ import java.util.Comparator;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HeapTest {
-    Heap heap;
+    Heap<Integer> heap;
 
     @BeforeEach
     void setUp() {
-        heap = new Heap(10);
+        heap = new Heap<>(10);
     }
 
     @Test
@@ -54,9 +53,9 @@ class HeapTest {
     @Test
     @DisplayName("Check if elements are correctly enqueued")
     void enqueue() {
-        heap.enqueue("A");
-        heap.enqueue("B");
-        heap.enqueue("C");
+        heap.enqueue(1);
+        heap.enqueue(2);
+        heap.enqueue(3);
 
         assertEquals(3, heap.size(), "The expected size doesn't match with the heap size");
     }
@@ -99,9 +98,8 @@ class HeapTest {
     @Test
     @DisplayName("Heap with custom comparator (max-heap)")
     void customComparator() {
-        @SuppressWarnings("unchecked")
-        Comparator<Object> reverseCmp = (a, b) -> ((Comparable<Object>) b).compareTo(a);
-        Heap maxHeap = new Heap(10, reverseCmp);
+        Comparator<Integer> reverseCmp = (a, b) -> b.compareTo(a);
+        Heap<Integer> maxHeap = new Heap<>(10, reverseCmp);
 
         maxHeap.enqueue(10);
         maxHeap.enqueue(30);
@@ -126,13 +124,15 @@ class HeapTest {
     @Test
     @DisplayName("String elements maintain natural order")
     void stringNaturalOrder() {
-        heap.enqueue("banana");
-        heap.enqueue("apple");
-        heap.enqueue("cherry");
+        Heap<String> stringHeap = new Heap<>(10);
 
-        assertEquals("apple", heap.dequeue(), "apple should come first alphabetically");
-        assertEquals("banana", heap.dequeue(), "banana should come second");
-        assertEquals("cherry", heap.dequeue(), "cherry should come last");
+        stringHeap.enqueue("banana");
+        stringHeap.enqueue("apple");
+        stringHeap.enqueue("cherry");
+
+        assertEquals("apple", stringHeap.dequeue(), "apple should come first alphabetically");
+        assertEquals("banana", stringHeap.dequeue(), "banana should come second");
+        assertEquals("cherry", stringHeap.dequeue(), "cherry should come last");
     }
 
     @Test
@@ -143,7 +143,7 @@ class HeapTest {
         heap.enqueue(30);
 
         int sizeBefore = heap.size();
-        Object firstBefore = heap.peek();
+        Integer firstBefore = heap.peek();
 
         heap.print();
 
@@ -166,9 +166,10 @@ class HeapTest {
     @Test
     @DisplayName("toString on non-empty heap throws no exception")
     void toStringOnNonEmpty() {
-        heap.enqueue("hello");
-        heap.enqueue("world");
+        Heap<String> h = new Heap<>(10);
+        h.enqueue("hello");
+        h.enqueue("world");
 
-        assertDoesNotThrow(() -> heap.toString());
+        assertDoesNotThrow(() -> h.toString());
     }
 }

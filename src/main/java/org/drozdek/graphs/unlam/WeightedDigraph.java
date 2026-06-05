@@ -15,7 +15,6 @@ public class WeightedDigraph {
     protected int totalArcs;
 
     public WeightedDigraph(int n) {
-        // TODO Auto-generated constructor stub
         this.adjacencyList = null;
         this.adjacencyMatrix = new byte[n][n];
         this.weightTable = new int[n][n];
@@ -29,7 +28,6 @@ public class WeightedDigraph {
 
     /// @param args
     static void main(String[] args) {
-        // TODO Auto-generated method stub
         WeightedDigraph dp = new WeightedDigraph(10);
         dp.createArc('a', 'e', 1);
         dp.createArc('d', 'a', 4);
@@ -112,7 +110,6 @@ public class WeightedDigraph {
         int j = 0;
         while (visitedVertices.size() < cardinality() && j < cardinality()) {
             if (adjacencyMatrix[v][j] == 1 && !visitedVertices.contains(j)) {
-                // out.println("vertices no contiene a : " + (char)(j + 97));
                 newGraph.createArc(v, j, weightTable[v][j]);
                 visitedVertices.add(j);
                 dfs(j, visitedVertices, newGraph);
@@ -120,17 +117,6 @@ public class WeightedDigraph {
             j++;
         }
     }
-
-    /*public static Integer buscarMinimo(ArrayList<Integer> lista){
-
-        Integer min = lista.get(0).intValue();
-
-        for(int i = 0; i < lista.size(); i++)
-            if(lista.get(i) < min)
-                min = lista.get(i).intValue();
-
-        return min;
-    }*/
 
     public Integer removeArc(int node1, int node2) {
         Integer aux = null;
@@ -149,34 +135,6 @@ public class WeightedDigraph {
             return null;
         }
     }
-
-/*    public int[] algoritmoDijkstra(int first){
-        int n = cardinality();
-        int []currDistV = new int[n];
-
-        for(int i = 0; i < n; i++)
-            currDistV[i] = 999;
-
-        currDistV[first] = 0;
-
-        @SuppressWarnings("unchecked")
-        MinimumHeap aVerificar = new MinimumHeap(v.size());
-        for(int i = 0; i < v.size(); i++)
-
-
-        while(!aVerificar.estaVacio()){
-            Vertex v = (Vertex)aVerificar.extraerRaiz();
-
-            for(int u = 0; u < aVerificar. && aVerificar.contains(u); u++)
-                if(isAdjacent(aVerificar.get(u), v)){
-                    if(currDistV[u] > currDistV[v] + weightTable[v][u])
-                        currDistV[u] = currDistV[v] + weightTable[v][u];
-                    u = v;
-                }
-        }
-
-        return null;
-    }*/
 
     public boolean isAdjacent(int i, int j) {
         return adjacencyMatrix[i][j] == 1 ||

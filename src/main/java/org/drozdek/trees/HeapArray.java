@@ -1,5 +1,6 @@
 package org.drozdek.trees;
 
+import org.drozdek.commons.LoggerService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -26,7 +27,7 @@ public class HeapArray {
         int child;
         int previousKey;
         int last = position - 1;
-        for (int i = 10; i >= 1; i--) {
+        for (int i = position; i >= 1; i--) {
             previousKey = keys[last];
             keys[last] = keys[0];
             last = last - 1;
@@ -104,5 +105,9 @@ public class HeapArray {
             i++;
         }
         return result;
+    }
+
+    public void print() {
+        LoggerService.logInfo(System.lineSeparator() + display());
     }
 }

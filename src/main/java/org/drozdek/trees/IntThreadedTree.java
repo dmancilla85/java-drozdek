@@ -120,4 +120,32 @@ public class IntThreadedTree implements TreeInterface {
 
         out.println(p.getKey() + " ");
     }
+
+    @Override
+    public String toString() {
+        if (root == null) return System.lineSeparator() + "<EMPTY>" + System.lineSeparator();
+        StringBuilder buffer = new StringBuilder(50);
+        buffer.append(System.lineSeparator());
+        printNode(buffer, "", "", root);
+        return buffer.toString();
+    }
+
+    private void printNode(StringBuilder buffer, String prefix, String childrenPrefix, IntThreadedTreeNode node) {
+        if (node == null) return;
+        buffer.append(prefix);
+        buffer.append(node.getKey());
+        buffer.append(System.lineSeparator());
+
+        IntThreadedTreeNode left = node.getLeft();
+        IntThreadedTreeNode right = node.isSuccessor() ? null : node.getRight();
+        boolean hasLeft = left != null;
+        boolean hasRight = right != null;
+
+        if (hasRight) {
+            printNode(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ", left);
+            printNode(buffer, childrenPrefix + "└── ", childrenPrefix + "    ", right);
+        } else if (hasLeft) {
+            printNode(buffer, childrenPrefix + "└── ", childrenPrefix + "    ", left);
+        }
+    }
 }

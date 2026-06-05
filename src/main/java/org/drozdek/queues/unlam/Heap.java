@@ -1,136 +1,91 @@
-/*
-  File: Heap.java
-
-  Originally written by Doug Lea and released into the public domain.
-  This may be used for any purposes whatsoever without acknowledgment.
-  Thanks for the assistance and support of Sun Microsystems Labs,
-  and everyone contributing, testing, and using this code.
-
-  History:
-  Date       Who                What
-  29Aug1998  dl               Refactored from BoundedPriorityQueue
-  08dec2001  dl               Null out slots of removed items
-  03feb2002  dl               Also null out in clear
-*/
-
 package org.drozdek.queues.unlam;
 
 import org.drozdek.commons.LoggerService;
 import org.drozdek.queues.interfaces.QueueInterface;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
-/// A heap-based priority queue, without any concurrency control
-/// (i.e., no blocking on empty/full states).
-/// This class provides the data structure mechanics for BoundedPriorityQueue.
-///
-/// The class currently uses a standard array-based heap, as described
-/// in, for example, Sedgewick's Algorithms text. All methods
-/// are fully synchronized. In the future,
-/// it may instead use structures permitting finer-grained locking.
-///
-/// [Introduction to this package.](http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/intro.html)
+public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> {
+    protected final Comparator<? super E> cmp_;
+    protected final List<E> nodes_;
+    protected int count_;
 
-public class Heap implements QueueInterface<Object> {
-    protected final Comparator<Object> cmp_;  // for ordering
-    protected Object[] nodes_;  // the tree nodes, packed into an array
-    protected int count_ = 0;   // number of used slots
-
-    /// Create a Heap with the given initial capacity and comparator
-    ///
-    /// @throws IllegalArgumentException if capacity less or equal to zero
-
-    public Heap(int capacity, Comparator<Object> cmp)
-            throws IllegalArgumentException {
-        if (capacity <= 0) throw new IllegalArgumentException();
-        nodes_ = new Object[capacity];
+    public Heap(int capacity, Comparator<? super E> cmp) {
+        if (capacity <= 0)
+            throw new IllegalArgumentException();
+        nodes_ = new ArrayList<>(capacity);
         cmp_ = cmp;
     }
-
-    /// Create a Heap with the given capacity,
-    /// and relying on natural ordering.
 
     public Heap(int capacity) {
         this(capacity, null);
     }
 
-    /// Remove all elements.
     public synchronized void clear() {
-        for (int i = 0; i < count_; ++i)
-            nodes_[i] = null;
+        nodes_.clear();
         count_ = 0;
     }
 
-    /// Perform element comparisons using comparator or natural ordering.
-    @SuppressWarnings("unchecked")
-    protected int compare(Object a, Object b) {
-        if (cmp_ == null)
-            return ((Comparable<Object>) a).compareTo(b);
-        else
+    protected int compare(E a, E b) {
+        if (cmp_ != null)
             return cmp_.compare(a, b);
+        return a.compareTo(b);
     }
 
-    /// Return and remove least element, or null if empty.
+    public synchronized E extract() {
+        if (count_ < 1)
+            return null;
 
-    public synchronized Object extract() {
-        if (count_ < 1) return null;
-
-        int k = 0; // take element at root;
-        Object least = nodes_[k];
+        int k = 0;
+        E least = nodes_.get(k);
         --count_;
-        Object x = nodes_[count_];
-        nodes_[count_] = null;
-        for (;;) {
+        E x = nodes_.get(count_);
+        nodes_.set(count_, null);
+
+        while (true) {
             int l = left(k);
             if (l >= count_)
                 break;
-            else {
-                int r = right(k);
-                int child = (r >= count_ || compare(nodes_[l], nodes_[r]) < 0) ? l : r;
-                if (compare(x, nodes_[child]) > 0) {
-                    nodes_[k] = nodes_[child];
-                    k = child;
-                } else break;
-            }
+            int r = right(k);
+            int child = (r >= count_ || compare(nodes_.get(l), nodes_.get(r)) < 0) ? l : r;
+            if (compare(x, nodes_.get(child)) > 0) {
+                nodes_.set(k, nodes_.get(child));
+                k = child;
+            } else
+                break;
         }
-        nodes_[k] = x;
+        nodes_.set(k, x);
         return least;
     }
 
-    /// Insert an element, resize if necessary.
-    public synchronized void insert(Object x) {
-        if (count_ >= nodes_.length) {
-            int newcap = 3 * nodes_.length / 2 + 1;
-            Object[] newnodes = new Object[newcap];
-            System.arraycopy(nodes_, 0, newnodes, 0, nodes_.length);
-            nodes_ = newnodes;
-        }
-
+    public synchronized void insert(E x) {
+        nodes_.add(x);
         int k = count_;
         ++count_;
         while (k > 0) {
             int par = parent(k);
-            if (compare(x, nodes_[par]) < 0) {
-                nodes_[k] = nodes_[par];
+            if (compare(x, nodes_.get(par)) < 0) {
+                nodes_.set(k, nodes_.get(par));
                 k = par;
-            } else break;
+            } else
+                break;
         }
-        nodes_[k] = x;
+        nodes_.set(k, x);
     }
 
     protected final int left(int k) {
         return 2 * k + 1;
     }
 
-    // indexes of heap parents and children
     protected final int parent(int k) {
         return (k - 1) / 2;
     }
 
-    /// Return least element without removing it, or null if empty.
-    public synchronized Object peek() {
+    public synchronized E peek() {
         if (count_ > 0)
-            return nodes_[0];
+            return nodes_.get(0);
         else
             return null;
     }
@@ -139,12 +94,12 @@ public class Heap implements QueueInterface<Object> {
         return 2 * (k + 1);
     }
 
-    public synchronized boolean enqueue(Object x) {
+    public synchronized boolean enqueue(E x) {
         insert(x);
         return true;
     }
 
-    public synchronized Object dequeue() {
+    public synchronized E dequeue() {
         return extract();
     }
 
@@ -159,9 +114,9 @@ public class Heap implements QueueInterface<Object> {
         }
         StringBuilder sb = new StringBuilder("FRONT");
         for (int i = 0; i < count_; i++) {
-            sb.append(" ➔ [").append(nodes_[i]).append("]");
+            sb.append(" \u2794 [").append(nodes_.get(i)).append("]");
         }
-        sb.append(" ➔ REAR");
+        sb.append(" \u2794 REAR");
         return QueueInterface.boxedQueue(sb.toString());
     }
 
@@ -172,9 +127,7 @@ public class Heap implements QueueInterface<Object> {
                 toString());
     }
 
-    /// Return number of elements.
     public synchronized int size() {
         return count_;
     }
-
 }

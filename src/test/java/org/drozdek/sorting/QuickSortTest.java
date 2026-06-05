@@ -1,4 +1,4 @@
-package sorting;
+package org.drozdek.sorting;
 
 import org.drozdek.commons.ArrayUtils;
 import org.drozdek.sorting.QuickSort;

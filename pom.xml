@@ -16,6 +16,7 @@
         <sonar.organization>dmancilla85</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.projectKey>dmancilla85_java-drozdek</sonar.projectKey>
+        <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
     </properties>
 
     <dependencies>

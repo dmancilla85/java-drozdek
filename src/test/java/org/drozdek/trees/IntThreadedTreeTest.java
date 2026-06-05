@@ -1,4 +1,4 @@
-package trees;
+package org.drozdek.trees;
 
 import org.drozdek.trees.IntThreadedTree;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,6 +60,33 @@ class IntThreadedTreeTest {
 
 
         assertEquals(6, tree.size(), "The tree size is not the expected");
+    }
+
+    @Test
+    @DisplayName("ToString shows visual tree structure")
+    void testToString() {
+        tree.insert(3);
+        tree.insert(5);
+        tree.insert(6);
+        tree.insert(21);
+        tree.insert(65);
+        tree.insert(19);
+        String output = tree.toString();
+        assertTrue(output.contains("3"));
+        assertTrue(output.contains("5"));
+        assertTrue(output.contains("6"));
+    }
+
+    @Test
+    @DisplayName("Print method executes without error")
+    void testPrint() {
+        tree.insert(3);
+        tree.insert(5);
+        tree.insert(6);
+        tree.insert(21);
+        tree.insert(65);
+        tree.insert(19);
+        assertDoesNotThrow(() -> tree.print());
     }
 
     @Test

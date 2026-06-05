@@ -135,4 +135,32 @@ public class StaticBinaryTree implements TreeInterface {
         else
             return tree[size - 2];
     }
+
+    @Override
+    public String toString() {
+        if (size == 0) return System.lineSeparator() + "<EMPTY>" + System.lineSeparator();
+        StringBuilder buffer = new StringBuilder(50);
+        buffer.append(System.lineSeparator());
+        printNode(buffer, "", "", 0);
+        return buffer.toString();
+    }
+
+    private void printNode(StringBuilder buffer, String prefix, String childrenPrefix, int index) {
+        if (index >= CAPACITY || tree[index] == null) return;
+        buffer.append(prefix);
+        buffer.append(tree[index]);
+        buffer.append(System.lineSeparator());
+
+        int left = 2 * index + 1;
+        int right = 2 * index + 2;
+        boolean hasLeft = left < CAPACITY && tree[left] != null;
+        boolean hasRight = right < CAPACITY && tree[right] != null;
+
+        if (hasRight) {
+            printNode(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ", left);
+            printNode(buffer, childrenPrefix + "└── ", childrenPrefix + "    ", right);
+        } else if (hasLeft) {
+            printNode(buffer, childrenPrefix + "└── ", childrenPrefix + "    ", left);
+        }
+    }
 }

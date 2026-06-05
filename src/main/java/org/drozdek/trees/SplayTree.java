@@ -13,7 +13,7 @@ import java.io.PrintStream;
 /// Auxiliary Space: O(1)
 ///
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/splay-tree/)
-public class SplayTree<T> implements TreeInterface {
+public class SplayTree<T extends Comparable<T>> implements TreeInterface {
 
     SplayTreeNode<T> root;
 
@@ -54,7 +54,7 @@ public class SplayTree<T> implements TreeInterface {
     ///
     /// @param data Key to delete
     /// @return Operation code
-    public int deleteByMerging(Comparable<T> data) {
+    public int deleteByMerging(T data) {
         SplayTreeNode<T> tmp;
         SplayTreeNode<T> node;
         SplayTreeNode<T> p;
@@ -115,14 +115,14 @@ public class SplayTree<T> implements TreeInterface {
     /// Insert a new node in the tree.
     ///
     /// @param data Value to insert in the tree
-    public void insert(Comparable<T> data) {
+    public void insert(T data) {
         SplayTreeNode<T> p = root;
         SplayTreeNode<T> previous = null;
 
         while (p != null) {
             previous = p;
 
-            if (p.getKey().compareTo((T) data) < 0) // should be <
+            if (p.getKey().compareTo(data) < 0) // should be <
                 p = p.getRight();
             else
                 p = p.getLeft();
@@ -130,38 +130,41 @@ public class SplayTree<T> implements TreeInterface {
 
         if (root == null)
             root = new SplayTreeNode<>(data);
-        else if (previous.getKey().compareTo((T) data) < 0)
-            previous.setRight( new SplayTreeNode<>(data));
-        else
-            previous.setLeft( new SplayTreeNode<>(data));
+        else if (previous.getKey().compareTo(data) < 0) {
+            previous.setRight(new SplayTreeNode<>(data));
+            previous.getRight().setParent(previous);
+        } else {
+            previous.setLeft(new SplayTreeNode<>(data));
+            previous.getLeft().setParent(previous);
+        }
     }
 
     private void rotateLeft(SplayTreeNode<T> p) {
-        p.getParent().setRight( p.getLeft());
-        p.setLeft( p.getParent());
+        p.getParent().setRight(p.getLeft());
+        p.setLeft(p.getParent());
 
         continueRotation(p.getParent().getParent(), p.getLeft(), p, p.getLeft().getRight());
     }
 
     private void rotateRight(SplayTreeNode<T> p) {
-        p.getParent().setLeft( p.getRight());
-        p.setRight( p.getParent());
+        p.getParent().setLeft(p.getRight());
+        p.setRight(p.getParent());
 
         continueRotation(p.getParent().getParent(), p.getRight(), p, p.getRight().getLeft());
     }
 
-    public Comparable<T> search(SplayTreeNode<T> p, Comparable<T> element) {
+    public T search(SplayTreeNode<T> p, T element) {
         while (p != null) {
-            if (element == p.getKey())
+            if (element.compareTo(p.getKey()) == 0)
                 return p.getKey();
-            else if (element.compareTo((T) p.getKey()) < 0)
+            else if (element.compareTo(p.getKey()) < 0)
                 p = p.getLeft();
             else p = p.getRight();
         }
         return null;
     }
 
-    public Comparable<T> search(Comparable<T> key) {
+    public T search(T key) {
         return search(this.root, key);
     }
 
@@ -170,33 +173,50 @@ public class SplayTree<T> implements TreeInterface {
         semiSplay(this.root);
     }
 
-    private void semiSplay(SplayTreeNode<T> p) {
+    public void semiSplay(SplayTreeNode<T> p) {
         while (p != root) {
             if (p.getParent().getParent() == null) {
-                if (p.getParent().getLeft() == p)
-                    rotateRight(p);
-                else rotateLeft(p);
-            } else if (p.getParent().getLeft() == p) {
-                if (p.getParent().getParent().getLeft() == p.getParent()) {
-                    rotateRight(p.getParent());
-                    p = p.getParent();
-                } else {
-                    rotateRight(p);
-                    rotateLeft(p);
-                }
-            } else if (p.getParent().getParent().getRight() == p.getParent()) {
-                rotateLeft(p.getParent());
-                p = p.getParent();
+                semiSplayZig(p);
+            } else if (isZigZig(p)) {
+                p = semiSplayZigZig(p);
             } else {
-                rotateLeft(p.getParent());
-                rotateRight(p.getParent());
+                semiSplayZigZag(p);
             }
             if (root == null)
                 root = p;
         }
     }
 
-    private SplayTreeNode<T>[] setUpDelete(Comparable<T> key) {
+    private void semiSplayZig(SplayTreeNode<T> p) {
+        if (p.getParent().getLeft() == p)
+            rotateRight(p);
+        else
+            rotateLeft(p);
+    }
+
+    private boolean isZigZig(SplayTreeNode<T> p) {
+        return (p.getParent().getLeft() == p) == (p.getParent().getParent().getLeft() == p.getParent());
+    }
+
+    private SplayTreeNode<T> semiSplayZigZig(SplayTreeNode<T> p) {
+        if (p.getParent().getLeft() == p)
+            rotateRight(p.getParent());
+        else
+            rotateLeft(p.getParent());
+        return p.getParent();
+    }
+
+    private void semiSplayZigZag(SplayTreeNode<T> p) {
+        if (p.getParent().getLeft() == p) {
+            rotateRight(p);
+            rotateLeft(p);
+        } else {
+            rotateLeft(p);
+            rotateRight(p);
+        }
+    }
+
+    private SplayTreeNode<T>[] setUpDelete(T key) {
         SplayTreeNode<T>[] vars = new SplayTreeNode[2];
         vars[0] = root;
         vars[1] = null;
@@ -204,7 +224,7 @@ public class SplayTree<T> implements TreeInterface {
         while (vars[0] != null && vars[0].getKey() != key) {
             vars[1] = vars[0];
 
-            if (vars[0].getKey().compareTo((T) key) < 0)
+            if (vars[0].getKey().compareTo(key) < 0)
                 vars[0] = vars[0].getRight();
             else
                 vars[0] = vars[0].getLeft();

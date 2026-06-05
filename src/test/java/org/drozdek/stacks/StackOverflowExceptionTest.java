@@ -1,4 +1,4 @@
-package stacks;
+package org.drozdek.stacks;
 
 import org.drozdek.stacks.StackOverflowException;
 import org.junit.jupiter.api.DisplayName;

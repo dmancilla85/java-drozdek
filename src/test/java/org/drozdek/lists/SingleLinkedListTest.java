@@ -1,4 +1,4 @@
-package lists;
+package org.drozdek.lists;
 
 import org.drozdek.commons.LoggerService;
 import org.drozdek.lists.SingleLinkedList;

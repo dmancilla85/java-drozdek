@@ -1,4 +1,4 @@
-package trees;
+package org.drozdek.trees;
 
 import org.drozdek.trees.MinimumHeap;
 import org.junit.jupiter.api.BeforeEach;
@@ -229,5 +229,12 @@ class MinimumHeapTest {
     void defaultConstructor() {
         MinimumHeap<Integer> h = new MinimumHeap<>();
         assertTrue(h.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Print method executes without error")
+    void testPrint() {
+        dumpData();
+        assertDoesNotThrow(() -> heap.print());
     }
 }

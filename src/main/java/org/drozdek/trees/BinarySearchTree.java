@@ -19,7 +19,7 @@ import java.io.PrintStream;
 ///
 /// @author David
 /// @version 1.0.0
-public class BinarySearchTree<T> implements TreeInterface {
+public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface {
     protected BinarySearchTreeNode<T> root;
 
     public BinarySearchTree() {
@@ -132,11 +132,11 @@ public class BinarySearchTree<T> implements TreeInterface {
     /// This balance algorithm requires a previously sorted additional array
     ///
     /// @param data A sorted data array
-    public void balanceWithDataArray(Comparable<T>[] data) {
+    public void balanceWithDataArray(T[] data) {
         balanceWithDataArray(data, 0, data.length - 1);
     }
 
-    private void balanceWithDataArray(Comparable<T>[] data, int first, int last) {
+    private void balanceWithDataArray(T[] data, int first, int last) {
         if (first <= last) {
             int middle = (first + last) / 2;
             insert(data[middle]);
@@ -296,14 +296,14 @@ public class BinarySearchTree<T> implements TreeInterface {
     /// Insert a new node in the tree.
     ///
     /// @param data Value to insert in the tree
-    public void insert(Comparable<T> data) {
+    public void insert(T data) {
         BinarySearchTreeNode<T> p = root;
         BinarySearchTreeNode<T> previous = null;
 
         while (p != null) {
             previous = p;
 
-            if (p.getKey().compareTo((T) data) < 0) // should be <
+            if (p.getKey().compareTo(data) < 0) // should be <
                 p = p.getRight();
             else
                 p = p.getLeft();
@@ -311,7 +311,7 @@ public class BinarySearchTree<T> implements TreeInterface {
 
         if (root == null)
             root = new BinarySearchTreeNode<>(data);
-        else if (previous.getKey().compareTo((T) data) < 0)
+        else if (previous.getKey().compareTo(data) < 0)
             previous.setRight( new BinarySearchTreeNode<>(data));
         else
             previous.setLeft( new BinarySearchTreeNode<>(data));
@@ -548,18 +548,18 @@ public class BinarySearchTree<T> implements TreeInterface {
         preorder(p.getRight(), out);
     }
 
-    public Comparable<T> search(BinarySearchTreeNode<T> p, Comparable<T> element) {
+    public T search(BinarySearchTreeNode<T> p, T element) {
         while (p != null) {
             if (element == p.getKey())
                 return p.getKey();
-            else if (element.compareTo((T) p.getKey()) < 0)
+            else if (element.compareTo(p.getKey()) < 0)
                 p = p.getLeft();
             else p = p.getRight();
         }
         return null;
     }
 
-    public Comparable<T> search(Comparable<T> key) {
+    public T search(T key) {
         return search(this.root, key);
     }
 

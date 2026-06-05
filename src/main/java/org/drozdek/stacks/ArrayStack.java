@@ -7,52 +7,47 @@ import java.util.*;
 public class ArrayStack<T> implements StackInterface<T> {
 
     private static final int DEFAULT_CAPACITY = 5;
-    private Object[] array;
+    private List<T> list;
     private int top;
-    private int capacity;
 
     public ArrayStack() {
         this(DEFAULT_CAPACITY);
     }
 
-    @SuppressWarnings("unchecked")
     public ArrayStack(int capacity) {
-        this.array = new Object[capacity];
-        this.capacity = capacity;
+        this.list = new ArrayList<>(capacity);
         this.top = -1;
     }
 
     @Override
     public void push(T element) {
         Objects.requireNonNull(element, "Element cannot be null");
-        if (isFull()) {
-            resize();
-        }
-        array[++top] = element;
+        list.add(element);
+        top++;
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public T pop() {
         if (isEmpty()) {
             throw new EmptyStackException();
         }
-        return (T) array[top--];
+        return list.remove(top--);
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public T topElement() {
         if (isEmpty()) {
             throw new EmptyStackException();
         }
-        return (T) array[top];
+        return list.get(top);
     }
 
     @Override
     public String toString() {
         List<Object> elements = new ArrayList<>(top + 1);
-        elements.addAll(Arrays.asList(array).subList(0, top + 1));
+        for (int i = 0; i <= top; i++) {
+            elements.add(list.get(i));
+        }
         return Stack.formatStackList(elements);
     }
 
@@ -63,17 +58,7 @@ public class ArrayStack<T> implements StackInterface<T> {
 
     @Override
     public void clear() {
+        list.clear();
         top = -1;
-    }
-
-    public boolean isFull() {
-        return top + 1 == capacity;
-    }
-
-    private void resize() {
-        Object[] aux = new Object[2 * capacity];
-        if (capacity >= 0) System.arraycopy(array, 0, aux, 0, capacity);
-        capacity = 2 * capacity;
-        array = aux;
     }
 }

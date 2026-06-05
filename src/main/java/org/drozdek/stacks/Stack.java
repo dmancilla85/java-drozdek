@@ -90,18 +90,25 @@ public class Stack<T> implements StackInterface<T> {
             if (types[i].length() > maxTypeLen) maxTypeLen = types[i].length();
         }
 
-        int gap = 6;
-        int typeColPos = maxValueLen + gap;
+        int typeColPos = maxValueLen + 6;
         String header = " ─ STACK (" + n + " Item" + (n == 1 ? "" : "s") + ") ";
+        int width = computeListWidth(n, values, types, typeColPos, header.length());
 
-        int width = header.length();
+        return buildStackRows(values, types, n, typeColPos, width, header);
+    }
+
+    private static int computeListWidth(int n, String[] values, String[] types, int typeColPos, int headerLen) {
+        int width = headerLen;
         for (int i = 0; i < n; i++) {
             int padLen = Math.max(1, typeColPos - values[i].length());
             int lineLen = 8 + values[i].length() + padLen + 2 + types[i].length();
             if (i == n - 1) lineLen += 7;
             if (lineLen > width) width = lineLen;
         }
+        return width;
+    }
 
+    private static String buildStackRows(String[] values, String[] types, int n, int typeColPos, int width, String header) {
         StringBuilder sb = new StringBuilder();
 
         sb.append(header);

@@ -80,23 +80,30 @@ public class DoubleLinkedList<T> implements Iterable<T>, ListInterface<T> {
         if (head == null) return;
         if (data.equals(head.getData())) {
             head = head.getNext();
-            if (head != null) head.setPrevious(null);
-            if (head == null) tail = null;
-        } else {
-            if (data.equals(tail.getData())) {
-                removeFromTail();
-            } else {
-                DoubleLinkedListNode<T> predecessor = head;
-                DoubleLinkedListNode<T> tmp = head.getNext();
-                while (tmp != null && !tmp.getData().equals(data)) {
-                    predecessor = predecessor.getNext();
-                    tmp = tmp.getNext();
-                }
-                if (tmp != null) {
-                    predecessor.setNext(tmp.getNext());
-                    if (tmp.getNext() != null) tmp.getNext().setPrevious(predecessor);
-                }
-            }
+            if (head != null)
+                head.setPrevious(null);
+            else
+                tail = null;
+            return;
+        }
+        if (data.equals(tail.getData())) {
+            removeFromTail();
+            return;
+        }
+        removeMiddleNode(data);
+    }
+
+    private void removeMiddleNode(T data) {
+        DoubleLinkedListNode<T> predecessor = head;
+        DoubleLinkedListNode<T> tmp = head.getNext();
+        while (tmp != null && !tmp.getData().equals(data)) {
+            predecessor = predecessor.getNext();
+            tmp = tmp.getNext();
+        }
+        if (tmp != null) {
+            predecessor.setNext(tmp.getNext());
+            if (tmp.getNext() != null)
+                tmp.getNext().setPrevious(predecessor);
         }
     }
 

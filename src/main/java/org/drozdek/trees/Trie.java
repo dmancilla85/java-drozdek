@@ -75,38 +75,32 @@ public class Trie implements TreeInterface {
 
     public boolean found(String word) {
         TrieNode p = root;
-        int pos;
         int i = 0;
 
-        while (true) {
-            if (p == null)
-                return false;
+        while (p != null) {
+            if (p.isLeaf())
+                return word.substring(i).equals(((TrieLeaf) p).getSuffix());
 
-            if (p.isLeaf()) {
-                assert p instanceof TrieLeaf;
-                TrieLeaf lf = (TrieLeaf) p;
-                return word.substring(i).equals(lf.getSuffix());
-            }
-
-            if (i >= word.length()) {
+            if (i >= word.length())
                 return ((TrieNonLeaf) p).isEndOfWord();
+
+            int pos = position((TrieNonLeaf) p, word.charAt(i));
+
+            if (pos == NOT_FOUND)
+                return false;
+
+            if (i + 1 == word.length()) {
+                TrieNode child = ((TrieNonLeaf) p).getPtr()[pos];
+                return child == null || (!child.isLeaf() && ((TrieNonLeaf) child).isEndOfWord());
             }
 
-            pos = position((TrieNonLeaf) p, word.charAt(i));
-
-            if (pos != NOT_FOUND && i + 1 == word.length()) {
-                if (((TrieNonLeaf) p).getPtr()[pos] == null)
-                    return true;
-                else
-                    return !((TrieNonLeaf) p).getPtr()[pos].isLeaf() &&
-                            ((TrieNonLeaf) ((TrieNonLeaf) p).getPtr()[pos]).isEndOfWord();
-            } else if (pos != NOT_FOUND && ((TrieNonLeaf) p).getPtr()[pos] != null) {
-                p = ((TrieNonLeaf) p).getPtr()[pos];
-                i++;
-            } else
+            if (((TrieNonLeaf) p).getPtr()[pos] == null)
                 return false;
-        }
 
+            p = ((TrieNonLeaf) p).getPtr()[pos];
+            i++;
+        }
+        return false;
     }
 
     public void insert(String word) {
@@ -119,87 +113,95 @@ public class Trie implements TreeInterface {
         TrieNonLeaf current = root;
         int i = 0;
 
-        while (true) {
-            if (i == word.length()) {
-                current.setEndOfWord(true);
-                return;
-            }
-
+        while (i < word.length()) {
             int pos = position(current, word.charAt(i));
 
             if (pos != NOT_FOUND && current.getPtr()[pos] == null) {
-                if (i + 1 == word.length()) {
-                    current.setEndOfWord(true);
-                    return;
-                }
-
-                current.getPtr()[pos] = new TrieNonLeaf(word.charAt(i + 1));
-                ((TrieNonLeaf) current.getPtr()[pos]).setEndOfWord(true);
-
-                String s = (word.length() > i + 2) ? word.substring(i + 2) : null;
-                createLeaf(word.charAt(i + 1), s, (TrieNonLeaf) current.getPtr()[pos]);
+                insertAtNullPosition(current, word, i, pos);
                 return;
-            } else if (pos != NOT_FOUND && current.getPtr()[pos].isLeaf()) {
-                TrieLeaf lf = (TrieLeaf) current.getPtr()[pos];
+            }
 
-                if (lf.getSuffix().equals(word.substring(i + 1))) {
-                    LoggerService.logError("Duplicate entry (#3): " + word);
-                    return;
-                }
-
-                int offset = 0;
-
-                do {
-                    pos = position(current, word.charAt(i + offset));
-
-                    if (word.length() == i + offset + 1) {
-                        current.getPtr()[pos] = new TrieNonLeaf(lf.getSuffix().charAt(offset));
-                        current = (TrieNonLeaf) current.getPtr()[pos];
-                        current.setEndOfWord(true);
-                        createLeaf(lf.getSuffix().charAt(offset), lf.getSuffix().substring(offset + 1), current);
-                        return;
-                    } else if (lf.getSuffix().length() == offset) {
-                        current.getPtr()[pos] = new TrieNonLeaf(word.charAt(i + offset + 1));
-                        current = (TrieNonLeaf) current.getPtr()[pos];
-                        current.setEndOfWord(true);
-                        createLeaf(word.charAt(i + offset + 1), word.substring(i + offset + 2), current);
-                        return;
-                    }
-
-                    current.getPtr()[pos] = new TrieNonLeaf(word.charAt(i + offset + 1));
-                    current = (TrieNonLeaf) current.getPtr()[pos];
-                    offset++;
-                } while (word.charAt(i + offset) == lf.getSuffix().charAt(offset - 1));
-
-                offset--;
-                String s = null;
-
-                if (word.length() > i + offset + 2)
-                    s = word.substring(i + offset + 2);
-
-                createLeaf(word.charAt(i + offset + 1), s, current);
-
-                if (lf.getSuffix().length() > offset + 1)
-                    s = lf.getSuffix().substring(offset + 1);
-                else
-                    s = null;
-                createLeaf(lf.getSuffix().charAt(offset), s, current);
+            if (pos != NOT_FOUND && current.getPtr()[pos].isLeaf()) {
+                insertIntoSplit(current, word, i, pos);
                 return;
-            } else if (pos != NOT_FOUND) {
+            }
+
+            if (pos != NOT_FOUND) {
                 current = (TrieNonLeaf) current.getPtr()[pos];
                 i++;
             } else {
-                addCell(word.charAt(i), current, 0);
-                pos = position(current, word.charAt(i));
-                if (i + 1 == word.length()) {
-                    current.setEndOfWord(true);
-                    return;
-                }
-                String suffix = word.substring(i + 1);
-                current.getPtr()[pos] = new TrieLeaf(suffix);
+                insertAtNewPosition(current, word, i);
                 return;
             }
         }
+
+        current.setEndOfWord(true);
+    }
+
+    private void insertAtNullPosition(TrieNonLeaf current, String word, int i, int pos) {
+        if (i + 1 == word.length()) {
+            current.setEndOfWord(true);
+            return;
+        }
+
+        current.getPtr()[pos] = new TrieNonLeaf(word.charAt(i + 1));
+        ((TrieNonLeaf) current.getPtr()[pos]).setEndOfWord(true);
+
+        String s = word.length() > i + 2 ? word.substring(i + 2) : null;
+        createLeaf(word.charAt(i + 1), s, (TrieNonLeaf) current.getPtr()[pos]);
+    }
+
+    private void insertIntoSplit(TrieNonLeaf current, String word, int i, int pos) {
+        TrieLeaf lf = (TrieLeaf) current.getPtr()[pos];
+
+        if (lf.getSuffix().equals(word.substring(i + 1))) {
+            LoggerService.logError("Duplicate entry (#3): " + word);
+            return;
+        }
+
+        int offset = 0;
+
+        do {
+            pos = position(current, word.charAt(i + offset));
+
+            if (word.length() == i + offset + 1) {
+                current.getPtr()[pos] = new TrieNonLeaf(lf.getSuffix().charAt(offset));
+                current = (TrieNonLeaf) current.getPtr()[pos];
+                current.setEndOfWord(true);
+                createLeaf(lf.getSuffix().charAt(offset), lf.getSuffix().substring(offset + 1), current);
+                return;
+            }
+
+            if (lf.getSuffix().length() == offset) {
+                current.getPtr()[pos] = new TrieNonLeaf(word.charAt(i + offset + 1));
+                current = (TrieNonLeaf) current.getPtr()[pos];
+                current.setEndOfWord(true);
+                createLeaf(word.charAt(i + offset + 1), word.substring(i + offset + 2), current);
+                return;
+            }
+
+            current.getPtr()[pos] = new TrieNonLeaf(word.charAt(i + offset + 1));
+            current = (TrieNonLeaf) current.getPtr()[pos];
+            offset++;
+        } while (word.charAt(i + offset) == lf.getSuffix().charAt(offset - 1));
+
+        offset--;
+
+        String s1 = word.length() > i + offset + 2 ? word.substring(i + offset + 2) : null;
+        createLeaf(word.charAt(i + offset + 1), s1, current);
+
+        String s2 = lf.getSuffix().length() > offset + 1 ? lf.getSuffix().substring(offset + 1) : null;
+        createLeaf(lf.getSuffix().charAt(offset), s2, current);
+    }
+
+    private void insertAtNewPosition(TrieNonLeaf current, String word, int i) {
+        addCell(word.charAt(i), current, 0);
+        int pos = position(current, word.charAt(i));
+        if (i + 1 == word.length()) {
+            current.setEndOfWord(true);
+            return;
+        }
+        current.getPtr()[pos] = new TrieLeaf(word.substring(i + 1));
     }
 
     protected String oldPrintTrie(int depth, TrieNode p, String prefix) {
@@ -263,7 +265,8 @@ public class Trie implements TreeInterface {
         return count;
     }
 
-    public String print() {
+    @Override
+    public String toString() {
         if (root == null) return System.lineSeparator() + "<EMPTY>" + System.lineSeparator();
         StringBuilder sb = new StringBuilder();
         sb.append(System.lineSeparator());

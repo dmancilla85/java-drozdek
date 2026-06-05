@@ -1,4 +1,4 @@
-package trees;
+package org.drozdek.trees;
 
 import org.drozdek.trees.SimpleTree;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,6 +49,13 @@ class SimpleTreeTest {
     @DisplayName("Find non-existent node returns null")
     void findNonExistent() {
         assertNull(tree.findNode("nothing"));
+    }
+
+    @Test
+    @DisplayName("Print method executes without error")
+    void testPrint() {
+        tree.insertElement(null, "root");
+        assertDoesNotThrow(() -> tree.print());
     }
 
     @Test

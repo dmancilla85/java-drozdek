@@ -1,4 +1,4 @@
-package stacks;
+package org.drozdek.stacks;
 
 import org.drozdek.stacks.AdaptiveStack;
 import org.junit.jupiter.api.BeforeEach;

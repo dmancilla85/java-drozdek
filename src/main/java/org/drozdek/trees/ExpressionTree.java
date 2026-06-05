@@ -104,32 +104,48 @@ public class ExpressionTree implements TreeInterface {
         for (int i = 0; i < expression.length(); i++) {
             char token = expression.charAt(i);
             if (isNumber(token)) {
-                int num = 0;
-                while (i < expression.length() && Character.isDigit(expression.charAt(i))) {
-                    num = num * 10 + expression.charAt(i) - '0';
-                    i++;
-                }
-                i--;
-                numStack.push(num);
+                i = parseNumber(expression, i, numStack);
             } else if (token == '(') {
                 opStack.push(token);
             } else if (token == ')') {
-                while (opStack.peek() != '(') {
-                    numStack.push(compute(numStack.pop(), numStack.pop(), opStack.pop()));
-                }
-                opStack.pop();
+                evaluateUntilOpenParen(numStack, opStack);
             } else {
-                while (!opStack.isEmpty() && getPriority(opStack.peek()) >= getPriority(token)
-                        && !numStack.isEmpty()) {
-                    numStack.push(compute(numStack.pop(), numStack.pop(), opStack.pop()));
-                }
+                evaluateHigherOperators(token, numStack, opStack);
                 opStack.push(token);
             }
         }
+        evaluateRemainingOperators(numStack, opStack);
+        return numStack.isEmpty() ? 0 : numStack.pop();
+    }
+
+    private static int parseNumber(String expression, int i, Deque<Integer> numStack) {
+        int num = 0;
+        while (i < expression.length() && Character.isDigit(expression.charAt(i))) {
+            num = num * 10 + expression.charAt(i) - '0';
+            i++;
+        }
+        numStack.push(num);
+        return i - 1;
+    }
+
+    private static void evaluateUntilOpenParen(Deque<Integer> numStack, Deque<Character> opStack) {
+        while (opStack.peek() != '(') {
+            numStack.push(compute(numStack.pop(), numStack.pop(), opStack.pop()));
+        }
+        opStack.pop();
+    }
+
+    private static void evaluateHigherOperators(char token, Deque<Integer> numStack, Deque<Character> opStack) {
+        while (!opStack.isEmpty() && getPriority(opStack.peek()) >= getPriority(token)
+                && !numStack.isEmpty()) {
+            numStack.push(compute(numStack.pop(), numStack.pop(), opStack.pop()));
+        }
+    }
+
+    private static void evaluateRemainingOperators(Deque<Integer> numStack, Deque<Character> opStack) {
         while (!opStack.isEmpty()) {
             numStack.push(compute(numStack.pop(), numStack.pop(), opStack.pop()));
         }
-        return numStack.isEmpty() ? 0 : numStack.pop();
     }
 
     private static int getPriority(char op) {

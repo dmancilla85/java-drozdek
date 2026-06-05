@@ -41,14 +41,6 @@ public class Graph {
 
     /// @param args
     static void main(String[] args) {
-        // TODO Auto-generated method stub
-        /*
-         * GrafoSimple gs = createRandom(10, 60); gs.tablaAdyacencias();
-         *
-         * GrafoSimple gs2 = gs.depthFirstSearch();
-         * gs2.tablaAdyacencias();
-         */
-
         Graph uno = new Graph(9);
         uno.createEdge('a', 'e');
         uno.createEdge('a', 'f');
@@ -61,11 +53,6 @@ public class Graph {
         uno.createEdge('b', 'g');
         uno.createEdge('c', 'h');
         uno.createEdge('h', 'd');
-
-
-        /*GrafoSimple dos = uno.depthFirstSearch();
-        GrafoSimple tres = uno.breadthFirstSearch();*/
-
     }
 
     public void addVertex(Vertex v) {
@@ -86,30 +73,7 @@ public class Graph {
 
         while (i < cardinality() && visitedVertices.size() < cardinality()) {
             if (!visitedVertices.contains(vertices.get(i))) {
-                queue.add(vertices.get(i));
-                visitedVertices.add(this.vertices.get(i));
-
-                try {
-                    while (!queue.isEmpty()) {
-                        Vertex a = queue.poll();
-                        int vertex = vertices.indexOf(a);
-
-                        for (int j = 0; j < cardinality() && vertex != -1; j++) {
-                            if (adjacencyMatrix[vertex][j] == 1
-                                    && !visitedVertices.contains(this.vertices.get(j))) {
-                                LoggerService.logInfo("vertices Visitados contiene a : "
-                                        + (char) (j + 97));
-                                result.newEdge(vertex, j);
-                                queue.add(this.vertices.get(j));
-                                visitedVertices.add(this.vertices.get(j));
-                            }
-                        }
-
-                    }
-
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    e.printStackTrace();
-                }
+                bfsFromVertex(i, queue, visitedVertices, result);
             }
             i++;
         }
@@ -119,6 +83,32 @@ public class Graph {
                 + (end.getTimeInMillis() - ini.getTimeInMillis()));
 
         return result;
+    }
+
+    private void bfsFromVertex(int startIndex, Queue<Vertex> queue,
+                               ArrayList<Vertex> visitedVertices, Graph result) {
+        queue.add(vertices.get(startIndex));
+        visitedVertices.add(vertices.get(startIndex));
+
+        try {
+            while (!queue.isEmpty()) {
+                Vertex a = queue.poll();
+                int vertex = vertices.indexOf(a);
+
+                for (int j = 0; j < cardinality() && vertex != -1; j++) {
+                    if (adjacencyMatrix[vertex][j] == 1
+                            && !visitedVertices.contains(vertices.get(j))) {
+                        LoggerService.logInfo("vertices Visitados contiene a : "
+                                + (char) (j + 97));
+                        result.newEdge(vertex, j);
+                        queue.add(vertices.get(j));
+                        visitedVertices.add(vertices.get(j));
+                    }
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
     }
 
     /// @return
@@ -274,11 +264,11 @@ public class Graph {
         return getAdjacencyTable().toString();
     }
 
-    public StringBuffer getAdjacencyTable() {
+    public StringBuilder getAdjacencyTable() {
 
         int n = this.adjacencyMatrix[0].length;
 
-        StringBuffer table = new StringBuffer();
+        StringBuilder table = new StringBuilder();
         table.append("Tabla de Adyacencias\n\\ ");
         for (int i = 0; i < n; i++)
             table.append((char) (i + 97) + " ");

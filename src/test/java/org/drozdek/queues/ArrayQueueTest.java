@@ -1,4 +1,4 @@
-package queues;
+package org.drozdek.queues;
 
 import org.drozdek.commons.LoggerService;
 import org.drozdek.queues.ArrayQueue;

@@ -1,6 +1,7 @@
 package org.drozdek.trees;
 
 import info.schnatterer.mobynamesgenerator.MobyNamesGenerator;
+import org.drozdek.commons.LoggerService;
 import org.drozdek.trees.nodes.SuffixTreeNode;
 
 /// Ukkonen's suffix tree implementation. Builds a suffix tree in linear time for efficient
@@ -120,6 +121,10 @@ public class SuffixTree {
     @Override
     public String toString() {
         return root.toString();
+    }
+
+    public void print() {
+        LoggerService.logInfo(System.lineSeparator() + printTree());
     }
 
     SuffixTreeNode testAndSplit(SuffixTreeNode p, int i) {

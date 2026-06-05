@@ -10,14 +10,14 @@ import java.util.LinkedList;
 /// Auxiliary Space: O(1)
 ///
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/splay-tree/)
-public class SplayTreeNode<T> {
-    private final Comparable<T> key;
+public class SplayTreeNode<T extends Comparable<T>> {
+    private final T key;
     private SplayTreeNode<T> left;
     private SplayTreeNode<T> right;
     private SplayTreeNode<T> parent;
 
 
-    public SplayTreeNode(Comparable<T> element, SplayTreeNode<T> left,
+    public SplayTreeNode(T element, SplayTreeNode<T> left,
                          SplayTreeNode<T> right, SplayTreeNode<T> parent) {
         this.key = element;
         this.right = right;
@@ -25,11 +25,11 @@ public class SplayTreeNode<T> {
         this.parent = parent;
     }
 
-    public SplayTreeNode(Comparable<T> element) {
+    public SplayTreeNode(T element) {
         this(element, null, null, null);
     }
 
-    public Comparable<T> getKey() {
+    public T getKey() {
         return key;
     }
 

@@ -19,10 +19,6 @@ public class HeapNode implements Comparable<HeapNode> {
         this.value = value;
     }
 
-    public HeapNode clone() {
-        return new HeapNode(this.value);
-    }
-
     public int compareTo(HeapNode other) {
         return this.value.compareTo(other.value);
     }

@@ -1,4 +1,4 @@
-package trees;
+package org.drozdek.trees;
 
 import org.drozdek.trees.Word;
 import org.junit.jupiter.api.DisplayName;
@@ -33,5 +33,12 @@ class WordTest {
         w.freq++;
         assertEquals(2, w.freq);
         assertTrue(w.toString().contains("(2)"));
+    }
+
+    @Test
+    @DisplayName("Print method executes without error")
+    void testPrint() {
+        Word w = new Word("hello");
+        assertDoesNotThrow(() -> w.print());
     }
 }

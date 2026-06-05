@@ -1,4 +1,4 @@
-package trees;
+package org.drozdek.trees;
 
 import org.drozdek.trees.MaximumHeap;
 import org.junit.jupiter.api.BeforeEach;
@@ -230,5 +230,12 @@ class MaximumHeapTest {
     void defaultConstructor() {
         MaximumHeap<Integer> h = new MaximumHeap<>();
         assertTrue(h.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Print method executes without error")
+    void testPrint() {
+        dumpData();
+        assertDoesNotThrow(() -> heap.print());
     }
 }

@@ -1,4 +1,4 @@
-package trees;
+package org.drozdek.trees;
 
 import org.drozdek.trees.nodes.HeapNode;
 import org.junit.jupiter.api.DisplayName;
@@ -30,10 +30,10 @@ class HeapNodeTest {
     }
 
     @Test
-    @DisplayName("Clone returns equal but different instance")
-    void cloneNode() {
+    @DisplayName("Copy constructor returns equal but different instance")
+    void copyNode() {
         HeapNode original = new HeapNode(77);
-        HeapNode cloned = original.clone();
+        HeapNode cloned = new HeapNode(original.getValue());
         assertNotSame(original, cloned);
         assertEquals(original.getValue(), cloned.getValue());
     }

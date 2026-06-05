@@ -1,4 +1,4 @@
-package trees;
+package org.drozdek.trees;
 
 import org.drozdek.trees.nodes.TrieLeaf;
 import org.drozdek.trees.nodes.TrieNode;
