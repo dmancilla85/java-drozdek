@@ -39,6 +39,6 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: SonarCloud analysis
-      run: mvn sonar:sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }} -Dsonar.ci.autoconfig.disabled=true
+      run: mvn sonar:sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
