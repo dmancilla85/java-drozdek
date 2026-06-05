@@ -59,7 +59,7 @@ private Algorithms() {  }
         return newGraph;
     }
 
-    public static WeightedGraph kruskalAlgorithm(WeightedGraph g, int inicial) {
+    public static WeightedGraph kruskalAlgorithm(WeightedGraph g) {
 
         WeightedGraph newGraph = new WeightedGraph(g.cardinality());
 
@@ -185,7 +185,7 @@ private Algorithms() {  }
     }
 
 
-    public static boolean cycleDetector(Vertex v) {
+    public static boolean cycleDetector() {
 
         return false;
     }

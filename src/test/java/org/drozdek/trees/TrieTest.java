@@ -103,7 +103,7 @@ class TrieTest {
     @DisplayName("Print returns non-empty for populated trie")
     void printNotEmpty() {
         String output = tree.toString();
-        assertTrue(output.length() > 0);
+        assertFalse(output.isEmpty());
     }
 
     @Test

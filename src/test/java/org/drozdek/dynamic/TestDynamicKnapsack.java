@@ -42,7 +42,7 @@ class TestDynamicKnapsack {
     @Test
     @DisplayName("Solve exercise 5 returns a solution")
     void solveExercise5() {
-        KnapsackSolution solution = DynamicKnapsackItem.solveExercise5(items);
+        KnapsackSolution solution = DynamicKnapsackItem.solveExercise5();
 
         assertNotNull(solution, "Solution should not be null");
         assertEquals(0, solution.maximumProfit, "Stub solution has zero profit");

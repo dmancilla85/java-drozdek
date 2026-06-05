@@ -1,6 +1,7 @@
 package org.drozdek.dynamic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /// Result container for the Activity Selection / Weighted Interval Scheduling problem.
 ///
@@ -9,24 +10,23 @@ import java.util.ArrayList;
 public class TaskSchedulingSolution {
     public int taskCount;
     public int instructionCount;
-    public ArrayList<ScheduledTask> solution;
+    public List<ScheduledTask> solution;
 
     public TaskSchedulingSolution() {
         taskCount = 0;
         instructionCount = 0;
-        solution = new ArrayList<ScheduledTask>();
+        solution = new ArrayList<>();
     }
 
     /// @return A formatted string with task count, instruction count, and all selected tasks
     public String toString() {
-        String result = "";
-
-        result = "Tasks: " + taskCount + "\nInstructions: "
-                + instructionCount + ".\n";
+        StringBuilder result = new StringBuilder();
+        result.append("Tasks: ").append(taskCount).append("\nInstructions: ")
+                .append(instructionCount).append(".\n");
 
         for (int i = 0; i < solution.size(); i++)
-            result += solution.get(i) + "\n";
-        return result;
+            result.append(solution.get(i)).append("\n");
+        return result.toString();
     }
 
 }

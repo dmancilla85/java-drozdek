@@ -85,7 +85,7 @@ private FractionalKnapsack() {  }
             for (int j = 1; j <= maxWeight; j++) {
                 if (j - items.get(i - 1).weight < 0)
                     matrix[i][j] = max(items.get(i - 1).value *
-                                    ((double) j / items.get(i - 1).weight)
+                                    (j / (double) items.get(i - 1).weight)
                                     + matrix[i - 1][0],
                             matrix[i - 1][j]);
                 else {

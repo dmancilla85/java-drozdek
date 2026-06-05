@@ -80,8 +80,8 @@ public class WeightedDigraph {
     }
 
     public boolean createArc(char a1, char a2, int weight) {
-        int n1 = ((int) a1) - 97;
-        int n2 = ((int) a2) - 97;
+        int n1 = a1 - 97;
+        int n2 = a2 - 97;
 
         return createArc(n1, n2, weight);
     }

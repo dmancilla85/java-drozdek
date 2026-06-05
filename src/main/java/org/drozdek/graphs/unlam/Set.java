@@ -36,8 +36,8 @@ public class Set<T> {
         return elements.size();
     }
 
-    public boolean isSubsetOf(Set<T> B) {
-        return this.elements.containsAll(B.elements);
+    public boolean isSubsetOf(Set<T> b) {
+        return this.elements.containsAll(b.elements);
     }
 
     public boolean contains(T e) {
@@ -52,12 +52,12 @@ public class Set<T> {
             elements.remove(e);
     }
 
-    public void removeAll(Set<T> B) {
-        this.elements.removeAll(B.elements);
+    public void removeAll(Set<T> b) {
+        this.elements.removeAll(b.elements);
     }
 
-    public void union(Set<T> B) {
-        this.elements.addAll(B.elements);
+    public void union(Set<T> b) {
+        this.elements.addAll(b.elements);
     }
 
 }

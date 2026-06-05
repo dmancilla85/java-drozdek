@@ -1,5 +1,7 @@
 package org.drozdek.lists.nodes;
 
+import java.util.Arrays;
+
 /// Node for an integer skip list data structure.
 ///
 /// Abstract Data Type: Skip list node
@@ -34,7 +36,19 @@ public record IntSkipListNode(int key, IntSkipListNode[] next) {
         this(key, new IntSkipListNode[next]);
     }
 
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof IntSkipListNode that)) return false;
+        return key == that.key && Arrays.equals(next, that.next);
+    }
 
+    @Override
+    public final int hashCode() {
+        int result = key;
+        result = 31 * result + Arrays.hashCode(next);
+        return result;
+    }
 
     /// Returns a string representation of this node for debugging purposes.
     ///

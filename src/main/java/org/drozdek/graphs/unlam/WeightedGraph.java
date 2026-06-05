@@ -20,8 +20,8 @@ public class WeightedGraph extends Graph {
 
         for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++)
-                if ((int) (Math.random() * 100 + 1) > 100 - conexividad) {
-                    al.createEdge(i, j, (int) (Math.random() * 100 + 1));
+                if (RANDOM.nextInt(100) + 1 > 100 - conexividad) {
+                    al.createEdge(i, j, RANDOM.nextInt(100) + 1);
                 }
 
         return al;
@@ -76,8 +76,8 @@ public class WeightedGraph extends Graph {
     /// @param peso
     /// @return
     public boolean createEdge(char a1, char a2, int weight) {
-        int n1 = ((int) a1) - 97;
-        int n2 = ((int) a2) - 97;
+        int n1 = a1 - 97;
+        int n2 = a2 - 97;
 
         return createEdge(n1, n2, weight);
     }
@@ -113,14 +113,14 @@ public class WeightedGraph extends Graph {
         StringBuilder table = new StringBuilder();
         table.append("Tabla de Pesos\n\\ ");
         for (int i = 0; i < n; i++)
-            table.append((char) (i + 97) + " ");
+            table.append((char) (i + 97)).append(" ");
         table.append("\n");
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
 
                 if (j == 0)
-                    table.append((char) (i + j + 97) + " ");
+                    table.append((char) (i + j + 97)).append(" ");
 
                 table.append(weightTable[i][j]);
                 if (j < n)

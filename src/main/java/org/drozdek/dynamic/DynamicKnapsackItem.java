@@ -1,7 +1,7 @@
 package org.drozdek.dynamic;
 
-import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 /// @author david
 
@@ -35,7 +35,7 @@ public class DynamicKnapsackItem implements Comparable<DynamicKnapsackItem>, Com
     ///
     /// @param knapsack The list of items to select from
     /// @return An empty solution object
-    public static KnapsackSolution solveExercise5(ArrayList<DynamicKnapsackItem> knapsack) {
+    public static KnapsackSolution solveExercise5() {
 
         KnapsackSolution sol = new KnapsackSolution();
 

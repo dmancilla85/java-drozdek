@@ -90,6 +90,7 @@ public class HeapArray {
             out.println("-------------------------");
             out.close();
         } catch (Exception ignored) {
+            // Intentionally ignored
         }
     }
 

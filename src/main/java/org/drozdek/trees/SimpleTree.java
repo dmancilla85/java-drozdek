@@ -1,6 +1,5 @@
 package org.drozdek.trees;
 
-import org.drozdek.commons.LoggerService;
 import org.drozdek.trees.interfaces.TreeInterface;
 
 import java.util.ArrayList;

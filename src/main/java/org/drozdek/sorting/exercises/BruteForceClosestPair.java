@@ -62,8 +62,8 @@ class PointPair {
 
     void calculateDistance() {
 
-        distance = Math.sqrt((pointA.x - pointB.x) * (pointA.x - pointB.x)
-                + (pointA.y - pointB.y) * (pointA.y - pointB.y));
+        distance = Math.sqrt((double) (pointA.x - pointB.x) * (pointA.x - pointB.x)
+                + (double) (pointA.y - pointB.y) * (pointA.y - pointB.y));
     }
 
     public String toString() {
@@ -89,9 +89,9 @@ private BruteForceClosestPair() {  }
     ///
     /// @param points list of points (modified during recursion)
     /// @return list of PointPair for every pair
-    public static ArrayList<PointPair> enumeratePairs(List<Point> points) {
+    public static List<PointPair> enumeratePairs(List<Point> points) {
 
-        ArrayList<PointPair> pairs = new ArrayList<PointPair>();
+        ArrayList<PointPair> pairs = new ArrayList<>();
         int stepCount = 0;
 
         if (points.size() <= 1) {
@@ -154,7 +154,7 @@ private BruteForceClosestPair() {  }
 
 
         // Generate all point pairs and find the one with minimum distance
-        ArrayList<PointPair> pairs = enumeratePairs(points);
+        List<PointPair> pairs = enumeratePairs(points);
 
         for (PointPair pair : pairs)
             System.out.println(pair);
@@ -165,7 +165,7 @@ private BruteForceClosestPair() {  }
             System.out.println("No points to calculate distance.");
         } else {
             System.out.println();
-            System.out.printf("Minimum distance is %.3f\n", closest.distance);
+            System.out.printf("Minimum distance is %.3f%n", closest.distance);
             System.out.println();
             System.out.println("The points are: " + closest.pointA + " and " + closest.pointB);
             System.out.println();

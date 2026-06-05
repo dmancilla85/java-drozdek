@@ -2,7 +2,12 @@ package org.drozdek.graphs.unlam;
 
 import org.drozdek.commons.LoggerService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Queue;
+import java.util.Random;
+import java.util.LinkedList;
 
 /// @author David
 public class Graph {
@@ -28,12 +33,14 @@ public class Graph {
             this.vertices.add(new Vertex(i));
     }
 
+    protected static final Random RANDOM = new Random();
+
     public static Graph createRandom(int n, int conexividad) {
         Graph al = new Graph(n);
 
         for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++)
-                if ((int) (Math.random() * 100 + 1) > 100 - conexividad)
+                if (RANDOM.nextInt(100) + 1 > 100 - conexividad)
                     al.newEdge(i, j);
 
         return al;
@@ -153,8 +160,8 @@ public class Graph {
     /// @param a2
     /// @return
     public boolean createEdge(char a1, char a2) {
-        int n1 = ((int) a1) - 97;
-        int n2 = ((int) a2) - 97;
+        int n1 = a1 - 97;
+        int n2 = a2 - 97;
 
         return newEdge(n1, n2);
     }
@@ -236,7 +243,7 @@ public class Graph {
     }
 
     public String connectivityPercentage() {
-        double max = cardinality() * (cardinality() - 1) / 2;
+        double max = cardinality() * (cardinality() - 1) / 2.0;
         return String.format("Conexividad: %3.2f", edges.size() / max * 100)
                 + "%";
     }
@@ -271,14 +278,14 @@ public class Graph {
         StringBuilder table = new StringBuilder();
         table.append("Tabla de Adyacencias\n\\ ");
         for (int i = 0; i < n; i++)
-            table.append((char) (i + 97) + " ");
+            table.append((char) (i + 97)).append(" ");
         table.append("\n");
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
 
                 if (j == 0)
-                    table.append((char) (i + j + 97) + " ");
+                    table.append((char) (i + j + 97)).append(" ");
 
                 table.append(adjacencyMatrix[i][j]);
                 if (j < n)
