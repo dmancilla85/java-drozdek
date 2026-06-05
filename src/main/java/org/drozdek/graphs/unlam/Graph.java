@@ -4,6 +4,7 @@ import org.drozdek.commons.LoggerService;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
 import java.util.Random;
@@ -23,7 +24,6 @@ public class Graph {
         this.adjacencyMatrix = null;
     }
 
-    /// @param n
     public Graph(int n) {
         this.adjacencyMatrix = new byte[n][n];
         this.vertices = new ArrayList<>();
@@ -46,7 +46,6 @@ public class Graph {
         return al;
     }
 
-    /// @param args
     static void main(String[] args) {
         Graph uno = new Graph(9);
         uno.createEdge('a', 'e');
@@ -67,7 +66,6 @@ public class Graph {
             vertices.add(v);
     }
 
-    /// @return
     public Graph breadthFirstSearch() {
 
         Calendar ini = Calendar.getInstance();
@@ -86,7 +84,7 @@ public class Graph {
         }
 
         Calendar end = Calendar.getInstance();
-        LoggerService.logInfo("Tiempo algoritmo b\u00fasqueda primero en amplitud: "
+        LoggerService.logInfo("Tiempo algoritmo búsqueda primero en amplitud: "
                 + (end.getTimeInMillis() - ini.getTimeInMillis()));
 
         return result;
@@ -114,11 +112,10 @@ public class Graph {
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
+            LoggerService.logError(e.getMessage());
         }
     }
 
-    /// @return
     public Graph depthFirstSearch() {
 
         Calendar ini = Calendar.getInstance();
@@ -126,18 +123,18 @@ public class Graph {
         Graph result = new Graph(cardinality());
         ArrayList<Vertex> visitedVertices = new ArrayList<Vertex>();
 
-        int i = 0;
+        Vertex i = new Vertex(0);
 
-        while (i < cardinality() && visitedVertices.size() < cardinality()) {
+        while (i.key < cardinality() && visitedVertices.size() < cardinality()) {
             if (!visitedVertices.contains(i)) {
-                visitedVertices.add(this.vertices.get(i));
-                deepFirstSearch(i, visitedVertices, result);
+                visitedVertices.add(this.vertices.get(i.getKey()));
+                deepFirstSearch(i.getKey(), visitedVertices, result);
             }
-            i++;
+            i.key++;
         }
 
         Calendar end = Calendar.getInstance();
-        LoggerService.logInfo("Tiempo algoritmo b�squeda primero en profundidad: "
+        LoggerService.logInfo("Tiempo algoritmo b\u00fasqueda primero en profundidad: "
                 + (end.getTimeInMillis() - ini.getTimeInMillis()));
 
         return result;
@@ -151,14 +148,10 @@ public class Graph {
         return adjacencyMatrix[0].length;
     }
 
-    /// @return
     public int countEdges() {
         return this.edges.size();
     }
 
-    /// @param a1
-    /// @param a2
-    /// @return
     public boolean createEdge(char a1, char a2) {
         int n1 = a1 - 97;
         int n2 = a2 - 97;
@@ -185,13 +178,11 @@ public class Graph {
         }
     }
 
-    /// @param vertice
-    /// @return
     public List<Vertex> getAdjacentVertices(int vertex) {
         ArrayList<Vertex> ady = new ArrayList<>();
 
         if (vertex < 0 || vertex >= cardinality())
-            return null;
+            return Collections.emptyList();
 
         for (int i = 0; i < cardinality(); i++)
             if (this.adjacencyMatrix[vertex][i] == 1)
@@ -200,13 +191,11 @@ public class Graph {
         return ady;
     }
 
-    /// @param vertice
-    /// @return
     public List<Vertex> getNonAdjacentVertices(int vertex) {
         ArrayList<Vertex> ady = new ArrayList<Vertex>();
 
         if (vertex < 0 || vertex >= cardinality())
-            return null;
+            return Collections.emptyList();
 
         for (int i = 0; i < cardinality(); i++)
             if (this.adjacencyMatrix[vertex][i] == 0 && vertex != i)
@@ -215,9 +204,6 @@ public class Graph {
         return ady;
     }
 
-    /// @param node1
-    /// @param node2
-    /// @return
     public boolean newEdge(int node1, int node2) {
         try {
 
@@ -272,8 +258,10 @@ public class Graph {
     }
 
     public StringBuilder getAdjacencyTable() {
+        if (adjacencyMatrix == null)
+            return new StringBuilder();
 
-        int n = this.adjacencyMatrix[0].length;
+        int n = adjacencyMatrix[0].length;
 
         StringBuilder table = new StringBuilder();
         table.append("Tabla de Adyacencias\n\\ ");
@@ -282,17 +270,13 @@ public class Graph {
         table.append("\n");
 
         for (int i = 0; i < n; i++) {
+            table.append((char) (i + 97)).append(" ");
             for (int j = 0; j < n; j++) {
-
-                if (j == 0)
-                    table.append((char) (i + j + 97)).append(" ");
-
                 table.append(adjacencyMatrix[i][j]);
-                if (j < n)
+                if (j < n - 1)
                     table.append(" ");
             }
             table.append("\n");
-
         }
 
         return table;

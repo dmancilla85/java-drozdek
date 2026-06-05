@@ -104,10 +104,10 @@ class GraphTest {
     }
 
     @Test
-    @DisplayName("Get adjacent vertices with invalid index returns null")
+    @DisplayName("Get adjacent vertices with invalid index returns empty list")
     void getAdjacentVerticesInvalid() {
-        assertNull(graph.getAdjacentVertices(-1));
-        assertNull(graph.getAdjacentVertices(10));
+        assertTrue(graph.getAdjacentVertices(-1).isEmpty());
+        assertTrue(graph.getAdjacentVertices(10).isEmpty());
     }
 
     @Test
@@ -119,10 +119,10 @@ class GraphTest {
     }
 
     @Test
-    @DisplayName("Get non-adjacent vertices with invalid index returns null")
+    @DisplayName("Get non-adjacent vertices with invalid index returns empty list")
     void getNonAdjacentVerticesInvalid() {
-        assertNull(graph.getNonAdjacentVertices(-1));
-        assertNull(graph.getNonAdjacentVertices(10));
+        assertTrue(graph.getNonAdjacentVertices(-1).isEmpty());
+        assertTrue(graph.getNonAdjacentVertices(10).isEmpty());
     }
 
     @Test
