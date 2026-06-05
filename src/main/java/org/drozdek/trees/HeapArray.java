@@ -87,7 +87,7 @@ public class HeapArray {
 
     public void displayToFile() {
         try {
-            FileWriter fw = new FileWriter("HeapArray.txt", true);
+            FileWriter fw = new FileWriter("target/HeapArray.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw);
             int i = 0;
