@@ -2,6 +2,7 @@ package org.drozdek.graphs.unlam;
 
 import org.drozdek.commons.LoggerService;
 
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -9,6 +10,8 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 import java.util.LinkedList;
+
+import static java.time.ZoneId.systemDefault;
 
 /// @author David
 public class Graph {
@@ -46,7 +49,7 @@ public class Graph {
         return al;
     }
 
-    static void main(String[] args) {
+    static void main() {
         Graph uno = new Graph(9);
         uno.createEdge('a', 'e');
         uno.createEdge('a', 'f');
@@ -68,11 +71,11 @@ public class Graph {
 
     public Graph breadthFirstSearch() {
 
-        Calendar ini = Calendar.getInstance();
+        Clock ini = Clock.tickMillis(systemDefault());
 
         Graph result = new Graph(cardinality());
-        Queue<Vertex> queue = new LinkedList<Vertex>();
-        ArrayList<Vertex> visitedVertices = new ArrayList<Vertex>();
+        Queue<Vertex> queue = new LinkedList<>();
+        ArrayList<Vertex> visitedVertices = new ArrayList<>();
 
         int i = 0;
 
@@ -83,9 +86,9 @@ public class Graph {
             i++;
         }
 
-        Calendar end = Calendar.getInstance();
+        Clock end = Clock.tickMillis(systemDefault());
         LoggerService.logInfo("Tiempo algoritmo búsqueda primero en amplitud: "
-                + (end.getTimeInMillis() - ini.getTimeInMillis()));
+                + (end.millis() - ini.millis()));
 
         return result;
     }
@@ -121,7 +124,7 @@ public class Graph {
         Calendar ini = Calendar.getInstance();
 
         Graph result = new Graph(cardinality());
-        ArrayList<Vertex> visitedVertices = new ArrayList<Vertex>();
+        ArrayList<Vertex> visitedVertices = new ArrayList<>();
 
         Vertex i = new Vertex(0);
 
@@ -134,7 +137,7 @@ public class Graph {
         }
 
         Calendar end = Calendar.getInstance();
-        LoggerService.logInfo("Tiempo algoritmo b\u00fasqueda primero en profundidad: "
+        LoggerService.logInfo("Tiempo algoritmo búsqueda primero en profundidad: "
                 + (end.getTimeInMillis() - ini.getTimeInMillis()));
 
         return result;
@@ -159,11 +162,7 @@ public class Graph {
         return newEdge(n1, n2);
     }
 
-    /// B\u00fasqueda primero en profundidad (Hopcroft - Tarjan)
-    ///
-    /// @param v
-    /// @param visitedVertices
-    /// @param newGraph
+    /// Búsqueda primero en profundidad (Hopcroft - Tarjan)
     public void deepFirstSearch(int v, ArrayList<Vertex> visitedVertices, Graph newGraph) {
 
         int j = 0;
@@ -192,7 +191,7 @@ public class Graph {
     }
 
     public List<Vertex> getNonAdjacentVertices(int vertex) {
-        ArrayList<Vertex> ady = new ArrayList<Vertex>();
+        ArrayList<Vertex> ady = new ArrayList<>();
 
         if (vertex < 0 || vertex >= cardinality())
             return Collections.emptyList();
