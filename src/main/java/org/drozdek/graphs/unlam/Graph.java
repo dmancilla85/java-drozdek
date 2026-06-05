@@ -86,7 +86,7 @@ public class Graph {
         }
 
         Calendar end = Calendar.getInstance();
-        LoggerService.logInfo("Tiempo algoritmo b�squeda primero en amplitud: "
+        LoggerService.logInfo("Tiempo algoritmo b\u00fasqueda primero en amplitud: "
                 + (end.getTimeInMillis() - ini.getTimeInMillis()));
 
         return result;

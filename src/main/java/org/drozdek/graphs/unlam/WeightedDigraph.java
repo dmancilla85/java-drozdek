@@ -69,7 +69,7 @@ public class WeightedDigraph {
         }
 
         Calendar end = Calendar.getInstance();
-        out.println("Tiempo algoritmo b�squeda primero en profundidad: "
+        out.println("Tiempo algoritmo b\u00fasqueda primero en profundidad: "
                 + (end.getTimeInMillis() - ini.getTimeInMillis()));
 
         return result;
