@@ -150,4 +150,72 @@ class AdaptiveStackTest {
             stack.push(i);
         assertNotNull(stack.toString());
     }
+
+    @Test
+    @DisplayName("Pop all after dynamic switch triggers switch back")
+    void dynamicToStaticSwitch() {
+        for (int i = 0; i < 2500; i++)
+            stack.push(i);
+
+        // pops cover dynamic→static transition when diff drops below 1000
+        while (!stack.isEmpty())
+            stack.pop();
+
+        assertTrue(stack.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Push elements after dynamic-to-static switch back")
+    void switchBackAndPushMore() {
+        for (int i = 0; i < 2500; i++)
+            stack.push(i);
+
+        // pop enough to trigger switch back, then push more
+        while (!stack.isEmpty())
+            stack.pop();
+
+        stack.push(42);
+        assertEquals(42, stack.topElement());
+        stack.push(99);
+        assertEquals(99, stack.topElement());
+    }
+
+    @Test
+    @DisplayName("Interleave clear with dynamic switch")
+    void clearAfterDynamicSwitch() {
+        for (int i = 0; i < 2500; i++)
+            stack.push(i);
+
+        stack.clear();
+        assertTrue(stack.isEmpty());
+
+        // push after clear
+        stack.push(1);
+        stack.push(2);
+        assertEquals(2, stack.topElement());
+    }
+
+    @Test
+    @DisplayName("Multiple switches between static and dynamic")
+    void multipleSwitches() {
+        // static→dynamic (push > 2000)
+        for (int i = 0; i < 2100; i++)
+            stack.push(i);
+        assertFalse(stack.isEmpty());
+
+        // dynamic→static (pop enough to make diff < 1000)
+        while (!stack.isEmpty())
+            stack.pop();
+        assertTrue(stack.isEmpty());
+
+        // static→dynamic again
+        for (int i = 0; i < 2100; i++)
+            stack.push(i);
+        assertFalse(stack.isEmpty());
+
+        // dynamic→static again
+        while (!stack.isEmpty())
+            stack.pop();
+        assertTrue(stack.isEmpty());
+    }
 }

@@ -263,6 +263,7 @@ public class IntSkipList implements ListInterface<Integer> {
         return sb.toString();
     }
 
+    @Override
     public void print() {
         LoggerService.logInfo(this.showId() +
                 System.lineSeparator() +
@@ -311,28 +312,28 @@ public class IntSkipList implements ListInterface<Integer> {
         IntSkipListNode[] previous = new IntSkipListNode[maximumLevel];
         IntSkipListNode current = root[lvl];
 
-        for (int i = lvl; i >= 0; i--) {
-            previous[i] = null;
+        for (int i = lvl; i >= 0; i--)
+            current = deleteAtLevel(key, i, previous, current);
+    }
 
-            while (current != null && current.key() < key) {
-                previous[i] = current;
-                current = current.next()[i];
-            }
+    private IntSkipListNode deleteAtLevel(int key, int i, IntSkipListNode[] previous, IntSkipListNode current) {
+        previous[i] = null;
 
-            if (current != null && current.key() == key) {
-                if (previous[i] == null)
-                    root[i] = current.next()[i];
-                else
-                    previous[i].next()[i] = current.next()[i];
-            }
-
-            if (i > 0) {
-                if (previous[i] == null)
-                    current = root[i - 1];
-                else
-                    current = previous[i].next()[i - 1];
-            }
+        while (current != null && current.key() < key) {
+            previous[i] = current;
+            current = current.next()[i];
         }
+
+        if (current != null && current.key() == key) {
+            if (previous[i] == null)
+                root[i] = current.next()[i];
+            else
+                previous[i].next()[i] = current.next()[i];
+        }
+
+        if (i <= 0)
+            return null;
+        return previous[i] == null ? root[i - 1] : previous[i].next()[i - 1];
     }
 
     /// Returns the first element in the skip list without removing it.
@@ -347,55 +348,47 @@ public class IntSkipList implements ListInterface<Integer> {
     }
 
     public int search(int key) {
-        // Start from the highest non-empty level
         int lvl = findMajorNotNullValue();
-
         if (lvl < 0)
             return 0;
 
-        IntSkipListNode previous;
-        IntSkipListNode current;
-
-        // Start at the head of the highest non-empty level
-        previous = current = root[lvl];
+        IntSkipListNode current = root[lvl];
+        IntSkipListNode previous = root[lvl];
 
         while (true) {
-            // If we found the key, return it
-            if (key == current.key())
+            int cmp = Integer.compare(key, current.key());
+            if (cmp == 0)
                 return current.key();
 
-                // If the key is less than the current node's key, move down a level
-            else if (key < current.key()) {
+            if (cmp < 0) {
                 if (lvl == 0)
-                    return 0;  // We've reached the bottom level and haven't found the key
-                else if (current == root[lvl])
-                    // We're at the head of this level, move to the head of the lower level
-                    current = root[--lvl];
-                else
-                    // Move to the next node at the lower level
-                    current = previous.next()[--lvl];
-            } else {
-                // The key is greater than the current node's key, move forward at the current level
-                previous = current;
-
-                if (current.next()[lvl] != null)
-                    // Move forward at the current level
-                    current = current.next()[lvl];
-                else {
-                    // No forward pointer at this level, move down a level
-                    lvl--;
-
-                    lvl = checkForCurrentLevel(lvl, current);
-
-                    if (lvl >= 0)
-                        // Move forward at the lower level
-                        current = current.next()[lvl];
-                    else
-                        // We've moved below level 0, key not found
-                        return 0;
-                }
+                    return 0;
+                current = moveDownFrom(current, previous, lvl);
+                lvl--;
+                continue;
             }
+
+            previous = current;
+            current = current.next()[lvl];
+            if (current != null)
+                continue;
+
+            lvl = findNextLevel(lvl, previous);
+            if (lvl < 0)
+                return 0;
+            current = previous.next()[lvl];
         }
+    }
+
+    private IntSkipListNode moveDownFrom(IntSkipListNode current, IntSkipListNode previous, int lvl) {
+        if (current == root[lvl])
+            return root[lvl - 1];
+        return previous.next()[lvl - 1];
+    }
+
+    private int findNextLevel(int lvl, IntSkipListNode node) {
+        lvl--;
+        return checkForCurrentLevel(lvl, node);
     }
 
     /// Returns the number of elements in this skip list.

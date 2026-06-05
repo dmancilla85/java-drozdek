@@ -100,4 +100,40 @@ class SuffixTreeTest {
         assertTrue(output.contains("Name:"));
         assertTrue(output.contains("Text:"));
     }
+
+    @Test
+    @DisplayName("Ukkonen with pattern requiring edge split")
+    void ukkonenEdgeSplit() {
+        tree.ukkonen("abcab");
+        assertNotNull(tree.toString());
+    }
+
+    @Test
+    @DisplayName("Ukkonen with mississippi")
+    void ukkonenMississippi() {
+        tree.ukkonen("mississippi");
+        assertNotNull(tree.toString());
+    }
+
+    @Test
+    @DisplayName("Ukkonen with long non-repeating suffix")
+    void ukkonenLongNonRepeat() {
+        tree.ukkonen("abcdefghij");
+        assertNotNull(tree.toString());
+    }
+
+    @Test
+    @DisplayName("Print tree after complex ukkonen")
+    void printTreeComplex() {
+        tree.ukkonen("abcab");
+        String output = tree.printTree();
+        assertNotNull(output);
+    }
+
+    @Test
+    @DisplayName("Ukkonen with overlapping patterns")
+    void ukkonenOverlapping() {
+        tree.ukkonen("ababa");
+        assertNotNull(tree.toString());
+    }
 }

@@ -271,6 +271,26 @@ class SplayTreeTest {
     }
 
     @Test
+    @DisplayName("Delete node with left child that has right subtree")
+    void deleteByMergingLeftChildHasRightSubtree() {
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(70);
+        tree.insert(20);
+        tree.insert(35);
+        tree.insert(25);
+        assertEquals(6, tree.size());
+        assertEquals(0, tree.deleteByMerging(30));
+        assertEquals(5, tree.size());
+        assertNull(tree.search(30));
+        assertNotNull(tree.search(50));
+        assertNotNull(tree.search(20));
+        assertNotNull(tree.search(25));
+        assertNotNull(tree.search(35));
+        assertNotNull(tree.search(70));
+    }
+
+    @Test
     @DisplayName("Inorder on empty tree does nothing")
     void inorderEmpty() {
         assertDoesNotThrow(() -> tree.inorder(System.out));

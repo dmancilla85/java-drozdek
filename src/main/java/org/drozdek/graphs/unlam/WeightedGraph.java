@@ -29,8 +29,6 @@ public class WeightedGraph extends Graph {
 
     /// @param args
     static void main(String[] args) {
-        // TODO Auto-generated method stub
-
         WeightedGraph g = new WeightedGraph(6);
         g.createEdge('a', 'b', 20);
         g.createEdge('a', 'd', 40);
@@ -46,14 +44,6 @@ public class WeightedGraph extends Graph {
         WeightedGraph e = createRandom(10, 50);
         out.println(e.getAdjacencyTable());
         out.println(e.getWeightTable());
-        /*
-         * out.println(g.getAdjacencyTable());
-         * out.println(g.getWeightTable());
-         */
-
-        // out.println(e.getAdjacencyTable());
-        // out.println(e.getWeightTable());
-
         out.println("Prim");
     }
 
@@ -95,6 +85,7 @@ public class WeightedGraph extends Graph {
     /// @param node1
     /// @param node2
     /// @return
+    @Override
     public void removeEdge(int node1, int node2) {
 
 
@@ -115,11 +106,11 @@ public class WeightedGraph extends Graph {
         }
     }
 
-    public StringBuffer getWeightTable() {
+    public StringBuilder getWeightTable() {
 
         int n = this.weightTable[0].length;
 
-        StringBuffer table = new StringBuffer();
+        StringBuilder table = new StringBuilder();
         table.append("Tabla de Pesos\n\\ ");
         for (int i = 0; i < n; i++)
             table.append((char) (i + 97) + " ");

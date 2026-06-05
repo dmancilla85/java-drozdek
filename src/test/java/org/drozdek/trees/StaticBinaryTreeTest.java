@@ -1,4 +1,4 @@
-package trees;
+package org.drozdek.trees;
 
 import org.drozdek.trees.nodes.HeapNode;
 import org.drozdek.trees.StaticBinaryTree;
@@ -139,5 +139,116 @@ class StaticBinaryTreeTest {
         tree.setLeftChild(0, new HeapNode(2));
         tree.setLeftChild(1, new HeapNode(3));
         assertNotNull(tree.leftmostChild());
+    }
+
+    @Test
+    @DisplayName("IsFull returns true when tree reaches capacity")
+    void isFullTrue() {
+        tree.setRoot(new HeapNode(0));
+        tree.setRightChild(0, new HeapNode(1));
+        for (int p = 1; p < 5; p++) {
+            tree.setRightChild(p, new HeapNode(p * 2));
+            tree.setLeftChild(p, new HeapNode(p * 2 + 1));
+        }
+        assertTrue(tree.isFull());
+    }
+
+    @Test
+    @DisplayName("SetRightChild with out-of-bounds parent returns false")
+    void setRightChildOutOfBounds() {
+        assertFalse(tree.setRightChild(9, new HeapNode(1)));
+    }
+
+    @Test
+    @DisplayName("SetLeftChild with out-of-bounds parent returns false")
+    void setLeftChildOutOfBounds() {
+        assertFalse(tree.setLeftChild(5, new HeapNode(1)));
+    }
+
+    @Test
+    @DisplayName("SetRightChild on full tree returns false")
+    void setRightChildFullTree() {
+        tree.setRoot(new HeapNode(0));
+        tree.setRightChild(0, new HeapNode(1));
+        for (int p = 1; p < 5; p++) {
+            tree.setRightChild(p, new HeapNode(p * 2));
+            tree.setLeftChild(p, new HeapNode(p * 2 + 1));
+        }
+        assertFalse(tree.setRightChild(0, new HeapNode(99)));
+    }
+
+    @Test
+    @DisplayName("SetLeftChild on full tree returns false")
+    void setLeftChildFullTree() {
+        tree.setRoot(new HeapNode(0));
+        tree.setRightChild(0, new HeapNode(1));
+        for (int p = 1; p < 5; p++) {
+            tree.setRightChild(p, new HeapNode(p * 2));
+            tree.setLeftChild(p, new HeapNode(p * 2 + 1));
+        }
+        assertFalse(tree.setLeftChild(0, new HeapNode(99)));
+    }
+
+    @Test
+    @DisplayName("SetRightmostChild with even-sized tree")
+    void setRightmostChildEvenSize() {
+        tree.setRoot(new HeapNode(1));
+        tree.setRightChild(0, new HeapNode(2));
+        assertTrue(tree.setRightmostChild(0, new HeapNode(99)));
+    }
+
+    @Test
+    @DisplayName("RightmostChild with even-sized tree")
+    void rightmostChildEvenSize() {
+        tree.setRoot(new HeapNode(1));
+        tree.setRightChild(0, new HeapNode(2));
+        assertNotNull(tree.rightmostChild());
+    }
+
+    @Test
+    @DisplayName("LeftmostChild with even-sized tree")
+    void leftmostChildEvenSize() {
+        tree.setRoot(new HeapNode(1));
+        tree.setRightChild(0, new HeapNode(2));
+        assertNotNull(tree.leftmostChild());
+    }
+
+    @Test
+    @DisplayName("SetLeftmostChild with odd-sized tree")
+    void setLeftmostChildOddSize() {
+        tree.setRoot(new HeapNode(1));
+        tree.setRightChild(0, new HeapNode(2));
+        tree.setLeftChild(1, new HeapNode(3));
+        assertTrue(tree.setLeftmostChild(0, new HeapNode(99)));
+    }
+
+    @Test
+    @DisplayName("LeftmostChild(int) with odd-sized tree")
+    void leftmostChildWithNodeOddSize() {
+        tree.setRoot(new HeapNode(1));
+        tree.setRightChild(0, new HeapNode(2));
+        tree.setLeftChild(1, new HeapNode(3));
+        assertNotNull(tree.leftmostChild(0));
+    }
+
+    @Test
+    @DisplayName("ToString shows visual tree structure")
+    void testToString() {
+        tree.setRoot(new HeapNode(10));
+        tree.setRightChild(0, new HeapNode(5));
+        tree.setLeftChild(1, new HeapNode(15));
+        String output = tree.toString();
+        assertTrue(output.contains("10"));
+        assertTrue(output.contains("5"));
+        assertTrue(output.contains("15"));
+    }
+
+    @Test
+    @DisplayName("Print method executes without error")
+    void testPrint() {
+        tree.setRoot(new HeapNode(10));
+        tree.setRightChild(0, new HeapNode(5));
+        tree.setLeftChild(1, new HeapNode(15));
+        assertDoesNotThrow(() -> tree.print());
     }
 }

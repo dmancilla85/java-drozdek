@@ -202,4 +202,41 @@ class TrieTest {
         t.insert("ab");
         assertFalse(t.found("ac"));
     }
+
+    @Test
+    @DisplayName("Found non-leaf non-endOfWord after split returns false")
+    void foundNonLeafNonEndOfWordSplit() {
+        Trie t = new Trie("hello");
+        t.insert("he");
+        assertFalse(t.found("h"));
+    }
+
+    @Test
+    @DisplayName("Insert with leaf suffix fully consumed before new word ends")
+    void insertSuffixConsumed() {
+        Trie t = new Trie("ab");
+        t.insert("abcdef");
+        assertTrue(t.found("ab"));
+        assertTrue(t.found("abcdef"));
+    }
+
+    @Test
+    @DisplayName("Insert where new word ends before leaf suffix")
+    void insertShorterLeafSuffix() {
+        Trie t = new Trie("abcdef");
+        t.insert("abc");
+        assertTrue(t.found("abc"));
+        assertTrue(t.found("abcdef"));
+    }
+
+    @Test
+    @DisplayName("Insert into null pointer position at non-leaf")
+    void insertNullPointerPosition() {
+        Trie t = new Trie("cat");
+        t.insert("car");
+        t.insert("catx");
+        assertTrue(t.found("cat"));
+        assertTrue(t.found("car"));
+        assertTrue(t.found("catx"));
+    }
 }

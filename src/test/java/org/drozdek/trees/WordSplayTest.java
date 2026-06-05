@@ -34,6 +34,33 @@ class WordSplayTest {
         WordSplay ws = new WordSplay();
         InputStream in = new ByteArrayInputStream("hello hello world".getBytes(StandardCharsets.UTF_8));
         assertDoesNotThrow(() -> ws.run(in, "test"));
+        Word hello = (Word) ws.search(new Word("HELLO"));
+        assertNotNull(hello);
+        assertEquals(2, hello.freq);
+        assertEquals(2, ws.size());
+    }
+
+    @Test
+    @DisplayName("Run with triple repeated word")
+    void runWithTripleWord() {
+        WordSplay ws = new WordSplay();
+        InputStream in = new ByteArrayInputStream("hello hello hello".getBytes(StandardCharsets.UTF_8));
+        assertDoesNotThrow(() -> ws.run(in, "test"));
+        Word hello = (Word) ws.search(new Word("HELLO"));
+        assertNotNull(hello);
+        assertEquals(3, hello.freq);
+        assertEquals(1, ws.size());
+    }
+
+    @Test
+    @DisplayName("Search existing word with different Word object")
+    void searchCompareTo() {
+        WordSplay ws = new WordSplay();
+        InputStream in = new ByteArrayInputStream("hello world".getBytes(StandardCharsets.UTF_8));
+        assertDoesNotThrow(() -> ws.run(in, "test"));
+        Word found = (Word) ws.search(new Word("HELLO"));
+        assertNotNull(found);
+        assertTrue(found.toString().startsWith("HELLO"));
     }
 
     @Test
