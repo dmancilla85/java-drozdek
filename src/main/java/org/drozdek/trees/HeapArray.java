@@ -3,7 +3,10 @@ package org.drozdek.trees;
 import org.drozdek.commons.LoggerService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /// Array-based heap sort implementation. Uses an array to represent a binary heap and sorts elements in-place.
 ///
@@ -14,11 +17,13 @@ import java.io.PrintWriter;
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/heap-data-structure/)
 public class HeapArray {
 
+    private static final int DEFAULT_CAPACITY = 10;
+
     private int[] keys;
     private int position;
 
     public HeapArray() {
-        keys = new int[10];
+        keys = new int[DEFAULT_CAPACITY];
         position = 0;
     }
 
@@ -32,16 +37,18 @@ public class HeapArray {
             keys[last] = keys[0];
             last = last - 1;
             parent = 0;
-            if ((last >= 2) && (keys[2] > keys[1]))
+            if ((last >= 2) && (keys[2] > keys[1])) {
                 child = 2;
-            else
+            } else {
                 child = 1;
+            }
             while ((child <= last) && (keys[child] > previousKey)) {
                 keys[parent] = keys[child];
                 parent = child;
                 child = parent * 2;
-                if (((child + 1) <= last) && (keys[child + 1] > keys[child]))
+                if (((child + 1) <= last) && (keys[child + 1] > keys[child])) {
                     child++;
+                }
                 displayToFile();
             }
             keys[parent] = previousKey;
@@ -58,16 +65,18 @@ public class HeapArray {
     }
 
     public void insert(int key) {
-        if (position >= keys.length)
+        if (position >= keys.length) {
             resize();
+        }
 
         int parent;
         int temp;
         int next;
         next = position;
         parent = (next / 2);
-        if (parent < 0)
+        if (parent < 0) {
             parent = 0;
+        }
         keys[next] = key;
         while ((next != 0) && (keys[parent] <= keys[next])) {
             temp = keys[parent];
@@ -86,35 +95,41 @@ public class HeapArray {
     }
 
     public void displayToFile() {
+        Path path = Path.of("target", "files", "HeapArray.txt");
         try {
-            FileWriter fw = new FileWriter("target/HeapArray.txt", true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter out = new PrintWriter(bw);
-            int i = 0;
-            while (i < keys.length) {
-                out.print(keys[i] + " ");
-                i++;
+            Files.createDirectories(path.getParent());
+        } catch (IOException e) {
+            LoggerService.logError("Cannot create output directory: " + e.getMessage());
+            return;
+        }
+
+        try (FileWriter fw = new FileWriter(path.toString(), true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+
+            for (int i = 0; i < keys.length; i++) {
+                out.print(keys[i]);
+                out.print(" ");
             }
-            out.println("");
+            out.println();
             out.println("-------------------------");
-            out.close();
-        } catch (Exception ignored) {
-            // Intentionally ignored
+        } catch (IOException e) {
+            LoggerService.logError(e.getMessage());
         }
     }
 
     public String display() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         int i = 0;
         while (i < keys.length) {
             if (keys[i] == 0) {
-                result = result + "--" + "  ";
+                result.append("--").append("  ");
             } else {
-                result = result + keys[i] + "  ";
+                result.append(keys[i]).append(" ");
             }
             i++;
         }
-        return result;
+        return result.toString();
     }
 
     public void print() {
