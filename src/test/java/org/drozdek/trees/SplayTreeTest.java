@@ -34,7 +34,7 @@ class SplayTreeTest {
         int size = 20;
 
         dumpData(size);
-        LoggerService.logInfo(tree.toString());
+        tree.print();
         assertEquals(size, tree.size());
     }
 
@@ -45,7 +45,7 @@ class SplayTreeTest {
 
         dumpData(size);
         tree.semiSplay();
-        LoggerService.logInfo(tree.toString());
+        tree.print();
         assertEquals(size, tree.size());
     }
 
@@ -59,9 +59,11 @@ class SplayTreeTest {
         wordTree.insert(new Word("name"));
         wordTree.insert(new Word("is"));
         wordTree.insert(new Word("David"));
-        LoggerService.logInfo(wordTree.toString());
+        LoggerService.logInfo("Printing the tree with the words");
+        wordTree.print();
         wordTree.semiSplay();
-        LoggerService.logInfo(wordTree.toString());
+        LoggerService.logInfo("semi-splay");
+        wordTree.print();
         assertEquals(size, wordTree.size());
     }
 
@@ -72,9 +74,10 @@ class SplayTreeTest {
 
         dumpData(5);
         tree.insert(12);
-        LoggerService.logInfo(tree.toString());
+        tree.print();
         tree.deleteByMerging(12);
-        LoggerService.logWarning(tree.toString());
+        LoggerService.logWarning("Delete by merging tree node by merging");
+        tree.print();
         assertEquals(size, tree.size());
     }
 

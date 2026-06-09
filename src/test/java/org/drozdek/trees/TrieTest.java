@@ -239,4 +239,28 @@ class TrieTest {
         assertTrue(t.found("car"));
         assertTrue(t.found("catx"));
     }
+
+    @Test
+    @DisplayName("Print tree structure with connectors")
+    void printTreeStructure() {
+        tree.insert("help");
+        tree.insert("world");
+        String output = tree.toString();
+        tree.print();
+        assertTrue(output.contains("├──") || output.contains("└──"),
+                "Tree output should contain connector symbols");
+    }
+
+    @Test
+    @DisplayName("Print method executes without error")
+    void testPrint() {
+        assertDoesNotThrow(() -> tree.print());
+    }
+
+    @Test
+    @DisplayName("Print on empty trie does not throw")
+    void printEmpty() {
+        Trie t = new Trie();
+        assertDoesNotThrow(() -> t.print());
+    }
 }

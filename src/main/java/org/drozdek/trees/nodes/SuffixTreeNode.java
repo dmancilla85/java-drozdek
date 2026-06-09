@@ -51,13 +51,16 @@ public class SuffixTreeNode {
         buffer.append(this.id);
         buffer.append(System.lineSeparator());
 
-        for (Iterator<SuffixTreeNode> it = Arrays.stream(descendants).iterator();it.hasNext();) {
-            SuffixTreeNode next = it.next();
+        int count = 0;
+        for (SuffixTreeNode d : descendants) {
+            if (d != null) count++;
+        }
 
-            if (next == null)
-                continue;
-
-            if (it.hasNext()) {
+        int seen = 0;
+        for (SuffixTreeNode next : descendants) {
+            if (next == null) continue;
+            seen++;
+            if (seen < count) {
                 next.print(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
             } else {
                 next.print(buffer, childrenPrefix + "└── ", childrenPrefix + "    ");

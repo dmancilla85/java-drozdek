@@ -58,19 +58,16 @@ public class SplayTreeNode<T extends Comparable<T>> {
     }
 
     private void print(StringBuilder buffer, String prefix, String childrenPrefix) {
-        LinkedList<SplayTreeNode<T>> children = new LinkedList<>();
-        children.add(this.left);
-        children.add(this.right);
         buffer.append(prefix);
         buffer.append(this.key);
         buffer.append(System.lineSeparator());
 
-        for (Iterator<SplayTreeNode<T>> it = children.iterator();it.hasNext();) {
+        LinkedList<SplayTreeNode<T>> children = new LinkedList<>();
+        if (this.left != null) children.add(this.left);
+        if (this.right != null) children.add(this.right);
+
+        for (Iterator<SplayTreeNode<T>> it = children.iterator(); it.hasNext();) {
             SplayTreeNode<T> next = it.next();
-
-            if (next == null)
-                continue;
-
             if (it.hasNext()) {
                 next.print(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
             } else {

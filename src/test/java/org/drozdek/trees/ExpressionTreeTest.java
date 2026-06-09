@@ -53,7 +53,7 @@ class ExpressionTreeTest {
 
         // calling our algorithm
         tree=new ExpressionTree(expression);
-        System.out.println(tree);
+        tree.print();
 
         assertFalse(tree.isEmpty(),"The tree shouldn't be empty");
     }

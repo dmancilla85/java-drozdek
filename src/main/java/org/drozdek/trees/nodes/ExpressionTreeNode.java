@@ -46,20 +46,16 @@ public class ExpressionTreeNode {
     }
 
     private void print(StringBuilder buffer, String prefix, String childrenPrefix) {
-        LinkedList<ExpressionTreeNode> children = new LinkedList<>();
-        children.add(this.left);
-        children.add(this.right);
-
         buffer.append(prefix);
         buffer.append(this.symbol);
         buffer.append(System.lineSeparator());
 
-        for (Iterator<ExpressionTreeNode> it = children.iterator();it.hasNext();) {
+        LinkedList<ExpressionTreeNode> children = new LinkedList<>();
+        if (this.left != null) children.add(this.left);
+        if (this.right != null) children.add(this.right);
+
+        for (Iterator<ExpressionTreeNode> it = children.iterator(); it.hasNext();) {
             ExpressionTreeNode next = it.next();
-
-            if (next == null)
-                continue;
-
             if (it.hasNext()) {
                 next.print(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
             } else {

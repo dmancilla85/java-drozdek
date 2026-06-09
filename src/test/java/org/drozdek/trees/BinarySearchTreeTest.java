@@ -16,7 +16,7 @@ class BinarySearchTreeTest {
     void balanceWithDataArray() {
         Integer[] ordered = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8};
         tree.balanceWithDataArray(ordered);
-        System.out.println(tree.toString());
+        tree.print();
         assertEquals(8, tree.size(), "The expected size doesn't match");
     }
 
@@ -37,7 +37,7 @@ class BinarySearchTreeTest {
         tree.insert(181);
 
         BinarySearchTree<Integer> balancedTree = BinarySearchTree.balanceWithDSW(tree);
-        LoggerService.logInfo(balancedTree.toString());
+        balancedTree.print();
 
         assertEquals(12, balancedTree.size(), "The expected size doesn't match");
     }
@@ -84,7 +84,7 @@ class BinarySearchTreeTest {
 
         int code =tree.deleteByMerging(5);
         Integer result = (Integer) tree.search(5);
-        System.out.println(tree.toString());
+        tree.print();
         assertEquals(0, code, "The operation code is not the expected (0)");
         assertNull(result, "The element is still on the tree");
     }

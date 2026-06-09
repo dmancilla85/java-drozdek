@@ -1,7 +1,7 @@
 package org.drozdek.trees;
 
 import info.schnatterer.mobynamesgenerator.MobyNamesGenerator;
-import org.drozdek.commons.LoggerService;
+import org.drozdek.trees.interfaces.TreeInterface;
 import org.drozdek.trees.nodes.SuffixTreeNode;
 
 /// Ukkonen's suffix tree implementation. Builds a suffix tree in linear time for efficient
@@ -12,7 +12,7 @@ import org.drozdek.trees.nodes.SuffixTreeNode;
 /// Auxiliary Space: O(n) for storage
 ///
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/ukkonens-suffix-tree-construction-part-1/)
-public class SuffixTree {
+public class SuffixTree implements TreeInterface {
     protected final SuffixTreeNode root;
     protected final String name;
     protected final int size;
@@ -119,12 +119,75 @@ public class SuffixTree {
     }
 
     @Override
-    public String toString() {
-        return root.toString();
+    public boolean isEmpty() {
+        return text == null;
     }
 
-    public void print() {
-        LoggerService.logInfo(System.lineSeparator() + printTree());
+    @Override
+    public int size() {
+        return countNodes(root);
+    }
+
+    private int countNodes(SuffixTreeNode node) {
+        int count = 1;
+        for (SuffixTreeNode child : node.getDescendants()) {
+            if (child != null) {
+                count += countNodes(child);
+            }
+        }
+        return count;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(System.lineSeparator());
+        sb.append("Name: ").append(name).append("  Text: \"").append(text).append("\"").append(System.lineSeparator());
+        sb.append("root").append(System.lineSeparator());
+        printEdges(sb, root, "");
+        return sb.toString();
+    }
+
+    private void printEdges(StringBuilder sb, SuffixTreeNode node, String childrenPrefix) {
+        SuffixTreeNode[] desc = node.getDescendants();
+        int[] leftArr = node.getLeft();
+        int[] rightArr = node.getRight();
+
+        int total = 0;
+        for (int i = 0; i < desc.length; i++) {
+            if (leftArr[i] != -1) total++;
+        }
+
+        int seen = 0;
+        for (int i = 0; i < desc.length; i++) {
+            if (leftArr[i] == -1) continue;
+            seen++;
+            boolean last = (seen == total);
+
+            sb.append(childrenPrefix);
+            sb.append(last ? "└── " : "├── ");
+
+            int lt = leftArr[i];
+            int rt = rightArr[i];
+            int end = Math.min(rt + 1, text.length());
+            if (lt < end) {
+                sb.append('"').append(text, lt, end).append('"').append(" ");
+            }
+
+            SuffixTreeNode child = desc[i];
+            if (child != null) {
+                sb.append("node ").append(child.getId());
+                sb.append(System.lineSeparator());
+                String contPrefix = childrenPrefix + (last ? "    " : "│   ");
+                printEdges(sb, child, contPrefix);
+            } else {
+                sb.append("[");
+                sb.append(lt);
+                sb.append(",");
+                sb.append(rt);
+                sb.append("]").append(System.lineSeparator());
+            }
+        }
     }
 
     SuffixTreeNode testAndSplit(SuffixTreeNode p, int i) {

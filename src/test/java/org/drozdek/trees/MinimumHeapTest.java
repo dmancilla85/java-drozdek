@@ -72,7 +72,7 @@ class MinimumHeapTest {
     @DisplayName("Print heap")
     void print() {
         dumpData();
-        System.out.println(heap.toString());
+        heap.print();
         assertFalse(heap.isEmpty());
     }
 

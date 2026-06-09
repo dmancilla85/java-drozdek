@@ -20,7 +20,7 @@ class SuffixTreeTest {
     @DisplayName("Ukkonen builds suffix tree")
     void ukkonenBuild() {
         tree.ukkonen("banana");
-        assertNotNull(tree.toString());
+        assertDoesNotThrow(() -> tree.print());
     }
 
     @Test
@@ -89,6 +89,7 @@ class SuffixTreeTest {
     @DisplayName("Ukkonen with no repeated chars")
     void ukkonenNoRepeat() {
         tree.ukkonen("abcd");
+        tree.print();
         assertNotNull(tree.toString());
     }
 

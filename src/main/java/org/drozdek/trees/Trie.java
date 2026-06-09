@@ -268,46 +268,7 @@ public class Trie implements TreeInterface {
     @Override
     public String toString() {
         if (root == null) return System.lineSeparator() + "<EMPTY>" + System.lineSeparator();
-        StringBuilder sb = new StringBuilder();
-        sb.append(System.lineSeparator());
-        printNode(sb, "", "", root);
-        return sb.toString();
-    }
-
-    private void printNode(StringBuilder buffer, String prefix, String childrenPrefix, TrieNode node) {
-        if (node == null) return;
-
-        if (node.isLeaf()) {
-            buffer.append(prefix);
-            buffer.append("leaf: ");
-            buffer.append(((TrieLeaf) node).getSuffix());
-            buffer.append(System.lineSeparator());
-            return;
-        }
-
-        TrieNonLeaf n = (TrieNonLeaf) node;
-        buffer.append(prefix);
-        buffer.append(n.getLetters());
-        if (n.isEndOfWord()) buffer.append(" ($)");
-        buffer.append(System.lineSeparator());
-
-        int childCount = 0;
-        for (TrieNode child : n.getPtr()) {
-            if (child != null) childCount++;
-        }
-
-        int shown = 0;
-        for (int i = n.getLetters().length() - 1; i >= 0; i--) {
-            TrieNode child = n.getPtr()[i];
-            if (child == null) continue;
-            shown++;
-            boolean isLast = (shown == childCount);
-            if (isLast) {
-                printNode(buffer, childrenPrefix + "└── ", childrenPrefix + "    ", child);
-            } else {
-                printNode(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ", child);
-            }
-        }
+        return root.toString();
     }
 
     public String printTrie() {

@@ -1,18 +1,19 @@
 package org.drozdek.stacks;
 
+import org.drozdek.commons.LoggerService;
 import org.drozdek.stacks.interfaces.StackInterface;
 
-import java.util.Calendar;
+import java.security.SecureRandom;
+import java.time.Clock;
+import java.time.ZoneId;
 import java.util.Random;
-
-import static java.lang.System.out;
 
 public class AdaptiveStack<T> implements StackInterface<T> {
 
     public static final char STATIC = 0;
     public static final char DYNAMIC = 1;
     public static final int CRITICAL_VALUE = 2000;
-    private static final Random RANDOM = new Random();
+    private static final Random RANDOM = new SecureRandom();
     private char type;
     private StackInterface<T> stack;
     private int pushCount = 0;
@@ -97,15 +98,17 @@ public class AdaptiveStack<T> implements StackInterface<T> {
         int benchmarkPushCount = 0;
         int benchmarkPopCount = 0;
 
-        int maxIncrement = 5000000;
         int repetitions = 1000;
         ArrayStack<Integer> arrayStack = new ArrayStack<>();
         LinkedStack<Integer> linkedStack = new LinkedStack<>();
 
-        for (int j = 0; j < maxIncrement; j += 1000) {
+        int j = 0;
+
+        int maxIncrement = 5000000;
+        while (j < maxIncrement) {
             long[] delays = runTimedIterations(repetitions, arrayStack, linkedStack);
-            benchmarkPushCount += delays[4];
-            benchmarkPopCount += delays[5];
+            benchmarkPushCount += (int) delays[4];
+            benchmarkPopCount += (int) delays[5];
 
             for (int i = benchmarkPushCount - benchmarkPopCount; i < j; i++) {
                 arrayStack.push(RANDOM.nextInt());
@@ -114,7 +117,9 @@ public class AdaptiveStack<T> implements StackInterface<T> {
             }
 
             String message = buildEfficiencyMessage(delays);
-            out.printf("%09d - %S - %d%n", j, message, benchmarkPushCount - benchmarkPopCount);
+            LoggerService.logInfo(String
+                    .format("%09d - %S - %d%n", j, message, benchmarkPushCount - benchmarkPopCount));
+            j += 1000;
         }
     }
 
@@ -124,35 +129,34 @@ public class AdaptiveStack<T> implements StackInterface<T> {
         long pushDynamicDelays = 0;
         long popStaticDelays = 0;
         long popDynamicDelays = 0;
-        int pushCount = 0;
-        int popCount = 0;
+        int pushCounter = 0;
+        int popCounter = 0;
 
         for (int i = 0; i < repetitions; i++) {
+            Clock ini = Clock.tickMillis(ZoneId.systemDefault());
             if (i % 2 == 0) {
-                Calendar ini = Calendar.getInstance();
                 arrayStack.push(RANDOM.nextInt());
-                Calendar fin = Calendar.getInstance();
-                pushStaticDelays += fin.getTimeInMillis() - ini.getTimeInMillis();
+                Clock fin = Clock.tickMillis(ZoneId.systemDefault());
+                pushStaticDelays += fin.millis() - ini.millis();
 
-                ini = Calendar.getInstance();
+                ini = Clock.tickMillis(ZoneId.systemDefault());
                 linkedStack.push(RANDOM.nextInt());
-                fin = Calendar.getInstance();
-                pushDynamicDelays += fin.getTimeInMillis() - ini.getTimeInMillis();
-                pushCount++;
+                fin = Clock.tickMillis(ZoneId.systemDefault());
+                pushDynamicDelays += fin.millis() - ini.millis();
+                pushCounter++;
             } else {
-                Calendar ini = Calendar.getInstance();
                 arrayStack.pop();
-                Calendar fin = Calendar.getInstance();
-                popStaticDelays += fin.getTimeInMillis() - ini.getTimeInMillis();
+                Clock fin = Clock.tickMillis(ZoneId.systemDefault());
+                popStaticDelays += fin.millis() - ini.millis();
 
-                ini = Calendar.getInstance();
+                ini = Clock.tickMillis(ZoneId.systemDefault());
                 linkedStack.pop();
-                fin = Calendar.getInstance();
-                popDynamicDelays += fin.getTimeInMillis() - ini.getTimeInMillis();
-                popCount++;
+                fin = Clock.tickMillis(ZoneId.systemDefault());
+                popDynamicDelays += fin.millis() - ini.millis();
+                popCounter++;
             }
         }
-        return new long[]{pushStaticDelays, pushDynamicDelays, popStaticDelays, popDynamicDelays, pushCount, popCount};
+        return new long[]{pushStaticDelays, pushDynamicDelays, popStaticDelays, popDynamicDelays, pushCounter, popCounter};
     }
 
     private String buildEfficiencyMessage(long[] delays) {

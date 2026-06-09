@@ -72,7 +72,7 @@ class AvlTreeTest {
     @DisplayName("Create a balanced tree and print his structure")
     void treeToString() {
         dumpData();
-        LoggerService.logInfo(tree.toString());
+        tree.print();
         assertEquals(6, tree.size(), "The size of the tree doesn't match with the expected");
     }
 

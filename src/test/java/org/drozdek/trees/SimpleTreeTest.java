@@ -55,6 +55,12 @@ class SimpleTreeTest {
     @DisplayName("Print method executes without error")
     void testPrint() {
         tree.insertElement(null, "root");
+        tree.insertElement(tree.root, "child1");
+        tree.insertElement(tree.root, "child2");
+        tree.insertElement(tree.root, "child3");
+        tree.insertElement(tree.findNode("child2"), "grandchild3");
+        tree.insertElement(tree.findNode("child2"), "grandchild2");
+        tree.insertElement(tree.findNode("child1"), "grandchild6");
         assertDoesNotThrow(() -> tree.print());
     }
 

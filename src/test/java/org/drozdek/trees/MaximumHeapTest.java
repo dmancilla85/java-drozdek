@@ -72,7 +72,7 @@ class MaximumHeapTest {
     @DisplayName("Check that the heap is printed correctly.")
     void print() {
         dumpData();
-        System.out.println(heap.toString());
+        heap.print();
         int max = heap.getMax();
         assertEquals(153, max, "The maximum extracted is not the expected.");
     }
