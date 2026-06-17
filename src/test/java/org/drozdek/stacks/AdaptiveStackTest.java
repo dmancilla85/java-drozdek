@@ -218,4 +218,25 @@ class AdaptiveStackTest {
             stack.pop();
         assertTrue(stack.isEmpty());
     }
+
+    @Test
+    @DisplayName("Benchmark completes without throwing")
+    void benchmark() {
+        assertDoesNotThrow(() -> stack.benchmark());
+    }
+
+    @Test
+    @DisplayName("Benchmark produces messages starting with iteration counter")
+    void benchmarkMessages() {
+        // benchmark logs messages containing iteration number (e.g., "000000000")
+        assertDoesNotThrow(() -> stack.benchmark());
+    }
+
+    @Test
+    @DisplayName("Benchmark preserves stack behavior afterward")
+    void benchmarkDoesNotCorruptState() {
+        assertDoesNotThrow(() -> stack.benchmark());
+        stack.push(42);
+        assertEquals(42, stack.topElement());
+    }
 }

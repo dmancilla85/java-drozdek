@@ -20,7 +20,6 @@ public class WordSplay extends SplayTree<Word> {
 
     public static void testSplaying(String[] args) {
         String fileName;
-        InputStream fIn;
         BufferedReader buffer = new BufferedReader(
                 new InputStreamReader(System.in));
 
@@ -28,13 +27,12 @@ public class WordSplay extends SplayTree<Word> {
             if (args.length == 0) {
                 System.out.println("Enter a filename: ");
                 fileName = buffer.readLine();
-                fIn = new FileInputStream(fileName);
             } else {
-                fIn = new FileInputStream(args[0]);
                 fileName = args[0];
             }
-            new WordSplay().run(fIn, fileName);
-            fIn.close();
+            try (InputStream fIn = new FileInputStream(fileName)) {
+                new WordSplay().run(fIn, fileName);
+            }
 
         } catch (IOException io) {
             System.err.println("Error: " + io.getMessage());
@@ -56,12 +54,12 @@ public class WordSplay extends SplayTree<Word> {
     private void processWords(InputStream fIn) throws IOException {
         String word;
         while ((word = nextWord(fIn)) != null) {
-            Word p = (Word) search(new Word(word));
+            Word p = search(new Word(word));
             if (p == null) {
                 insert(new Word(word));
                 differentWords++;
             } else {
-                p.freq++;
+                p.incrementFreq();
             }
             wordCnt++;
         }

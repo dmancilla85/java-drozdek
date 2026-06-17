@@ -51,7 +51,7 @@ class WeightedDigraphTest {
     void removeArc() {
         graph.createArc(0, 1, 10);
         Integer removed = graph.removeArc(0, 1);
-        assertNull(removed);
+        assertEquals(10, removed);
     }
 
     @Test
@@ -105,6 +105,7 @@ class WeightedDigraphTest {
         java.util.ArrayList<Integer> visited = new java.util.ArrayList<>();
         visited.add(0);
         graph.dfs(0, visited, result);
+        assertNotNull(result);
     }
 
     @Test
@@ -141,6 +142,6 @@ class WeightedDigraphTest {
     void runMain() throws Exception {
         java.lang.reflect.Method m = WeightedDigraph.class.getDeclaredMethod("main", String[].class);
         m.setAccessible(true);
-        m.invoke(null, (Object) new String[0]);
+        assertDoesNotThrow(() -> m.invoke(null, (Object) new String[0]));
     }
 }

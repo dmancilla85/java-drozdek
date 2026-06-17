@@ -110,6 +110,6 @@ class WeightedGraphTest {
     void runMain() throws Exception {
         java.lang.reflect.Method m = WeightedGraph.class.getDeclaredMethod("main", String[].class);
         m.setAccessible(true);
-        m.invoke(null, (Object) new String[0]);
+        assertDoesNotThrow(() -> m.invoke(null, (Object) new String[0]));
     }
 }

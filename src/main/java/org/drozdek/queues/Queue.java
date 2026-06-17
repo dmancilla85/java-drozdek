@@ -28,6 +28,7 @@ public class Queue<T> implements QueueInterface<T> {
         return list.getFirst();
     }
 
+    @Override
     public boolean isEmpty() {
         return list.isEmpty();
     }
@@ -49,6 +50,7 @@ public class Queue<T> implements QueueInterface<T> {
         return QueueInterface.boxedQueue(sb.toString());
     }
 
+    @Override
     public int size() {
         return list.size();
     }

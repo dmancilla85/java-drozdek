@@ -62,8 +62,7 @@ public final class QuickSort {
         ArrayList<Integer> greater = new ArrayList<>();
         classifyForStableSort(array, pivot, middle, smaller, greater);
 
-        ArrayList<Integer> ans = new ArrayList<>();
-        ans.addAll(stableQuickSort(smaller));
+        ArrayList<Integer> ans = new ArrayList<>(stableQuickSort(smaller));
         ans.add(pivot);
         ans.addAll(stableQuickSort(greater));
         return ans;

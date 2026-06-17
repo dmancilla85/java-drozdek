@@ -11,7 +11,7 @@ import org.drozdek.commons.LoggerService;
 /// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/splay-tree/)
 public class Word implements Comparable<Word> {
     private final String words;
-    public int freq;
+    private int freq;
 
     public Word(String s) {
         this.words = s;
@@ -22,6 +22,14 @@ public class Word implements Comparable<Word> {
     @Override
     public int compareTo(Word o) {
         return words.compareTo(o.words);
+    }
+
+    public int getFreq() {
+        return freq;
+    }
+
+    public void incrementFreq() {
+        freq++;
     }
 
     @Override

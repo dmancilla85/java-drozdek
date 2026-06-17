@@ -1,7 +1,5 @@
 package org.drozdek.trees.nodes;
 
-import java.util.Arrays;
-import java.util.Iterator;
 
 public class SuffixTreeNode {
     private static int cnt = 0;

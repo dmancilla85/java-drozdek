@@ -77,7 +77,7 @@ public class IntSkipList implements ListInterface<Integer> {
     /// @param level   the starting level to check from
     /// @param current the current node to check
     /// @return the highest level <= level where current.next[level] is not null, or -1 if none found
-    private int checkForCurrentLevel(int level, IntSkipListNode current) {
+    private static int checkForCurrentLevel(int level, IntSkipListNode current) {
         int lvl = level;
 
         while (lvl >= 0 && current.next()[lvl] == null) {
@@ -127,6 +127,7 @@ public class IntSkipList implements ListInterface<Integer> {
     /// @param data the integer value to add
     ///
     ///             Time Complexity: O(log n) expected
+    @Override
     public void add(Integer data) {
         if (data != null) {
             insert(data);
@@ -139,6 +140,7 @@ public class IntSkipList implements ListInterface<Integer> {
     /// @param key the integer key to insert
     ///
     ///            Time Complexity: O(log n) expected, where n is the number of elements
+    @SuppressWarnings({"java:S3776", "java:S6541"})
     public void insert(int key) {
         IntSkipListNode[] previous = new IntSkipListNode[maximumLevel];
         IntSkipListNode[] current = new IntSkipListNode[maximumLevel];
@@ -208,6 +210,7 @@ public class IntSkipList implements ListInterface<Integer> {
     /// @return true if the skip list is empty, false otherwise
     ///
     /// Time Complexity: O(1) - direct check of the level 0 head reference
+    @Override
     public boolean isEmpty() {
         return root[0] == null;
     }
@@ -270,18 +273,13 @@ public class IntSkipList implements ListInterface<Integer> {
                 this);
     }
 
-    /// Searches for an element with the specified key in the skip list.
-    ///
-    /// @param key the key to search for
-    /// @return the key if found, or 0 if not found or the list is empty
-    ///
-    /// Time Complexity: O(log n) expected, where n is the number of elements
     /// Searches for the specified integer value in the skip list.
     ///
     /// @param data the integer value to search for
     /// @return the value if found, or null if not found or the list is empty
     ///
     /// Time Complexity: O(log n) expected
+    @Override
     public Integer find(Integer data) {
         if (data == null || isEmpty())
             return null;
@@ -300,6 +298,7 @@ public class IntSkipList implements ListInterface<Integer> {
     /// @param data the integer value to delete
     ///
     ///             Time Complexity: O(log n) expected
+    @Override
     public void delete(Integer data) {
         if (data == null || isEmpty())
             return;
@@ -331,7 +330,7 @@ public class IntSkipList implements ListInterface<Integer> {
                 previous[i].next()[i] = current.next()[i];
         }
 
-        if (i <= 0)
+        if (i == 0)
             return null;
         return previous[i] == null ? root[i - 1] : previous[i].next()[i - 1];
     }
@@ -341,12 +340,14 @@ public class IntSkipList implements ListInterface<Integer> {
     /// @return the first element, or null if the list is empty
     ///
     /// Time Complexity: O(1)
+    @Override
     public Integer first() {
         if (isEmpty())
             return null;
         return root[0].key();
     }
 
+    @SuppressWarnings({"java:S3776", "java:S6541"})
     public int search(int key) {
         int lvl = findMajorNotNullValue();
         if (lvl < 0)
@@ -386,7 +387,7 @@ public class IntSkipList implements ListInterface<Integer> {
         return previous.next()[lvl - 1];
     }
 
-    private int findNextLevel(int lvl, IntSkipListNode node) {
+    private static int findNextLevel(int lvl, IntSkipListNode node) {
         lvl--;
         return checkForCurrentLevel(lvl, node);
     }
@@ -399,6 +400,7 @@ public class IntSkipList implements ListInterface<Integer> {
     ///
     /// Note: This implementation does not maintain a size counter, so it requires
     /// a full traversal of the level 0 linked list to count elements.
+    @Override
     public int size() {
         int size = 0;
         IntSkipListNode tmp = root[0];

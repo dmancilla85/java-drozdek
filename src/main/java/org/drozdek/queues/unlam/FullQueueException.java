@@ -3,6 +3,7 @@ package org.drozdek.queues.unlam;
 /// Exception thrown when attempting to enqueue an element into a full queue.
 public class FullQueueException extends ArrayIndexOutOfBoundsException {
 
+    @java.io.Serial
     private static final long serialVersionUID = 1L;
 
     public FullQueueException() {

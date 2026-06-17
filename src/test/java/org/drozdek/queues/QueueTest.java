@@ -1,6 +1,5 @@
 package org.drozdek.queues;
 
-import org.drozdek.commons.LoggerService;
 import org.drozdek.queues.Queue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

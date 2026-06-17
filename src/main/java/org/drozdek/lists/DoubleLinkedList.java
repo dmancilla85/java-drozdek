@@ -151,7 +151,7 @@ public class DoubleLinkedList<T> implements Iterable<T>, ListInterface<T> {
     /// Time Complexity: O(1) to create the iterator, O(n) for full traversal
     @Override
     public Iterator<T> iterator() {
-        return new DoubleLinkedListIterator<T>(this);
+        return new DoubleLinkedListIterator<>(this);
     }
 
     /// Returns the data value of the tail node (last element) without removing it.

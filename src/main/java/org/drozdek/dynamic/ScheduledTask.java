@@ -7,8 +7,8 @@ import java.util.Comparator;
 /// Tasks are sorted by their end time (ascending), which is the standard
 /// preprocessing step for interval scheduling / activity selection algorithms.
 public class ScheduledTask implements Comparable<ScheduledTask>, Comparator<ScheduledTask> {
-    public int start;
-    public int end;
+    private int start;
+    private int end;
 
     public ScheduledTask() {
         start = 0;
@@ -18,6 +18,14 @@ public class ScheduledTask implements Comparable<ScheduledTask>, Comparator<Sche
     public ScheduledTask(int i, int f) {
         start = i;
         end = f;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public int getEnd() {
+        return end;
     }
 
     /// Compares two tasks by end time (delegates to compareTo).

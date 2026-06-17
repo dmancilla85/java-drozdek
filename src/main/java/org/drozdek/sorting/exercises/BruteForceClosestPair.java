@@ -3,6 +3,8 @@ package org.drozdek.sorting.exercises;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.drozdek.commons.LoggerService;
+
 class PointPair {
     Point pointA;
     Point pointB;
@@ -80,7 +82,9 @@ class PointPair {
 /// every remaining point, then recurse on the rest. The resulting list is
 /// sorted via `PointPair::quickSort` and the closest pair is reported.
 public final class BruteForceClosestPair {
-private BruteForceClosestPair() {  }
+private BruteForceClosestPair() {
+        // do nothing
+    }
 
     /// Generates all unordered point pairs recursively.
     ///
@@ -117,7 +121,7 @@ private BruteForceClosestPair() {  }
 
     static void main(String[] args) {
 
-        List<Point> points = new ArrayList<Point>();
+        List<Point> points = new ArrayList<>();
         points.add(new Point(1, 0));
         points.add(new Point(3, 124));
         points.add(new Point(0, 34));
@@ -157,19 +161,19 @@ private BruteForceClosestPair() {  }
         List<PointPair> pairs = enumeratePairs(points);
 
         for (PointPair pair : pairs)
-            System.out.println(pair);
+            LoggerService.logInfo(String.valueOf(pair));
 
         PointPair closest = PointPair.minimumDistanceBetweenPoints(pairs);
 
         if (closest == null) {
-            System.out.println("No points to calculate distance.");
+            LoggerService.logInfo("No points to calculate distance.");
         } else {
-            System.out.println();
-            System.out.printf("Minimum distance is %.3f%n", closest.distance);
-            System.out.println();
-            System.out.println("The points are: " + closest.pointA + " and " + closest.pointB);
-            System.out.println();
-            System.out.println("Number of steps: " + closest.instructions);
+            LoggerService.logInfo("");
+            LoggerService.logInfo(String.format("Minimum distance is %.3f", closest.distance));
+            LoggerService.logInfo("");
+            LoggerService.logInfo("The points are: " + closest.pointA + " and " + closest.pointB);
+            LoggerService.logInfo("");
+            LoggerService.logInfo("Number of steps: " + closest.instructions);
         }
     }
 }

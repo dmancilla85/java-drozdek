@@ -37,14 +37,14 @@ public record IntSkipListNode(int key, IntSkipListNode[] next) {
     }
 
     @Override
-    public final boolean equals(Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof IntSkipListNode that)) return false;
         return key == that.key && Arrays.equals(next, that.next);
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         int result = key;
         result = 31 * result + Arrays.hashCode(next);
         return result;

@@ -8,14 +8,34 @@ import java.util.List;
 /// Holds the number of selected tasks, the instruction count used by the solving
 /// algorithm, and the list of selected tasks that form the solution.
 public class TaskSchedulingSolution {
-    public int taskCount;
-    public int instructionCount;
-    public List<ScheduledTask> solution;
+    private int taskCount;
+    private int instructionCount;
+    private List<ScheduledTask> solution;
 
     public TaskSchedulingSolution() {
         taskCount = 0;
         instructionCount = 0;
         solution = new ArrayList<>();
+    }
+
+    public int getTaskCount() {
+        return taskCount;
+    }
+
+    public void setTaskCount(int taskCount) {
+        this.taskCount = taskCount;
+    }
+
+    public int getInstructionCount() {
+        return instructionCount;
+    }
+
+    public void setInstructionCount(int instructionCount) {
+        this.instructionCount = instructionCount;
+    }
+
+    public List<ScheduledTask> getSolution() {
+        return solution;
     }
 
     /// @return A formatted string with task count, instruction count, and all selected tasks

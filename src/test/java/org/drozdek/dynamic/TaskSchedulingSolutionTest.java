@@ -19,8 +19,8 @@ class TaskSchedulingSolutionTest {
     void createTask() {
         ScheduledTask task = new ScheduledTask(1, 5);
 
-        assertEquals(1, task.start);
-        assertEquals(5, task.end);
+        assertEquals(1, task.getStart());
+        assertEquals(5, task.getEnd());
     }
 
     @Test
@@ -28,8 +28,8 @@ class TaskSchedulingSolutionTest {
     void defaultTask() {
         ScheduledTask task = new ScheduledTask();
 
-        assertEquals(0, task.start);
-        assertEquals(0, task.end);
+        assertEquals(0, task.getStart());
+        assertEquals(0, task.getEnd());
     }
 
     @Test
@@ -48,9 +48,9 @@ class TaskSchedulingSolutionTest {
         out.println("After sorting:");
         for (ScheduledTask t : tasks) out.println(t);
 
-        assertEquals(4, tasks.get(0).end, "Earliest end time should be first");
-        assertEquals(6, tasks.get(1).end, "Middle end time");
-        assertEquals(8, tasks.get(2).end, "Latest end time should be last");
+        assertEquals(4, tasks.get(0).getEnd(), "Earliest end time should be first");
+        assertEquals(6, tasks.get(1).getEnd(), "Middle end time");
+        assertEquals(8, tasks.get(2).getEnd(), "Latest end time should be last");
     }
 
     @Test
@@ -66,19 +66,19 @@ class TaskSchedulingSolutionTest {
     void emptySolution() {
         TaskSchedulingSolution solution = new TaskSchedulingSolution();
 
-        assertEquals(0, solution.taskCount);
-        assertEquals(0, solution.instructionCount);
-        assertTrue(solution.solution.isEmpty());
+        assertEquals(0, solution.getTaskCount());
+        assertEquals(0, solution.getInstructionCount());
+        assertTrue(solution.getSolution().isEmpty());
     }
 
     @Test
     @DisplayName("Solution with tasks formats correctly")
     void solutionWithTasks() {
         TaskSchedulingSolution solution = new TaskSchedulingSolution();
-        solution.taskCount = 2;
-        solution.instructionCount = 10;
-        solution.solution.add(new ScheduledTask(1, 3));
-        solution.solution.add(new ScheduledTask(4, 6));
+        solution.setTaskCount(2);
+        solution.setInstructionCount(10);
+        solution.getSolution().add(new ScheduledTask(1, 3));
+        solution.getSolution().add(new ScheduledTask(4, 6));
 
         String output = solution.toString();
 

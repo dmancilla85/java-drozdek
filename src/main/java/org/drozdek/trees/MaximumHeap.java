@@ -68,10 +68,12 @@ public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
         return node >= 0 && node < heap.size() && (node * 2 + 1) >= heap.size();
     }
 
+    @Override
     public boolean isEmpty() {
         return heap.isEmpty();
     }
 
+    @Override
     public int size() {
         return heap.size();
     }
@@ -160,7 +162,7 @@ public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
         }
     }
 
-    private int parent(int node) {
+    private static int parent(int node) {
         if (node <= 0)
             return node;
         return (node - 1) / 2;

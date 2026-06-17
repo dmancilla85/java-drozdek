@@ -129,10 +129,11 @@ public class ExpressionTree implements TreeInterface {
     }
 
     private static void evaluateUntilOpenParen(Deque<Integer> numStack, Deque<Character> opStack) {
-        while (opStack.peek() != '(') {
+        while (!opStack.isEmpty() && opStack.peek() != '(') {
             numStack.push(compute(numStack.pop(), numStack.pop(), opStack.pop()));
         }
-        opStack.pop();
+        if (!opStack.isEmpty())
+            opStack.pop();
     }
 
     private static void evaluateHigherOperators(char token, Deque<Integer> numStack, Deque<Character> opStack) {

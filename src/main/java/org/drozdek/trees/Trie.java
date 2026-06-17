@@ -60,26 +60,31 @@ public class Trie implements TreeInterface {
         int pos = position(p, ch);
         TrieLeaf lf = null;
 
-        if (suffix != null && suffix.length() > 0) {
+        if (suffix != null && !suffix.isEmpty()) {
             lf = new TrieLeaf(suffix);
         }
 
         if (pos == NOT_FOUND) {
-            for (pos = 0; pos < p.getLetters().length() && p.getLetters().charAt(pos) < ch; pos++)
-                ;
+            pos = 0;
+            while (pos < p.getLetters().length() && p.getLetters().charAt(pos) < ch)
+                pos++;
             addCell(ch, p, pos);
         }
 
         p.getPtr()[pos] = lf;
     }
 
+    @SuppressWarnings({"java:S3776", "java:S6541"})
     public boolean found(String word) {
         TrieNode p = root;
         int i = 0;
 
         while (p != null) {
-            if (p.isLeaf())
+            if (p.isLeaf()) {
+                if (i >= word.length())
+                    return false;
                 return word.substring(i).equals(((TrieLeaf) p).getSuffix());
+            }
 
             if (i >= word.length())
                 return ((TrieNonLeaf) p).isEndOfWord();
@@ -103,6 +108,7 @@ public class Trie implements TreeInterface {
         return false;
     }
 
+    @SuppressWarnings({"java:S3776", "java:S6541"})
     public void insert(String word) {
         if (root == null) {
             root = new TrieNonLeaf(word.charAt(0));
@@ -151,6 +157,7 @@ public class Trie implements TreeInterface {
         createLeaf(word.charAt(i + 1), s, (TrieNonLeaf) current.getPtr()[pos]);
     }
 
+    @SuppressWarnings({"java:S3776", "java:S6541"})
     private void insertIntoSplit(TrieNonLeaf current, String word, int i, int pos) {
         TrieLeaf lf = (TrieLeaf) current.getPtr()[pos];
 
@@ -243,10 +250,12 @@ public class Trie implements TreeInterface {
         return (i < p.getLetters().length()) ? i : NOT_FOUND;
     }
 
+    @Override
     public boolean isEmpty() {
         return root == null;
     }
 
+    @Override
     public int size() {
         return sizeRecursive(root);
     }

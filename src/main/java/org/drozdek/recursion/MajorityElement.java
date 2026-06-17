@@ -3,10 +3,12 @@ package org.drozdek.recursion;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.System.out;
+import org.drozdek.commons.LoggerService;
 
 public final class MajorityElement {
-private MajorityElement() {  }
+private MajorityElement() {
+        // do nothing
+    }
 
     // Given an integer array A, find the majority element.
     // An element x is the majority if it appears more than n/2 times.
@@ -39,7 +41,7 @@ private MajorityElement() {  }
     }
 
     public static void test() {
-        List<Integer> a = new ArrayList<Integer>();
+        List<Integer> a = new ArrayList<>();
         Integer mayor = 0;
 
         a.add(1);
@@ -57,8 +59,8 @@ private MajorityElement() {  }
         mayor = run(a, 0);
 
         if (mayor != null)
-            out.println("El elemento mayoritario es " + mayor + ".");
+            LoggerService.logInfo("El elemento mayoritario es " + mayor + ".");
         else
-            out.println("No hay elemento mayoritario.");
+            LoggerService.logInfo("No hay elemento mayoritario.");
     }
 }

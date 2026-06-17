@@ -2,8 +2,6 @@ package org.drozdek.graphs.unlam;
 
 import org.drozdek.commons.LoggerService;
 
-import static java.lang.System.out;
-
 /// @author David
 public class WeightedGraph extends Graph {
 
@@ -42,9 +40,9 @@ public class WeightedGraph extends Graph {
         g.createEdge('e', 'f', 30);
 
         WeightedGraph e = createRandom(10, 50);
-        out.println(e.getAdjacencyTable());
-        out.println(e.getWeightTable());
-        out.println("Prim");
+        LoggerService.logInfo(e.getAdjacencyTable().toString());
+        LoggerService.logInfo(e.getWeightTable().toString());
+        LoggerService.logInfo("Prim");
     }
 
     /// @param node1
@@ -66,7 +64,7 @@ public class WeightedGraph extends Graph {
             return true;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerService.logError(e.getMessage());
             return false;
         }
     }
@@ -123,8 +121,7 @@ public class WeightedGraph extends Graph {
                     table.append((char) (i + j + 97)).append(" ");
 
                 table.append(weightTable[i][j]);
-                if (j < n)
-                    table.append(" ");
+                table.append(" ");
             }
             table.append("\n");
 

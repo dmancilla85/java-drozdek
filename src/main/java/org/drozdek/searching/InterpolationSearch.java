@@ -9,25 +9,28 @@ public final class InterpolationSearch {
     // Complexity O(log log n) average, O(n) worst
     // Memory O(1)
     public static int interpolationSearch(int[] array, int left, int right, int target) {
-        while (left <= right && target >= array[left] && target <= array[right]) {
+        int result = -1;
+
+        while (left <= right && target >= array[left] && target <= array[right] && result == -1) {
             if (left == right) {
-                return array[left] == target ? left : -1;
+                if (array[left] == target) {
+                    result = left;
+                }
+                break;
             }
 
             int pos = left + (target - array[left]) * (right - left)
                     / (array[right] - array[left]);
 
             if (array[pos] == target) {
-                return pos;
-            }
-
-            if (array[pos] < target) {
+                result = pos;
+            } else if (array[pos] < target) {
                 left = pos + 1;
             } else {
                 right = pos - 1;
             }
         }
 
-        return -1;
+        return result;
     }
 }

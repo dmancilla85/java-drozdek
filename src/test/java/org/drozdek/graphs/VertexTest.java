@@ -68,14 +68,14 @@ class VertexTest {
     @Test
     @DisplayName("Set color only if positive")
     void setColor() {
-        vertex.setColor(5);
-        vertex.setColor(-1);
+        assertDoesNotThrow(() -> vertex.setColor(5));
+        assertDoesNotThrow(() -> vertex.setColor(-1));
     }
 
     @Test
     @DisplayName("Equals same object")
     void equalsSame() {
-        assertTrue(vertex.equals(vertex));
+        assertEquals(vertex, vertex);
     }
 
     @Test
@@ -94,7 +94,7 @@ class VertexTest {
     @DisplayName("Equals same key and degree")
     void equalsSameKey() {
         Vertex v2 = new Vertex(0);
-        assertTrue(vertex.equals(v2));
+        assertEquals(v2, vertex);
     }
 
     @Test

@@ -1,6 +1,5 @@
 package org.drozdek.trees;
 
-import org.drozdek.commons.LoggerService;
 import org.drozdek.trees.BinarySearchTree;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

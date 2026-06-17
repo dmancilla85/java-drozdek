@@ -155,6 +155,7 @@ public class Stack<T> implements StackInterface<T> {
     /// Is stack empty?
     ///
     /// @return True if is empty
+    @Override
     public boolean isEmpty() {
         return pool.isEmpty();
     }

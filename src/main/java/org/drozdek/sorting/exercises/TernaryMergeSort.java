@@ -13,7 +13,9 @@ import static java.lang.System.out;
 /// producing three sorted sub-ranges that are merged in O(n) using a
 /// three-way merge.
 public final class TernaryMergeSort {
-private TernaryMergeSort() {  }
+private TernaryMergeSort() {
+        // do nothing
+    }
 
     public static void mergeSortAlter(List<Integer> a, int start, int end) {
         if (end - start < 1) {

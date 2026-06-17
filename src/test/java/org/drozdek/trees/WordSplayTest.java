@@ -34,9 +34,9 @@ class WordSplayTest {
         WordSplay ws = new WordSplay();
         InputStream in = new ByteArrayInputStream("hello hello world".getBytes(StandardCharsets.UTF_8));
         assertDoesNotThrow(() -> ws.run(in, "test"));
-        Word hello = (Word) ws.search(new Word("HELLO"));
+        Word hello = ws.search(new Word("HELLO"));
         assertNotNull(hello);
-        assertEquals(2, hello.freq);
+        assertEquals(2, hello.getFreq());
         assertEquals(2, ws.size());
     }
 
@@ -46,9 +46,9 @@ class WordSplayTest {
         WordSplay ws = new WordSplay();
         InputStream in = new ByteArrayInputStream("hello hello hello".getBytes(StandardCharsets.UTF_8));
         assertDoesNotThrow(() -> ws.run(in, "test"));
-        Word hello = (Word) ws.search(new Word("HELLO"));
+        Word hello = ws.search(new Word("HELLO"));
         assertNotNull(hello);
-        assertEquals(3, hello.freq);
+        assertEquals(3, hello.getFreq());
         assertEquals(1, ws.size());
     }
 
@@ -58,7 +58,7 @@ class WordSplayTest {
         WordSplay ws = new WordSplay();
         InputStream in = new ByteArrayInputStream("hello world".getBytes(StandardCharsets.UTF_8));
         assertDoesNotThrow(() -> ws.run(in, "test"));
-        Word found = (Word) ws.search(new Word("HELLO"));
+        Word found = ws.search(new Word("HELLO"));
         assertNotNull(found);
         assertTrue(found.toString().startsWith("HELLO"));
     }

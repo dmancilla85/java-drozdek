@@ -63,7 +63,7 @@ class EdgeTest {
     @Test
     @DisplayName("Equals same object")
     void equalsSame() {
-        assertTrue(edge.equals(edge));
+        assertEquals(edge, edge);
     }
 
     @Test
@@ -82,7 +82,7 @@ class EdgeTest {
     @DisplayName("Equals same vertices")
     void equalsSameVertices() {
         Edge same = new Edge(a, b);
-        assertTrue(edge.equals(same));
+        assertEquals(same, edge);
     }
 
     @Test
@@ -158,7 +158,7 @@ class EdgeTest {
     void equalsBothOriginsNull() {
         Edge e1 = new Edge(null, b);
         Edge e2 = new Edge(null, b);
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
     }
 
     @Test

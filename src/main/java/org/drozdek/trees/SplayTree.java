@@ -233,6 +233,7 @@ public class SplayTree<T extends Comparable<T>> implements TreeInterface {
         return vars;
     }
 
+    @Override
     public boolean isEmpty() {
         return root == null;
     }
@@ -240,6 +241,7 @@ public class SplayTree<T extends Comparable<T>> implements TreeInterface {
     /// Number of nodes in the tree.
     ///
     /// @return The number of elements in node
+    @Override
     public int size() {
         return countNodes(root);
     }

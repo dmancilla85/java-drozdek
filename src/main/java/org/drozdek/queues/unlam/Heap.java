@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> {
-    protected final Comparator<? super E> cmp_;
+    protected final Comparator<? super E> cmp;
     protected final List<E> nodes_;
     protected int count_;
 
@@ -16,7 +16,7 @@ public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> 
         if (capacity <= 0)
             throw new IllegalArgumentException();
         nodes_ = new ArrayList<>(capacity);
-        cmp_ = cmp;
+        this.cmp = cmp;
     }
 
     public Heap(int capacity) {
@@ -29,8 +29,8 @@ public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> 
     }
 
     protected int compare(E a, E b) {
-        if (cmp_ != null)
-            return cmp_.compare(a, b);
+        if (cmp != null)
+            return cmp.compare(a, b);
         return a.compareTo(b);
     }
 

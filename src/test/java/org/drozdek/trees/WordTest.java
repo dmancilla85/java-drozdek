@@ -13,7 +13,7 @@ class WordTest {
     void createWord() {
         Word w = new Word("hello");
         assertTrue(w.toString().contains("hello"));
-        assertEquals(1, w.freq);
+        assertEquals(1, w.getFreq());
     }
 
     @Test
@@ -30,8 +30,8 @@ class WordTest {
     @DisplayName("Increment frequency")
     void incrementFrequency() {
         Word w = new Word("test");
-        w.freq++;
-        assertEquals(2, w.freq);
+        w.incrementFreq();
+        assertEquals(2, w.getFreq());
         assertTrue(w.toString().contains("(2)"));
     }
 

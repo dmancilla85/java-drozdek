@@ -5,10 +5,13 @@ import java.util.List;
 
 import static java.lang.Character.getNumericValue;
 import static java.lang.Character.toUpperCase;
-import static java.lang.System.out;
+
+import org.drozdek.commons.LoggerService;
 
 public final class AlphabeticallySorted {
-private AlphabeticallySorted() {  }
+private AlphabeticallySorted() {
+        // do nothing
+    }
 
     // Check if a sequence of characters is alphabetically sorted (case-insensitive)
     public static boolean run(List<Character> s, int llamada) {
@@ -18,7 +21,7 @@ private AlphabeticallySorted() {  }
             return true;
 
         if (getNumericValue(toUpperCase(s.get(0))) <= getNumericValue(toUpperCase(s.get(1)))) {
-            out.println("llamada " + llamada + " s1: "
+            LoggerService.logInfo("llamada " + llamada + " s1: "
                     + getNumericValue(toUpperCase(s.get(0)))
                     + " y s2:" + getNumericValue(toUpperCase(s.get(1))));
 
@@ -33,8 +36,8 @@ private AlphabeticallySorted() {  }
 
     public static void test() {
 
-        ArrayList<Character> si = new ArrayList<Character>();
-        ArrayList<Character> no = new ArrayList<Character>();
+        ArrayList<Character> si = new ArrayList<>();
+        ArrayList<Character> no = new ArrayList<>();
 
         si.add('a');
         si.add('c');
@@ -52,13 +55,13 @@ private AlphabeticallySorted() {  }
         no.add('y');
 
         if (run(si, 0))
-            out.println("SIp está ordenada");
+            LoggerService.logInfo("SIp está ordenada");
         else
-            out.println("SIp no está ordenada");
+            LoggerService.logInfo("SIp no está ordenada");
 
         if (run(no, 0))
-            out.println("NOp está ordenada");
+            LoggerService.logInfo("NOp está ordenada");
         else
-            out.println("NOp no está ordenada");
+            LoggerService.logInfo("NOp no está ordenada");
     }
 }

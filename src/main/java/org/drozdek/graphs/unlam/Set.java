@@ -1,26 +1,25 @@
 package org.drozdek.graphs.unlam;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
 
 /// @author lab4
 public class Set<T> {
 
-    private List<T> elements;
+    private final java.util.Set<T> elements;
 
     public Set() {
-        elements = new ArrayList<T>();
+        elements = new LinkedHashSet<>();
     }
 
     /// @param n
+    @SuppressWarnings("unchecked")
     public Set(int n) {
-        if (n > 0)
-            elements = new ArrayList<T>(n);
+        elements = n > 0 ? new LinkedHashSet<>(n) : null;
     }
 
     /// @param args
     static void main(String[] args) {
-        Set<Object> A = new Set<Object>();
+        Set<Object> A = new Set<>();
         A.add("Hola");
         A.add(324.4);
         A.add(11);

@@ -16,8 +16,8 @@ import static java.time.ZoneId.systemDefault;
 /// @author David
 public class Graph {
 
-    protected ArrayList<Vertex> vertices;
-    protected ArrayList<Edge> edges;
+    protected List<Vertex> vertices;
+    protected List<Edge> edges;
     protected byte[][] adjacencyMatrix;
 
 
@@ -75,7 +75,7 @@ public class Graph {
 
         Graph result = new Graph(cardinality());
         Queue<Vertex> queue = new LinkedList<>();
-        ArrayList<Vertex> visitedVertices = new ArrayList<>();
+        List<Vertex> visitedVertices = new ArrayList<>();
 
         int i = 0;
 
@@ -94,7 +94,7 @@ public class Graph {
     }
 
     private void bfsFromVertex(int startIndex, Queue<Vertex> queue,
-                               ArrayList<Vertex> visitedVertices, Graph result) {
+                               List<Vertex> visitedVertices, Graph result) {
         queue.add(vertices.get(startIndex));
         visitedVertices.add(vertices.get(startIndex));
 
@@ -124,7 +124,7 @@ public class Graph {
         Calendar ini = Calendar.getInstance();
 
         Graph result = new Graph(cardinality());
-        ArrayList<Vertex> visitedVertices = new ArrayList<>();
+        List<Vertex> visitedVertices = new ArrayList<>();
 
         Vertex i = new Vertex(0);
 
@@ -163,7 +163,7 @@ public class Graph {
     }
 
     /// Búsqueda primero en profundidad (Hopcroft - Tarjan)
-    public void deepFirstSearch(int v, ArrayList<Vertex> visitedVertices, Graph newGraph) {
+    public void deepFirstSearch(int v, List<Vertex> visitedVertices, Graph newGraph) {
 
         int j = 0;
         while (visitedVertices.size() < cardinality() && j < cardinality()) {
@@ -178,7 +178,7 @@ public class Graph {
     }
 
     public List<Vertex> getAdjacentVertices(int vertex) {
-        ArrayList<Vertex> ady = new ArrayList<>();
+        List<Vertex> ady = new ArrayList<>();
 
         if (vertex < 0 || vertex >= cardinality())
             return Collections.emptyList();
@@ -191,7 +191,7 @@ public class Graph {
     }
 
     public List<Vertex> getNonAdjacentVertices(int vertex) {
-        ArrayList<Vertex> ady = new ArrayList<>();
+        List<Vertex> ady = new ArrayList<>();
 
         if (vertex < 0 || vertex >= cardinality())
             return Collections.emptyList();
@@ -228,7 +228,7 @@ public class Graph {
     }
 
     public String connectivityPercentage() {
-        double max = cardinality() * (cardinality() - 1) / 2.0;
+        double max = (double) cardinality() * (cardinality() - 1) / 2.0;
         return String.format("Conexividad: %3.2f", edges.size() / max * 100)
                 + "%";
     }

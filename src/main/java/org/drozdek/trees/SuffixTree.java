@@ -33,6 +33,7 @@ public class SuffixTree implements TreeInterface {
         name = MobyNamesGenerator.getRandomName();
     }
 
+    @SuppressWarnings({"java:S3776", "java:S6541"})
     private SuffixTreeNode findCanonicalNode(SuffixTreeNode p, int rt) {
         if (rt >= left) {
             int pos = text.charAt(left) - offset;
@@ -55,6 +56,7 @@ public class SuffixTree implements TreeInterface {
         return p;
     }
 
+    @SuppressWarnings({"java:S3776", "java:S6541"})
     private String printTree(SuffixTreeNode p, int lvl, int lt, int rt, int pos) {
 
         StringBuilder tree = new StringBuilder();
@@ -190,6 +192,7 @@ public class SuffixTree implements TreeInterface {
         }
     }
 
+    @SuppressWarnings({"java:S3776", "java:S6541"})
     SuffixTreeNode testAndSplit(SuffixTreeNode p, int i) {
         int rt = i - 1;
 
@@ -252,6 +255,7 @@ public class SuffixTree implements TreeInterface {
         }
     }
 
+    @SuppressWarnings({"java:S3776", "java:S6541"})
     private SuffixTreeNode update(SuffixTreeNode p, int i) {
         SuffixTreeNode prev = null;
         SuffixTreeNode r = testAndSplit(p, i);

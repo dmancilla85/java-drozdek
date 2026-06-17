@@ -3,7 +3,7 @@ package org.drozdek.dynamic;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.System.out;
+import org.drozdek.commons.LoggerService;
 
 /// Implements the Fractional Knapsack problem using two approaches:
 ///
@@ -12,7 +12,9 @@ import static java.lang.System.out;
 /// 2. **Dynamic programming** (`dpKnapsack`) — builds a value matrix with a
 ///    hybrid recurrence that blends fractional and 0/1 knapsack ideas.
 public final class FractionalKnapsack {
-private FractionalKnapsack() {  }
+private FractionalKnapsack() {
+        // do nothing
+    }
 
     /// Returns the larger of two doubles.
     private static double max(double a, double b) {
@@ -35,7 +37,7 @@ private FractionalKnapsack() {  }
     /// @return The total value obtained
     public static Double sequentialGreedyKnapsack(List<KnapsackItem> items, int maxWeight) {
 
-        List<Double> r = new ArrayList<Double>();
+        List<Double> r = new ArrayList<>();
 
         for (int i = 0; i < items.size(); i++)
             r.add(0.00);
@@ -44,16 +46,16 @@ private FractionalKnapsack() {  }
         int currentItem = 0;
 
         while (sum < maxWeight && currentItem < items.size()) {
-            double fraction = min(1, (maxWeight - sum) / (double) items.get(currentItem).weight);
+            double fraction = min(1, (maxWeight - sum) / (double) items.get(currentItem).getWeight());
             r.set(currentItem, fraction);
 
-            sum += fraction * items.get(currentItem).weight;
+            sum += fraction * items.get(currentItem).getWeight();
             currentItem++;
         }
 
         double totalValue = 0;
         for (int i = 0; i < items.size(); i++) {
-            totalValue += r.get(i) * items.get(i).value;
+            totalValue += r.get(i) * items.get(i).getValue();
         }
         return totalValue;
     }
@@ -83,15 +85,15 @@ private FractionalKnapsack() {  }
 
         for (int i = 1; i <= items.size(); i++)
             for (int j = 1; j <= maxWeight; j++) {
-                if (j - items.get(i - 1).weight < 0)
-                    matrix[i][j] = max(items.get(i - 1).value *
-                                    (j / (double) items.get(i - 1).weight)
+                if (j - items.get(i - 1).getWeight() < 0)
+                    matrix[i][j] = max(items.get(i - 1).getValue() *
+                                    (j / (double) items.get(i - 1).getWeight())
                                     + matrix[i - 1][0],
                             matrix[i - 1][j]);
                 else {
                     matrix[i][j] = max(matrix[i - 1][j],
-                            items.get(i - 1).value
-                                    + matrix[i - 1][j - items.get(i - 1).weight]);
+                            items.get(i - 1).getValue()
+                                    + matrix[i - 1][j - items.get(i - 1).getWeight()]);
                 }
 
             }
@@ -104,7 +106,7 @@ private FractionalKnapsack() {  }
     /// Creates three items with weights (18, 15, 10) and values (25, 24, 15),
     /// sets capacity to 20, and prints the result from `dpKnapsack`.
     public static void runDemo() {
-        List<KnapsackItem> items = new ArrayList<KnapsackItem>();
+        List<KnapsackItem> items = new ArrayList<>();
 
         items.add(new KnapsackItem("1", 18, 25));
         items.add(new KnapsackItem("2", 15, 24));
@@ -112,6 +114,6 @@ private FractionalKnapsack() {  }
 
         double result = dpKnapsack(items, 20);
 
-        out.println("Maximum profit is " + result);
+        LoggerService.logInfo("Maximum profit is " + result);
     }
 }

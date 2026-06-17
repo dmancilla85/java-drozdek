@@ -35,8 +35,8 @@ class TestDynamicKnapsack {
         for (int i = 0; i < items.size(); i++)
             out.println(items.get(i));
 
-        assertEquals(1, items.getFirst().profit, "Lowest profit item should be first");
-        assertEquals(10, items.getLast().profit, "Highest profit item should be last");
+        assertEquals(1, items.getFirst().getProfit(), "Lowest profit item should be first");
+        assertEquals(10, items.getLast().getProfit(), "Highest profit item should be last");
     }
 
     @Test
@@ -45,8 +45,8 @@ class TestDynamicKnapsack {
         KnapsackSolution solution = DynamicKnapsackItem.solveExercise5();
 
         assertNotNull(solution, "Solution should not be null");
-        assertEquals(0, solution.maximumProfit, "Stub solution has zero profit");
-        assertTrue(solution.knapsack.isEmpty(), "Stub solution has no items");
+        assertEquals(0, solution.getMaximumProfit(), "Stub solution has zero profit");
+        assertTrue(solution.getKnapsack().isEmpty(), "Stub solution has no items");
     }
 
     @Test
@@ -54,8 +54,8 @@ class TestDynamicKnapsack {
     void itemCreation() {
         DynamicKnapsackItem item = new DynamicKnapsackItem(7, 15);
 
-        assertEquals(7, item.weight, "Weight should be 7");
-        assertEquals(15, item.profit, "Profit should be 15");
+        assertEquals(7, item.getWeight(), "Weight should be 7");
+        assertEquals(15, item.getProfit(), "Profit should be 15");
     }
 
     @Test
@@ -63,7 +63,7 @@ class TestDynamicKnapsack {
     void defaultItem() {
         DynamicKnapsackItem item = new DynamicKnapsackItem();
 
-        assertEquals(0, item.weight);
-        assertEquals(0, item.profit);
+        assertEquals(0, item.getWeight());
+        assertEquals(0, item.getProfit());
     }
 }

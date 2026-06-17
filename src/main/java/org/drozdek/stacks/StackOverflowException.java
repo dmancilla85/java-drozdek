@@ -2,6 +2,7 @@ package org.drozdek.stacks;
 
 public class StackOverflowException extends ArrayIndexOutOfBoundsException {
 
+    @java.io.Serial
     private static final long serialVersionUID = 1L;
 
     public StackOverflowException() {

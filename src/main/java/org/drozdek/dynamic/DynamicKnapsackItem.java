@@ -1,7 +1,6 @@
 package org.drozdek.dynamic;
 
 import java.util.Comparator;
-import java.util.List;
 
 /// @author david
 
@@ -10,8 +9,8 @@ import java.util.List;
 /// Implements `Comparable` to enable sorting items by profit (ascending).
 public class DynamicKnapsackItem implements Comparable<DynamicKnapsackItem>, Comparator<DynamicKnapsackItem> {
 
-    public int weight;
-    public int profit;
+    private int weight;
+    private int profit;
 
     /// Creates a default item with zero weight and zero profit.
     public DynamicKnapsackItem() {
@@ -26,6 +25,14 @@ public class DynamicKnapsackItem implements Comparable<DynamicKnapsackItem>, Com
     public DynamicKnapsackItem(int weight, int profit) {
         this.weight = weight;
         this.profit = profit;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public int getProfit() {
+        return profit;
     }
 
     /// Stub method for the Exercise 5 knapsack solver.

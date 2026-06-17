@@ -8,7 +8,9 @@ import java.util.Calendar;
 import java.util.List;
 
 public final class Algorithms {
-private Algorithms() {  }
+private Algorithms() {
+        // do nothing
+    }
 
     /// Prim-Jarník minimum spanning tree algorithm.
     ///
@@ -185,8 +187,8 @@ private Algorithms() {  }
     }
 
 
+    @SuppressWarnings("java:S3516")
     public static boolean cycleDetector() {
-
         return false;
     }
 }

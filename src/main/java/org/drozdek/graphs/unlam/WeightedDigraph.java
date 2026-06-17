@@ -2,14 +2,15 @@ package org.drozdek.graphs.unlam;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
-import static java.lang.System.out;
+import org.drozdek.commons.LoggerService;
 
 /// @author David
 public class WeightedDigraph {
 
-    protected ArrayList<Vertex> v;
-    protected ArrayList<Vertex>[] adjacencyList;
+    protected List<Vertex> v;
+    protected List<Vertex>[] adjacencyList;
     protected byte[][] adjacencyMatrix;
     protected int[][] weightTable;
     protected int totalArcs;
@@ -19,7 +20,7 @@ public class WeightedDigraph {
         this.adjacencyMatrix = new byte[n][n];
         this.weightTable = new int[n][n];
         this.totalArcs = 0;
-        this.v = new ArrayList<Vertex>();
+        this.v = new ArrayList<>();
 
         for (int i = 0; i < cardinality(); i++)
             v.add(new Vertex(i));
@@ -51,12 +52,13 @@ public class WeightedDigraph {
         newGraph.printArcWeightTable();
     }
 
+    @SuppressWarnings({"java:S3776", "java:S6541"})
     public WeightedDigraph depthFirstSearch() {
 
         Calendar ini = Calendar.getInstance();
 
         WeightedDigraph result = new WeightedDigraph(cardinality());
-        ArrayList<Integer> visitedVertices = new ArrayList<Integer>();
+        List<Integer> visitedVertices = new ArrayList<>();
 
         int i = 0;
 
@@ -69,7 +71,7 @@ public class WeightedDigraph {
         }
 
         Calendar end = Calendar.getInstance();
-        out.println("Tiempo algoritmo b\u00fasqueda primero en profundidad: "
+        LoggerService.logInfo("Tiempo algoritmo b\u00fasqueda primero en profundidad: "
                 + (end.getTimeInMillis() - ini.getTimeInMillis()));
 
         return result;
@@ -98,13 +100,13 @@ public class WeightedDigraph {
             return true;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerService.logError(e.getMessage());
             return false;
         }
     }
 
     /// B\u00fasqueda primero en profundidad (Hopcroft - Tarjan)
-    public void dfs(int v, ArrayList<Integer> visitedVertices,
+    public void dfs(int v, List<Integer> visitedVertices,
                     WeightedDigraph newGraph) {
 
         int j = 0;
@@ -119,19 +121,18 @@ public class WeightedDigraph {
     }
 
     public Integer removeArc(int node1, int node2) {
-        Integer aux = null;
-
         if (totalArcs == 0)
             return null;
 
         try {
+            int weight = weightTable[node1][node2];
             adjacencyMatrix[node1][node2] = 0;
             weightTable[node1][node2] = 0;
             this.totalArcs--;
-            return aux;
+            return weight;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerService.logError(e.getMessage());
             return null;
         }
     }
@@ -142,52 +143,56 @@ public class WeightedDigraph {
     }
 
     public void printAdjacencyTable() {
+        StringBuilder sb = new StringBuilder();
 
         int n = this.adjacencyMatrix[0].length;
 
-        out.println();
-        out.print("\\ ");
+        sb.append(System.lineSeparator());
+        sb.append("\\ ");
         for (int i = 0; i < n; i++)
-            out.print((char) (i + 97) + " ");
-        out.println();
+            sb.append((char) (i + 97)).append(" ");
+        sb.append(System.lineSeparator());
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
 
                 if (j == 0)
-                    out.print((char) (i + j + 97) + " ");
+                    sb.append((char) (i + j + 97)).append(" ");
 
-                out.print(adjacencyMatrix[i][j]);
-                if (j < n)
-                    out.print(" ");
+                sb.append(adjacencyMatrix[i][j]);
+                sb.append(" ");
             }
-            out.println();
+            sb.append(System.lineSeparator());
         }
+
+        LoggerService.logInfo(sb.toString());
     }
 
     public void printArcWeightTable() {
+        StringBuilder sb = new StringBuilder();
 
         int n = this.weightTable[0].length;
 
-        out.println();
-        out.print("\\ ");
+        sb.append(System.lineSeparator());
+        sb.append("\\ ");
         for (int i = 0; i < n; i++)
-            out.print((char) (i + 97) + " ");
-        out.println();
+            sb.append((char) (i + 97)).append(" ");
+        sb.append(System.lineSeparator());
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
 
                 if (j == 0)
-                    out.print((char) (i + j + 97) + " ");
+                    sb.append((char) (i + j + 97)).append(" ");
 
-                out.print(weightTable[i][j]);
-                if (j < n)
-                    out.print(" ");
+                sb.append(weightTable[i][j]);
+                sb.append(" ");
             }
-            out.println();
+            sb.append(System.lineSeparator());
 
         }
+
+        LoggerService.logInfo(sb.toString());
     }
 
 }

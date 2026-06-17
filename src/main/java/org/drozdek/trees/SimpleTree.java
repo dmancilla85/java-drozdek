@@ -21,10 +21,12 @@ public class SimpleTree<T> implements TreeInterface {
         nodeCount = 0;
     }
 
+    @Override
     public boolean isEmpty() {
         return root == null;
     }
 
+    @Override
     public int size() {
         return nodeCount;
     }
