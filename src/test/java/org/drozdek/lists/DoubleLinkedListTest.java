@@ -1,7 +1,6 @@
 package org.drozdek.lists;
 
 import org.drozdek.commons.LoggerService;
-import org.drozdek.lists.DoubleLinkedList;
 import org.drozdek.lists.nodes.DoubleLinkedListNode;
 import org.junit.jupiter.api.Test;
 

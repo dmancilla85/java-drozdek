@@ -37,6 +37,7 @@ public record IntSkipListNode(int key, IntSkipListNode[] next) {
     }
 
     @Override
+    @SuppressWarnings("java:S6878")
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof IntSkipListNode that)) return false;

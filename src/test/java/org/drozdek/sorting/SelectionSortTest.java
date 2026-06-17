@@ -1,7 +1,6 @@
 package org.drozdek.sorting;
 
 import org.drozdek.commons.ArrayUtils;
-import org.drozdek.sorting.SelectionSort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

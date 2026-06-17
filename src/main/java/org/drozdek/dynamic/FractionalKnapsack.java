@@ -46,7 +46,7 @@ private FractionalKnapsack() {
         int currentItem = 0;
 
         while (sum < maxWeight && currentItem < items.size()) {
-            double fraction = min(1, (maxWeight - sum) / (double) items.get(currentItem).getWeight());
+            double fraction = min(1, (maxWeight - sum) / items.get(currentItem).getWeight());
             r.set(currentItem, fraction);
 
             sum += fraction * items.get(currentItem).getWeight();

@@ -1,6 +1,5 @@
 package org.drozdek.trees;
 
-import org.drozdek.trees.Word;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +38,6 @@ class WordTest {
     @DisplayName("Print method executes without error")
     void testPrint() {
         Word w = new Word("hello");
-        assertDoesNotThrow(() -> w.print());
+        assertDoesNotThrow(w::print);
     }
 }

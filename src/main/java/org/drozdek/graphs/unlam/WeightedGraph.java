@@ -26,7 +26,7 @@ public class WeightedGraph extends Graph {
     }
 
     /// @param args
-    static void main(String[] args) {
+    static void main(@SuppressWarnings("unused") String[] args) {
         WeightedGraph g = new WeightedGraph(6);
         g.createEdge('a', 'b', 20);
         g.createEdge('a', 'd', 40);

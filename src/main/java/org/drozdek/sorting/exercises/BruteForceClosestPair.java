@@ -119,7 +119,7 @@ private BruteForceClosestPair() {
         return pairs;
     }
 
-    static void main(String[] args) {
+    static void main(@SuppressWarnings("unused") String[] args) {
 
         List<Point> points = new ArrayList<>();
         points.add(new Point(1, 0));

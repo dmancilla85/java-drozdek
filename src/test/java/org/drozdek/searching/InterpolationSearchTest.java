@@ -1,7 +1,6 @@
 package org.drozdek.searching;
 
 import org.drozdek.commons.ArrayUtils;
-import org.drozdek.searching.InterpolationSearch;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

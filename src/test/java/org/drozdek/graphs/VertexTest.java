@@ -81,13 +81,13 @@ class VertexTest {
     @Test
     @DisplayName("Equals null")
     void equalsNull() {
-        assertFalse(vertex.equals(null));
+        assertNotEquals(vertex, null);
     }
 
     @Test
     @DisplayName("Equals different type")
     void equalsDifferentType() {
-        assertFalse(vertex.equals("string"));
+        assertNotEquals(vertex, "string");
     }
 
     @Test
@@ -101,7 +101,7 @@ class VertexTest {
     @DisplayName("Equals different key")
     void equalsDifferentKey() {
         Vertex v2 = new Vertex(1);
-        assertFalse(vertex.equals(v2));
+        assertNotEquals(vertex, v2);
     }
 
     @Test

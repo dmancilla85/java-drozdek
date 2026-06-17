@@ -1,6 +1,5 @@
 package org.drozdek.queues.unlam;
 
-import org.drozdek.queues.unlam.DynamicQueue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

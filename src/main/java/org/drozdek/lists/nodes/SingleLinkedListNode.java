@@ -4,7 +4,7 @@ package org.drozdek.lists.nodes;
 public class SingleLinkedListNode<T> {
     public final T data;
 
-    public SingleLinkedListNode<T> next;
+    private SingleLinkedListNode<T> next;
     /// Set next node.
     ///
     /// @param next Next node

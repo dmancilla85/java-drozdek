@@ -3,9 +3,11 @@ package org.drozdek.graphs.unlam;
 import org.drozdek.commons.LoggerService;
 import org.drozdek.trees.MinimumHeap;
 
+import java.time.Clock;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
+
+import static java.time.ZoneId.systemDefault;
 
 public final class Algorithms {
 private Algorithms() {
@@ -23,7 +25,7 @@ private Algorithms() {
     /// @return minimum spanning tree
     public static WeightedGraph primJarnikAlgorithm(WeightedGraph g, int inicial) {
 
-        Calendar ini = Calendar.getInstance();
+        Clock ini = Clock.tickMillis(systemDefault());
 
         WeightedGraph newGraph = new WeightedGraph(g.cardinality());
         MinimumHeap<Edge> edges = new MinimumHeap<>(g.countEdges());
@@ -54,9 +56,9 @@ private Algorithms() {
                 }
             }
 
-        Calendar end = Calendar.getInstance();
+        Clock end = Clock.tickMillis(systemDefault());
         LoggerService.logInfo("Tiempo algoritmo de Prim para N = " + g.cardinality() + ": "  //$NON-NLS-1$//$NON-NLS-2$
-                + (end.getTimeInMillis() - ini.getTimeInMillis()));
+                + (end.millis() - ini.millis()));
 
         return newGraph;
     }

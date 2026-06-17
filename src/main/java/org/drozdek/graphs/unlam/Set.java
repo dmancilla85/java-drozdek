@@ -14,16 +14,16 @@ public class Set<T> {
     /// @param n
     @SuppressWarnings("unchecked")
     public Set(int n) {
-        elements = n > 0 ? new LinkedHashSet<>(n) : null;
+        elements = n > 0 ? LinkedHashSet.newLinkedHashSet(n) : null;
     }
 
     /// @param args
-    static void main(String[] args) {
-        Set<Object> A = new Set<>();
-        A.add("Hola");
-        A.add(324.4);
-        A.add(11);
-        A.add("Chau");
+    static void main(@SuppressWarnings("unused") String[] args) {
+        Set<Object> a = new Set<>();
+        a.add("Hola");
+        a.add(324.4);
+        a.add(11);
+        a.add("Chau");
     }
 
     public void add(T e) {

@@ -1,6 +1,7 @@
 package org.drozdek.queues.unlam;
 
 /// Exception thrown when attempting to enqueue an element into a full queue.
+@SuppressWarnings("java:S110")
 public class FullQueueException extends ArrayIndexOutOfBoundsException {
 
     @java.io.Serial

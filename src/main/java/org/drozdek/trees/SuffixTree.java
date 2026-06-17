@@ -150,6 +150,7 @@ public class SuffixTree implements TreeInterface {
         return sb.toString();
     }
 
+    @SuppressWarnings("java:S3776")
     private void printEdges(StringBuilder sb, SuffixTreeNode node, String childrenPrefix) {
         SuffixTreeNode[] desc = node.getDescendants();
         int[] leftArr = node.getLeft();

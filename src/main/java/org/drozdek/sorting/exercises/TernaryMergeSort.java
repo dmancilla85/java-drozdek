@@ -3,7 +3,7 @@ package org.drozdek.sorting.exercises;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.System.out;
+import org.drozdek.commons.LoggerService;
 
 /// Variation of merge sort that divides the array into three equal
 /// thirds instead of two halves (ternary merge sort). Each third is
@@ -69,7 +69,7 @@ private TernaryMergeSort() {
             a.set(start + idx, result.get(idx));
     }
 
-    public static void test(int n) {
+    public static void test(@SuppressWarnings("unused") int n) {
         List<Integer> valores = new ArrayList<>();
         valores.add(2);
         valores.add(8);
@@ -83,6 +83,6 @@ private TernaryMergeSort() {
         mergeSortAlter(valores, 0, valores.size() - 1);
 
         for (int i = 0; i < valores.size(); i++)
-            out.println(valores.get(i));
+            LoggerService.logInfo(String.valueOf(valores.get(i)));
     }
 }

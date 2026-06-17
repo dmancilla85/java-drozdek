@@ -4,8 +4,7 @@ import org.drozdek.queues.interfaces.QueueInterface;
 import org.drozdek.queues.interfaces.UnlamQueue;
 
 import static java.lang.Math.random;
-import static java.lang.System.err;
-import static java.lang.System.out;
+import org.drozdek.commons.LoggerService;
 
 /// Static array-based circular queue implementation.
 ///
@@ -63,10 +62,10 @@ public class StaticQueue implements UnlamQueue, QueueInterface<Object> {
             last = (last + 1) % size;
             queue[last] = obj;
         } catch (FullQueueException e) {
-            err.println(e.getMessage() + " -- Index: " + ((last + 1) % size));
+            LoggerService.logError(e.getMessage() + " -- Index: " + ((last + 1) % size));
             resize();
             enqueue(obj);
-        } catch (Exception e) {
+        } catch (Exception _) {
             return false;
         }
 

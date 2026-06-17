@@ -1,6 +1,5 @@
 package org.drozdek.commons;
 
-import org.drozdek.commons.LoggerService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

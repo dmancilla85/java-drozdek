@@ -1,12 +1,12 @@
 package org.drozdek.sorting;
 
 import org.drozdek.commons.ArrayUtils;
-import org.drozdek.sorting.QuickSort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
@@ -66,16 +66,16 @@ class QuickSortTest {
     @Test
     @DisplayName("Stable quick sort empty list")
     void stableSortEmpty() {
-        ArrayList<Integer> list = new ArrayList<>();
-        ArrayList<Integer> result = QuickSort.stableQuickSort(list);
+        List<Integer> list = new ArrayList<>();
+        List<Integer> result = QuickSort.stableQuickSort(list);
         assertTrue(result.isEmpty());
     }
 
     @Test
     @DisplayName("Stable quick sort single element")
     void stableSortSingle() {
-        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(42));
-        ArrayList<Integer> result = QuickSort.stableQuickSort(list);
+        List<Integer> list = new ArrayList<>(Arrays.asList(42));
+        List<Integer> result = QuickSort.stableQuickSort(list);
         assertEquals(1, result.size());
         assertEquals(42, result.get(0));
     }
@@ -83,32 +83,32 @@ class QuickSortTest {
     @Test
     @DisplayName("Stable quick sort already sorted")
     void stableSortSorted() {
-        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
-        ArrayList<Integer> result = QuickSort.stableQuickSort(list);
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        List<Integer> result = QuickSort.stableQuickSort(list);
         assertArrayEquals(new Integer[]{1, 2, 3, 4, 5}, result.toArray());
     }
 
     @Test
     @DisplayName("Stable quick sort reverse sorted")
     void stableSortReverse() {
-        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(5, 4, 3, 2, 1));
-        ArrayList<Integer> result = QuickSort.stableQuickSort(list);
+        List<Integer> list = new ArrayList<>(Arrays.asList(5, 4, 3, 2, 1));
+        List<Integer> result = QuickSort.stableQuickSort(list);
         assertArrayEquals(new Integer[]{1, 2, 3, 4, 5}, result.toArray());
     }
 
     @Test
     @DisplayName("Stable quick sort with duplicates")
     void stableSortDuplicates() {
-        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(3, 1, 2, 3, 1, 2));
-        ArrayList<Integer> result = QuickSort.stableQuickSort(list);
+        List<Integer> list = new ArrayList<>(Arrays.asList(3, 1, 2, 3, 1, 2));
+        List<Integer> result = QuickSort.stableQuickSort(list);
         assertArrayEquals(new Integer[]{1, 1, 2, 2, 3, 3}, result.toArray());
     }
 
     @Test
     @DisplayName("Stable quick sort maintains relative order of equal keys")
     void stableSortPreservesOrder() {
-        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(3, 1, 2, 1, 4));
-        ArrayList<Integer> result = QuickSort.stableQuickSort(list);
+        List<Integer> list = new ArrayList<>(Arrays.asList(3, 1, 2, 1, 4));
+        List<Integer> result = QuickSort.stableQuickSort(list);
         assertEquals(1, result.get(0));
         assertEquals(1, result.get(1));
     }

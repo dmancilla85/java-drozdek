@@ -58,7 +58,7 @@ public class StaticBinaryTree implements TreeInterface {
         return false;
     }
 
-    public boolean setRightmostChild(int parent, HeapNode node) {
+    public boolean setRightmostChild(@SuppressWarnings("unused") int parent, HeapNode node) {
         try {
             if ((size - 1) % 2 != 0)
                 tree[size - 1] = node;
@@ -72,7 +72,7 @@ public class StaticBinaryTree implements TreeInterface {
         return true;
     }
 
-    public boolean setLeftmostChild(int parent, HeapNode node) {
+    public boolean setLeftmostChild(@SuppressWarnings("unused") int parent, HeapNode node) {
         try {
             if ((size - 1) % 2 == 0)
                 tree[size - 1] = node;
@@ -105,7 +105,7 @@ public class StaticBinaryTree implements TreeInterface {
         return size;
     }
 
-    public HeapNode leftChild(int parent, HeapNode node) {
+    public HeapNode leftChild(int parent, @SuppressWarnings("unused") HeapNode node) {
         try {
             return tree[(parent * 2) + 1];
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -129,7 +129,8 @@ public class StaticBinaryTree implements TreeInterface {
             return tree[size - 2];
     }
 
-    public Object leftmostChild(int node) {
+    @SuppressWarnings("java:S4144")
+    public Object leftmostChild(@SuppressWarnings("unused") int node) {
         if ((size - 1) % 2 == 0)
             return tree[size - 1];
         else

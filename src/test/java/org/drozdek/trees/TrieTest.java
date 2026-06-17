@@ -1,13 +1,13 @@
 package org.drozdek.trees;
 
 import org.drozdek.commons.LoggerService;
-import org.drozdek.trees.Trie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("java:S5976")
 class TrieTest {
 
     Trie tree;
@@ -254,13 +254,13 @@ class TrieTest {
     @Test
     @DisplayName("Print method executes without error")
     void testPrint() {
-        assertDoesNotThrow(() -> tree.print());
+        assertDoesNotThrow(tree::print);
     }
 
     @Test
     @DisplayName("Print on empty trie does not throw")
     void printEmpty() {
         Trie t = new Trie();
-        assertDoesNotThrow(() -> t.print());
+        assertDoesNotThrow(t::print);
     }
 }

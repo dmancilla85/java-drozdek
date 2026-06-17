@@ -36,9 +36,6 @@ public class Trie implements TreeInterface {
         TrieNode[] tmp = p.getPtr();
         p.setPtr(new TrieNode[len + 1]);
 
-        for (i = 0; i < len + 1; i++)
-            p.getPtr()[i] = null;
-
         if (stop < len) {
             for (i = len; i >= stop + 1; i--) {
                 p.getPtr()[i] = tmp[i - 1];

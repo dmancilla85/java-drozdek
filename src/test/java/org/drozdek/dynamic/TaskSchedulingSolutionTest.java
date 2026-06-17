@@ -1,7 +1,5 @@
 package org.drozdek.dynamic;
 
-import org.drozdek.dynamic.ScheduledTask;
-import org.drozdek.dynamic.TaskSchedulingSolution;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

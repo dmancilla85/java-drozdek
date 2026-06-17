@@ -1,8 +1,6 @@
 package org.drozdek.trees;
 
 import org.drozdek.commons.LoggerService;
-import org.drozdek.trees.SplayTree;
-import org.drozdek.trees.Word;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +9,7 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("java:S5976")
 class SplayTreeTest {
 
     SplayTree<Integer> tree;

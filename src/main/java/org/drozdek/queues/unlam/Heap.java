@@ -9,13 +9,13 @@ import java.util.List;
 
 public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> {
     protected final Comparator<? super E> cmp;
-    protected final List<E> nodes_;
-    protected int count_;
+    protected final List<E> nodes;
+    protected int count;
 
     public Heap(int capacity, Comparator<? super E> cmp) {
         if (capacity <= 0)
             throw new IllegalArgumentException();
-        nodes_ = new ArrayList<>(capacity);
+        nodes = new ArrayList<>(capacity);
         this.cmp = cmp;
     }
 
@@ -24,8 +24,8 @@ public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> 
     }
 
     public synchronized void clear() {
-        nodes_.clear();
-        count_ = 0;
+        nodes.clear();
+        count = 0;
     }
 
     protected int compare(E a, E b) {
@@ -35,44 +35,47 @@ public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> 
     }
 
     public synchronized E extract() {
-        if (count_ < 1)
+        if (count < 1)
             return null;
 
         int k = 0;
-        E least = nodes_.get(k);
-        --count_;
-        E x = nodes_.get(count_);
-        nodes_.set(count_, null);
+        E least = nodes.get(k);
+        --count;
+        E x = nodes.get(count);
+        nodes.set(count, null);
 
-        while (true) {
+        boolean shouldContinue = true;
+        while (shouldContinue) {
             int l = left(k);
-            if (l >= count_)
-                break;
-            int r = right(k);
-            int child = (r >= count_ || compare(nodes_.get(l), nodes_.get(r)) < 0) ? l : r;
-            if (compare(x, nodes_.get(child)) > 0) {
-                nodes_.set(k, nodes_.get(child));
-                k = child;
-            } else
-                break;
+            if (l >= count)
+                shouldContinue = false;
+            else {
+                int r = right(k);
+                int child = (r >= count || compare(nodes.get(l), nodes.get(r)) < 0) ? l : r;
+                if (compare(x, nodes.get(child)) > 0) {
+                    nodes.set(k, nodes.get(child));
+                    k = child;
+                } else
+                    shouldContinue = false;
+            }
         }
-        nodes_.set(k, x);
+        nodes.set(k, x);
         return least;
     }
 
     public synchronized void insert(E x) {
-        nodes_.add(x);
-        int k = count_;
-        ++count_;
+        nodes.add(x);
+        int k = count;
+        ++count;
         while (k > 0) {
             int par = parent(k);
-            if (compare(x, nodes_.get(par)) < 0) {
-                nodes_.set(k, nodes_.get(par));
+            if (compare(x, nodes.get(par)) < 0) {
+                nodes.set(k, nodes.get(par));
                 k = par;
             } else
                 break;
         }
-        nodes_.set(k, x);
+        nodes.set(k, x);
     }
 
     protected final int left(int k) {
@@ -84,8 +87,8 @@ public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> 
     }
 
     public synchronized E peek() {
-        if (count_ > 0)
-            return nodes_.get(0);
+        if (count > 0)
+            return nodes.get(0);
         else
             return null;
     }
@@ -104,7 +107,7 @@ public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> 
     }
 
     public synchronized boolean isEmpty() {
-        return count_ == 0;
+        return count == 0;
     }
 
     @Override
@@ -113,8 +116,8 @@ public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> 
             return QueueInterface.boxedQueue("[ EMPTY ]");
         }
         StringBuilder sb = new StringBuilder("FRONT");
-        for (int i = 0; i < count_; i++) {
-            sb.append(" \u2794 [").append(nodes_.get(i)).append("]");
+        for (int i = 0; i < count; i++) {
+            sb.append(" \u2794 [").append(nodes.get(i)).append("]");
         }
         sb.append(" \u2794 REAR");
         return QueueInterface.boxedQueue(sb.toString());
@@ -128,6 +131,6 @@ public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> 
     }
 
     public synchronized int size() {
-        return count_;
+        return count;
     }
 }

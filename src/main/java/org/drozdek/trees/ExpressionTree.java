@@ -95,13 +95,14 @@ public class ExpressionTree implements TreeInterface {
     /// @param expression Expression to evaluate
     /// @return Zero if the expression is correct
     public static int evaluateExpression(String expression) {
-        if (expression == null || expression.length() == 0) {
+        if (expression == null || expression.isEmpty()) {
             return 0;
         }
         Deque<Integer> numStack = new ArrayDeque<>();
         Deque<Character> opStack = new ArrayDeque<>();
 
-        for (int i = 0; i < expression.length(); i++) {
+        int i = 0;
+        while (i < expression.length()) {
             char token = expression.charAt(i);
             if (isNumber(token)) {
                 i = parseNumber(expression, i, numStack);
@@ -113,6 +114,7 @@ public class ExpressionTree implements TreeInterface {
                 evaluateHigherOperators(token, numStack, opStack);
                 opStack.push(token);
             }
+            i++;
         }
         evaluateRemainingOperators(numStack, opStack);
         return numStack.isEmpty() ? 0 : numStack.pop();

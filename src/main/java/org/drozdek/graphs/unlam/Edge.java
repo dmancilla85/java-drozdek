@@ -30,7 +30,7 @@ public class Edge implements Comparable<Edge> {
         this.directed = directed;
     }
 
-    static void main(String[] args) {
+    static void main(@SuppressWarnings("unused") String[] args) {
         Vertex a = new Vertex(0);
         Vertex b = new Vertex(1);
         Vertex c = new Vertex(2, "Juan"); //$NON-NLS-1$

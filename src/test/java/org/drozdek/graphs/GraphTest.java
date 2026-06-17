@@ -82,8 +82,8 @@ class GraphTest {
     @DisplayName("Add vertex")
     void addVertex() {
         Graph g = new Graph();
-        g.addVertex(new Vertex(0));
-        g.addVertex(null);
+        assertDoesNotThrow(() -> g.addVertex(new Vertex(0)));
+        assertDoesNotThrow(() -> g.addVertex(null));
     }
 
     @Test
@@ -191,6 +191,6 @@ class GraphTest {
         Graph result = new Graph(3);
         java.util.ArrayList<Vertex> visited = new java.util.ArrayList<>();
         visited.add(new Vertex(0));
-        g.deepFirstSearch(0, visited, result);
+        assertDoesNotThrow(() -> g.deepFirstSearch(0, visited, result));
     }
 }

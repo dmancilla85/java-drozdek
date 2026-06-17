@@ -69,13 +69,13 @@ class EdgeTest {
     @Test
     @DisplayName("Equals null")
     void equalsNull() {
-        assertFalse(edge.equals(null));
+        assertNotEquals(edge, null);
     }
 
     @Test
     @DisplayName("Equals different type")
     void equalsDifferentType() {
-        assertFalse(edge.equals("string"));
+        assertNotEquals(edge, "string");
     }
 
     @Test
@@ -89,14 +89,14 @@ class EdgeTest {
     @DisplayName("Equals different origin")
     void equalsDifferentOrigin() {
         Edge other = new Edge(new Vertex(2), b);
-        assertFalse(edge.equals(other));
+        assertNotEquals(edge, other);
     }
 
     @Test
     @DisplayName("Equals different destination")
     void equalsDifferentDestination() {
         Edge other = new Edge(a, new Vertex(2));
-        assertFalse(edge.equals(other));
+        assertNotEquals(edge, other);
     }
 
     @Test
@@ -127,7 +127,7 @@ class EdgeTest {
     void nullOrigin() {
         Edge e = new Edge(null, b);
         assertNull(e.getOrigin());
-        assertFalse(edge.equals(e));
+        assertNotEquals(edge, e);
     }
 
     @Test
@@ -135,7 +135,7 @@ class EdgeTest {
     void nullDestination() {
         Edge e = new Edge(a, null);
         assertNull(e.getDestination());
-        assertFalse(edge.equals(e));
+        assertNotEquals(edge, e);
     }
 
     @Test
@@ -150,7 +150,7 @@ class EdgeTest {
     @DisplayName("Equals with different directed flag")
     void equalsDifferentDirected() {
         Edge directed = new Edge(a, b, 0, true);
-        assertFalse(edge.equals(directed));
+        assertNotEquals(edge, directed);
     }
 
     @Test
@@ -181,7 +181,7 @@ class EdgeTest {
     @DisplayName("Equals different origin null vs non-null")
     void equalsDifferentOriginNull() {
         Edge e = new Edge(null, b);
-        assertFalse(edge.equals(e));
+        assertNotEquals(edge, e);
     }
 
     @Test

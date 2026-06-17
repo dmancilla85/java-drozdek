@@ -1,7 +1,5 @@
 package org.drozdek.dynamic;
 
-import org.drozdek.dynamic.FractionalKnapsack;
-import org.drozdek.dynamic.KnapsackItem;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

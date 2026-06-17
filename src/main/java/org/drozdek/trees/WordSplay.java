@@ -1,5 +1,6 @@
 package org.drozdek.trees;
 
+import org.drozdek.commons.LoggerService;
 import java.io.*;
 
 /// Splay tree specialized for Word objects. Reads a file, inserts words with frequency counting,
@@ -20,13 +21,11 @@ public class WordSplay extends SplayTree<Word> {
 
     public static void testSplaying(String[] args) {
         String fileName;
-        BufferedReader buffer = new BufferedReader(
-                new InputStreamReader(System.in));
 
         try {
             if (args.length == 0) {
-                System.out.println("Enter a filename: ");
-                fileName = buffer.readLine();
+                LoggerService.logInfo("Enter a filename: ");
+                fileName = IO.readln();
             } else {
                 fileName = args[0];
             }
@@ -35,10 +34,11 @@ public class WordSplay extends SplayTree<Word> {
             }
 
         } catch (IOException io) {
-            System.err.println("Error: " + io.getMessage());
+            LoggerService.logError("Error: " + io.getMessage());
         }
     }
 
+    @SuppressWarnings("java:S106")
     public void run(InputStream fIn, String filename) {
         try {
             processWords(fIn);
@@ -47,7 +47,7 @@ public class WordSplay extends SplayTree<Word> {
         }
 
         inorder(System.out);
-        System.out.println("\nFile " + filename + " contains " + wordCnt + " words whose " + differentWords +
+        LoggerService.logInfo("\nFile " + filename + " contains " + wordCnt + " words whose " + differentWords +
                 " are different.\n");
     }
 

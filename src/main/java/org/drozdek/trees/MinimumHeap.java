@@ -29,9 +29,8 @@ public class MinimumHeap<T extends Comparable<T>> implements TreeInterface {
         siftUp(heap.size() - 1);
     }
 
-    public boolean insertKey(T key) {
+    public void insertKey(T key) {
         insert(key);
-        return true;
     }
 
     public T extractMin() {

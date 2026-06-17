@@ -170,6 +170,6 @@ class HeapTest {
         h.enqueue("hello");
         h.enqueue("world");
 
-        assertDoesNotThrow(() -> h.toString());
+        assertDoesNotThrow(h::toString);
     }
 }

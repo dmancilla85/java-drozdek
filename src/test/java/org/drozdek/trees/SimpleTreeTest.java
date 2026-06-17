@@ -1,6 +1,5 @@
 package org.drozdek.trees;
 
-import org.drozdek.trees.SimpleTree;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

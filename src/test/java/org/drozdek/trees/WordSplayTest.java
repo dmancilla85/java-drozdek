@@ -1,7 +1,5 @@
 package org.drozdek.trees;
 
-import org.drozdek.trees.Word;
-import org.drozdek.trees.WordSplay;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("java:S5976")
 class WordSplayTest {
     @Test
     @DisplayName("Run with empty input")

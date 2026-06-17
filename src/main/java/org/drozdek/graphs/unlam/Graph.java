@@ -4,7 +4,6 @@ import org.drozdek.commons.LoggerService;
 
 import java.time.Clock;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
@@ -121,7 +120,7 @@ public class Graph {
 
     public Graph depthFirstSearch() {
 
-        Calendar ini = Calendar.getInstance();
+        Clock ini = Clock.tickMillis(systemDefault());
 
         Graph result = new Graph(cardinality());
         List<Vertex> visitedVertices = new ArrayList<>();
@@ -136,9 +135,9 @@ public class Graph {
             i.key++;
         }
 
-        Calendar end = Calendar.getInstance();
+        Clock end = Clock.tickMillis(systemDefault());
         LoggerService.logInfo("Tiempo algoritmo búsqueda primero en profundidad: "
-                + (end.getTimeInMillis() - ini.getTimeInMillis()));
+                + (end.millis() - ini.millis()));
 
         return result;
     }

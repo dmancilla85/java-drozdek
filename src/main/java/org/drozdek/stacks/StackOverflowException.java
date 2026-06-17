@@ -1,5 +1,6 @@
 package org.drozdek.stacks;
 
+@SuppressWarnings("java:S110")
 public class StackOverflowException extends ArrayIndexOutOfBoundsException {
 
     @java.io.Serial

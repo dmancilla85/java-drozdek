@@ -3,6 +3,7 @@ package org.drozdek.sorting;
 import org.drozdek.commons.ArrayUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public final class QuickSort {
 
@@ -51,7 +52,7 @@ public final class QuickSort {
         return j;
     }
 
-    public static ArrayList<Integer> stableQuickSort(ArrayList<Integer> array) {
+    public static List<Integer> stableQuickSort(List<Integer> array) {
         if (array.size() <= 1)
             return array;
 
@@ -68,8 +69,8 @@ public final class QuickSort {
         return ans;
     }
 
-    private static void classifyForStableSort(ArrayList<Integer> array, int pivot, int middle,
-                                              ArrayList<Integer> smaller, ArrayList<Integer> greater) {
+    private static void classifyForStableSort(List<Integer> array, int pivot, int middle,
+                                              List<Integer> smaller, List<Integer> greater) {
         for (int i = 0; i < array.size(); i++) {
             int val = array.get(i);
             if (i == middle)

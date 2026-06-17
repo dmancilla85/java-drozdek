@@ -216,6 +216,7 @@ public class SplayTree<T extends Comparable<T>> implements TreeInterface {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private SplayTreeNode<T>[] setUpDelete(T key) {
         SplayTreeNode<T>[] vars = new SplayTreeNode[2];
         vars[0] = root;

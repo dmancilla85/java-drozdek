@@ -2,7 +2,6 @@ package org.drozdek.sorting;
 
 import org.drozdek.commons.ArrayUtils;
 import org.drozdek.commons.LoggerService;
-import org.drozdek.sorting.MergeSort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

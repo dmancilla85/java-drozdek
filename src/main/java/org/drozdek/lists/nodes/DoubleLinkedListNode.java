@@ -19,8 +19,8 @@ package org.drozdek.lists.nodes;
 ///   Section 2.2: Doubly-linked lists.
 public class DoubleLinkedListNode<T> {
     public final T data;
-    public DoubleLinkedListNode<T> next;
-    public DoubleLinkedListNode<T> previous;
+    private DoubleLinkedListNode<T> next;
+    private DoubleLinkedListNode<T> previous;
 
     /// Constructs a new doubly-linked list node with the given data and null next/previous references.
     /// Creates an isolated node (not connected to any list).

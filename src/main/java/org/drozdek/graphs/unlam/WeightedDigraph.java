@@ -1,8 +1,10 @@
 package org.drozdek.graphs.unlam;
 
+import java.time.Clock;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
+
+import static java.time.ZoneId.systemDefault;
 
 import org.drozdek.commons.LoggerService;
 
@@ -28,7 +30,7 @@ public class WeightedDigraph {
     }
 
     /// @param args
-    static void main(String[] args) {
+    static void main(@SuppressWarnings("unused") String[] args) {
         WeightedDigraph dp = new WeightedDigraph(10);
         dp.createArc('a', 'e', 1);
         dp.createArc('d', 'a', 4);
@@ -55,7 +57,7 @@ public class WeightedDigraph {
     @SuppressWarnings({"java:S3776", "java:S6541"})
     public WeightedDigraph depthFirstSearch() {
 
-        Calendar ini = Calendar.getInstance();
+        Clock ini = Clock.tickMillis(systemDefault());
 
         WeightedDigraph result = new WeightedDigraph(cardinality());
         List<Integer> visitedVertices = new ArrayList<>();
@@ -70,9 +72,9 @@ public class WeightedDigraph {
             i++;
         }
 
-        Calendar end = Calendar.getInstance();
+        Clock end = Clock.tickMillis(systemDefault());
         LoggerService.logInfo("Tiempo algoritmo b\u00fasqueda primero en profundidad: "
-                + (end.getTimeInMillis() - ini.getTimeInMillis()));
+                + (end.millis() - ini.millis()));
 
         return result;
     }

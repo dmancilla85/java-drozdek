@@ -1,5 +1,6 @@
 package org.drozdek.dynamic;
 
+import org.drozdek.commons.LoggerService;
 import java.util.Comparator;
 
 /// @author david
@@ -46,7 +47,7 @@ public class DynamicKnapsackItem implements Comparable<DynamicKnapsackItem>, Com
 
         KnapsackSolution sol = new KnapsackSolution();
 
-        System.out.println(sol);
+        LoggerService.logInfo(String.valueOf(sol));
         return sol;
     }
 

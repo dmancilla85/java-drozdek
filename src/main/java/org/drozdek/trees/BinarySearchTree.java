@@ -502,6 +502,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface 
         }
     }
 
+    @SuppressWarnings("unchecked")
     private BinarySearchTreeNode<T>[] moveToRightmostNode(BinarySearchTreeNode<T> node) {
         BinarySearchTreeNode<T>[] results = new BinarySearchTreeNode[]{node.getLeft(), node};
 
@@ -563,6 +564,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface 
         return search(this.root, key);
     }
 
+    @SuppressWarnings("unchecked")
     private BinarySearchTreeNode<T>[] setUpDelete(T key) {
         BinarySearchTreeNode<T>[] vars = new BinarySearchTreeNode[2];
         vars[0] = root;
