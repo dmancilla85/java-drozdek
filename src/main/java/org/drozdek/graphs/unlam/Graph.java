@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
-import java.util.Random;
+import java.security.SecureRandom;
 import java.util.LinkedList;
 
 import static java.time.ZoneId.systemDefault;
@@ -35,7 +35,7 @@ public class Graph {
             this.vertices.add(new Vertex(i));
     }
 
-    protected static final Random RANDOM = new Random();
+    protected static final SecureRandom RANDOM = new SecureRandom();
 
     public static Graph createRandom(int n, int conexividad) {
         Graph al = new Graph(n);

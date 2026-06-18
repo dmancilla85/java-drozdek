@@ -4,7 +4,7 @@ import org.drozdek.commons.LoggerService;
 import org.drozdek.lists.interfaces.ListInterface;
 import org.drozdek.lists.nodes.IntSkipListNode;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 /// Skip list for integer values - a probabilistic data structure that provides fast search,
 /// insertion, and deletion operations.
@@ -44,7 +44,7 @@ public class IntSkipList implements ListInterface<Integer> {
     /// Precomputed powers used in level selection
     private final int[] powers;
     /// Random number generator for probabilistic level selection
-    private final Random rd = new Random();
+    private final SecureRandom rd = new SecureRandom();
 
     /// Constructs a skip list with the default maximum level of 4.
     ///

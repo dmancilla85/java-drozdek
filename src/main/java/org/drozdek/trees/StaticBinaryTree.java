@@ -1,5 +1,6 @@
 package org.drozdek.trees;
 
+import org.drozdek.commons.LoggerService;
 import org.drozdek.trees.interfaces.TreeInterface;
 import org.drozdek.trees.nodes.HeapNode;
 
@@ -36,7 +37,7 @@ public class StaticBinaryTree implements TreeInterface {
                 return true;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
+            LoggerService.logError(e.getMessage());
             return false;
         }
 
@@ -51,7 +52,7 @@ public class StaticBinaryTree implements TreeInterface {
                 return true;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
+            LoggerService.logError(e.getMessage());
             return false;
         }
 
@@ -65,7 +66,7 @@ public class StaticBinaryTree implements TreeInterface {
             else
                 tree[size - 2] = node;
         } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
+            LoggerService.logError(e.getMessage());
             return false;
         }
 
@@ -79,7 +80,7 @@ public class StaticBinaryTree implements TreeInterface {
             else
                 tree[size - 2] = node;
         } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
+            LoggerService.logError(e.getMessage());
             return false;
         }
 
@@ -109,7 +110,7 @@ public class StaticBinaryTree implements TreeInterface {
         try {
             return tree[(parent * 2) + 1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
+            LoggerService.logError(e.getMessage());
         }
 
         return null;

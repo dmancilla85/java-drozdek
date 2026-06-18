@@ -107,7 +107,7 @@ private Algorithms() {
                     index = i;
                 }
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerService.logError(e.getMessage());
         }
 
         return index;

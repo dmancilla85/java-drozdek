@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
@@ -52,7 +52,7 @@ class LinkedListStackTest {
     @Test
     @DisplayName("Clear the stack")
     void clear() {
-        Random rand = new Random();
+        SecureRandom rand = new SecureRandom();
         int size = 10;
 
         for(int i = 0; i < size; i++)
@@ -66,7 +66,7 @@ class LinkedListStackTest {
     @Test
     @DisplayName("Print the stack")
     void print() {
-        Random rand = new Random();
+        SecureRandom rand = new SecureRandom();
         int size = 5;
 
         for(int i = 0; i < size; i++)

@@ -6,14 +6,13 @@ import org.drozdek.stacks.interfaces.StackInterface;
 import java.security.SecureRandom;
 import java.time.Clock;
 import java.time.ZoneId;
-import java.util.Random;
 
 public class AdaptiveStack<T> implements StackInterface<T> {
 
     public static final char STATIC = 0;
     public static final char DYNAMIC = 1;
     public static final int CRITICAL_VALUE = 2000;
-    private static final Random RANDOM = new SecureRandom();
+    private static final SecureRandom RANDOM = new SecureRandom();
     private char type;
     private StackInterface<T> stack;
     private int pushCount = 0;

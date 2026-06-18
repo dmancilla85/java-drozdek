@@ -1,10 +1,10 @@
 package org.drozdek.commons;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 public final class ArrayUtils {
 
-    private static final Random r = new Random();
+    private static final SecureRandom r = new SecureRandom();
 
     private ArrayUtils() {
         // do nothing
