@@ -5,7 +5,6 @@ import org.drozdek.queues.interfaces.QueueInterface;
 import org.drozdek.queues.interfaces.UnlamQueue;
 
 import static java.lang.Math.random;
-import static java.lang.System.out;
 
 /// Dynamic queue implementation using a singly-linked list.
 ///
