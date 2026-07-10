@@ -33,4 +33,31 @@ class FibonacciSearchTest {
         index = FibonacciSearch.fibonacciSearch(array, 90);
         assertEquals(8, index, "Element 90 should be at index 8");
     }
+
+    @Test
+    @DisplayName("Fibonacci search on single-element array.")
+    void fibonacciSearchSingleElement() {
+        int[] array = {42};
+
+        int index = FibonacciSearch.fibonacciSearch(array, 42);
+        assertEquals(0, index, "Element 42 should be at index 0");
+
+        index = FibonacciSearch.fibonacciSearch(array, 99);
+        assertEquals(-1, index, "Element 99 should not be found");
+    }
+
+    @Test
+    @DisplayName("Fibonacci search on two-element array.")
+    void fibonacciSearchTwoElements() {
+        int[] array = {10, 20};
+
+        int index = FibonacciSearch.fibonacciSearch(array, 10);
+        assertEquals(0, index, "Element 10 should be at index 0");
+
+        index = FibonacciSearch.fibonacciSearch(array, 20);
+        assertEquals(1, index, "Element 20 should be at index 1");
+
+        index = FibonacciSearch.fibonacciSearch(array, 15);
+        assertEquals(-1, index, "Element 15 should not be found");
+    }
 }

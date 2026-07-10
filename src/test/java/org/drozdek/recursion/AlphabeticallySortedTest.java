@@ -87,4 +87,10 @@ class AlphabeticallySortedTest {
         List<Character> list = new ArrayList<>(Arrays.asList('a', 'b', 'z', 'c', 'd'));
         assertFalse(AlphabeticallySorted.run(list, 0));
     }
+
+    @Test
+    @DisplayName("Test method executes without error")
+    void testMethod() {
+        assertDoesNotThrow(AlphabeticallySorted::test);
+    }
 }

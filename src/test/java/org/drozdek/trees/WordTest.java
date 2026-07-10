@@ -40,4 +40,42 @@ class WordTest {
         Word w = new Word("hello");
         assertDoesNotThrow(w::print);
     }
+
+    @Test
+    @DisplayName("Equals returns true for same word")
+    void equalsSame() {
+        Word a = new Word("hello");
+        Word b = new Word("hello");
+        assertEquals(a, b);
+    }
+
+    @Test
+    @DisplayName("Equals returns false for different words")
+    void equalsDifferent() {
+        Word a = new Word("hello");
+        Word b = new Word("world");
+        assertNotEquals(a, b);
+    }
+
+    @Test
+    @DisplayName("Equals returns false for null")
+    void equalsNull() {
+        Word a = new Word("hello");
+        assertNotEquals(null, a);
+    }
+
+    @Test
+    @DisplayName("Equals returns true for same reference")
+    void equalsReflexive() {
+        Word a = new Word("hello");
+        assertEquals(a, a);
+    }
+
+    @Test
+    @DisplayName("Hash code is consistent with equals")
+    void hashCodeConsistent() {
+        Word a = new Word("hello");
+        Word b = new Word("hello");
+        assertEquals(a.hashCode(), b.hashCode());
+    }
 }

@@ -68,4 +68,50 @@ class HeapNodeTest {
         HeapNode node = new HeapNode(55);
         assertEquals("55", node.toString());
     }
+
+    @Test
+    @DisplayName("Equals returns true for same value")
+    void equalsSame() {
+        HeapNode a = new HeapNode(42);
+        HeapNode b = new HeapNode(42);
+        assertEquals(a, b);
+    }
+
+    @Test
+    @DisplayName("Equals returns false for different values")
+    void equalsDifferent() {
+        HeapNode a = new HeapNode(42);
+        HeapNode b = new HeapNode(99);
+        assertNotEquals(a, b);
+    }
+
+    @Test
+    @DisplayName("Equals returns false for null")
+    void equalsNull() {
+        HeapNode a = new HeapNode(42);
+        assertNotEquals(null, a);
+    }
+
+    @Test
+    @DisplayName("Equals returns true for same reference")
+    void equalsReflexive() {
+        HeapNode a = new HeapNode(42);
+        assertEquals(a, a);
+    }
+
+    @Test
+    @DisplayName("Hash code is consistent with equals")
+    void hashCodeConsistent() {
+        HeapNode a = new HeapNode(42);
+        HeapNode b = new HeapNode(42);
+        assertEquals(a.hashCode(), b.hashCode());
+    }
+
+    @Test
+    @DisplayName("Hash code differs for different values")
+    void hashCodeDifferent() {
+        HeapNode a = new HeapNode(42);
+        HeapNode b = new HeapNode(99);
+        assertNotEquals(a.hashCode(), b.hashCode());
+    }
 }

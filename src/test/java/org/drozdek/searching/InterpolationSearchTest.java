@@ -33,4 +33,28 @@ class InterpolationSearchTest {
         index = InterpolationSearch.interpolationSearch(array, 0, array.length - 1, 90);
         assertEquals(8, index, "Element 90 should be at index 8");
     }
+
+    @Test
+    @DisplayName("Interpolation search on single-element array.")
+    void interpolationSearchSingleElement() {
+        int[] array = {42};
+
+        int index = InterpolationSearch.interpolationSearch(array, 0, 0, 42);
+        assertEquals(0, index, "Element 42 should be at index 0");
+
+        index = InterpolationSearch.interpolationSearch(array, 0, 0, 99);
+        assertEquals(-1, index, "Element 99 should not be found");
+    }
+
+    @Test
+    @DisplayName("Interpolation search triggers right branch.")
+    void interpolationSearchRightBranch() {
+        int[] array = {10, 30, 40, 50, 60, 70, 80, 90, 95};
+
+        int index = InterpolationSearch.interpolationSearch(array, 0, array.length - 1, 35);
+        assertEquals(-1, index, "Element 35 should not be found");
+
+        index = InterpolationSearch.interpolationSearch(array, 0, array.length - 1, 10);
+        assertEquals(0, index, "Element 10 should be at index 0");
+    }
 }

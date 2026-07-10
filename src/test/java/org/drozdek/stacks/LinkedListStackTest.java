@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.security.SecureRandom;
+import java.util.EmptyStackException;
 
 import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
@@ -94,5 +95,17 @@ class LinkedListStackTest {
         Integer top = stack.topElement();
 
         assertEquals(67,top,"The stack should not be empty");
+    }
+
+    @Test
+    @DisplayName("Pop on empty stack throws exception")
+    void popOnEmpty() {
+        assertThrows(EmptyStackException.class, () -> stack.pop());
+    }
+
+    @Test
+    @DisplayName("Top element on empty stack throws exception")
+    void topOnEmpty() {
+        assertThrows(EmptyStackException.class, () -> stack.topElement());
     }
 }

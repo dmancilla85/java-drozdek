@@ -104,4 +104,18 @@ class TernaryMergeSortTest {
         TernaryMergeSort.mergeSortAlter(list, 0, 99);
         assertTrue(isSorted(list));
     }
+
+    @Test
+    @DisplayName("Merge with segment exhaustion paths")
+    void mergeSort_exhaustionPaths() {
+        List<Integer> list = new ArrayList<>();
+        list.add(3);
+        list.add(1);
+        list.add(2);
+        TernaryMergeSort.mergeSortAlter(list, 0, 2);
+        assertTrue(isSorted(list));
+        assertEquals(1, list.get(0));
+        assertEquals(2, list.get(1));
+        assertEquals(3, list.get(2));
+    }
 }

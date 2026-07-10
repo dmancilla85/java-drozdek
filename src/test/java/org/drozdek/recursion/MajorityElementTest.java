@@ -73,4 +73,10 @@ class MajorityElementTest {
         List<Integer> list = new ArrayList<>(Arrays.asList(1, 6, 3, 3, 3, 6, 6, 6, 1, 6, 6));
         assertEquals(Integer.valueOf(6), MajorityElement.run(list, 0));
     }
+
+    @Test
+    @DisplayName("Test method executes without error")
+    void testMethod() {
+        assertDoesNotThrow(MajorityElement::test);
+    }
 }
