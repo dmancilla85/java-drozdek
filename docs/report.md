@@ -2,7 +2,7 @@
 
 ## Overview
 
-Systematic audit and repair of ~126 source files spanning lists, queues, stacks, sorting, searching, trees, recursion, dynamic programming, and graphs. All 125 tests pass with 0 failures.
+Systematic audit and repair spanning lists, queues, stacks, sorting, searching, trees, recursion, dynamic programming, and graphs. All 714 tests pass with 0 failures, 90.0% instruction coverage (15,518/17,240).
 
 ---
 
@@ -126,6 +126,54 @@ All 10 sort tests and BinarySearchTest replaced meaningless `assertTrue(true)` w
 | CountingSortTest | `assertTrue(true)` | `assertTrue(ArrayUtils.isSorted(array))` |
 | BucketSortTest | `assertTrue(true)` | `assertTrue(ArrayUtils.isSorted(array))` |
 | BinarySearchTest | `assertTrue(true)` | `assertEquals(4, index)` / `assertEquals(-1, index)` |
+
+## Coverage Improvement (87% → 90%)
+
+**Commit:** `6c276e9` — 16 files changed, 607 insertions.
+
+7 new test files, 9 existing test files extended. Total: 75 test files, 714 tests.
+
+| Test File | Type | Tests |
+|-----------|------|-------|
+| `CompareExampleTest.java` | new | Comparator coverage |
+| `IntSkipListNodeTest.java` | new | Record node |
+| `TrieLeafTest.java` | new | TrieLeaf |
+| `KnapsackSolutionTest.java` | new | KnapsackSolution |
+| `KnapsackItemTest.java` | new | KnapsackItem |
+| `ScheduledTaskTest.java` | new | 12 tests |
+| `DynamicKnapsackItemTest.java` | new | 12 tests |
+| `LinkedListStackTest.java` | extended | pop/top on empty |
+| `JumpSearchTest.java` | extended | single-element |
+| `FibonacciSearchTest.java` | extended | single/two-element |
+| `InterpolationSearchTest.java` | extended | single-element, right-branch |
+| `TernaryMergeSortTest.java` | extended | exhaustion paths |
+| `AlphabeticallySortedTest.java` | extended | test method |
+| `MajorityElementTest.java` | extended | test method |
+| `WordTest.java` | extended | equals/hashCode (5) |
+| `HeapNodeTest.java` | extended | equals/hashCode (6) |
+
+### Per-file coverage gains
+
+| Class | Before | After |
+|-------|--------|-------|
+| `AlphabeticallySorted` | 34.8% | 96.5% |
+| `MajorityElement` | 53.5% | 98.4% |
+| `DynamicKnapsackItem` | 51.7% | 95.3% |
+| `ScheduledTask` | 46.2% | 94.8% |
+| `HeapNode` | 47.6% | 93.4% |
+| `LinkedListStack`, `InterpolationSearch`, `FibonacciSearch` | — | 100% |
+
+---
+
+## Documentation
+
+### README.md rewritten
+
+Full rewrite: title with badges (CI, CodeQL, SonarCloud quality gate), tech stack table, module list grouped by topic, build commands, project structure tree, MIT license. Replaced 12-line stub with TODO list.
+
+### AGENTS.md created
+
+Compact instruction file for OpenCode sessions: exact build/test commands, checkstyle/coverage notes, package directory map, code conventions (`LoggerService`, `private` constructors, Google Checks style, SonarQube suppression pattern), coverage target and high-ROI files.
 
 ---
 
