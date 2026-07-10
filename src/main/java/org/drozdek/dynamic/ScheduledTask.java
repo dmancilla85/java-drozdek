@@ -40,6 +40,19 @@ public class ScheduledTask implements Comparable<ScheduledTask>, Comparator<Sche
         return Integer.compare(this.end, arg0.end);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof ScheduledTask other)) return false;
+        return this.end == other.end;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(end);
+    }
+
     /// @return A string in the format {S:start, E:end}
     public String toString() {
         return "{S:" + start + ", E:" + end + "}";

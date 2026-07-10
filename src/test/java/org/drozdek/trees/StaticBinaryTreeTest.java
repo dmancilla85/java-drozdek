@@ -60,7 +60,7 @@ class StaticBinaryTreeTest {
     void leftChild() {
         tree.setRoot(new HeapNode(1));
         tree.setRightChild(0, new HeapNode(2));
-        assertNotNull(tree.leftChild(0, null));
+        assertNotNull(tree.leftChild(0));
     }
 
     @Test
@@ -68,7 +68,7 @@ class StaticBinaryTreeTest {
     void setLeftmostChild() {
         tree.setRoot(new HeapNode(1));
         tree.setLeftChild(0, new HeapNode(2));
-        assertTrue(tree.setLeftmostChild(0, new HeapNode(99)));
+        assertTrue(tree.setLeftmostChild(new HeapNode(99)));
     }
 
     @Test
@@ -76,7 +76,7 @@ class StaticBinaryTreeTest {
     void setRightmostChild() {
         tree.setRoot(new HeapNode(1));
         tree.setRightChild(0, new HeapNode(2));
-        assertTrue(tree.setRightmostChild(0, new HeapNode(99)));
+        assertTrue(tree.setRightmostChild(new HeapNode(99)));
     }
 
     @Test
@@ -187,15 +187,6 @@ class StaticBinaryTreeTest {
         }
         assertFalse(tree.setLeftChild(0, new HeapNode(99)));
     }
-
-    @Test
-    @DisplayName("SetRightmostChild with even-sized tree")
-    void setRightmostChildEvenSize() {
-        tree.setRoot(new HeapNode(1));
-        tree.setRightChild(0, new HeapNode(2));
-        assertTrue(tree.setRightmostChild(0, new HeapNode(99)));
-    }
-
     @Test
     @DisplayName("RightmostChild with even-sized tree")
     void rightmostChildEvenSize() {
@@ -218,7 +209,7 @@ class StaticBinaryTreeTest {
         tree.setRoot(new HeapNode(1));
         tree.setRightChild(0, new HeapNode(2));
         tree.setLeftChild(1, new HeapNode(3));
-        assertTrue(tree.setLeftmostChild(0, new HeapNode(99)));
+        assertTrue(tree.setLeftmostChild(new HeapNode(99)));
     }
 
     @Test

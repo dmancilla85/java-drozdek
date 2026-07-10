@@ -366,18 +366,16 @@ public class IntSkipList implements ListInterface<Integer> {
                     return 0;
                 current = moveDownFrom(current, previous, lvl);
                 lvl--;
-                continue;
+            } else {
+                previous = current;
+                current = current.next()[lvl];
+                if (current == null) {
+                    lvl = findNextLevel(lvl, previous);
+                    if (lvl < 0)
+                        return 0;
+                    current = previous.next()[lvl];
+                }
             }
-
-            previous = current;
-            current = current.next()[lvl];
-            if (current != null)
-                continue;
-
-            lvl = findNextLevel(lvl, previous);
-            if (lvl < 0)
-                return 0;
-            current = previous.next()[lvl];
         }
     }
 

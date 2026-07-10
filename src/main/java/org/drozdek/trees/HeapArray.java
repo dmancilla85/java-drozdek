@@ -65,14 +65,13 @@ public class HeapArray {
     }
 
     public void insert(int key) {
-        if (position >= keys.length) {
+        int next = position;
+        if (next >= keys.length) {
             resize();
         }
 
         int parent;
         int temp;
-        int next;
-        next = position;
         parent = (next / 2);
         if (parent < 0) {
             parent = 0;

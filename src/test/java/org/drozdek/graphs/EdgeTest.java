@@ -69,13 +69,13 @@ class EdgeTest {
     @Test
     @DisplayName("Equals null")
     void equalsNull() {
-        assertNotEquals(edge, null);
+        assertNotEquals(null, edge);
     }
 
     @Test
     @DisplayName("Equals different type")
     void equalsDifferentType() {
-        assertNotEquals(edge, "string");
+        assertNotEquals("string", edge);
     }
 
     @Test

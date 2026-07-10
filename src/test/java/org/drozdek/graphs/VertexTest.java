@@ -81,13 +81,13 @@ class VertexTest {
     @Test
     @DisplayName("Equals null")
     void equalsNull() {
-        assertNotEquals(vertex, null);
+        assertNotEquals(null, vertex);
     }
 
     @Test
     @DisplayName("Equals different type")
     void equalsDifferentType() {
-        assertNotEquals(vertex, "string");
+        assertNotEquals("string", vertex);
     }
 
     @Test

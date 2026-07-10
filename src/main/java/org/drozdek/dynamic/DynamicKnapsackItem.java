@@ -63,6 +63,19 @@ public class DynamicKnapsackItem implements Comparable<DynamicKnapsackItem>, Com
         return Integer.compare(this.profit, arg0.profit);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof DynamicKnapsackItem other)) return false;
+        return this.profit == other.profit;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(profit);
+    }
+
     /// @return A string in the format [W: weight, P: profit]
     public String toString() {
         return "[W: " + weight + ", P: " + profit + "]";

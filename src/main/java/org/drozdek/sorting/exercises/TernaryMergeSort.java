@@ -69,7 +69,7 @@ private TernaryMergeSort() {
             a.set(start + idx, result.get(idx));
     }
 
-    public static void test(@SuppressWarnings("unused") int n) {
+    public static void test() {
         List<Integer> valores = new ArrayList<>();
         valores.add(2);
         valores.add(8);

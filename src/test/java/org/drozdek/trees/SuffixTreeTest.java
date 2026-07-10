@@ -138,10 +138,4 @@ class SuffixTreeTest {
         assertNotNull(tree.toString());
     }
 
-    @Test
-    @DisplayName("Print method executes without error")
-    void testPrint() {
-        tree.ukkonen("banana");
-        assertDoesNotThrow(() -> tree.print());
-    }
 }

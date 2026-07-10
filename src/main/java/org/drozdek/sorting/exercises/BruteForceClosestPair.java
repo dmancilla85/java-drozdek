@@ -99,7 +99,6 @@ private BruteForceClosestPair() {
         int stepCount = 0;
 
         if (points.size() <= 1) {
-            stepCount++;
             return pairs;
         }
 

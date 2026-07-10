@@ -23,6 +23,19 @@ public class HeapNode implements Comparable<HeapNode> {
         return this.value.compareTo(other.value);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof HeapNode other)) return false;
+        return java.util.Objects.equals(value, other.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(value);
+    }
+
     public Integer getValue() {
         return value;
     }
