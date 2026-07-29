@@ -4,7 +4,7 @@
 
 ```bash
 mvn clean package           # full build + tests + coverage report
-mvn test                    # run all tests (714)
+mvn test                    # run all tests (754)
 mvn test -Dtest=FooTest     # single test class
 mvn validate                # checkstyle (Google Checks, fails on error)
 mvn jacoco:report           # coverage → target/site/jacoco/
@@ -19,7 +19,7 @@ JaCoCo report auto-generates at `test` phase (no separate step needed for local 
 
 Single-module Maven project. Java 25, JUnit Jupiter 6.0.3, JaCoCo 0.8.14. Two dependencies: JUnit (test) and `moby-names-generator` (SuffixTree uses it for random names).
 
-Source mirrors under `src/test/java/org/drozdek/`. 75 test files, 714 tests, 90% instruction coverage.
+Source mirrors under `src/test/java/org/drozdek/`. 75 test files, 754 tests, 90% instruction coverage.
 
 Branch is `master`, not `main`.
 

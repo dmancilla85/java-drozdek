@@ -48,14 +48,55 @@ jobs:
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
+<<<<<<< Updated upstream
       uses: github/codeql-action/init@v4
+||||||| Stash base
+      uses: github/codeql-action/init@v2
+=======
+      uses: github/codeql-action/init@v3
+>>>>>>> Stashed changes
       with:
         languages: ${{ matrix.language }}
 
+<<<<<<< Updated upstream
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+||||||| Stash base
+        # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
+        # queries: security-extended,security-and-quality
+    
+    - name: Define Java version
+      uses: actions/setup-java@v1
+      with:
+        java-version: 18
+
+    # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
+    # If this step fails, then you should remove it and run the build manually (see below)
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+
+    # ℹ️ Command-line programs to run using the OS shell.
+    # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+
+    #   If the Autobuild fails above, remove it and uncomment the following three lines.
+    #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
+
+    # - run: |
+    #   echo "Run, Build Application using script"
+    #   ./location_of_script_within_repo/buildscript.sh
+=======
+    # Autobuild attempts to build any compiled languages (C/C++, C#, Go, or Java).
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v3
+>>>>>>> Stashed changes
 
     - name: Perform CodeQL Analysis
+<<<<<<< Updated upstream
       uses: github/codeql-action/analyze@v4
+||||||| Stash base
+      uses: github/codeql-action/analyze@v2
+=======
+      uses: github/codeql-action/analyze@v3
+>>>>>>> Stashed changes
       with:
         category: "/language:${{matrix.language}}"

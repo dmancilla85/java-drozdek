@@ -9,7 +9,7 @@ import static java.time.ZoneId.systemDefault;
 import org.drozdek.commons.LoggerService;
 
 /// @author David
-public class WeightedDigraph {
+public class WeightedDigraph implements Digraph {
 
     protected List<Vertex> v;
     protected List<Vertex>[] adjacencyList;
@@ -81,6 +81,11 @@ public class WeightedDigraph {
 
     public int cardinality() {
         return adjacencyMatrix[0].length;
+    }
+
+    public boolean hasArc(int from, int to) {
+        return from >= 0 && from < cardinality() && to >= 0 && to < cardinality()
+                && adjacencyMatrix[from][to] == 1;
     }
 
     public boolean createArc(char a1, char a2, int weight) {

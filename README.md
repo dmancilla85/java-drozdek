@@ -12,7 +12,7 @@ A collection of abstract data types and algorithms based on the book *Data Struc
 |---|---|
 | **Language** | Java 25 |
 | **Build** | Maven 3.9+ |
-| **Testing** | JUnit Jupiter 6.0.3 (714 tests) |
+| **Testing** | JUnit Jupiter 6.0.3 (754 tests) |
 | **Coverage** | JaCoCo 0.8.14 (90% instruction) |
 | **Static analysis** | SonarCloud, Qodana, Checkstyle (Google) |
 | **CI/CD** | GitHub Actions, Dependabot |
