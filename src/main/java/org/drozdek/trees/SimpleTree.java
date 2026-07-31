@@ -6,11 +6,14 @@ import java.util.ArrayList;
 
 /// Simple n-ary tree data structure. Each node can have an arbitrary number of children stored in an ArrayList.
 ///
+/// <p><b>Real-world use case:</b> File-system directory trees, DOM/XML document
+/// representation, and organizational hierarchy charts.
+///
 /// Complexity Analysis:
 /// Time Complexity: O(n) for traversal, O(n) for search
 /// Auxiliary Space: O(n) for storage
 ///
-/// Source: Generic n-ary tree
+/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
 public class SimpleTree<T> implements TreeInterface {
 
     protected TreeNode<T> root;

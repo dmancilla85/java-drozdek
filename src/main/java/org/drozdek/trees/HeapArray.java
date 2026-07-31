@@ -10,11 +10,14 @@ import java.nio.file.Path;
 
 /// Array-based heap sort implementation. Uses an array to represent a binary heap and sorts elements in-place.
 ///
+/// <p><b>Real-world use case:</b> Priority-queue backed schedulers and the heapsort
+/// algorithm itself, widely used in embedded systems where in-place sorting is required.
+///
 /// Complexity Analysis:
 /// Time Complexity: O(n*log(n)) for heap sort, O(log n) for insert, O(n) for heapify
 /// Auxiliary Space: O(1)
 ///
-/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/heap-data-structure/)
+/// @see <a href="https://doi.org/10.1145/512274.3734138">Williams, 1964, Heapsort (ACM)</a>
 public class HeapArray {
 
     private static final int DEFAULT_CAPACITY = 10;

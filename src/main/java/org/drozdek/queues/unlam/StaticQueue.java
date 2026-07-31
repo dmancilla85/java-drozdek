@@ -6,13 +6,18 @@ import org.drozdek.queues.interfaces.UnlamQueue;
 import static java.lang.Math.random;
 import org.drozdek.commons.LoggerService;
 
-/// Static array-based circular queue implementation.
+/// Static array-based circular queue implementation with automatic resizing.
 ///
-/// Abstract Data Type: Static Queue (FIFO - First In, First Out)
+/// <p><b>Abstract Data Type:</b> Static Queue (FIFO - First In, First Out)
 ///
-/// This implementation uses a fixed-size array with circular indexing,
-/// providing O(1) enqueue and dequeue operations when not full.
-/// When the queue becomes full, it automatically doubles its capacity.
+/// <p><b>Real-world use case:</b> Bounded buffers in network packet processing,
+/// fixed-size event queues in real-time systems.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) amortized for enqueue and dequeue
+/// Auxiliary Space: O(n) for the storage array
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
 public class StaticQueue implements UnlamQueue, QueueInterface<Object> {
 
     private static final int DEFAULT_SIZE = 5;

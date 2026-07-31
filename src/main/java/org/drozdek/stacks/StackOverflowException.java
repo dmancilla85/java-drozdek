@@ -1,5 +1,9 @@
 package org.drozdek.stacks;
 
+/// Exception thrown when a stack operation exceeds capacity.
+///
+/// <p><b>Real-world use case:</b> Bounded stack implementations that
+/// enforce a maximum capacity limit.
 @SuppressWarnings("java:S110")
 public class StackOverflowException extends ArrayIndexOutOfBoundsException {
 

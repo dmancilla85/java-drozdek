@@ -15,7 +15,14 @@ import java.io.PrintStream;
 /// The left and right subtree each must also be a binary search tree.
 /// There must be no duplicate nodes.
 ///
-/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/)
+/// <p><b>Real-world use case:</b> Symbol tables in compilers and interpreters where
+/// identifiers must be inserted and looked up dynamically.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(log n) average for search/insert/delete, O(n) worst-case
+/// Auxiliary Space: O(log n) for recursion stack, O(n) for storage
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
 ///
 /// @author David
 /// @version 1.0.0

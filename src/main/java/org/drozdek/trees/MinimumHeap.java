@@ -5,6 +5,17 @@ import org.drozdek.trees.interfaces.TreeInterface;
 import java.util.ArrayList;
 import java.util.List;
 
+/// Minimum heap data structure implemented with an ArrayList. Maintains the min-heap property
+/// where the parent node is always less than or equal to its children.
+///
+/// <p><b>Real-world use case:</b> Dijkstra's shortest path algorithm and Huffman coding both
+/// use a min-heap to efficiently extract the smallest element.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(log n) for insert/extractMin, O(n) for heapify
+/// Auxiliary Space: O(n) for storage
+///
+/// @see <a href="https://doi.org/10.1145/512274.3734138">Williams, 1964, Heapsort (ACM)</a>
 public class MinimumHeap<T extends Comparable<T>> implements TreeInterface {
 
     private static final int DEFAULT_CAPACITY = 10;

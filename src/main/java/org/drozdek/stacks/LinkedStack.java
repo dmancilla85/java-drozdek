@@ -6,6 +6,16 @@ import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
 
+/// Stack implemented as a singly-linked list.
+///
+/// <p><b>Real-world use case:</b> Function call stack simulation in
+/// interpreters and runtime environments.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) for push and pop
+/// Auxiliary Space: O(n) for storing n elements
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
 public class LinkedStack<T> implements StackInterface<T> {
 
     private Node<T> top;

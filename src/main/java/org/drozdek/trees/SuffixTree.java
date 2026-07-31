@@ -7,11 +7,14 @@ import org.drozdek.trees.nodes.SuffixTreeNode;
 /// Ukkonen's suffix tree implementation. Builds a suffix tree in linear time for efficient
 /// substring and pattern matching operations.
 ///
+/// <p><b>Real-world use case:</b> Genome sequence alignment, plagiarism detection
+/// systems, and full-text search engines.
+///
 /// Complexity Analysis:
 /// Time Complexity: O(n) for construction (Ukkonen's algorithm)
 /// Auxiliary Space: O(n) for storage
 ///
-/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/ukkonens-suffix-tree-construction-part-1/)
+/// @see <a href="https://doi.org/10.1007/BF01206331">Ukkonen, 1995, On-line construction of suffix trees (Algorithmica)</a>
 public class SuffixTree implements TreeInterface {
     protected final SuffixTreeNode root;
     protected final String name;

@@ -9,11 +9,14 @@ import org.drozdek.trees.nodes.TrieNonLeaf;
 /// Trie (prefix tree) data structure. Supports insertion and lookup of strings with shared prefixes,
 /// using a hybrid non-leaf/leaf node structure.
 ///
+/// <p><b>Real-world use case:</b> Autocomplete and spell-check in text editors,
+/// IP routing table lookups in networking hardware, and predictive text input.
+///
 /// Complexity Analysis:
 /// Time Complexity: O(m) where m is key length
 /// Auxiliary Space: O(n * m) where n is number of keys and m is average key length
 ///
-/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/trie-data-structure/)
+/// @see <a href="https://doi.org/10.1145/367390.367400">Fredkin, 1960, Trie memory (ACM)</a>
 public class Trie implements TreeInterface {
     public static final int NOT_FOUND = -1;
     private TrieNonLeaf root;

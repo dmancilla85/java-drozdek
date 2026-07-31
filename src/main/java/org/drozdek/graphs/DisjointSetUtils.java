@@ -1,4 +1,4 @@
-package org.drozdek.graphs.unlam;
+package org.drozdek.graphs;
 
 public final class DisjointSetUtils {
     private DisjointSetUtils() {

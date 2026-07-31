@@ -59,6 +59,9 @@ replay_pid*.log
 *.log
 logs/
 
+# OpenCode session state
+.opencode/
+
 # Test reports
 *.html
 test-output/

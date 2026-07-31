@@ -1,14 +1,34 @@
 package org.drozdek.sorting;
 
+/**
+ * Insertion Sort algorithm.
+ *
+ * Builds the sorted array one element at a time by repeatedly taking the
+ * next unsorted element and inserting it into its correct position among
+ * the already-sorted elements. Elements are shifted right to make room.
+ * Performs very well on small or nearly-sorted datasets.
+ *
+ * <p><b>Real-world use case:</b> Sorting a hand of playing cards, or
+ * processing small real-time data streams where new items are added
+ * incrementally to an already-sorted list.
+ *
+ * Time complexity: O(n²)
+ * Memory complexity: O(1)
+ * Type: Stable
+ *
+ * @see <a href="https://en.wikipedia.org/wiki/Insertion_sort">Insertion sort (Wikipedia)</a>
+ */
 public final class InsertionSort {
 
     private InsertionSort() {
         // do nothing
     }
 
-    // Complexity O(n²)
-    // Memory O(1)
-    // Type: Stable
+    /**
+     * Sorts an array in-place using Insertion Sort.
+     *
+     * @param array Array of integers to sort
+     */
     public static void insertionSort(int[] array) {
         int n = array.length;
 

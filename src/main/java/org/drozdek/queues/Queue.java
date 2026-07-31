@@ -4,6 +4,17 @@ import org.drozdek.queues.interfaces.QueueInterface;
 
 import java.util.LinkedList;
 
+/// Queue backed by Java's LinkedList, providing a general-purpose FIFO
+/// implementation.
+///
+/// <p><b>Real-world use case:</b> Breadth-first search graph traversal,
+/// job scheduling in operating systems.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) for enqueue and dequeue
+/// Auxiliary Space: O(n) for storing n elements
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
 public class Queue<T> implements QueueInterface<T> {
     private final LinkedList<T> list;
 

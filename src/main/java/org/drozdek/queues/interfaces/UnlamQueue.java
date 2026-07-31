@@ -1,9 +1,16 @@
 package org.drozdek.queues.interfaces;
 
 
-/// Queue interface defining standard queue operations.
+/// Interface defining standard queue operations (FIFO).
 ///
-/// Abstract Data Type: Queue (FIFO - First In, First Out)
+/// <p><b>Real-world use case:</b> Request queuing in web servers,
+/// message buffering in producer-consumer patterns.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) for enqueue and dequeue (per implementation)
+/// Auxiliary Space: O(n) for storing n elements
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
 public interface UnlamQueue {
 
     /// Removes and returns the element at the front of the queue.

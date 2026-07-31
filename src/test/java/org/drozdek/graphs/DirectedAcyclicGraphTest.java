@@ -1,6 +1,5 @@
 package org.drozdek.graphs;
 
-import org.drozdek.graphs.unlam.DirectedAcyclicGraph;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -59,20 +58,20 @@ class DirectedAcyclicGraphTest {
         dag.createArc(0, 1);
         dag.createArc(1, 2);
 
-        java.lang.reflect.Field adjField = org.drozdek.graphs.unlam.DirectedGraph.class
+        java.lang.reflect.Field adjField = DirectedGraph.class
                 .getDeclaredField("adjacencyMatrix");
         adjField.setAccessible(true);
         byte[][] adj = (byte[][]) adjField.get(dag);
         adj[2][0] = 1;
 
-        java.lang.reflect.Field edgesField = org.drozdek.graphs.unlam.DirectedGraph.class
+        java.lang.reflect.Field edgesField = DirectedGraph.class
                 .getDeclaredField("edges");
         edgesField.setAccessible(true);
-        List<org.drozdek.graphs.unlam.Edge> edges =
-                (List<org.drozdek.graphs.unlam.Edge>) edgesField.get(dag);
-        edges.add(new org.drozdek.graphs.unlam.Edge(
-                new org.drozdek.graphs.unlam.Vertex(2),
-                new org.drozdek.graphs.unlam.Vertex(0), 0, true));
+        List<Edge> edges =
+                (List<Edge>) edgesField.get(dag);
+        edges.add(new Edge(
+                new Vertex(2),
+                new Vertex(0), 0, true));
 
         List<Integer> order = dag.topologicalSort();
         assertTrue(order.isEmpty());

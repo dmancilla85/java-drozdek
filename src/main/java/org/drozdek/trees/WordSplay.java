@@ -9,8 +9,6 @@ import java.io.*;
 /// Complexity Analysis:
 /// Time Complexity: O(n * log n) amortized for building the tree
 /// Auxiliary Space: O(n) for storage
-///
-/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/splay-tree/)
 public class WordSplay extends SplayTree<Word> {
     private int differentWords;
     private int wordCnt;

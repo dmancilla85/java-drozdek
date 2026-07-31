@@ -1,6 +1,8 @@
 package org.drozdek.trees.nodes;
 
 
+/// Node for Ukkonen's suffix tree. Stores descendant pointers, interval edges (left/right),
+/// and a suffix link used during linear-time construction.
 public class SuffixTreeNode {
     private static int cnt = 0;
     private final SuffixTreeNode[] descendants;

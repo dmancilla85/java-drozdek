@@ -1,7 +1,5 @@
 package org.drozdek.graphs;
 
-import org.drozdek.graphs.unlam.Edge;
-import org.drozdek.graphs.unlam.Vertex;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

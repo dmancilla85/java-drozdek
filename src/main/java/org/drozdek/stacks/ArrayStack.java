@@ -4,6 +4,16 @@ import org.drozdek.stacks.interfaces.StackInterface;
 
 import java.util.*;
 
+/// Stack backed by an ArrayList with dynamic resizing.
+///
+/// <p><b>Real-world use case:</b> Undo/redo in text editors,
+/// expression evaluation in calculator applications.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) amortized for push and pop
+/// Auxiliary Space: O(n) for storing n elements
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
 public class ArrayStack<T> implements StackInterface<T> {
 
     private static final int DEFAULT_CAPACITY = 5;

@@ -7,7 +7,16 @@ import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Objects;
 
-/// Stack implemented as an arraylist.
+/// Stack backed by an ArrayList with unicode pretty-printing support.
+///
+/// <p><b>Real-world use case:</b> Educational tools and debug visualizations
+/// showing stack state with formatted output.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) amortized for push and pop
+/// Auxiliary Space: O(n) for storing n elements
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
 public class Stack<T> implements StackInterface<T> {
     private final ArrayList<T> pool;
     private boolean printWithUnicode;

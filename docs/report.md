@@ -2,7 +2,7 @@
 
 ## Overview
 
-Systematic audit and repair spanning lists, queues, stacks, sorting, searching, trees, recursion, dynamic programming, and graphs. All 714 tests pass with 0 failures, 90.0% instruction coverage (15,518/17,240).
+Systematic audit and repair spanning lists, queues, stacks, sorting, searching, trees, recursion, dynamic programming, and graphs. All 795 tests pass with 0 failures, 89.9% instruction coverage (18,862/20,987).
 
 ---
 
@@ -180,3 +180,38 @@ Compact instruction file for OpenCode sessions: exact build/test commands, check
 ## .gitignore
 
 - `.idea/` and `*.iml` already covered — no action needed.
+
+---
+
+## Recent Changes
+
+### Reference audit — broken DOIs fixed
+
+| Broken reference | Replacement | Files |
+|---|---|---|
+| `10.5555/1614191` (CLRS, dead) | `https://en.wikipedia.org/wiki/Introduction_to_Algorithms` | 18 |
+| `10.1145/512274.512284` (dead) | `10.1145/512274.3734138` | 4 |
+| `10.1145/367390.367400` (wrong) | `10.1145/367177.367202` | 1 |
+
+12 graph-package DOIs verified and left unchanged.
+
+### New data structures and algorithms (5)
+
+| Class | Package | Notes | Coverage |
+|---|---|---|---|
+| `HashTable` | `hashing/` | Generic separate-chaining map with auto-resize | 97.8% |
+| `RedBlackTree` (+ `RedBlackTreeNode`) | `trees/` | Self-balancing BST with insert + fix-up, search/min/max | 77.1% / 73.6% |
+| `ZeroOneKnapsack` | `dynamic/` | Classic 0/1 DP with backtracking + space-optimised variant | 100% |
+| `Deque` | `queues/` | Doubly-linked double-ended queue implementing `QueueInterface` | 76.1% |
+| `TowersOfHanoi` | `recursion/` | Recursive solver + closed-form `minimumMoves()` | 100% |
+
+Supporting changes: `QueueInterface` gained `clear()` (required by `Deque`); `TowersOfHanoi.solve(0, ...)` guard added for the base case.
+
+### CI fix — committed conflict markers
+
+`src/main/java/org/drozdek/queues/unlam/FullQueueException.java` at HEAD still contained unresolved `git stash` conflict markers, which broke the Checkstyle (ANTLR) parse at `11:1: no viable alternative at input '<'`. The working-tree copy was already resolved (message kept, Javadoc added); the clean version must be committed.
+
+### Test / logging
+
+- `TowersOfHanoi` tests silence `java.util.logging` (`Logger` "Logger") in `@BeforeAll` and restore `INFO` in `@AfterAll`, removing ~1000 move-log lines per run and fixing the suite timeout.
+- Test suite grew 754 -> 795 tests (82 test files). Coverage is 89.9%, just under the 90% target, driven by the new `RedBlackTree`/`Deque` classes.

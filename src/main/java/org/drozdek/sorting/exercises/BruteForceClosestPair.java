@@ -73,14 +73,25 @@ class PointPair {
     }
 }
 
-/// Brute-force closest pair of points: generates every pair of 2D points,
-/// computes Euclidean distances, then sorts by distance using quicksort
-/// to find the minimum. Also tracks instruction counts for complexity
-/// analysis.
-///
-/// Point pairs are built recursively: take the first point, pair it with
-/// every remaining point, then recurse on the rest. The resulting list is
-/// sorted via `PointPair::quickSort` and the closest pair is reported.
+/**
+ * Brute-force closest pair of points algorithm.
+ *
+ * Enumerates every unordered pair of 2D points, computes Euclidean
+ * distances, then sorts by distance using quicksort to find the minimum.
+ * Also tracks instruction counts for complexity analysis. Point pairs are
+ * built recursively: take the first point, pair it with every remaining
+ * point, then recurse on the rest.
+ *
+ * <p><b>Real-world use case:</b> Validating the correctness of
+ * divide-and-conquer closest-pair implementations in computational
+ * geometry, or solving the problem exhaustively for very small point sets.
+ *
+ * Time complexity: O(n²) for pair generation, O(n² log n²) for the sort
+ * Memory complexity: O(n²)
+ *
+ * @see <a href="https://en.wikipedia.org/wiki/Closest_pair_of_points_problem">
+ *      Closest pair of points problem (Wikipedia)</a>
+ */
 public final class BruteForceClosestPair {
 private BruteForceClosestPair() {
         // do nothing

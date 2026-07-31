@@ -7,8 +7,6 @@ import org.drozdek.commons.LoggerService;
 /// Complexity Analysis:
 /// Time Complexity: O(1)
 /// Auxiliary Space: O(1)
-///
-/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/splay-tree/)
 public class Word implements Comparable<Word> {
     private final String words;
     private int freq;

@@ -5,13 +5,23 @@ import java.util.List;
 
 import org.drozdek.commons.LoggerService;
 
-/// Variation of merge sort that divides the array into three equal
-/// thirds instead of two halves (ternary merge sort). Each third is
-/// sorted recursively, then all three are merged together.
-///
-/// While the classic merge sort splits at n/2, this splits at n/3 and 2n/3,
-/// producing three sorted sub-ranges that are merged in O(n) using a
-/// three-way merge.
+/**
+ * Ternary Merge Sort algorithm.
+ *
+ * A variation of merge sort that divides the array into three equal thirds
+ * instead of two halves. Each third is sorted recursively, then all three
+ * are merged together using a three-way merge.
+ *
+ * <p><b>Real-world use case:</b> Educational illustration of how changing
+ * the divide factor affects recursion depth and merge complexity, helping
+ * students understand the trade-offs in divide-and-conquer design.
+ *
+ * Time complexity: O(n log₃ n)
+ * Memory complexity: O(n)
+ *
+ * @see <a href="https://en.wikipedia.org/wiki/Merge_sort#Variations">
+ *      Merge sort variations (Wikipedia)</a>
+ */
 public final class TernaryMergeSort {
 private TernaryMergeSort() {
         // do nothing

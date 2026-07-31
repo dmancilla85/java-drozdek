@@ -1,13 +1,33 @@
 package org.drozdek.sorting;
 
+/**
+ * Shell Sort algorithm.
+ *
+ * A generalization of insertion sort that sorts elements at progressively
+ * smaller gaps, allowing distant elements to move into place quickly in
+ * the early passes before a final fine-grained insertion sort. The gap
+ * sequence determines the overall time complexity.
+ *
+ * <p><b>Real-world use case:</b> Embedded systems where code size is
+ * constrained and a moderate-speed sort is needed with minimal memory
+ * overhead — Shell Sort requires no recursion and no auxiliary arrays.
+ *
+ * Time complexity: O(n³∕²) with the original gap sequence (n/2, n/4, ...)
+ * Memory complexity: O(1)
+ *
+ * @see <a href="https://en.wikipedia.org/wiki/Shellsort">Shellsort (Wikipedia)</a>
+ */
 public final class ShellSort {
 
     private ShellSort() {
         // do nothing
     }
 
-    // Complexity: O(n1.25)
-    // Memory: O(1)
+    /**
+     * Sorts an array in-place using Shell Sort.
+     *
+     * @param array Array of integers to sort
+     */
     public static void shellSort(int[] array) {
 
         int n = array.length;

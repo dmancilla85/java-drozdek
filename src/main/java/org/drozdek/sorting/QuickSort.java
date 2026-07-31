@@ -5,15 +5,37 @@ import org.drozdek.commons.ArrayUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Quick Sort algorithm.
+ *
+ * A divide-and-conquer algorithm that selects a pivot element, partitions the
+ * array so that elements less than the pivot come before it and greater ones
+ * come after, then recursively sorts the two sub-arrays. The in-place
+ * variant uses O(log n) stack space.
+ *
+ * <p><b>Real-world use case:</b> General-purpose sorting in standard library
+ * implementations, such as Java's {@code Arrays.sort()} for primitive arrays
+ * (Dual-Pivot QuickSort).
+ *
+ * Time complexity: O(n log n) average, O(n²) worst case
+ * Memory complexity: O(log n) for the recursive stack
+ * Type: Unstable
+ *
+ * @see <a href="https://en.wikipedia.org/wiki/Quicksort">Quicksort (Wikipedia)</a>
+ */
 public final class QuickSort {
 
     private QuickSort() {
         // do nothing
     }
 
-    // Complexity: average: O(n log n), worst: O(n²)
-    // Memory: O(log n)
-    // Type: Unstable
+    /**
+     * Sorts a sub-array in-place using Quick Sort.
+     *
+     * @param array Array of integers to sort
+     * @param left  Starting index of the sub-array
+     * @param right Ending index of the sub-array
+     */
     public static void quickSort(int[] array, int left, int right) {
 
         if (left < right) {

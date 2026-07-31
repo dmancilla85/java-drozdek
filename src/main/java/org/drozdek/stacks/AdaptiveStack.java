@@ -7,6 +7,17 @@ import java.security.SecureRandom;
 import java.time.Clock;
 import java.time.ZoneId;
 
+/// Stack that adapts between array-based (static) and linked-list (dynamic)
+/// representation based on the number of elements.
+///
+/// <p><b>Real-world use case:</b> Memory-constrained embedded systems where
+/// the optimal data structure depends on runtime workload characteristics.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) amortized for push and pop
+/// Auxiliary Space: O(n) for storing n elements
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
 public class AdaptiveStack<T> implements StackInterface<T> {
 
     public static final char STATIC = 0;

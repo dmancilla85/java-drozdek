@@ -1,4 +1,4 @@
-package org.drozdek.graphs.unlam;
+package org.drozdek.graphs;
 
 import java.time.Clock;
 import java.util.Arrays;

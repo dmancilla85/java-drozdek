@@ -8,10 +8,16 @@ import static java.lang.Math.random;
 
 /// Dynamic queue implementation using a singly-linked list.
 ///
-/// Abstract Data Type: Dynamic Queue (FIFO - First In, First Out)
+/// <p><b>Abstract Data Type:</b> Dynamic Queue (FIFO - First In, First Out)
 ///
-/// This implementation uses a singly-linked list with head and tail pointers,
-/// providing O(1) enqueue and dequeue operations.
+/// <p><b>Real-world use case:</b> Unbounded message queues in
+/// event-driven architectures and task scheduling.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) for enqueue and dequeue
+/// Auxiliary Space: O(n) for storing n elements
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
 public class DynamicQueue implements UnlamQueue, QueueInterface<Object> {
 
     private QueueNode first;

@@ -1,5 +1,4 @@
 package org.drozdek.graphs;
-import org.drozdek.graphs.unlam.WeightedGraph;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;

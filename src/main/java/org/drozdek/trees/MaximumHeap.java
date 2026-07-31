@@ -5,6 +5,17 @@ import org.drozdek.trees.interfaces.TreeInterface;
 import java.util.ArrayList;
 import java.util.List;
 
+/// Maximum heap data structure implemented with an ArrayList. Maintains the max-heap property
+/// where the parent node is always greater than or equal to its children.
+///
+/// <p><b>Real-world use case:</b> Job scheduling in operating systems where the highest-priority
+/// task must be processed first.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(log n) for insert/extractMax, O(n) for heapify
+/// Auxiliary Space: O(n) for storage
+///
+/// @see <a href="https://doi.org/10.1145/512274.3734138">Williams, 1964, Heapsort (ACM)</a>
 public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
 
     private static final int DEFAULT_CAPACITY = 10;

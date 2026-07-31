@@ -6,10 +6,16 @@ import java.util.Arrays;
 
 /// Array-based circular queue implementation.
 ///
-/// Abstract Data Type: Queue (FIFO - First In, First Out)
+/// <p><b>Abstract Data Type:</b> Queue (FIFO - First In, First Out)
 ///
-/// This implementation uses a fixed-size array with circular indexing,
-/// providing O(1) enqueue and dequeue operations.
+/// <p><b>Real-world use case:</b> Ring buffers in audio processing,
+/// bounded buffers in producer-consumer systems.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) for enqueue and dequeue
+/// Auxiliary Space: O(n) for the fixed-size storage array
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
 public class ArrayQueue implements QueueInterface<Object> {
     private final int capacity;
     private final Object[] storage;

@@ -7,6 +7,16 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/// Binary heap priority queue implementation.
+///
+/// <p><b>Real-world use case:</b> Dijkstra's shortest-path algorithm,
+/// Huffman coding, and real-time task scheduling by priority.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(log n) for insert and extract, O(1) for peek
+/// Auxiliary Space: O(n) for storing n elements
+///
+/// @see <a href="https://doi.org/10.1145/512274.3734138">Williams, "Algorithm 232: Heapsort", CACM 1964</a>
 public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> {
     protected final Comparator<? super E> cmp;
     protected final List<E> nodes;

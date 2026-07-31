@@ -8,11 +8,14 @@ import java.io.PrintStream;
 /// Self-adjusting splay tree. Recently accessed elements are moved to the root via splay operations,
 /// providing amortized O(log n) performance.
 ///
+/// <p><b>Real-world use case:</b> Cache implementations, garbage collection algorithms,
+/// and network routing tables with temporal locality of reference.
+///
 /// Complexity Analysis:
 /// Time Complexity: O(log n) amortized for search/insert/delete
 /// Auxiliary Space: O(1)
 ///
-/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/splay-tree/)
+/// @see <a href="https://doi.org/10.1145/3828.3835">Sleator &amp; Tarjan, 1985, Self-adjusting binary search trees (JACM)</a>
 public class SplayTree<T extends Comparable<T>> implements TreeInterface {
 
     SplayTreeNode<T> root;

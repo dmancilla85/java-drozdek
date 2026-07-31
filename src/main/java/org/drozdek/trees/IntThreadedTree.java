@@ -8,11 +8,14 @@ import java.io.PrintStream;
 /// In-threaded binary tree with threaded inorder traversal. Uses successor threads to perform
 /// efficient in-order traversal without recursion or a stack.
 ///
+/// <p><b>Real-world use case:</b> Constrained embedded environments where a call stack
+/// is unavailable or too expensive, such as in-kernel data structure traversals.
+///
 /// Complexity Analysis:
 /// Time Complexity: O(n) for traversal, O(log n) for search/insert on balanced
 /// Auxiliary Space: O(1) for traversal, O(1) for insert
 ///
-/// Source: [Geeks for Geeks](https://www.geeksforgeeks.org/threaded-binary-tree/)
+/// @see <a href="https://doi.org/10.1145/367177.367202">Perlis &amp; Thornton, 1960, Symbol manipulation by threaded lists (ACM)</a>
 public class IntThreadedTree implements TreeInterface {
     private IntThreadedTreeNode root;
 

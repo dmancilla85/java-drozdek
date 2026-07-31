@@ -4,7 +4,7 @@
 
 ```bash
 mvn clean package           # full build + tests + coverage report
-mvn test                    # run all tests (754)
+mvn test                    # run all tests (795)
 mvn test -Dtest=FooTest     # single test class
 mvn validate                # checkstyle (Google Checks, fails on error)
 mvn jacoco:report           # coverage → target/site/jacoco/
@@ -19,7 +19,7 @@ JaCoCo report auto-generates at `test` phase (no separate step needed for local 
 
 Single-module Maven project. Java 25, JUnit Jupiter 6.0.3, JaCoCo 0.8.14. Two dependencies: JUnit (test) and `moby-names-generator` (SuffixTree uses it for random names).
 
-Source mirrors under `src/test/java/org/drozdek/`. 75 test files, 754 tests, 90% instruction coverage.
+Source mirrors under `src/test/java/org/drozdek/`. 82 test files, 795 tests, 90% instruction coverage.
 
 Branch is `master`, not `main`.
 
@@ -28,9 +28,10 @@ Branch is `master`, not `main`.
 | src/main/org/drozdek/ | Contains |
 |---|---|
 | `sorting/` `searching/` | Algorithm implementations (static utility classes, most with private constructors) |
-| `trees/` | 14 tree types + `nodes/` subpackage for node classes |
+| `trees/` | 15 tree types + `nodes/` subpackage for node classes |
 | `lists/` | Linked list variants + `nodes/` and `iterators/` |
 | `dynamic/` | Knapsack + task scheduling |
+| `hashing/` | Hash table with separate chaining |
 | `graphs/unlam/` | Graph ADT, algorithms (Dijkstra, Prim-Jarnik, Kruskal, Floyd-Warshall) |
 | `stacks/` | Stack implementations |
 | `queues/` + `queues/unlam/` | Queue implementations |
@@ -48,4 +49,4 @@ Branch is `master`, not `main`.
 
 ## Coverage
 
-90% target (instruction). Uncovered files cluster in `IntSkipList`, `BruteForceClosestPair`, `SuffixTree`, and `Trie` — these are the highest-ROI targets for new tests.
+90% target (instruction). Lowest coverage today: `BruteForceClosestPair` (~16%), `RedBlackTree` (~77%), `Deque` (~76%), plus 0%-covered node classes (`DoubleLinkedListNode`, `SingleLinkedListNode`, `IntSkipListNode`) — the highest-ROI targets for new tests.

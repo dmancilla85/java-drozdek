@@ -9,7 +9,14 @@ import java.util.Deque;
 /// The structure of Expression Tree is a binary tree to evaluate certain expressions. All leaves of the Expression Tree
 /// have a number string value. All non-leaves of the Expression Tree have an operator string value.
 ///
-/// Source: [Here](https://wxx5433.gitbooks.io/interview-preparation/content/part_ii_leetcode_lintcode/stack/expression_tree_build.html)
+/// <p><b>Real-world use case:</b> Expression evaluation in calculators, compilers, and
+/// spreadsheet engines where postfix notation represents arithmetic operations.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(n) for construction and evaluation
+/// Auxiliary Space: O(n) for storage
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
 public class ExpressionTree implements TreeInterface {
     final ExpressionTreeNode root;
 

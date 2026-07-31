@@ -1,4 +1,4 @@
-package org.drozdek.graphs.unlam;
+package org.drozdek.graphs;
 
 public class FlowNetwork {
     private final int[][] capacity;

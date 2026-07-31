@@ -5,7 +5,16 @@ import org.drozdek.stacks.interfaces.StackInterface;
 import java.util.EmptyStackException;
 import java.util.LinkedList;
 
-/// Stack implemented as a linked list.
+/// Stack backed by Java's LinkedList (doubly-linked list).
+///
+/// <p><b>Real-world use case:</b> General-purpose LIFO storage where
+/// peak memory usage is unpredictable.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) for push and pop
+/// Auxiliary Space: O(n) for storing n elements
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
 public class LinkedListStack<T> implements StackInterface<T> {
     private final LinkedList<T> pool;
 
