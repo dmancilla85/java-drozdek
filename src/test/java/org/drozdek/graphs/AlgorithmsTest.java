@@ -1,5 +1,8 @@
 package org.drozdek.graphs;
 
+import org.drozdek.graphs.algorithms.ConstructionAlgorithms;
+import org.drozdek.graphs.algorithms.ShortestPathAlgorithms;
+import org.drozdek.graphs.algorithms.StructuralAlgorithms;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

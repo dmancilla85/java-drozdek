@@ -5,7 +5,7 @@ import org.drozdek.commons.LoggerService;
 /// @author David
 public class WeightedGraph extends Graph {
 
-    protected int[][] weightTable;
+    public int[][] weightTable;
 
     /// @param n
     public WeightedGraph(int n) {

@@ -31,6 +31,8 @@ class DequeTest {
         assertEquals(1, deque.size());
         assertEquals("a", deque.peekFirst());
         assertEquals("a", deque.peekLast());
+
+        deque.print();
     }
 
     @Test
@@ -50,6 +52,8 @@ class DequeTest {
         assertEquals("a", deque.removeFirst());
         assertEquals(1, deque.size());
         assertEquals("b", deque.peekFirst());
+
+        deque.print();
     }
 
     @Test
@@ -60,6 +64,8 @@ class DequeTest {
         assertEquals("b", deque.removeLast());
         assertEquals(1, deque.size());
         assertEquals("a", deque.peekLast());
+
+        deque.print();
     }
 
     @Test

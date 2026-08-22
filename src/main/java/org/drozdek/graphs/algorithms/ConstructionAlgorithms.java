@@ -1,4 +1,4 @@
-package org.drozdek.graphs;
+package org.drozdek.graphs.algorithms;
 
 import java.time.Clock;
 import java.util.Arrays;
@@ -6,6 +6,7 @@ import java.util.Arrays;
 import static java.time.ZoneId.systemDefault;
 
 import org.drozdek.commons.LoggerService;
+import org.drozdek.graphs.*;
 import org.drozdek.trees.MinimumHeap;
 
 public final class ConstructionAlgorithms {
@@ -51,14 +52,14 @@ public final class ConstructionAlgorithms {
         int edgesInTree = 0;
         while (!heap.isEmpty() && edgesInTree < g.cardinality() - 1) {
             Edge e = heap.extractMin();
-            int dest = e.destination.key;
+            int dest = e.getDestination().getKey();
 
             if (visited[dest]) {
                 continue;
             }
 
             visited[dest] = true;
-            newGraph.createEdge(e.origin.key, dest, e.weight);
+            newGraph.createEdge(e.getOrigin().getKey(), dest, e.getWeight());
             edgesInTree++;
 
             for (int i = 0; i < g.cardinality(); i++) {
@@ -114,12 +115,12 @@ public final class ConstructionAlgorithms {
         while (!queue.isEmpty() && edgesInTree < g.cardinality() - 1) {
             Edge e = queue.extractMin();
 
-            int u = DisjointSetUtils.find(parent, e.origin.key);
-            int v = DisjointSetUtils.find(parent, e.destination.key);
+            int u = DisjointSetUtils.find(parent, e.getOrigin().getKey());
+            int v = DisjointSetUtils.find(parent, e.getDestination().getKey());
 
             if (u != v) {
                 parent[u] = v;
-                newGraph.createEdge(e.origin.key, e.destination.key, e.weight);
+                newGraph.createEdge(e.getOrigin().getKey(), e.getDestination().getKey(), e.getWeight());
                 edgesInTree++;
             }
         }

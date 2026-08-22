@@ -1,4 +1,8 @@
-package org.drozdek.graphs;
+package org.drozdek.graphs.algorithms;
+
+import org.drozdek.graphs.Heuristic;
+import org.drozdek.graphs.WeightedDigraph;
+import org.drozdek.graphs.WeightedGraph;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +42,7 @@ public final class ShortestPathAlgorithms {
     /// location to every other intersection in the map.
     ///
     /// Reference: Dijkstra, E. W. (1959). "A note on two problems in connexion with
-    /// graphs." Numerische Mathematik 1: 269–271. https://doi.org/10.1007/BF01386390
+    /// graphs." Numerische Mathematik 1: 269–271. [...](https://doi.org/10.1007/BF01386390)
     ///
     /// @param g       weighted directed graph
     /// @param inicial source vertex
@@ -144,9 +148,9 @@ public final class ShortestPathAlgorithms {
     /// real-time route optimization across a fleet of vehicles.
     ///
     /// Reference: Floyd, R. W. (1962). "Algorithm 97: Shortest path."
-    /// Communications of the ACM 5(6): 345. https://doi.org/10.1145/367766.368168
+    /// Communications of the ACM 5(6): 345. [...](https://doi.org/10.1145/367766.368168)
     /// Reference: Warshall, S. (1962). "A theorem on Boolean matrices."
-    /// Journal of the ACM 9(1): 11–12. https://doi.org/10.1145/321105.321107
+    /// Journal of the ACM 9(1): 11–12. [...](https://doi.org/10.1145/321105.321107)
     ///
     /// @param g weighted graph
     /// @return matrix of shortest distances between every pair of vertices
@@ -197,7 +201,7 @@ public final class ShortestPathAlgorithms {
     /// Reference: Hart, P. E., Nilsson, N. J. & Raphael, B. (1968). "A formal basis
     /// for the heuristic determination of minimum cost paths."
     /// IEEE Trans. Systems Science and Cybernetics 4(2): 100–107.
-    /// https://doi.org/10.1109/TSSC.1968.300136
+    /// [...](https://doi.org/10.1109/TSSC.1968.300136)
     ///
     /// @param g       an undirected weighted graph
     /// @param source  source vertex

@@ -1,4 +1,6 @@
-package org.drozdek.graphs;
+package org.drozdek.graphs.algorithms;
+
+import org.drozdek.graphs.*;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -25,7 +27,7 @@ public final class StructuralAlgorithms {
     ///
     /// Reference: Galler, B. A. & Fisher, M. J. (1964). "An improved equivalence
     /// algorithm." Communications of the ACM 7(5): 301–303.
-    /// https://doi.org/10.1145/364099.364331
+    /// [...](https://doi.org/10.1145/364099.364331)
     ///
     /// @param g an undirected unweighted graph
     /// @return true if the graph contains at least one cycle
@@ -41,8 +43,8 @@ public final class StructuralAlgorithms {
         }
 
         for (Edge e : g.edges) {
-            int u = DisjointSetUtils.find(parent, e.origin.key);
-            int v = DisjointSetUtils.find(parent, e.destination.key);
+            int u = DisjointSetUtils.find(parent, e.getOrigin().getKey());
+            int v = DisjointSetUtils.find(parent, e.getDestination().getKey());
 
             if (u == v) {
                 return true;
@@ -75,8 +77,8 @@ public final class StructuralAlgorithms {
         }
 
         for (Edge e : g.edges) {
-            int u = DisjointSetUtils.find(parent, e.origin.key);
-            int v = DisjointSetUtils.find(parent, e.destination.key);
+            int u = DisjointSetUtils.find(parent, e.getOrigin().getKey());
+            int v = DisjointSetUtils.find(parent, e.getDestination().getKey());
 
             if (u == v) {
                 return true;
@@ -100,7 +102,7 @@ public final class StructuralAlgorithms {
     /// resources form a directed wait-for graph; a cycle indicates a deadlock.
     ///
     /// Reference: Tarjan, R. (1972). "Depth-first search and linear graph algorithms."
-    /// SIAM Journal on Computing 1(2): 146–160. https://doi.org/10.1137/0201010
+    /// SIAM Journal on Computing 1(2): 146–160. [...](https://doi.org/10.1137/0201010)
     ///
     /// @param g a directed graph
     /// @return true if the graph contains at least one cycle
@@ -153,7 +155,7 @@ public final class StructuralAlgorithms {
     /// course prerequisite scheduling, task scheduling in project management.
     ///
     /// Reference: Kahn, A. B. (1962). "Topological sorting of large networks."
-    /// Communications of the ACM 5(11): 558–562. https://doi.org/10.1145/368996.369025
+    /// Communications of the ACM 5(11): 558–562. [...](https://doi.org/10.1145/368996.369025)
     ///
     /// @param g a directed graph
     /// @return topological ordering of vertices, or empty list if a cycle exists
@@ -211,7 +213,7 @@ public final class StructuralAlgorithms {
     /// garbage collection, formal verification of concurrent systems.
     ///
     /// Reference: Tarjan, R. (1972). "Depth-first search and linear graph algorithms."
-    /// SIAM Journal on Computing 1(2): 146–160. https://doi.org/10.1137/0201010
+    /// SIAM Journal on Computing 1(2): 146–160. [...](https://doi.org/10.1137/0201010)
     ///
     /// @param g a directed graph
     /// @return list of strongly connected components (each is a list of vertex indices)
@@ -281,7 +283,7 @@ public final class StructuralAlgorithms {
     ///
     /// Reference: Tarjan, R. E. (1974). "A note on finding the bridges of a graph."
     /// Information Processing Letters 2(6): 160–161.
-    /// https://doi.org/10.1016/0020-0190(74)90003-9
+    /// [...](https://doi.org/10.1016/0020-0190(74)90003-9)
     ///
     /// @param g an undirected unweighted graph
     /// @return list of articulation point vertex indices

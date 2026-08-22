@@ -13,8 +13,8 @@ public class WeightedDigraph implements Digraph {
 
     protected List<Vertex> v;
     protected List<Vertex>[] adjacencyList;
-    protected byte[][] adjacencyMatrix;
-    protected int[][] weightTable;
+    public byte[][] adjacencyMatrix;
+    public int[][] weightTable;
     protected int totalArcs;
 
     public WeightedDigraph(int n) {

@@ -15,9 +15,9 @@ import static java.time.ZoneId.systemDefault;
 /// @author David
 public class Graph {
 
-    protected List<Vertex> vertices;
-    protected List<Edge> edges;
-    protected byte[][] adjacencyMatrix;
+    public List<Vertex> vertices;
+    public List<Edge> edges;
+    public byte[][] adjacencyMatrix;
 
 
     public Graph() {
