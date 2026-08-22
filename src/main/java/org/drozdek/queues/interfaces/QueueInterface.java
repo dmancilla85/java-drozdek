@@ -4,7 +4,7 @@ import org.drozdek.commons.DataTypeInterface;
 
 /// Interface defining First-In-First-Out (FIFO) queue operations.
 ///
-/// <p><b>Real-world use case:</b> Task scheduling, breadth-first search,
+/// **Real-world use case:** Task scheduling, breadth-first search,
 /// and print job spooling.
 ///
 /// Complexity Analysis:

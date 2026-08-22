@@ -3,7 +3,7 @@ package org.drozdek.queues.interfaces;
 
 /// Interface defining standard queue operations (FIFO).
 ///
-/// <p><b>Real-world use case:</b> Request queuing in web servers,
+/// **Real-world use case:** Request queuing in web servers,
 /// message buffering in producer-consumer patterns.
 ///
 /// Complexity Analysis:

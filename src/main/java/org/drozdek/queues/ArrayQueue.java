@@ -6,9 +6,9 @@ import java.util.Arrays;
 
 /// Array-based circular queue implementation.
 ///
-/// <p><b>Abstract Data Type:</b> Queue (FIFO - First In, First Out)
+/// **Abstract Data Type:** Queue (FIFO - First In, First Out)
 ///
-/// <p><b>Real-world use case:</b> Ring buffers in audio processing,
+/// **Real-world use case:** Ring buffers in audio processing,
 /// bounded buffers in producer-consumer systems.
 ///
 /// Complexity Analysis:

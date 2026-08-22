@@ -2,6 +2,9 @@ package org.drozdek.graphs.algorithms;
 
 import java.time.Clock;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Objects;
+import java.util.Queue;
 
 import static java.time.ZoneId.systemDefault;
 
@@ -11,6 +14,28 @@ import org.drozdek.trees.MinimumHeap;
 
 public final class ConstructionAlgorithms {
     private ConstructionAlgorithms() {
+    }
+
+    private static void validateVertexIndices(int cardinality, int... vertices) {
+        for (int v : vertices) {
+            Objects.checkIndex(v, cardinality);
+        }
+    }
+
+    /// Loads every edge incident to the start vertex into the frontier heap.
+    ///
+    /// @param g       an undirected weighted graph
+    /// @param inicial starting vertex
+    /// @return min-heap seeded with the edges leaving the starting vertex
+    private static MinimumHeap<Edge> seedFrontierHeap(WeightedGraph g, int inicial) {
+        MinimumHeap<Edge> heap = new MinimumHeap<>(g.countEdges());
+        for (int i = 0; i < g.cardinality(); i++) {
+            if (g.adjacencyMatrix[inicial][i] == 1) {
+                heap.insert(new Edge(g.vertices.get(inicial), g.vertices.get(i),
+                        g.weightTable[inicial][i]));
+            }
+        }
+        return heap;
     }
 
     /// Prim-Jarník minimum spanning tree algorithm.
@@ -35,19 +60,13 @@ public final class ConstructionAlgorithms {
     /// @param inicial starting vertex
     /// @return minimum spanning tree
     public static WeightedGraph primJarnikAlgorithm(WeightedGraph g, int inicial) {
+        validateVertexIndices(g.cardinality(), inicial);
 
         WeightedGraph newGraph = new WeightedGraph(g.cardinality());
         boolean[] visited = new boolean[g.cardinality()];
-        MinimumHeap<Edge> heap = new MinimumHeap<>(g.countEdges());
+        MinimumHeap<Edge> heap = seedFrontierHeap(g, inicial);
 
         visited[inicial] = true;
-
-        for (int i = 0; i < g.cardinality(); i++) {
-            if (g.adjacencyMatrix[inicial][i] == 1) {
-                heap.insert(new Edge(g.vertices.get(inicial), g.vertices.get(i),
-                        g.weightTable[inicial][i]));
-            }
-        }
 
         int edgesInTree = 0;
         while (!heap.isEmpty() && edgesInTree < g.cardinality() - 1) {
@@ -128,6 +147,62 @@ public final class ConstructionAlgorithms {
         return newGraph;
     }
 
+    /// Finds the shortest augmenting path from source to sink using BFS over
+    /// residual capacities.
+    ///
+    /// @param capacity capacity matrix
+    /// @param flow     current flow matrix
+    /// @param source   source vertex
+    /// @param sink     sink vertex
+    /// @return parent array encoding the path (parent[sink] == -1 when none exists)
+    private static int[] findAugmentingPath(int[][] capacity, int[][] flow,
+                                            int source, int sink) {
+        int n = capacity.length;
+        int[] parent = new int[n];
+        Arrays.fill(parent, -1);
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(source);
+        parent[source] = source;
+
+        while (!queue.isEmpty() && parent[sink] == -1) {
+            int u = queue.poll();
+            for (int v = 0; v < n; v++) {
+                if (parent[v] == -1 && capacity[u][v] - flow[u][v] > 0) {
+                    parent[v] = u;
+                    queue.add(v);
+                }
+            }
+        }
+
+        return parent;
+    }
+
+    /// Pushes the bottleneck amount along the augmenting path encoded by the
+    /// parent array.
+    ///
+    /// @param capacity  capacity matrix
+    /// @param flow      current flow matrix, mutated in place
+    /// @param parent    parent array from the BFS phase
+    /// @param source    source vertex
+    /// @param sink      sink vertex
+    /// @return the amount of flow pushed along the path
+    private static int pushFlowAlongPath(int[][] capacity, int[][] flow, int[] parent,
+                                         int source, int sink) {
+        int bottleneck = Integer.MAX_VALUE;
+        for (int v = sink; v != source; v = parent[v]) {
+            int u = parent[v];
+            bottleneck = Math.min(bottleneck, capacity[u][v] - flow[u][v]);
+        }
+
+        for (int v = sink; v != source; v = parent[v]) {
+            int u = parent[v];
+            flow[u][v] += bottleneck;
+            flow[v][u] -= bottleneck;
+        }
+
+        return bottleneck;
+    }
+
     /// Edmonds-Karp maximum flow algorithm (Edmonds & Karp, 1972).
     ///
     /// Uses BFS to find the shortest augmenting path at each iteration.
@@ -155,39 +230,13 @@ public final class ConstructionAlgorithms {
         int maxFlow = 0;
 
         while (true) {
-            int[] parent = new int[n];
-            Arrays.fill(parent, -1);
-            java.util.Queue<Integer> queue = new java.util.LinkedList<>();
-            queue.add(source);
-            parent[source] = source;
-
-            while (!queue.isEmpty() && parent[sink] == -1) {
-                int u = queue.poll();
-                for (int v = 0; v < n; v++) {
-                    if (parent[v] == -1 && capacity[u][v] - flow[u][v] > 0) {
-                        parent[v] = u;
-                        queue.add(v);
-                    }
-                }
-            }
+            int[] parent = findAugmentingPath(capacity, flow, source, sink);
 
             if (parent[sink] == -1) {
                 break;
             }
 
-            int bottleneck = Integer.MAX_VALUE;
-            for (int v = sink; v != source; v = parent[v]) {
-                int u = parent[v];
-                bottleneck = Math.min(bottleneck, capacity[u][v] - flow[u][v]);
-            }
-
-            for (int v = sink; v != source; v = parent[v]) {
-                int u = parent[v];
-                flow[u][v] += bottleneck;
-                flow[v][u] -= bottleneck;
-            }
-
-            maxFlow += bottleneck;
+            maxFlow += pushFlowAlongPath(capacity, flow, parent, source, sink);
         }
 
         return maxFlow;

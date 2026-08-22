@@ -6,7 +6,7 @@ import java.util.List;
 /// Solves the 0/1 knapsack problem using dynamic programming.
 /// Each item may be taken at most once (hence "0/1").
 ///
-/// <p><b>Real-world use case:</b> Resource allocation in cloud computing
+/// **Real-world use case:** Resource allocation in cloud computing
 /// where each job consumes a fixed amount of memory and must either be
 /// accepted or rejected; cargo loading; budget-constrained project selection.
 ///
@@ -65,7 +65,7 @@ public final class ZeroOneKnapsack {
     ///
     /// @param items    List of items (each with weight and value)
     /// @param capacity Maximum weight capacity
-    /// @return A {@link Result} containing the optimal value and which items were taken
+    /// @return A [Result] containing the optimal value and which items were taken
     public static Result solve(List<KnapsackItem> items, int capacity) {
         int n = items.size();
         int[][] dp = new int[n + 1][capacity + 1];

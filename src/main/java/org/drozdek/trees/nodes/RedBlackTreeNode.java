@@ -87,7 +87,7 @@ public class RedBlackTreeNode<T extends Comparable<T>> {
     }
 
     /// Renders the subtree rooted at this node as an indented tree diagram,
-    /// annotating every line with the node colour ({@code [R]} or {@code [B]}).
+    /// annotating every line with the node colour (`[R]` or `[B]`).
     private void print(StringBuilder buffer, String prefix, String childrenPrefix) {
         buffer.append(prefix);
         buffer.append(this.key).append(" [").append(isRed() ? 'R' : 'B').append(']');

@@ -8,7 +8,7 @@ import java.io.PrintStream;
 /// Self-adjusting splay tree. Recently accessed elements are moved to the root via splay operations,
 /// providing amortized O(log n) performance.
 ///
-/// <p><b>Real-world use case:</b> Cache implementations, garbage collection algorithms,
+/// **Real-world use case:** Cache implementations, garbage collection algorithms,
 /// and network routing tables with temporal locality of reference.
 ///
 /// Complexity Analysis:
@@ -143,17 +143,23 @@ public class SplayTree<T extends Comparable<T>> implements TreeInterface {
     }
 
     private void rotateLeft(SplayTreeNode<T> p) {
-        p.getParent().setRight(p.getLeft());
-        p.setLeft(p.getParent());
+        SplayTreeNode<T> parent = p.getParent();
+        if (parent == null)
+            return;
+        parent.setRight(p.getLeft());
+        p.setLeft(parent);
 
-        continueRotation(p.getParent().getParent(), p.getLeft(), p, p.getLeft().getRight());
+        continueRotation(parent.getParent(), p.getLeft(), p, p.getLeft().getRight());
     }
 
     private void rotateRight(SplayTreeNode<T> p) {
-        p.getParent().setLeft(p.getRight());
-        p.setRight(p.getParent());
+        SplayTreeNode<T> parent = p.getParent();
+        if (parent == null)
+            return;
+        parent.setLeft(p.getRight());
+        p.setRight(parent);
 
-        continueRotation(p.getParent().getParent(), p.getRight(), p, p.getRight().getLeft());
+        continueRotation(parent.getParent(), p.getRight(), p, p.getRight().getLeft());
     }
 
     public T search(SplayTreeNode<T> p, T element) {

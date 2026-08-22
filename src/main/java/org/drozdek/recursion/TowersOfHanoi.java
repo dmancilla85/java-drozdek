@@ -4,7 +4,7 @@ import org.drozdek.commons.LoggerService;
 
 /// Solves the classic Towers of Hanoi puzzle using recursion.
 ///
-/// <p><b>Real-world use case:</b> Backup rotation schemes (the Tower of Hanoi
+/// **Real-world use case:** Backup rotation schemes (the Tower of Hanoi
 /// rotation pattern is used for rotating backup media), elevator dispatching,
 /// and teaching recursive problem decomposition.
 ///
@@ -35,10 +35,15 @@ public final class TowersOfHanoi {
             return;
         }
 
-        solve(n - 1, from, aux, to, moves);
+        char firstLegDestination = aux;
+        char firstLegBuffer = to;
+        solve(n - 1, from, firstLegDestination, firstLegBuffer, moves);
+
         moves[0]++;
         LoggerService.logInfo("Move disk " + n + " from " + from + " to " + to);
-        solve(n - 1, aux, to, from, moves);
+
+        char secondLegOrigin = aux;
+        solve(n - 1, secondLegOrigin, to, from, moves);
     }
 
     /// Convenience overload that initialises the move counter internally.
@@ -54,7 +59,7 @@ public final class TowersOfHanoi {
         return moves[0];
     }
 
-    /// Returns the minimum number of moves required for {@code n} disks
+    /// Returns the minimum number of moves required for `n` disks
     /// without executing the algorithm (closed-form solution).
     ///
     /// @param n Number of disks

@@ -10,7 +10,7 @@ import java.time.ZoneId;
 /// Stack that adapts between array-based (static) and linked-list (dynamic)
 /// representation based on the number of elements.
 ///
-/// <p><b>Real-world use case:</b> Memory-constrained embedded systems where
+/// **Real-world use case:** Memory-constrained embedded systems where
 /// the optimal data structure depends on runtime workload characteristics.
 ///
 /// Complexity Analysis:

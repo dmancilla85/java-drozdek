@@ -7,7 +7,7 @@ import org.drozdek.trees.nodes.HeapNode;
 /// Array-based static binary tree. Uses an array to store HeapNode elements with implicit parent-child
 /// indexing (left child at 2*parent, right child at 2*parent+1).
 ///
-/// <p><b>Real-world use case:</b> Segment trees for range queries and binary-heap
+/// **Real-world use case:** Segment trees for range queries and binary-heap
 /// storage where node positions are computed arithmetically rather than via pointers.
 ///
 /// Complexity Analysis:
@@ -63,30 +63,20 @@ public class StaticBinaryTree implements TreeInterface {
     }
 
     public boolean setRightmostChild(HeapNode node) {
-        try {
-            if ((size - 1) % 2 != 0)
-                tree[size - 1] = node;
-            else
-                tree[size - 2] = node;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            LoggerService.logError(e.getMessage());
+        int index = (size - 1) % 2 != 0 ? size - 1 : size - 2;
+        if (index < 0 || index >= CAPACITY) {
             return false;
         }
-
+        tree[index] = node;
         return true;
     }
 
     public boolean setLeftmostChild(HeapNode node) {
-        try {
-            if ((size - 1) % 2 == 0)
-                tree[size - 1] = node;
-            else
-                tree[size - 2] = node;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            LoggerService.logError(e.getMessage());
+        int index = (size - 1) % 2 == 0 ? size - 1 : size - 2;
+        if (index < 0 || index >= CAPACITY) {
             return false;
         }
-
+        tree[index] = node;
         return true;
     }
 

@@ -57,7 +57,7 @@ public final class StructuralAlgorithms {
 
     /// Detects cycles in an undirected weighted graph.
     ///
-    /// Identical algorithm to {@link #cycleDetector(Graph)} since WeightedGraph
+    /// Identical algorithm to [cycleDetector(Graph)] since WeightedGraph
     /// inherits the edge list from Graph. Edge weights do not affect cycle detection.
     ///
     /// Reference: Galler, B. A. & Fisher, M. J. (1964). "An improved equivalence
@@ -142,6 +142,25 @@ public final class StructuralAlgorithms {
         return false;
     }
 
+    /// Counts incoming arcs for every vertex of the graph.
+    ///
+    /// @param g a directed graph
+    /// @param n number of vertices
+    /// @return array with the in-degree of each vertex
+    private static int[] computeInDegrees(Digraph g, int n) {
+        int[] inDegree = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (g.hasArc(i, j)) {
+                    inDegree[j]++;
+                }
+            }
+        }
+
+        return inDegree;
+    }
+
     /// Topological sort (Kahn's algorithm, 1962).
     ///
     /// Processes vertices with in-degree zero iteratively. Each time a vertex is
@@ -161,15 +180,7 @@ public final class StructuralAlgorithms {
     /// @return topological ordering of vertices, or empty list if a cycle exists
     public static List<Integer> topologicalSort(Digraph g) {
         int n = g.cardinality();
-        int[] inDegree = new int[n];
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (g.hasArc(i, j)) {
-                    inDegree[j]++;
-                }
-            }
-        }
+        int[] inDegree = computeInDegrees(g, n);
 
         Queue<Integer> queue = new LinkedList<>();
         for (int i = 0; i < n; i++) {
@@ -219,54 +230,62 @@ public final class StructuralAlgorithms {
     /// @return list of strongly connected components (each is a list of vertex indices)
     public static List<List<Integer>> stronglyConnectedComponents(Digraph g) {
         int n = g.cardinality();
-        int[] index = new int[n];
-        int[] lowlink = new int[n];
-        boolean[] onStack = new boolean[n];
-        Deque<Integer> stack = new ArrayDeque<>();
-        List<List<Integer>> components = new ArrayList<>();
-        int[] currentIndex = {0};
-
-        Arrays.fill(index, -1);
+        TarjanState state = new TarjanState(n);
 
         for (int i = 0; i < n; i++) {
-            if (index[i] == -1) {
-                tarjanScc(g, i, index, lowlink, onStack, stack, components, currentIndex);
+            if (state.index[i] == -1) {
+                tarjanScc(g, i, state);
             }
         }
 
-        return components;
+        return state.components;
     }
 
-    private static void tarjanScc(Digraph g, int v, int[] index, int[] lowlink,
-                                   boolean[] onStack, Deque<Integer> stack,
-                                   List<List<Integer>> components, int[] currentIndex) {
-        index[v] = currentIndex[0];
-        lowlink[v] = currentIndex[0];
-        currentIndex[0]++;
-        stack.push(v);
-        onStack[v] = true;
+    /// Mutable DFS state shared across the recursive Tarjan traversal.
+    private static final class TarjanState {
+        private final int[] index;
+        private final int[] lowlink;
+        private final boolean[] onStack;
+        private final Deque<Integer> stack = new ArrayDeque<>();
+        private final List<List<Integer>> components = new ArrayList<>();
+        private int counter;
+
+        private TarjanState(int n) {
+            index = new int[n];
+            lowlink = new int[n];
+            onStack = new boolean[n];
+            Arrays.fill(index, -1);
+        }
+    }
+
+    private static void tarjanScc(Digraph g, int v, TarjanState state) {
+        state.index[v] = state.counter;
+        state.lowlink[v] = state.counter;
+        state.counter++;
+        state.stack.push(v);
+        state.onStack[v] = true;
 
         for (int u = 0; u < g.cardinality(); u++) {
             if (!g.hasArc(v, u)) {
                 continue;
             }
-            if (index[u] == -1) {
-                tarjanScc(g, u, index, lowlink, onStack, stack, components, currentIndex);
-                lowlink[v] = Math.min(lowlink[v], lowlink[u]);
-            } else if (onStack[u]) {
-                lowlink[v] = Math.min(lowlink[v], index[u]);
+            if (state.index[u] == -1) {
+                tarjanScc(g, u, state);
+                state.lowlink[v] = Math.min(state.lowlink[v], state.lowlink[u]);
+            } else if (state.onStack[u]) {
+                state.lowlink[v] = Math.min(state.lowlink[v], state.index[u]);
             }
         }
 
-        if (lowlink[v] == index[v]) {
+        if (state.lowlink[v] == state.index[v]) {
             List<Integer> component = new ArrayList<>();
             int w;
             do {
-                w = stack.pop();
-                onStack[w] = false;
+                w = state.stack.pop();
+                state.onStack[w] = false;
                 component.add(w);
             } while (w != v);
-            components.add(component);
+            state.components.add(component);
         }
     }
 

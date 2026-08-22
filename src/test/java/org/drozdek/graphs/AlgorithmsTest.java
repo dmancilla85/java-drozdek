@@ -236,7 +236,9 @@ class AlgorithmsTest {
         g.createArc(1, 2, -3);
         g.createArc(2, 0, 1);
 
-        assertNull(ShortestPathAlgorithms.bellmanFordAlgorithm(g, 0));
+        Integer[] dist = ShortestPathAlgorithms.bellmanFordAlgorithm(g, 0);
+        assertNotNull(dist);
+        assertEquals(0, dist.length);
     }
 
     @Test

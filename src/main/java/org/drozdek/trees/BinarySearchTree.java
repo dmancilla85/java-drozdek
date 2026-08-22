@@ -15,7 +15,7 @@ import java.io.PrintStream;
 /// The left and right subtree each must also be a binary search tree.
 /// There must be no duplicate nodes.
 ///
-/// <p><b>Real-world use case:</b> Symbol tables in compilers and interpreters where
+/// **Real-world use case:** Symbol tables in compilers and interpreters where
 /// identifiers must be inserted and looked up dynamically.
 ///
 /// Complexity Analysis:

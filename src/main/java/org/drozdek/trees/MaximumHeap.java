@@ -8,7 +8,7 @@ import java.util.List;
 /// Maximum heap data structure implemented with an ArrayList. Maintains the max-heap property
 /// where the parent node is always greater than or equal to its children.
 ///
-/// <p><b>Real-world use case:</b> Job scheduling in operating systems where the highest-priority
+/// **Real-world use case:** Job scheduling in operating systems where the highest-priority
 /// task must be processed first.
 ///
 /// Complexity Analysis:

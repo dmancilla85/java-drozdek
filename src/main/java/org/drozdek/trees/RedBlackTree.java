@@ -6,8 +6,8 @@ import org.drozdek.trees.nodes.RedBlackTreeNode;
 /// Red-black tree — a self-balancing binary search tree that guarantees
 /// O(log n) operations by enforcing five colour invariants.
 ///
-/// <p><b>Real-world use case:</b> Backbone of Java's {@link java.util.TreeMap}
-/// and {@link java.util.TreeSet}, Linux kernel Completely Fair Scheduler,
+/// **Real-world use case:** Backbone of Java's [java.util.TreeMap]
+/// and [java.util.TreeSet], Linux kernel Completely Fair Scheduler,
 /// and many in-memory associative containers.
 ///
 /// Complexity Analysis:
@@ -39,7 +39,7 @@ public class RedBlackTree<T extends Comparable<T>> implements TreeInterface {
     /// Searches for a key in the tree.
     ///
     /// @param key Value to find
-    /// @return The key if found, or {@code null}
+    /// @return The key if found, or `null`
     public T search(T key) {
         RedBlackTreeNode<T> node = root;
         while (node != null) {
@@ -54,7 +54,7 @@ public class RedBlackTree<T extends Comparable<T>> implements TreeInterface {
 
     /// Returns the minimum key in the tree.
     ///
-    /// @return The smallest key, or {@code null} if empty
+    /// @return The smallest key, or `null` if empty
     public T minimum() {
         if (root == null) {
             return null;
@@ -68,7 +68,7 @@ public class RedBlackTree<T extends Comparable<T>> implements TreeInterface {
 
     /// Returns the maximum key in the tree.
     ///
-    /// @return The largest key, or {@code null} if empty
+    /// @return The largest key, or `null` if empty
     public T maximum() {
         if (root == null) {
             return null;
@@ -143,6 +143,30 @@ public class RedBlackTree<T extends Comparable<T>> implements TreeInterface {
         }
     }
 
+    /// Restores red-black properties via rotations when the uncle of the
+    /// inserted node is black or absent (zig-zig and zig-zag cases).
+    ///
+    /// @param z red node whose parent is also red
+    private void rebalanceWithBlackUncle(RedBlackTreeNode<T> z) {
+        if (z.getParent() == z.getParent().getParent().getLeft()) {
+            if (z == z.getParent().getRight()) {
+                z = z.getParent();
+                rotateLeft(z);
+            }
+            z.getParent().setColor(RedBlackTreeNode.BLACK);
+            z.getParent().getParent().setColor(RedBlackTreeNode.RED);
+            rotateRight(z.getParent().getParent());
+        } else {
+            if (z == z.getParent().getLeft()) {
+                z = z.getParent();
+                rotateRight(z);
+            }
+            z.getParent().setColor(RedBlackTreeNode.BLACK);
+            z.getParent().getParent().setColor(RedBlackTreeNode.RED);
+            rotateLeft(z.getParent().getParent());
+        }
+    }
+
     private void fixInsert(RedBlackTreeNode<T> z) {
         while (z.getParent() != null && z.getParent().isRed()) {
             RedBlackTreeNode<T> uncle = z.getUncle();
@@ -156,23 +180,8 @@ public class RedBlackTree<T extends Comparable<T>> implements TreeInterface {
                 z = g;
             } else {
                 // Cases 2 & 3: rotations
-                if (z.getParent() == z.getParent().getParent().getLeft()) {
-                    if (z == z.getParent().getRight()) {
-                        z = z.getParent();
-                        rotateLeft(z);
-                    }
-                    z.getParent().setColor(RedBlackTreeNode.BLACK);
-                    z.getParent().getParent().setColor(RedBlackTreeNode.RED);
-                    rotateRight(z.getParent().getParent());
-                } else {
-                    if (z == z.getParent().getLeft()) {
-                        z = z.getParent();
-                        rotateRight(z);
-                    }
-                    z.getParent().setColor(RedBlackTreeNode.BLACK);
-                    z.getParent().getParent().setColor(RedBlackTreeNode.RED);
-                    rotateLeft(z.getParent().getParent());
-                }
+                rebalanceWithBlackUncle(z);
+                break;
             }
         }
         root.setColor(RedBlackTreeNode.BLACK);

@@ -7,7 +7,7 @@ import org.drozdek.trees.nodes.SuffixTreeNode;
 /// Ukkonen's suffix tree implementation. Builds a suffix tree in linear time for efficient
 /// substring and pattern matching operations.
 ///
-/// <p><b>Real-world use case:</b> Genome sequence alignment, plagiarism detection
+/// **Real-world use case:** Genome sequence alignment, plagiarism detection
 /// systems, and full-text search engines.
 ///
 /// Complexity Analysis:

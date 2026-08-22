@@ -13,7 +13,7 @@ public class WeightedGraph extends Graph {
         this.weightTable = new int[n][n];
     }
 
-    public static WeightedGraph createRandom(int n, int conexividad) {
+    public static WeightedGraph createRandomWeighted(int n, int conexividad) {
         WeightedGraph al = new WeightedGraph(n);
 
         for (int i = 0; i < n; i++)
@@ -39,7 +39,7 @@ public class WeightedGraph extends Graph {
         g.createEdge('d', 'f', 60);
         g.createEdge('e', 'f', 30);
 
-        WeightedGraph e = createRandom(10, 50);
+        WeightedGraph e = createRandomWeighted(10, 50);
         LoggerService.logInfo(e.getAdjacencyTable().toString());
         LoggerService.logInfo(e.getWeightTable().toString());
         LoggerService.logInfo("Prim");

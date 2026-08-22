@@ -8,7 +8,7 @@ import java.util.List;
 /// Minimum heap data structure implemented with an ArrayList. Maintains the min-heap property
 /// where the parent node is always less than or equal to its children.
 ///
-/// <p><b>Real-world use case:</b> Dijkstra's shortest path algorithm and Huffman coding both
+/// **Real-world use case:** Dijkstra's shortest path algorithm and Huffman coding both
 /// use a min-heap to efficiently extract the smallest element.
 ///
 /// Complexity Analysis:

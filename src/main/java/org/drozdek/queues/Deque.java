@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 /// Double-ended queue (deque) implemented as a doubly-linked list.
 /// Supports insertion and removal at both ends in constant time.
 ///
-/// <p><b>Real-world use case:</b> Sliding window algorithms, undo-redo
+/// **Real-world use case:** Sliding window algorithms, undo-redo
 /// buffers, palindrome checking, and job scheduling with bi-directional
 /// priority.
 ///
@@ -108,7 +108,7 @@ public class Deque<T> implements QueueInterface<T> {
 
     /// Returns (without removing) the front element.
     ///
-    /// @return The front element, or {@code null} if empty
+    /// @return The front element, or `null` if empty
     public T peekFirst() {
         if (isEmpty()) {
             return null;
@@ -118,7 +118,7 @@ public class Deque<T> implements QueueInterface<T> {
 
     /// Returns (without removing) the rear element.
     ///
-    /// @return The rear element, or {@code null} if empty
+    /// @return The rear element, or `null` if empty
     public T peekLast() {
         if (isEmpty()) {
             return null;
@@ -138,7 +138,7 @@ public class Deque<T> implements QueueInterface<T> {
     public T dequeue() {
         try {
             return removeFirst();
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException _) {
             return null;
         }
     }

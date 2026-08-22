@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 /// Stack backed by Java's LinkedList (doubly-linked list).
 ///
-/// <p><b>Real-world use case:</b> General-purpose LIFO storage where
+/// **Real-world use case:** General-purpose LIFO storage where
 /// peak memory usage is unpredictable.
 ///
 /// Complexity Analysis:

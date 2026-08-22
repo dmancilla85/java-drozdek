@@ -9,7 +9,7 @@ import java.util.Deque;
 /// The structure of Expression Tree is a binary tree to evaluate certain expressions. All leaves of the Expression Tree
 /// have a number string value. All non-leaves of the Expression Tree have an operator string value.
 ///
-/// <p><b>Real-world use case:</b> Expression evaluation in calculators, compilers, and
+/// **Real-world use case:** Expression evaluation in calculators, compilers, and
 /// spreadsheet engines where postfix notation represents arithmetic operations.
 ///
 /// Complexity Analysis:

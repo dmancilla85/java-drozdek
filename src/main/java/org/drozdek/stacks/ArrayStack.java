@@ -6,7 +6,7 @@ import java.util.*;
 
 /// Stack backed by an ArrayList with dynamic resizing.
 ///
-/// <p><b>Real-world use case:</b> Undo/redo in text editors,
+/// **Real-world use case:** Undo/redo in text editors,
 /// expression evaluation in calculator applications.
 ///
 /// Complexity Analysis:

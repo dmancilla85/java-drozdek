@@ -9,7 +9,7 @@ import java.util.List;
 
 /// Binary heap priority queue implementation.
 ///
-/// <p><b>Real-world use case:</b> Dijkstra's shortest-path algorithm,
+/// **Real-world use case:** Dijkstra's shortest-path algorithm,
 /// Huffman coding, and real-time task scheduling by priority.
 ///
 /// Complexity Analysis:

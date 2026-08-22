@@ -11,9 +11,14 @@ public class DirectedAcyclicGraph extends DirectedGraph {
         super(n);
     }
 
+    private boolean isValidVertex(int v) {
+        return v >= 0 && v < cardinality();
+    }
+
     @Override
     public boolean createArc(int node1, int node2) {
-        if (adjacencyMatrix[node1][node2] == 1 || node1 == node2) {
+        if (!isValidVertex(node1) || !isValidVertex(node2)
+                || adjacencyMatrix[node1][node2] == 1 || node1 == node2) {
             return false;
         }
 
@@ -30,6 +35,9 @@ public class DirectedAcyclicGraph extends DirectedGraph {
     private boolean canReach(int start, int target) {
         if (start == target) {
             return true;
+        }
+        if (!isValidVertex(start) || !isValidVertex(target)) {
+            return false;
         }
 
         int n = cardinality();

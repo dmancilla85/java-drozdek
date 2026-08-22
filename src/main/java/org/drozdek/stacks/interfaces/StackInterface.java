@@ -6,7 +6,7 @@ import java.util.EmptyStackException;
 
 /// Interface defining Last-In-First-Out (LIFO) stack operations.
 ///
-/// <p><b>Real-world use case:</b> Expression evaluation, syntax parsing,
+/// **Real-world use case:** Expression evaluation, syntax parsing,
 /// and undo/redo systems in text editors.
 ///
 /// Complexity Analysis:

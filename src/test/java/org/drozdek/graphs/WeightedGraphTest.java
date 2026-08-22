@@ -74,7 +74,7 @@ class WeightedGraphTest {
     @Test
     @DisplayName("Create random weighted graph")
     void createRandom() {
-        WeightedGraph g = WeightedGraph.createRandom(5, 50);
+        WeightedGraph g = WeightedGraph.createRandomWeighted(5, 50);
         assertEquals(5, g.cardinality());
     }
 
@@ -100,7 +100,7 @@ class WeightedGraphTest {
     @RepeatedTest(10)
     @DisplayName("Create random graph with edges")
     void createRandomWithEdges() {
-        WeightedGraph g = WeightedGraph.createRandom(5, 100);
+        WeightedGraph g = WeightedGraph.createRandomWeighted(5, 100);
         assertTrue(g.countEdges() >= 0);
     }
 

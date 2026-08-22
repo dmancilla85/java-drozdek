@@ -7,7 +7,7 @@ import java.util.LinkedList;
 /// Queue backed by Java's LinkedList, providing a general-purpose FIFO
 /// implementation.
 ///
-/// <p><b>Real-world use case:</b> Breadth-first search graph traversal,
+/// **Real-world use case:** Breadth-first search graph traversal,
 /// job scheduling in operating systems.
 ///
 /// Complexity Analysis:

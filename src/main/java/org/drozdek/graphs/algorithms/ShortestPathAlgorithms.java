@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public final class ShortestPathAlgorithms {
     private ShortestPathAlgorithms() {
@@ -78,11 +79,54 @@ public final class ShortestPathAlgorithms {
         return d;
     }
 
+    /// Relaxes every arc of the graph once.
+    ///
+    /// @param g    weighted directed graph
+    /// @param dist current shortest-distance estimates, mutated in place
+    /// @param inf  sentinel value representing "no path yet"
+    private static void relaxOnce(WeightedDigraph g, Integer[] dist, int inf) {
+        int n = g.cardinality();
+        for (int u = 0; u < n; u++) {
+            if (dist[u] == inf) {
+                continue;
+            }
+            for (int v = 0; v < n; v++) {
+                if (g.adjacencyMatrix[u][v] == 1
+                        && dist[v] > dist[u] + g.weightTable[u][v]) {
+                    dist[v] = dist[u] + g.weightTable[u][v];
+                }
+            }
+        }
+    }
+
+    /// Detects a reachable negative-weight cycle by attempting one extra
+    /// relaxation pass: if any estimate still improves, a negative cycle exists.
+    ///
+    /// @param g    weighted directed graph
+    /// @param dist current shortest-distance estimates
+    /// @param inf  sentinel value representing "no path yet"
+    /// @return true if a negative cycle is reachable from the source
+    private static boolean hasNegativeCycle(WeightedDigraph g, Integer[] dist, int inf) {
+        int n = g.cardinality();
+        for (int u = 0; u < n; u++) {
+            if (dist[u] == inf) {
+                continue;
+            }
+            for (int v = 0; v < n; v++) {
+                if (g.adjacencyMatrix[u][v] == 1
+                        && dist[v] > dist[u] + g.weightTable[u][v]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /// Bellman-Ford shortest path algorithm (Bellman 1958, Ford 1956).
     ///
     /// Relaxes all edges V-1 times using dynamic programming, then checks for
     /// negative-weight cycles. Handles negative edge weights, unlike Dijkstra.
-    /// Returns null if a negative cycle is reachable from the source.
+    /// Returns an empty array if a negative cycle is reachable from the source.
     ///
     /// Time complexity: O(V·E)
     /// Space complexity: O(V)
@@ -97,7 +141,7 @@ public final class ShortestPathAlgorithms {
     ///
     /// @param g      weighted directed graph
     /// @param source source vertex
-    /// @return array of shortest distances, or null if a negative cycle is detected
+    /// @return array of shortest distances, or an empty array if a negative cycle is detected
     public static Integer[] bellmanFordAlgorithm(WeightedDigraph g, int source) {
         int n = g.cardinality();
         int inf = Integer.MAX_VALUE / 2;
@@ -106,27 +150,32 @@ public final class ShortestPathAlgorithms {
         dist[source] = 0;
 
         for (int i = 1; i < n; i++) {
-            for (int u = 0; u < n; u++) {
-                if (dist[u] == inf) {
-                    continue;
-                }
-                for (int v = 0; v < n; v++) {
-                    if (g.adjacencyMatrix[u][v] == 1
-                            && dist[v] > dist[u] + g.weightTable[u][v]) {
-                        dist[v] = dist[u] + g.weightTable[u][v];
-                    }
-                }
-            }
+            relaxOnce(g, dist, inf);
         }
 
-        for (int u = 0; u < n; u++) {
-            if (dist[u] == inf) {
-                continue;
-            }
-            for (int v = 0; v < n; v++) {
-                if (g.adjacencyMatrix[u][v] == 1
-                        && dist[v] > dist[u] + g.weightTable[u][v]) {
-                    return null;
+        if (hasNegativeCycle(g, dist, inf)) {
+            return new Integer[0];
+        }
+
+        return dist;
+    }
+
+    /// Builds the initial all-pairs distance matrix: zero on the diagonal,
+    /// direct edge weights where arcs exist, and the sentinel elsewhere.
+    ///
+    /// @param g   weighted graph
+    /// @param n   number of vertices
+    /// @param inf sentinel value representing "no path yet"
+    /// @return initialised distance matrix
+    private static int[][] initialiseDistanceMatrix(WeightedGraph g, int n, int inf) {
+        int[][] dist = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(dist[i], inf);
+            dist[i][i] = 0;
+            for (int j = 0; j < n; j++) {
+                if (g.adjacencyMatrix[i][j] == 1) {
+                    dist[i][j] = g.weightTable[i][j];
                 }
             }
         }
@@ -158,20 +207,7 @@ public final class ShortestPathAlgorithms {
 
         int n = g.cardinality();
         int inf = Integer.MAX_VALUE / 2;
-        int[][] dist = new int[n][n];
-
-        for (int i = 0; i < n; i++) {
-            Arrays.fill(dist[i], inf);
-            dist[i][i] = 0;
-        }
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (g.adjacencyMatrix[i][j] == 1) {
-                    dist[i][j] = g.weightTable[i][j];
-                }
-            }
-        }
+        int[][] dist = initialiseDistanceMatrix(g, n, inf);
 
         for (int k = 0; k < n; k++) {
             for (int i = 0; i < n; i++) {
@@ -210,49 +246,77 @@ public final class ShortestPathAlgorithms {
     /// @return list of vertices forming the shortest path, or empty if unreachable
     public static List<Integer> aStarAlgorithm(WeightedGraph g, int source, int target,
                                                Heuristic h) {
-        int n = g.cardinality();
-        int[] gScore = new int[n];
-        int[] fScore = new int[n];
-        int[] parent = new int[n];
-        boolean[] closed = new boolean[n];
-        Arrays.fill(gScore, Integer.MAX_VALUE);
-        Arrays.fill(fScore, Integer.MAX_VALUE);
-        Arrays.fill(parent, -1);
-        gScore[source] = 0;
-        fScore[source] = h.estimate(source, target);
+        validateVertexIndices(g.cardinality(), source, target);
+        return aStarCore(g.cardinality(), g.adjacencyMatrix, g.weightTable,
+                source, target, h);
+    }
+
+    /// A* shortest path on a weighted digraph.
+    ///
+    /// @param g      weighted directed graph
+    /// @param source source vertex
+    /// @param target target vertex
+    /// @param h      admissible heuristic function
+    /// @return list of vertices forming the shortest path, or empty if unreachable
+    public static List<Integer> aStarAlgorithm(WeightedDigraph g, int source, int target,
+                                               Heuristic h) {
+        validateVertexIndices(g.cardinality(), source, target);
+        return aStarCore(g.cardinality(), g.adjacencyMatrix, g.weightTable,
+                source, target, h);
+    }
+
+    private static void validateVertexIndices(int cardinality, int... vertices) {
+        for (int v : vertices) {
+            Objects.checkIndex(v, cardinality);
+        }
+    }
+
+    private static List<Integer> aStarCore(int n, byte[][] adjacency, int[][] weights,
+                                           int source, int target, Heuristic h) {
+        AStarState state = new AStarState(n, source, target, h);
 
         for (int count = 0; count < n; count++) {
-            int current = -1;
-            int bestF = Integer.MAX_VALUE;
-            for (int i = 0; i < n; i++) {
-                if (!closed[i] && fScore[i] < bestF) {
-                    bestF = fScore[i];
-                    current = i;
-                }
-            }
-
+            int current = selectOpenVertex(state);
             if (current == -1 || current == target) {
                 break;
             }
+            state.closed[current] = true;
+            relaxNeighbours(current, adjacency, weights, state, h, target);
+        }
 
-            closed[current] = true;
+        return buildPath(state.parent, source, target);
+    }
 
-            for (int v = 0; v < n; v++) {
-                if (g.adjacencyMatrix[current][v] == 1 && !closed[v]) {
-                    int tentative = gScore[current] + g.weightTable[current][v];
-                    if (tentative < gScore[v]) {
-                        parent[v] = current;
-                        gScore[v] = tentative;
-                        fScore[v] = tentative + h.estimate(v, target);
-                    }
+    private static int selectOpenVertex(AStarState state) {
+        int current = -1;
+        int bestF = Integer.MAX_VALUE;
+        for (int i = 0; i < state.fScore.length; i++) {
+            if (!state.closed[i] && state.fScore[i] < bestF) {
+                bestF = state.fScore[i];
+                current = i;
+            }
+        }
+        return current;
+    }
+
+    private static void relaxNeighbours(int current, byte[][] adjacency, int[][] weights,
+                                        AStarState state, Heuristic h, int target) {
+        for (int v = 0; v < adjacency.length; v++) {
+            if (adjacency[current][v] == 1 && !state.closed[v]) {
+                int tentative = state.gScore[current] + weights[current][v];
+                if (tentative < state.gScore[v]) {
+                    state.parent[v] = current;
+                    state.gScore[v] = tentative;
+                    state.fScore[v] = tentative + h.estimate(v, target);
                 }
             }
         }
+    }
 
+    private static List<Integer> buildPath(int[] parent, int source, int target) {
         if (parent[target] == -1 && source != target) {
             return new ArrayList<>();
         }
-
         List<Integer> path = new ArrayList<>();
         for (int v = target; v != -1; v = parent[v]) {
             path.add(v);
@@ -261,57 +325,23 @@ public final class ShortestPathAlgorithms {
         return path;
     }
 
-    /// A* shortest path on a weighted digraph.
-    public static List<Integer> aStarAlgorithm(WeightedDigraph g, int source, int target,
-                                               Heuristic h) {
-        int n = g.cardinality();
-        int[] gScore = new int[n];
-        int[] fScore = new int[n];
-        int[] parent = new int[n];
-        boolean[] closed = new boolean[n];
-        Arrays.fill(gScore, Integer.MAX_VALUE);
-        Arrays.fill(fScore, Integer.MAX_VALUE);
-        Arrays.fill(parent, -1);
-        gScore[source] = 0;
-        fScore[source] = h.estimate(source, target);
+    /// Mutable search state shared by the A* helper methods.
+    private static final class AStarState {
+        private final int[] gScore;
+        private final int[] fScore;
+        private final int[] parent;
+        private final boolean[] closed;
 
-        for (int count = 0; count < n; count++) {
-            int current = -1;
-            int bestF = Integer.MAX_VALUE;
-            for (int i = 0; i < n; i++) {
-                if (!closed[i] && fScore[i] < bestF) {
-                    bestF = fScore[i];
-                    current = i;
-                }
-            }
-
-            if (current == -1 || current == target) {
-                break;
-            }
-
-            closed[current] = true;
-
-            for (int v = 0; v < n; v++) {
-                if (g.adjacencyMatrix[current][v] == 1 && !closed[v]) {
-                    int tentative = gScore[current] + g.weightTable[current][v];
-                    if (tentative < gScore[v]) {
-                        parent[v] = current;
-                        gScore[v] = tentative;
-                        fScore[v] = tentative + h.estimate(v, target);
-                    }
-                }
-            }
+        private AStarState(int n, int source, int target, Heuristic h) {
+            gScore = new int[n];
+            fScore = new int[n];
+            parent = new int[n];
+            closed = new boolean[n];
+            Arrays.fill(gScore, Integer.MAX_VALUE);
+            Arrays.fill(fScore, Integer.MAX_VALUE);
+            Arrays.fill(parent, -1);
+            gScore[source] = 0;
+            fScore[source] = h.estimate(source, target);
         }
-
-        if (parent[target] == -1 && source != target) {
-            return new ArrayList<>();
-        }
-
-        List<Integer> path = new ArrayList<>();
-        for (int v = target; v != -1; v = parent[v]) {
-            path.add(v);
-        }
-        Collections.reverse(path);
-        return path;
     }
 }

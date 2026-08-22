@@ -8,9 +8,9 @@ import org.drozdek.commons.LoggerService;
 
 /// Static array-based circular queue implementation with automatic resizing.
 ///
-/// <p><b>Abstract Data Type:</b> Static Queue (FIFO - First In, First Out)
+/// **Abstract Data Type:** Static Queue (FIFO - First In, First Out)
 ///
-/// <p><b>Real-world use case:</b> Bounded buffers in network packet processing,
+/// **Real-world use case:** Bounded buffers in network packet processing,
 /// fixed-size event queues in real-time systems.
 ///
 /// Complexity Analysis:

@@ -4,18 +4,18 @@ import java.util.LinkedList;
 
 import org.drozdek.commons.DataTypeInterface;
 
-/// Hash table with separate chaining. Uses Java's {@link LinkedList} for each
+/// Hash table with separate chaining. Uses Java's [LinkedList] for each
 /// bucket to handle collisions.
 ///
-/// <p><b>Real-world use case:</b> Symbol tables in compilers, database
+/// **Real-world use case:** Symbol tables in compilers, database
 /// indexing, in-memory caches, and associative arrays in scripting languages.
 ///
 /// Complexity Analysis:
 /// Time Complexity: O(1) average for put/get/remove; O(n) worst-case
 /// Auxiliary Space: O(n + m) where n is entries and m is capacity
 ///
-/// @param <K> Key type (must implement {@link Object#hashCode()} and
-///            {@link Object#equals(Object)})
+/// @param <K> Key type (must implement [Object#hashCode()] and
+///            [Object#equals(Object)])
 /// @param <V> Value type
 ///
 /// @see <a href="https://en.wikipedia.org/wiki/Hash_table">Hash table (Wikipedia)</a>
@@ -78,10 +78,10 @@ public class HashTable<K, V> implements DataTypeInterface {
         }
     }
 
-    /// Returns the value for the given key, or {@code null} if not found.
+    /// Returns the value for the given key, or `null` if not found.
     ///
     /// @param key Key to look up
-    /// @return Associated value, or {@code null}
+    /// @return Associated value, or `null`
     public V get(K key) {
         int index = hash(key);
         if (buckets[index] == null) {
@@ -100,7 +100,7 @@ public class HashTable<K, V> implements DataTypeInterface {
     /// Removes the mapping for the specified key, if present.
     ///
     /// @param key Key whose mapping to remove
-    /// @return The previous value, or {@code null} if none
+    /// @return The previous value, or `null` if none
     public V remove(K key) {
         int index = hash(key);
         if (buckets[index] == null) {
@@ -124,10 +124,10 @@ public class HashTable<K, V> implements DataTypeInterface {
         return null;
     }
 
-    /// Returns {@code true} if the table contains the given key.
+    /// Returns `true` if the table contains the given key.
     ///
     /// @param key Key to test
-    /// @return {@code true} if present
+    /// @return `true` if present
     public boolean containsKey(K key) {
         return get(key) != null;
     }
@@ -139,9 +139,9 @@ public class HashTable<K, V> implements DataTypeInterface {
         return size;
     }
 
-    /// Returns {@code true} if the table is empty.
+    /// Returns `true` if the table is empty.
     ///
-    /// @return {@code true} if empty
+    /// @return `true` if empty
     public boolean isEmpty() {
         return size == 0;
     }
@@ -162,8 +162,8 @@ public class HashTable<K, V> implements DataTypeInterface {
     }
 
     /// Renders the table as one line per non-empty bucket, in the form
-    /// {@code [index] -> key=value, key=value}. An empty table renders as
-    /// {@code (empty table)}.
+    /// `[index] -> key=value, key=value`. An empty table renders as
+    /// `(empty table)`.
     @Override
     public String toString() {
         if (size == 0) {

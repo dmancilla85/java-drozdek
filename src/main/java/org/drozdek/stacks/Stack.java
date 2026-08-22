@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /// Stack backed by an ArrayList with unicode pretty-printing support.
 ///
-/// <p><b>Real-world use case:</b> Educational tools and debug visualizations
+/// **Real-world use case:** Educational tools and debug visualizations
 /// showing stack state with formatted output.
 ///
 /// Complexity Analysis:

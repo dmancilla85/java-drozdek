@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /// Simple n-ary tree data structure. Each node can have an arbitrary number of children stored in an ArrayList.
 ///
-/// <p><b>Real-world use case:</b> File-system directory trees, DOM/XML document
+/// **Real-world use case:** File-system directory trees, DOM/XML document
 /// representation, and organizational hierarchy charts.
 ///
 /// Complexity Analysis:

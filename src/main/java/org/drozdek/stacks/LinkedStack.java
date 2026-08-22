@@ -8,7 +8,7 @@ import java.util.List;
 
 /// Stack implemented as a singly-linked list.
 ///
-/// <p><b>Real-world use case:</b> Function call stack simulation in
+/// **Real-world use case:** Function call stack simulation in
 /// interpreters and runtime environments.
 ///
 /// Complexity Analysis:

@@ -7,7 +7,7 @@ import org.drozdek.trees.interfaces.TreeInterface;
 /// AVL tree is a self-balancing Binary Search Tree (BST) where the difference between heights of left and right
 /// subtrees cannot be more than one for all nodes.
 ///
-/// <p><b>Real-world use case:</b> In-memory database indexing where frequent lookups must
+/// **Real-world use case:** In-memory database indexing where frequent lookups must
 /// remain fast despite insertions and deletions.
 ///
 /// Complexity Analysis:

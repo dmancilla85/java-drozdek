@@ -8,9 +8,9 @@ import static java.lang.Math.random;
 
 /// Dynamic queue implementation using a singly-linked list.
 ///
-/// <p><b>Abstract Data Type:</b> Dynamic Queue (FIFO - First In, First Out)
+/// **Abstract Data Type:** Dynamic Queue (FIFO - First In, First Out)
 ///
-/// <p><b>Real-world use case:</b> Unbounded message queues in
+/// **Real-world use case:** Unbounded message queues in
 /// event-driven architectures and task scheduling.
 ///
 /// Complexity Analysis:

@@ -2,7 +2,7 @@ package org.drozdek.queues.unlam;
 
 /// Exception thrown when attempting to enqueue an element into a full queue.
 ///
-/// <p><b>Real-world use case:</b> Bounded queue implementations that
+/// **Real-world use case:** Bounded queue implementations that
 /// enforce a maximum capacity limit.
 @SuppressWarnings("java:S110")
 public class FullQueueException extends ArrayIndexOutOfBoundsException {

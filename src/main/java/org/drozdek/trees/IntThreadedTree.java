@@ -8,7 +8,7 @@ import java.io.PrintStream;
 /// In-threaded binary tree with threaded inorder traversal. Uses successor threads to perform
 /// efficient in-order traversal without recursion or a stack.
 ///
-/// <p><b>Real-world use case:</b> Constrained embedded environments where a call stack
+/// **Real-world use case:** Constrained embedded environments where a call stack
 /// is unavailable or too expensive, such as in-kernel data structure traversals.
 ///
 /// Complexity Analysis:

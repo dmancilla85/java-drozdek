@@ -7,10 +7,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 /// Array-based heap sort implementation. Uses an array to represent a binary heap and sorts elements in-place.
 ///
-/// <p><b>Real-world use case:</b> Priority-queue backed schedulers and the heapsort
+/// **Real-world use case:** Priority-queue backed schedulers and the heapsort
 /// algorithm itself, widely used in embedded systems where in-place sorting is required.
 ///
 /// Complexity Analysis:
@@ -70,30 +71,19 @@ public class HeapArray {
     public void insert(int key) {
         int next = position;
         if (next >= keys.length) {
-            resize();
+            keys = Arrays.copyOf(keys, keys.length * 2);
         }
 
-        int parent;
-        int temp;
-        parent = (next / 2);
-        if (parent < 0) {
-            parent = 0;
-        }
+        int parent = Math.max(next / 2, 0);
         keys[next] = key;
         while ((next != 0) && (keys[parent] <= keys[next])) {
-            temp = keys[parent];
+            int temp = keys[parent];
             keys[parent] = keys[next];
             keys[next] = temp;
             next = parent;
             parent = (next / 2);
         }
         position++;
-    }
-
-    private void resize() {
-        int[] newKeys = new int[keys.length * 2];
-        System.arraycopy(keys, 0, newKeys, 0, keys.length);
-        keys = newKeys;
     }
 
     public void displayToFile() {
