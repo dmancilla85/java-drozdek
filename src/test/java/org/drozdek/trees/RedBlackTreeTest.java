@@ -105,4 +105,44 @@ class RedBlackTreeTest {
     void searchEmpty() {
         assertNull(tree.search(42));
     }
+
+    @Test
+    @DisplayName("toString on empty tree")
+    void toStringEmpty() {
+        assertEquals("(empty)", tree.toString());
+        assertFalse(tree.toString().contains("[R]"));
+    }
+
+    @Test
+    @DisplayName("toString renders diagram with colour tags and keys")
+    void toStringDiagram() {
+        tree.insert(50);
+        String output = tree.toString();
+
+        assertTrue(output.contains("50 [B]"));
+        assertFalse(output.contains(":"));
+
+        for (int key : new int[]{30, 70, 20}) {
+            tree.insert(key);
+        }
+        output = tree.toString();
+        assertTrue(output.contains("\u251c\u2500\u2500 ") || output.contains("\u2514\u2500\u2500 "));
+        assertTrue(output.contains("[R]"));
+        assertTrue(output.contains("[B]"));
+        assertTrue(output.contains("30"));
+        assertTrue(output.contains("70"));
+        assertTrue(output.contains("20"));
+    }
+
+    @Test
+    @DisplayName("print() logs the tree without throwing")
+    void printDoesNotThrow() {
+        assertDoesNotThrow(() -> {
+            tree.print();
+            tree.insert(10);
+            tree.insert(20);
+            tree.insert(30);
+            tree.print();
+        });
+    }
 }

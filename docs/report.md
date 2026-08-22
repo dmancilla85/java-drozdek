@@ -2,7 +2,7 @@
 
 ## Overview
 
-Systematic audit and repair spanning lists, queues, stacks, sorting, searching, trees, recursion, dynamic programming, and graphs. All 795 tests pass with 0 failures, 89.9% instruction coverage (18,862/20,987).
+Systematic audit and repair spanning lists, queues, stacks, sorting, searching, trees, recursion, dynamic programming, and graphs. All 801 tests pass with 0 failures, 90.1% instruction coverage (19,069/21,155).
 
 ---
 
@@ -199,10 +199,10 @@ Compact instruction file for OpenCode sessions: exact build/test commands, check
 
 | Class | Package | Notes | Coverage |
 |---|---|---|---|
-| `HashTable` | `hashing/` | Generic separate-chaining map with auto-resize | 97.8% |
-| `RedBlackTree` (+ `RedBlackTreeNode`) | `trees/` | Self-balancing BST with insert + fix-up, search/min/max | 77.1% / 73.6% |
+| `HashTable` | `hashing/` | Generic separate-chaining map with auto-resize | 96% |
+| `RedBlackTree` (+ `RedBlackTreeNode`) | `trees/` | Self-balancing BST with insert + fix-up, search/min/max | 78% / 73.6% |
 | `ZeroOneKnapsack` | `dynamic/` | Classic 0/1 DP with backtracking + space-optimised variant | 100% |
-| `Deque` | `queues/` | Doubly-linked double-ended queue implementing `QueueInterface` | 76.1% |
+| `Deque` | `queues/` | Doubly-linked double-ended queue implementing `QueueInterface` | 93% |
 | `TowersOfHanoi` | `recursion/` | Recursive solver + closed-form `minimumMoves()` | 100% |
 
 Supporting changes: `QueueInterface` gained `clear()` (required by `Deque`); `TowersOfHanoi.solve(0, ...)` guard added for the base case.
@@ -214,4 +214,12 @@ Supporting changes: `QueueInterface` gained `clear()` (required by `Deque`); `To
 ### Test / logging
 
 - `TowersOfHanoi` tests silence `java.util.logging` (`Logger` "Logger") in `@BeforeAll` and restore `INFO` in `@AfterAll`, removing ~1000 move-log lines per run and fixing the suite timeout.
-- Test suite grew 754 -> 795 tests (82 test files). Coverage is 89.9%, just under the 90% target, driven by the new `RedBlackTree`/`Deque` classes.
+- Test suite grew 754 -> 795 tests during the audit (82 test files); with the follow-up display-support work below it reached 801 tests at 90.1% coverage.
+
+### Display support for new structures
+
+- `HashTable` now implements `DataTypeInterface`: `toString()` renders one `[index] ➔ key=value` line per non-empty bucket (`(empty table)` when empty) and inherits the default `print()`.
+- `RedBlackTreeNode` gained the standard prefix-diagram helper (`├──`/`└──`, same pattern as `AvlTreeNode`), tagging every line `key [R]` / `key [B]`; `RedBlackTree.toString()` delegates to it and returns `(empty)` on an empty tree. `inOrder()` is unchanged.
+- `Deque` already matched the queue family format (`FRONT ➔ [x] ➔ REAR`, boxed via `QueueInterface.boxedQueue`) — verified, no change needed.
+- Static algorithms (`ZeroOneKnapsack.Result`, `TowersOfHanoi` move logs) were left as-is; their output was already printable under existing conventions.
+- Test suite grew 795 -> 801 tests (+6 display tests). Coverage rose to 90.1% instruction (19,069/21,155): `HashTable` 96%, `Deque` 93%, `RedBlackTree` 78%.

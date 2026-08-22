@@ -103,7 +103,7 @@ public class RedBlackTree<T extends Comparable<T>> implements TreeInterface {
 
     @Override
     public String toString() {
-        return inOrder();
+        return root == null ? "(empty)" : root.toString();
     }
 
     // ---- Private helpers ----

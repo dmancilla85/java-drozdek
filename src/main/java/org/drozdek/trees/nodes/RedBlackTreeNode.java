@@ -1,5 +1,8 @@
 package org.drozdek.trees.nodes;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+
 /// Node for a red-black tree. Stores a comparable key, colour flag,
 /// and references to left, right, and parent nodes.
 public class RedBlackTreeNode<T extends Comparable<T>> {
@@ -83,8 +86,32 @@ public class RedBlackTreeNode<T extends Comparable<T>> {
         }
     }
 
+    /// Renders the subtree rooted at this node as an indented tree diagram,
+    /// annotating every line with the node colour ({@code [R]} or {@code [B]}).
+    private void print(StringBuilder buffer, String prefix, String childrenPrefix) {
+        buffer.append(prefix);
+        buffer.append(this.key).append(" [").append(isRed() ? 'R' : 'B').append(']');
+        buffer.append(System.lineSeparator());
+
+        LinkedList<RedBlackTreeNode<T>> children = new LinkedList<>();
+        if (this.left != null) children.add(this.left);
+        if (this.right != null) children.add(this.right);
+
+        for (Iterator<RedBlackTreeNode<T>> it = children.iterator(); it.hasNext();) {
+            RedBlackTreeNode<T> next = it.next();
+            if (it.hasNext()) {
+                next.print(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
+            } else {
+                next.print(buffer, childrenPrefix + "└── ", childrenPrefix + "    ");
+            }
+        }
+    }
+
     @Override
     public String toString() {
-        return (color == RED ? "R" : "B") + ":" + key;
+        StringBuilder buffer = new StringBuilder(50);
+        buffer.append(System.lineSeparator());
+        print(buffer, "", "");
+        return buffer.toString();
     }
 }

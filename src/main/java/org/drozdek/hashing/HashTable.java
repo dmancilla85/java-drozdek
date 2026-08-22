@@ -2,6 +2,8 @@ package org.drozdek.hashing;
 
 import java.util.LinkedList;
 
+import org.drozdek.commons.DataTypeInterface;
+
 /// Hash table with separate chaining. Uses Java's {@link LinkedList} for each
 /// bucket to handle collisions.
 ///
@@ -17,7 +19,7 @@ import java.util.LinkedList;
 /// @param <V> Value type
 ///
 /// @see <a href="https://en.wikipedia.org/wiki/Hash_table">Hash table (Wikipedia)</a>
-public class HashTable<K, V> {
+public class HashTable<K, V> implements DataTypeInterface {
     private static final int DEFAULT_CAPACITY = 16;
     private static final double LOAD_FACTOR = 0.75;
 
@@ -157,5 +159,40 @@ public class HashTable<K, V> {
                 }
             }
         }
+    }
+
+    /// Renders the table as one line per non-empty bucket, in the form
+    /// {@code [index] -> key=value, key=value}. An empty table renders as
+    /// {@code (empty table)}.
+    @Override
+    public String toString() {
+        if (size == 0) {
+            return "(empty table)";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        boolean firstBucket = true;
+
+        for (int i = 0; i < buckets.length; i++) {
+            LinkedList<Entry<K, V>> bucket = buckets[i];
+            if (bucket == null || bucket.isEmpty()) {
+                continue;
+            }
+
+            if (!firstBucket) {
+                sb.append(System.lineSeparator());
+            }
+            firstBucket = false;
+
+            sb.append('[').append(i).append("] \u2794 ");
+            for (int j = 0; j < bucket.size(); j++) {
+                Entry<K, V> entry = bucket.get(j);
+                sb.append(entry.key).append('=').append(entry.value);
+                if (j < bucket.size() - 1) {
+                    sb.append(", ");
+                }
+            }
+        }
+        return sb.toString();
     }
 }

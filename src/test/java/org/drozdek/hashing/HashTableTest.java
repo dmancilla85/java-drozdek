@@ -89,4 +89,33 @@ class HashTableTest {
             assertEquals(Integer.valueOf(i), table.get("key" + i));
         }
     }
+
+    @Test
+    @DisplayName("toString on empty table")
+    void toStringEmpty() {
+        assertEquals("(empty table)", table.toString());
+    }
+
+    @Test
+    @DisplayName("toString lists entries with bucket index")
+    void toStringContainsEntries() {
+        table.put("alpha", 1);
+        String output = table.toString();
+
+        assertTrue(output.contains("["));
+        assertTrue(output.contains("] \u2794 "));
+        assertTrue(output.contains("alpha=1"));
+        assertTrue(output.matches("(?s)\\[\\d+\\] .*"));
+        assertFalse(output.contains("null=null"));
+    }
+
+    @Test
+    @DisplayName("print() logs the table without throwing")
+    void printDoesNotThrow() {
+        assertDoesNotThrow(() -> {
+            table.print();
+            table.put("beta", 2);
+            table.print();
+        });
+    }
 }
