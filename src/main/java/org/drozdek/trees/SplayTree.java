@@ -162,6 +162,14 @@ public class SplayTree<T extends Comparable<T>> implements TreeInterface {
         continueRotation(parent.getParent(), p.getRight(), p, p.getRight().getLeft());
     }
 
+    /// Searches the subtree rooted at the given node without splaying.
+    ///
+    /// Descends by comparing keys; no rotation is performed. Runs in O(h), where h is the
+    /// height of the subtree.
+    ///
+    /// @param p       root of the subtree to search
+    /// @param element value to locate
+    /// @return the matching stored key, or null when absent
     public T search(SplayTreeNode<T> p, T element) {
         while (p != null) {
             if (element.compareTo(p.getKey()) == 0)
@@ -173,6 +181,10 @@ public class SplayTree<T extends Comparable<T>> implements TreeInterface {
         return null;
     }
 
+    /// Searches for a key starting at the root.
+    ///
+    /// @param key value to locate
+    /// @return the stored key equal to the argument, or null when absent
     public T search(T key) {
         return search(this.root, key);
     }
@@ -182,6 +194,12 @@ public class SplayTree<T extends Comparable<T>> implements TreeInterface {
         semiSplay(this.root);
     }
 
+    /// Moves the given node to the root using zig, zig-zig and zig-zag steps.
+    ///
+    /// In zig-zig pairs the parent is rotated first (semi-splaying variant). The node becomes
+    /// the new root when it has no grandparent left.
+    ///
+    /// @param p node to bring to the root
     public void semiSplay(SplayTreeNode<T> p) {
         while (p != root) {
             if (p.getParent().getParent() == null) {
@@ -261,6 +279,10 @@ public class SplayTree<T extends Comparable<T>> implements TreeInterface {
         return root.toString();
     }
 
+    /// Prints the key of the visited node followed by a space.
+    ///
+    /// @param p   node being visited
+    /// @param out destination stream
     protected void visit(SplayTreeNode<T> p, PrintStream out) {
         out.println(p.getKey() + " ");
     }

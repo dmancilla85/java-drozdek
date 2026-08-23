@@ -17,6 +17,12 @@ public class WordSplay extends SplayTree<Word> {
         differentWords = wordCnt = 0;
     }
 
+    /// Manual entry point that counts word frequencies of a text file.
+    ///
+    /// Takes the file name from the first command-line argument or prompts for it, then prints
+    /// the words in-order with their frequencies.
+    ///
+    /// @param args command-line arguments; args[0] optionally holds the file name
     public static void testSplaying(String[] args) {
         String fileName;
 
@@ -37,6 +43,13 @@ public class WordSplay extends SplayTree<Word> {
     }
 
     @SuppressWarnings("java:S106")
+    /// Reads the stream, builds the frequency tree and prints the summary.
+    ///
+    /// Words are upper-cased and split on non-letter characters; each word is printed in-order
+    /// followed by a count of total and distinct words.
+    ///
+    /// @param fIn      stream with the text to analyze
+    /// @param filename name reported in the summary line
     public void run(InputStream fIn, String filename) {
         try {
             processWords(fIn);

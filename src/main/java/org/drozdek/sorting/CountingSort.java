@@ -2,34 +2,31 @@ package org.drozdek.sorting;
 
 import org.drozdek.commons.ArrayUtils;
 
-/**
- * Counting Sort algorithm.
- *
- * An integer sorting algorithm that counts the frequency of each distinct
- * value using an auxiliary count array, then computes prefix sums to
- * determine the final position of each element. Only works when the range
- * of possible input values (k) is reasonably small and known in advance.
- *
- * <p><b>Real-world use case:</b> Sorting the ages of a large population, or
- * ranking items by a small integer key such as priority levels or
- * categorical labels.
- *
- * Time complexity: O(n + k) where k is the range of input values
- * Memory complexity: O(n + k)
- *
- * @see <a href="https://en.wikipedia.org/wiki/Counting_sort">Counting sort (Wikipedia)</a>
- */
+/// Counting Sort algorithm.
+///
+/// An integer sorting algorithm that counts the frequency of each distinct
+/// value using an auxiliary count array, then computes prefix sums to
+/// determine the final position of each element. Only works when the range
+/// of possible input values (k) is reasonably small and known in advance.
+///
+/// **Real-world use case:** Sorting the ages of a large population, or
+/// ranking items by a small integer key such as priority levels or
+/// categorical labels.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(n + k) where k is the range of input values
+/// Auxiliary Space: O(n + k)
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Counting_sort">Counting sort (Wikipedia)</a>
 public final class CountingSort {
 
     private CountingSort() {
         // do nothing
     }
 
-    /**
-     * Sorts an array in-place using Counting Sort.
-     *
-     * @param array Array of non-negative integers to sort
-     */
+    /// Sorts an array in-place using Counting Sort.
+    ///
+    /// @param array Array of non-negative integers to sort
     public static void countingSort(int[] array) {
         int n = array.length;
 

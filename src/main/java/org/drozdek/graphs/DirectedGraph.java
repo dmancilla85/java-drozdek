@@ -15,6 +15,10 @@ public class DirectedGraph implements Digraph {
     protected List<Edge> edges;
     protected byte[][] adjacencyMatrix;
 
+    /// Creates a digraph with n isolated vertices whose names follow
+    /// their index ('a' + index) plus a zeroed n-by-n adjacency matrix.
+    ///
+    /// @param n number of vertices
     public DirectedGraph(int n) {
         this.adjacencyMatrix = new byte[n][n];
         this.vertices = new ArrayList<>();
@@ -25,6 +29,9 @@ public class DirectedGraph implements Digraph {
         }
     }
 
+    /// Returns the vertex count derived from the adjacency matrix size.
+    ///
+    /// @return number of vertices, or zero when no matrix exists yet
     public int cardinality() {
         if (adjacencyMatrix == null) {
             return 0;
@@ -32,6 +39,12 @@ public class DirectedGraph implements Digraph {
         return adjacencyMatrix[0].length;
     }
 
+    /// Checks whether the directed arc from-to exists, validating both
+    /// indices first.
+    ///
+    /// @param from source vertex index
+    /// @param to   target vertex index
+    /// @return true if the arc is present
     public boolean hasArc(int from, int to) {
         if (adjacencyMatrix == null) {
             return false;
@@ -40,10 +53,20 @@ public class DirectedGraph implements Digraph {
                 && adjacencyMatrix[from][to] == 1;
     }
 
+    /// Returns the number of stored arcs.
+    ///
+    /// @return current arc count
     public int countArcs() {
         return this.edges.size();
     }
 
+    /// Creates a directed arc between two vertex indices, updating the
+    /// matrix and increasing only the source degree.
+    ///
+    /// @param node1 source vertex index
+    /// @param node2 target vertex index
+    /// @return true if the arc was created, false if it already existed,
+    ///         the vertices coincide, or an index is invalid
     public boolean createArc(int node1, int node2) {
         try {
             if (adjacencyMatrix[node1][node2] == 1 || node1 == node2) {
@@ -61,12 +84,23 @@ public class DirectedGraph implements Digraph {
         }
     }
 
+    /// Creates a directed arc using letter names, where 'a' maps to
+    /// vertex 0.
+    ///
+    /// @param a1 source vertex name in [a..z]
+    /// @param a2 target vertex name in [a..z]
+    /// @return true if the arc was created
     public boolean createArc(char a1, char a2) {
         int n1 = a1 - 97;
         int n2 = a2 - 97;
         return createArc(n1, n2);
     }
 
+    /// Removes the directed arc between two vertex indices, clearing the
+    /// matrix cell and lowering the source degree.
+    ///
+    /// @param node1 source vertex index
+    /// @param node2 target vertex index
     public void removeArc(int node1, int node2) {
         if (edges.isEmpty()) {
             return;
@@ -82,6 +116,14 @@ public class DirectedGraph implements Digraph {
         }
     }
 
+    /// Lists the direct successors of a vertex via a row scan of the
+    /// adjacency matrix.
+    ///
+    /// Complexity: O(V).
+    ///
+    /// @param vertex index of the queried vertex
+    /// @return successors of the vertex, or an empty list for an invalid
+    ///         index
     public List<Vertex> getAdjacentVertices(int vertex) {
         List<Vertex> ady = new ArrayList<>();
 
@@ -98,6 +140,13 @@ public class DirectedGraph implements Digraph {
         return ady;
     }
 
+    /// Traverses the whole digraph depth-first and stores the DFS tree
+    /// arcs in a fresh result graph, restarting until every vertex is
+    /// visited.
+    ///
+    /// Complexity: O(V²) due to adjacency-matrix scans.
+    ///
+    /// @return a digraph holding the depth-first search forest
     public DirectedGraph depthFirstSearch() {
         Clock ini = Clock.tickMillis(systemDefault());
 
@@ -121,6 +170,12 @@ public class DirectedGraph implements Digraph {
         return result;
     }
 
+    /// Recursive depth-first visit collecting traversed arcs into
+    /// newGraph.
+    ///
+    /// @param v               current vertex index
+    /// @param visitedVertices vertices visited so far
+    /// @param newGraph        sink graph receiving the DFS arcs
     protected void dfs(int v, List<Vertex> visitedVertices, DirectedGraph newGraph) {
         int j = 0;
         while (visitedVertices.size() < cardinality() && j < cardinality()) {
@@ -133,6 +188,10 @@ public class DirectedGraph implements Digraph {
         }
     }
 
+    /// Builds the adjacency matrix as a letter-labelled table for the
+    /// directed case, where cell `[i][j]` marks an arc from i to j.
+    ///
+    /// @return the table contents ready for printing
     public StringBuilder getAdjacencyTable() {
         if (adjacencyMatrix == null) {
             return new StringBuilder();
@@ -161,6 +220,9 @@ public class DirectedGraph implements Digraph {
         return table;
     }
 
+    /// Renders the adjacency table of the digraph.
+    ///
+    /// @return printable representation of the adjacency table
     public String toString() {
         return getAdjacencyTable().toString();
     }

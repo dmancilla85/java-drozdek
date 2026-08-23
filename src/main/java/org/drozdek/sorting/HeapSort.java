@@ -1,33 +1,30 @@
 package org.drozdek.sorting;
 
-/**
- * Heap Sort algorithm.
- *
- * Builds a max-heap from the input array, then repeatedly extracts the
- * root (the largest element) and swaps it to the end of the unsorted
- * portion. The heap property is restored after each extraction via
- * heapify, yielding a sorted array in-place.
- *
- * <p><b>Real-world use case:</b> Priority-queue-backed scheduling in
- * operating systems, or any scenario requiring guaranteed O(n log n) time
- * with minimal auxiliary memory overhead.
- *
- * Time complexity: O(n log n)
- * Memory complexity: O(1)
- *
- * @see <a href="https://en.wikipedia.org/wiki/Heapsort">Heapsort (Wikipedia)</a>
- */
+/// Heap Sort algorithm.
+///
+/// Builds a max-heap from the input array, then repeatedly extracts the
+/// root (the largest element) and swaps it to the end of the unsorted
+/// portion. The heap property is restored after each extraction via
+/// heapify, yielding a sorted array in-place.
+///
+/// **Real-world use case:** Priority-queue-backed scheduling in
+/// operating systems, or any scenario requiring guaranteed O(n log n) time
+/// with minimal auxiliary memory overhead.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(n log n)
+/// Auxiliary Space: O(1)
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Heapsort">Heapsort (Wikipedia)</a>
 public final class HeapSort {
 
     private HeapSort() {
         // do nothing
     }
 
-    /**
-     * Sorts an array in-place using Heap Sort.
-     *
-     * @param array Array of integers to sort
-     */
+    /// Sorts an array in-place using Heap Sort.
+    ///
+    /// @param array Array of integers to sort
     public static void heapSort(int[] array) {
         int n = array.length;
 

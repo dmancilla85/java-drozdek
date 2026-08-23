@@ -347,6 +347,18 @@ public class IntSkipList implements ListInterface<Integer> {
         return root[0].key();
     }
 
+    /// Searches for the given key in the skip list.
+    ///
+    /// Starts at the highest occupied level and moves right while keys are
+    /// smaller, dropping a level when the search would overshoot, until the key
+    /// is found or no level remains.
+    ///
+    /// @param key the integer key to search for
+    /// @return the stored key equal to the requested one if found; 0 if the key
+    ///         is not present or the list is empty. Because 0 is also a legal
+    ///         key, callers looking for 0 should confirm through `find(Integer)`
+    ///
+    /// Time Complexity: O(log n) expected, where n is the number of elements
     @SuppressWarnings({"java:S3776", "java:S6541"})
     public int search(int key) {
         int lvl = findMajorNotNullValue();

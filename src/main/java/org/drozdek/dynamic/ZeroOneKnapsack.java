@@ -34,21 +34,29 @@ public final class ZeroOneKnapsack {
             this.tableCols = cols;
         }
 
+        /// Returns the optimal total value found by the solver.
+        ///
         /// @return Maximum value achievable
         public int getMaxValue() {
             return maxValue;
         }
 
+        /// Returns the items included in the optimal solution, in selection order.
+        ///
         /// @return Indices (0-based) of selected items
         public List<Integer> getSelectedIndices() {
             return selectedIndices;
         }
 
+        /// Returns the number of rows of the DP table built by `solve`.
+        ///
         /// @return Number of items evaluated (rows in DP table)
         public int getTableRows() {
             return tableRows;
         }
 
+        /// Returns the number of columns of the DP table built by `solve`.
+        ///
         /// @return Capacity + 1 (columns in DP table)
         public int getTableCols() {
             return tableCols;

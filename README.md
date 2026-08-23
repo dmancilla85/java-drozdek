@@ -6,6 +6,25 @@
 
 A collection of abstract data types and algorithms initially based on the book *Data Structures and Algorithms in Java* by Adam Drozdek.
 
+## Prerequisites
+
+- **JDK 25** (earlier versions will not compile — `preview` features used)
+- **Maven 3.9+**
+
+## Quick Start
+
+```bash
+# Build and run all tests
+mvn clean test
+
+# Run a single algorithm demo (e.g., QuickSort on random data)
+mvn exec:java -Dexec.mainClass="org.drozdek.sorting.QuickSort" -q
+
+# Generate Javadoc HTML
+mvn javadoc:javadoc
+# Open target/site/apidocs/index.html in a browser
+```
+
 ## Tech Stack
 
 | | |
@@ -25,7 +44,7 @@ A collection of abstract data types and algorithms initially based on the book *
 - **Lists** — Single/Double/Circular/Double Circular Linked Lists, Skip List
 - **Stacks** — Adaptive, Array, Linked List, Stack with format
 - **Queues** — Array, Deque, Dynamic, Static, Heap
-- **Graphs** — Directed/Undirected/Weighted with Dijkstra, Prim-Jarnik, Kruskal, Floyd-Warshall
+- **Graphs** — Directed/Undirected/Weighted with Dijkstra, Prim-Jarnik, Kruskal, Floyd-Warshall (algorithms in `graphs/algorithms/`)
 - **Hashing** — Hash Table (separate chaining, auto-resize)
 - **Dynamic Programming** — Fractional Knapsack, 0/1 Knapsack, Task Scheduling
 - **Recursion** — Alphabetically Sorted, Majority Element, Towers of Hanoi
@@ -57,6 +76,14 @@ src/main/java/org/drozdek/
 src/test/java/org/drozdek/
 └── (mirrors main structure, 82 test files)
 ```
+
+## Documentation Conventions
+
+All public APIs use modern markdown doc comments (`///`, JEP-467) following a
+consistent template (class-level includes **Real-world use case** and **Complexity
+Analysis** sections). Javadoc is generated via `mvn javadoc:javadoc`.
+
+Each package contains a `package-info.java` summarizing its scope.
 
 ## License
 

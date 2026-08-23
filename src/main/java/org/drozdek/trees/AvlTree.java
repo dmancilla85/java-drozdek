@@ -38,7 +38,10 @@ public class AvlTree implements TreeInterface {
         return height(node.getLeft()) - height(node.getRight());
     }
 
-    // A utility function to get the height of the tree
+    /// Returns the stored height of the given node.
+    ///
+    /// @param n node whose height is queried
+    /// @return node height, or 0 when the node is null
     public int height(AvlTreeNode n) {
         if (n == null)
             return 0;
@@ -63,10 +66,18 @@ public class AvlTree implements TreeInterface {
         return tree.toString();
     }
 
+    /// Returns the keys in in-order (ascending) separated by spaces.
+    ///
+    /// @return space-separated key listing, or an empty string for an empty tree
     public String inOrder() {
         return inOrder(root);
     }
 
+    /// Inserts a key, rebalancing the ancestors path on the way out.
+    ///
+    /// Duplicate keys are ignored. Runs in O(log n).
+    ///
+    /// @param key value to insert
     public void insert(int key) {
         root = insertNode(root, key);
     }
@@ -152,6 +163,9 @@ public class AvlTree implements TreeInterface {
         return tree.toString();
     }
 
+    /// Returns the keys in post-order (left, right, node) separated by spaces.
+    ///
+    /// @return space-separated key listing, or an empty string for an empty tree
     public String postOrder() {
         return postOrder(root);
     }
@@ -173,6 +187,9 @@ public class AvlTree implements TreeInterface {
         return tree.toString();
     }
 
+    /// Returns the keys in pre-order (node, left, right) separated by spaces.
+    ///
+    /// @return space-separated key listing, or an empty string for an empty tree
     public String preOrder() {
         return preOrder(root);
     }

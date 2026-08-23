@@ -16,6 +16,9 @@ public class AvlTreeNode {
     private AvlTreeNode left;
     private AvlTreeNode right;
 
+    /// Creates a leaf node with height 1 holding the given key.
+    ///
+    /// @param data integer key stored in the node
     public AvlTreeNode(int data) {
         this(data, null, null);
     }

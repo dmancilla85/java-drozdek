@@ -33,6 +33,9 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface 
         root = null;
     }
 
+    /// Creates a tree sharing the given node as its root.
+    ///
+    /// @param root node that becomes the root of this tree
     public BinarySearchTree(BinarySearchTreeNode<T> root) {
         this.root = root;
     }
@@ -71,8 +74,8 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface 
 
     /// Function to compress given tree with its root as grand right
     ///
-    /// @param grand Grandfather node
-    /// @param m
+    /// @param grand grandfather node anchoring the compression
+    /// @param m     number of left rotations to perform
     private static void compress(BinarySearchTreeNode<Integer> grand, int m) {
         // Make tmp pointer to traverse and compress the given BST.
         BinarySearchTreeNode<Integer> tmp = grand.getRight();
@@ -152,6 +155,11 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface 
         }
     }
 
+    /// Traverses the tree level by level and prints every key.
+    ///
+    /// Uses a queue of pending nodes; runs in O(n).
+    ///
+    /// @param out destination stream for visited keys
     public void breadthFirst(PrintStream out) {
         BinarySearchTreeNode<T> p = root;
         Queue<BinarySearchTreeNode<T>> queue = new Queue<>();
@@ -326,7 +334,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface 
 
     /// Non-recursive implementation for the in-order tree path
     ///
-    /// @param out
+    /// @param out destination stream for visited keys
     public void iterativeInorder(PrintStream out) {
         BinarySearchTreeNode<T> p = root;
         Stack<BinarySearchTreeNode<T>> stack = new Stack<>();
@@ -358,7 +366,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface 
 
     /// Non-recursive implementation for the post-order tree path
     ///
-    /// @param out
+    /// @param out destination stream for visited keys
     public void iterativePostorder(PrintStream out) {
         BinarySearchTreeNode<T> p = root;
         BinarySearchTreeNode<T> q = root;
@@ -388,7 +396,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface 
 
     /// Non-recursive implementation for the pre-order tree path
     ///
-    /// @param out
+    /// @param out destination stream for visited keys
     public void iterativePreorder(PrintStream out) {
         BinarySearchTreeNode<T> p = root;
         Stack<BinarySearchTreeNode<T>> stack = new Stack<>();
@@ -521,14 +529,17 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface 
         return results;
     }
 
+    /// Prints the keys in post-order (left, right, node).
+    ///
+    /// @param out destination stream for visited keys
     public void postorder(PrintStream out) {
         postorder(root, out);
     }
 
     /// Recursive implementation for the post-order tree path
     ///
-    /// @param p
-    /// @param out
+    /// @param p   node to start printing from
+    /// @param out destination stream for visited keys
     protected void postorder(BinarySearchTreeNode<T> p, PrintStream out) {
         if (p == null)
             return;
@@ -538,6 +549,9 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface 
         visit(p, out);
     }
 
+    /// Prints the keys in pre-order (node, left, right).
+    ///
+    /// @param out destination stream for visited keys
     public void preorder(PrintStream out) {
 
         preorder(root, out);
@@ -556,6 +570,14 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface 
         preorder(p.getRight(), out);
     }
 
+    /// Searches the subtree rooted at the given node.
+    ///
+    /// Descends by comparing keys and stops as soon as an identical key is found; runs in
+    /// O(h), where h is the height of the subtree.
+    ///
+    /// @param p       root of the subtree to search
+    /// @param element value to locate
+    /// @return the matching stored key, or null when absent
     public T search(BinarySearchTreeNode<T> p, T element) {
         while (p != null) {
             if (element == p.getKey())
@@ -567,6 +589,10 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface 
         return null;
     }
 
+    /// Searches for a key starting at the root.
+    ///
+    /// @param key value to locate
+    /// @return the stored key equal to the argument, or null when absent
     public T search(T key) {
         return search(this.root, key);
     }
@@ -607,6 +633,10 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface 
         return root.toString();
     }
 
+    /// Prints the key of the visited node followed by a space.
+    ///
+    /// @param p   node being visited
+    /// @param out destination stream
     protected void visit(BinarySearchTreeNode<T> p, PrintStream out) {
         out.println(p.getKey() + " ");
     }

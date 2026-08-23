@@ -1,11 +1,9 @@
 package org.drozdek.sorting.exercises;
 
-/**
- * A simple 2D point value class with integer coordinates.
- *
- * Used as a building block for geometric algorithms such as closest-pair
- * of points, convex hull, and triangulation.
- */
+/// A simple 2D point value class with integer coordinates.
+///
+/// Used as a building block for geometric algorithms such as closest-pair
+/// of points, convex hull, and triangulation.
 class Point {
     int x;
     int y;

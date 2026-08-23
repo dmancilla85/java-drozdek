@@ -5,8 +5,28 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
+/// Directed graph that rejects any arc creating a cycle, guaranteeing
+/// acyclicity at all times.
+///
+/// Arc creation first checks reachability, so an arc is only added when no
+/// path already exists from target back to source. Supports topological
+/// ordering of its vertices.
+///
+/// **Real-world use case:** Build systems and task scheduling with
+/// dependencies, spreadsheet formula evaluation, course prerequisite
+/// planning, and version-control commit histories.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(V + E) cycle check per createArc, O(V + E) topological sort
+/// Auxiliary Space: O(V)
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">Directed acyclic graph (Wikipedia)</a>
 public class DirectedAcyclicGraph extends DirectedGraph {
 
+    /// Creates an acyclic digraph with n isolated vertices named after
+    /// their index ('a' + index).
+    ///
+    /// @param n number of vertices
     public DirectedAcyclicGraph(int n) {
         super(n);
     }
@@ -64,6 +84,13 @@ public class DirectedAcyclicGraph extends DirectedGraph {
         return false;
     }
 
+    /// Computes a topological ordering of the vertices using Kahn's
+    /// in-degree algorithm.
+    ///
+    /// Complexity: O(V²) via matrix row scans.
+    ///
+    /// @return vertex indices in topological order, or an empty list if
+    ///         a cycle prevents a complete ordering
     public List<Integer> topologicalSort() {
         int n = cardinality();
         int[] inDegree = new int[n];

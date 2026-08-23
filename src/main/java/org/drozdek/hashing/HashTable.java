@@ -41,6 +41,9 @@ public class HashTable<K, V> implements DataTypeInterface {
         this(DEFAULT_CAPACITY);
     }
 
+    /// Creates a hash table with the specified number of buckets.
+    ///
+    /// @param capacity initial number of buckets; values below 1 are raised to 1
     @SuppressWarnings("unchecked")
     public HashTable(int capacity) {
         buckets = new LinkedList[Math.max(capacity, 1)];

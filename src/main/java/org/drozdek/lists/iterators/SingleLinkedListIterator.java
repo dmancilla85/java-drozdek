@@ -6,30 +6,38 @@ import org.drozdek.lists.nodes.SingleLinkedListNode;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-    /// Check whether there is a further element.
-    ///
-    /// @return true/false
+/// Iterator for a singly linked list, walking from head to tail.
+///
+/// **Real-world use case:** Transparent for-each traversal of list
+/// contents while hiding node pointers from client code.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) for hasNext/next
+/// Auxiliary Space: O(1)
+///
 public class SingleLinkedListIterator<T> implements Iterator<T> {
 
-    /// Get the next element.
-    ///
-    /// @return Next element in list
     private SingleLinkedListNode<T> current;
 
-/// Iterator for a single linked list.
+    /// Constructor.
+    ///
+    /// @param list linked list to iterate
     public SingleLinkedListIterator(SingleLinkedList<T> list) {
         // initialize cursor to the head of the list
         current = list.viewHeadNode();
     }
 
-    /// Delete the iterated item from the list.
+    /// Check whether there is a further element.
+    ///
+    /// @return true if the iteration has more elements
     public boolean hasNext() {
         return current != null;
     }
 
-    /// Constructor.
+    /// Get the next element.
     ///
-    /// @param list linked list
+    /// @return next element in the list
+    /// @throws NoSuchElementException if no elements remain
     public T next() {
         if (!hasNext())
             throw new NoSuchElementException();
@@ -39,9 +47,9 @@ public class SingleLinkedListIterator<T> implements Iterator<T> {
         return data;
     }
 
-    /// Insert element after the iterated element.
+    /// Removal is not supported by this iterator.
     ///
-    /// @param element Element to insert
+    /// @throws UnsupportedOperationException always
     @Override
     public void remove() {
         // Default throws UnsupportedOperationException.

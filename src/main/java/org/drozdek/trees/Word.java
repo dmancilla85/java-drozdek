@@ -11,6 +11,9 @@ public class Word implements Comparable<Word> {
     private final String words;
     private int freq;
 
+    /// Creates a word with an initial frequency of one.
+    ///
+    /// @param s word text to store
     public Word(String s) {
         this.words = s;
         freq = 1;

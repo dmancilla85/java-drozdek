@@ -13,6 +13,9 @@ public class IntThreadedTreeNode {
     private IntThreadedTreeNode left;
     private IntThreadedTreeNode right;
 
+    /// Creates a leaf node whose successor flag starts as false.
+    ///
+    /// @param value integer key stored in the node
     public IntThreadedTreeNode(int value) {
         this(value, null, null);
     }

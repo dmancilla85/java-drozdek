@@ -30,6 +30,8 @@ public class KnapsackSolution {
         return knapsack;
     }
 
+    /// Returns a multi-line summary of this solution.
+    ///
     /// @return A formatted string with total profit, instruction count, and selected items
     public String toString() {
         StringBuilder result = new StringBuilder();

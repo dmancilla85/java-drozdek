@@ -25,6 +25,10 @@ public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
         this(DEFAULT_CAPACITY);
     }
 
+    /// Creates a heap backed by a list with the given initial capacity.
+    ///
+    /// @param capacity initial capacity of the backing list
+    /// @throws IllegalArgumentException when capacity is not positive
     public MaximumHeap(int capacity) {
         if (capacity <= 0) {
             throw new IllegalArgumentException("Capacity must be positive");
@@ -32,6 +36,10 @@ public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
         this.heap = new ArrayList<>(capacity);
     }
 
+    /// Adds an element and restores the max-heap property by sifting it up.
+    ///
+    /// @param element value to add
+    /// @throws IllegalArgumentException when element is null
     public void insert(T element) {
         if (element == null) {
             throw new IllegalArgumentException("Element cannot be null");
@@ -40,10 +48,19 @@ public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
         siftUp(heap.size() - 1);
     }
 
+    /// Alias for insert(Object).
+    ///
+    /// @param key value to add
+    /// @throws IllegalArgumentException when key is null
     public void insertKey(T key) {
         insert(key);
     }
 
+    /// Removes and returns the largest element.
+    ///
+    /// The last element replaces the root and is sifted down. Runs in O(log n).
+    ///
+    /// @return previous maximum, or null when the heap is empty
     public T extractMax() {
         if (heap.isEmpty()) {
             return null;
@@ -61,6 +78,9 @@ public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
         return root;
     }
 
+    /// Returns, without removing, the largest element.
+    ///
+    /// @return current maximum, or null when the heap is empty
     public T getMax() {
         if (heap.isEmpty()) {
             return null;
@@ -68,12 +88,20 @@ public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
         return heap.get(0);
     }
 
+    /// Returns the number of levels of the subtree rooted at the given index.
+    ///
+    /// @param node index of the subtree root
+    /// @return subtree height counted in nodes, where a leaf counts as 1
     public int height(int node) {
         if (!isLeaf(node))
             return 1 + height(leftChild(node));
         return 1;
     }
 
+    /// Checks whether the given index refers to a leaf.
+    ///
+    /// @param node index to test
+    /// @return true when the index is valid and has no children
     public boolean isLeaf(int node) {
         return node >= 0 && node < heap.size() && (node * 2 + 1) >= heap.size();
     }
@@ -93,6 +121,12 @@ public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
     }
 
 
+    /// Removes the element stored at the given index.
+    ///
+    /// The last element takes the vacated slot and is sifted down; invalid indexes are ignored.
+    /// Runs in O(log n).
+    ///
+    /// @param index position of the element to remove
     public void deleteKey(int index) {
         if (index < 0 || index >= heap.size())
             return;
@@ -108,6 +142,12 @@ public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
     }
 
 
+    /// Replaces the value at the given index and repairs the heap in the needed direction.
+    ///
+    /// Invalid indexes are ignored.
+    ///
+    /// @param index    position whose value changes
+    /// @param newValue replacement value
     public void changeValueOnAKey(int index, T newValue) {
         if (index < 0 || index >= heap.size())
             return;
@@ -123,6 +163,12 @@ public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
         }
     }
 
+    /// Raises the value at the given index and sifts it up towards the root.
+    ///
+    /// No-op when the index is invalid or the new value is not greater. Runs in O(log n).
+    ///
+    /// @param index    position whose value increases
+    /// @param newValue value strictly greater than the current one
     public void increaseKey(int index, T newValue) {
         if (index < 0 || index >= heap.size())
             return;
@@ -138,7 +184,13 @@ public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
         }
     }
 
-   public void decreaseKey(int index, T newValue) {
+    /// Lowers the value at the given index and sifts it down towards the leaves.
+    ///
+    /// No-op when the index is invalid or the new value is not smaller. Runs in O(log n).
+    ///
+    /// @param index    position whose value decreases
+    /// @param newValue value strictly smaller than the current one
+    public void decreaseKey(int index, T newValue) {
         if (index < 0 || index >= heap.size())
             return;
 

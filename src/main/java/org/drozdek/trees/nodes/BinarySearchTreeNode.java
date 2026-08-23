@@ -15,10 +15,14 @@ public class BinarySearchTreeNode<T extends Comparable<T>> {
     private BinarySearchTreeNode<T> left;
     private BinarySearchTreeNode<T> right;
 
+    /// Creates a node without a key and without children.
     public BinarySearchTreeNode() {
         this(null, null, null);
     }
 
+    /// Creates a leaf node holding the given key.
+    ///
+    /// @param data comparable value stored in the node
     public BinarySearchTreeNode(T data) {
         this(data, null, null);
     }

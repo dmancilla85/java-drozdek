@@ -24,6 +24,9 @@ public class ExpressionTree implements TreeInterface {
         root = null;
     }
 
+    /// Builds an expression tree from a postfix expression.
+    ///
+    /// @param postfix expression in postfix notation; a null or empty string yields an empty tree
     public ExpressionTree(String postfix) {
 
         if (postfix == null || postfix.isEmpty()) {
@@ -32,11 +35,23 @@ public class ExpressionTree implements TreeInterface {
             root = insertPostFix(postfix);
     }
 
+    /// Checks whether the character is one of the supported operators.
+    ///
+    /// @param ch character to test
+    /// @return true when the character is '+', '-', '*', '/' or '^'
     public static boolean isOperator(char ch) {
         return ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^';
     }
 
     // generate expression tree and return the root node
+
+    /// Builds an expression tree from the given postfix expression and returns its root.
+    ///
+    /// Operands become leaves and operators become internal nodes: every operand is pushed on
+    /// a stack and attached beneath the next operator read. Runs in O(n).
+    ///
+    /// @param postfix expression in postfix notation
+    /// @return root of the constructed expression tree
     public static ExpressionTreeNode insertPostFix(String postfix) {
         // stack to hold character
         Deque<ExpressionTreeNode> st = new ArrayDeque<>();
@@ -97,10 +112,13 @@ public class ExpressionTree implements TreeInterface {
         };
     }
 
-    /// Evaluate if an expression is well parsed.
+    /// Evaluates an infix arithmetic expression honouring operator precedence.
     ///
-    /// @param expression Expression to evaluate
-    /// @return Zero if the expression is correct
+    /// One stack holds operands and another operators; parentheses are supported. Evaluation
+    /// covers '+', '-', '*' and '/'. A null or empty expression evaluates to 0.
+    ///
+    /// @param expression infix expression to evaluate
+    /// @return numeric result of the expression, or 0 for a null or empty input
     public static int evaluateExpression(String expression) {
         if (expression == null || expression.isEmpty()) {
             return 0;
@@ -172,7 +190,9 @@ public class ExpressionTree implements TreeInterface {
         return Character.isDigit(token);
     }
 
-    /// Print the inorder traversal of tree
+    /// Returns the expression in infix form obtained by an in-order traversal.
+    ///
+    /// @return concatenated symbols of the tree visited in-order, or an empty string when empty
     public String inorder() {
         return inorder(this.root);
     }

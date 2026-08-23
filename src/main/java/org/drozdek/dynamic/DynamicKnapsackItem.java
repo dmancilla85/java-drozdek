@@ -41,8 +41,7 @@ public class DynamicKnapsackItem implements Comparable<DynamicKnapsackItem>, Com
     /// Currently creates an empty `KnapsackSolution` and prints it
     /// without performing any computation. Intended as a template.
     ///
-    /// @param knapsack The list of items to select from
-    /// @return An empty solution object
+    /// @return an empty solution object
     public static KnapsackSolution solveExercise5() {
 
         KnapsackSolution sol = new KnapsackSolution();
@@ -76,6 +75,8 @@ public class DynamicKnapsackItem implements Comparable<DynamicKnapsackItem>, Com
         return java.util.Objects.hash(profit);
     }
 
+    /// Returns a string representation of this item.
+    ///
     /// @return A string in the format [W: weight, P: profit]
     public String toString() {
         return "[W: " + weight + ", P: " + profit + "]";

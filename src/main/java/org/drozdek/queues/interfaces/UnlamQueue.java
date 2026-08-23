@@ -22,7 +22,7 @@ public interface UnlamQueue {
     ///
     /// @param obj the element to add to the queue
     /// @return true if the element was added, false if the operation failed
-    /// @throws FullQueueException if the queue is full
+    /// @throws org.drozdek.queues.unlam.FullQueueException if the queue is full
     boolean enqueue(Object obj);
 
     /// Tests if this queue contains no elements.

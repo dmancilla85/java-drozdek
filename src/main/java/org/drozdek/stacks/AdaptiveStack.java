@@ -20,8 +20,14 @@ import java.time.ZoneId;
 /// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
 public class AdaptiveStack<T> implements StackInterface<T> {
 
+    /// Mode flag selecting the array-backed (static) representation.
     public static final char STATIC = 0;
+
+    /// Mode flag selecting the linked-list (dynamic) representation.
     public static final char DYNAMIC = 1;
+
+    /// Depth difference between pushes and pops above which the stack switches
+    /// to the linked representation; it switches back below half this value.
     public static final int CRITICAL_VALUE = 2000;
     private static final SecureRandom RANDOM = new SecureRandom();
     private char type;
@@ -104,6 +110,11 @@ public class AdaptiveStack<T> implements StackInterface<T> {
         return (pushCount - popCount) < CRITICAL_VALUE / 2;
     }
 
+    /// Runs a micro-benchmark comparing push and pop throughput of the
+    /// array-backed and linked-list stacks.
+    ///
+    /// Alternates timed batches of pushes and pops over five million iterations,
+    /// logging which representation performs better after each batch.
     public void benchmark() {
         int benchmarkPushCount = 0;
         int benchmarkPopCount = 0;

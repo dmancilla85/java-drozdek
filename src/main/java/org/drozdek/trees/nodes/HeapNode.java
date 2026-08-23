@@ -15,6 +15,9 @@ public class HeapNode implements Comparable<HeapNode> {
         this(0);
     }
 
+    /// Creates a node wrapping the given value.
+    ///
+    /// @param value integer stored in the node
     public HeapNode(Integer value) {
         this.value = value;
     }

@@ -2,17 +2,36 @@ package org.drozdek.graphs;
 
 import org.drozdek.commons.LoggerService;
 
-/// @author David
+/// Undirected graph with an integer edge-weight table layered over the
+/// base Graph structure.
+///
+/// **Real-world use case:** Road networks with distances, utility grids
+/// with connection costs, and inputs to Prim-Jarnik and Kruskal minimum
+/// spanning tree algorithms.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) edge weight lookup, O(n²) random generation
+/// Auxiliary Space: O(n²) for the weight table
+///
 public class WeightedGraph extends Graph {
 
     public int[][] weightTable;
 
-    /// @param n
+    /// Constructor allocating an n-by-n weight table.
+    ///
+    /// @param n number of vertices
     public WeightedGraph(int n) {
         super(n);
         this.weightTable = new int[n][n];
     }
 
+    /// Factory producing a random weighted graph where each possible edge
+    /// appears with probability conexividad% and weights are drawn from
+    /// 1..100.
+    ///
+    /// @param n            number of vertices
+    /// @param conexividad  connectivity percentage in [0, 100]
+    /// @return a randomly weighted undirected graph
     public static WeightedGraph createRandomWeighted(int n, int conexividad) {
         WeightedGraph al = new WeightedGraph(n);
 
@@ -25,7 +44,10 @@ public class WeightedGraph extends Graph {
         return al;
     }
 
-    /// @param args
+    /// Demo entry point building a sample weighted graph and printing its
+    /// adjacency and weight tables.
+    ///
+    /// @param args unused
     static void main(@SuppressWarnings("unused") String[] args) {
         WeightedGraph g = new WeightedGraph(6);
         g.createEdge('a', 'b', 20);
@@ -45,10 +67,14 @@ public class WeightedGraph extends Graph {
         LoggerService.logInfo("Prim");
     }
 
-    /// @param node1
-    /// @param node2
-    /// @param peso
-    /// @return
+    /// Creates a weighted undirected edge between two vertex indices,
+    /// updating the adjacency matrix, weight table, and degree counters.
+    ///
+    /// @param node1  first vertex index
+    /// @param node2  second vertex index
+    /// @param weight edge weight
+    /// @return true if the edge was created, false if it already existed,
+    ///         the vertices coincide, or indices are out of range
     public boolean createEdge(int node1, int node2, int weight) {
         try {
             if (adjacencyMatrix[node1][node2] == 1 || node1 == node2)
@@ -69,10 +95,13 @@ public class WeightedGraph extends Graph {
         }
     }
 
-    /// @param a1
-    /// @param a2
-    /// @param peso
-    /// @return
+    /// Creates a weighted undirected edge using letter names, where 'a'
+    /// maps to vertex 0.
+    ///
+    /// @param a1     first vertex name in [a..z]
+    /// @param a2     second vertex name in [a..z]
+    /// @param weight edge weight
+    /// @return true if the edge was created
     public boolean createEdge(char a1, char a2, int weight) {
         int n1 = a1 - 97;
         int n2 = a2 - 97;
@@ -80,9 +109,11 @@ public class WeightedGraph extends Graph {
         return createEdge(n1, n2, weight);
     }
 
-    /// @param node1
-    /// @param node2
-    /// @return
+    /// Removes the weighted edge between two vertex indices, clearing both
+    /// matrix cells and adjusting degrees.
+    ///
+    /// @param node1 first vertex index
+    /// @param node2 second vertex index
     @Override
     public void removeEdge(int node1, int node2) {
 
@@ -104,6 +135,9 @@ public class WeightedGraph extends Graph {
         }
     }
 
+    /// Renders the weight table with letter-labelled rows and columns.
+    ///
+    /// @return printable representation of the weight table
     public StringBuilder getWeightTable() {
 
         int n = this.weightTable[0].length;

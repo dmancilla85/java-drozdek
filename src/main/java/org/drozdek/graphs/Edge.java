@@ -2,7 +2,16 @@ package org.drozdek.graphs;
 
 import org.drozdek.commons.LoggerService;
 
-/// @author David
+/// Graph edge connecting two vertices, optionally weighted and directed.
+///
+/// **Real-world use case:** Road segments between intersections in
+/// navigation graphs, friendship links in social networks, and weighted
+/// connections in network cost models.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) for accessors, compareTo, equals, hashCode
+/// Auxiliary Space: O(1)
+///
 public class Edge implements Comparable<Edge> {
 
     protected Vertex origin;
@@ -11,18 +20,29 @@ public class Edge implements Comparable<Edge> {
     protected boolean directed;
 
 
+    /// Creates an unweighted undirected edge.
+    ///
+    /// @param v1 origin vertex
+    /// @param v2 destination vertex
     public Edge(Vertex v1, Vertex v2) {
         this(v1, v2, 0, false);
     }
 
+    /// Creates an undirected edge with an explicit weight.
+    ///
+    /// @param v1     origin vertex
+    /// @param v2     destination vertex
+    /// @param weight edge weight
     public Edge(Vertex v1, Vertex v2, int weight) {
         this(v1, v2, weight, false);
     }
 
-    /// @param v1
-    /// @param v2
-    /// @param weight
-    /// @param directed
+    /// Constructor with explicit weight and direction flag.
+    ///
+    /// @param v1       origin vertex
+    /// @param v2       destination vertex
+    /// @param weight   edge weight
+    /// @param directed true if the edge is directed
     public Edge(Vertex v1, Vertex v2, int weight, boolean directed) {
         this.origin = v1;
         this.destination = v2;
@@ -74,31 +94,43 @@ public class Edge implements Comparable<Edge> {
         } else return origin.equals(other.origin);
     }
 
+    /// Returns the destination vertex of this edge.
+    ///
     /// @return the destination
     public Vertex getDestination() {
         return destination;
     }
 
+    /// Replaces the destination vertex of this edge.
+    ///
     /// @param destination the destination to set
     public void setDestination(Vertex destination) {
         this.destination = destination;
     }
 
+    /// Returns the origin vertex of this edge.
+    ///
     /// @return the origin
     public Vertex getOrigin() {
         return origin;
     }
 
+    /// Replaces the origin vertex of this edge.
+    ///
     /// @param origin the origin to set
     public void setOrigin(Vertex origin) {
         this.origin = origin;
     }
 
+    /// Returns the weight assigned to this edge.
+    ///
     /// @return the weight
     public int getWeight() {
         return weight;
     }
 
+    /// Assigns a new weight to this edge.
+    ///
     /// @param weight the weight to set
     public void setWeight(int weight) {
         this.weight = weight;
@@ -114,6 +146,9 @@ public class Edge implements Comparable<Edge> {
         return result;
     }
 
+    /// Renders the edge as its origin and destination names.
+    ///
+    /// @return printable representation of the edge
     public String toString() {
         return "{" + this.origin.getName()
                 + ", " + this.destination.getName() + "}";

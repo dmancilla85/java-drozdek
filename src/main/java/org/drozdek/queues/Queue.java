@@ -3,6 +3,7 @@ package org.drozdek.queues;
 import org.drozdek.queues.interfaces.QueueInterface;
 
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 /// Queue backed by Java's LinkedList, providing a general-purpose FIFO
 /// implementation.
@@ -22,19 +23,32 @@ public class Queue<T> implements QueueInterface<T> {
         list = new LinkedList<>();
     }
 
+    /// Removes all elements from this queue, leaving it empty.
     public void clear() {
         list.clear();
     }
 
+    /// Removes and returns the element at the front of the queue.
+    ///
+    /// @return the element removed from the front of the queue
+    /// @throws NoSuchElementException if the queue is empty
     public T dequeue() {
         return list.removeFirst();
     }
 
+    /// Adds an element at the rear of the queue.
+    ///
+    /// @param element the element to add
+    /// @return true if the element was added
     public boolean enqueue(T element) {
         list.addLast(element);
         return true;
     }
 
+    /// Returns the element at the front of the queue without removing it.
+    ///
+    /// @return the element at the front of the queue
+    /// @throws NoSuchElementException if the queue is empty
     public T firstElement() {
         return list.getFirst();
     }
@@ -44,6 +58,10 @@ public class Queue<T> implements QueueInterface<T> {
         return list.isEmpty();
     }
 
+    /// Returns the element at the front of the queue without removing it.
+    ///
+    /// @return the element at the front of the queue
+    /// @throws NoSuchElementException if the queue is empty
     public T peek() {
         return list.getFirst();
     }

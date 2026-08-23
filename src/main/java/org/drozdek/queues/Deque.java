@@ -134,6 +134,10 @@ public class Deque<T> implements QueueInterface<T> {
         return true;
     }
 
+    /// Removes and returns the element at the front of this deque.
+    ///
+    /// Unlike {@link #removeFirst()}, returns null instead of throwing
+    /// when this deque is empty.
     @Override
     public T dequeue() {
         try {

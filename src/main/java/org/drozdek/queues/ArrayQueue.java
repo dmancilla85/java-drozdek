@@ -80,6 +80,9 @@ public class ArrayQueue implements QueueInterface<Object> {
         return true;
     }
 
+    /// Returns the element at the front of the queue without removing it.
+    ///
+    /// @return the element at the front of the queue, or null if the queue is empty
     public Object peek() {
         return firstElement();
     }
@@ -129,6 +132,10 @@ public class ArrayQueue implements QueueInterface<Object> {
         }
     }
 
+    /// Removes all elements from this queue by resetting the position markers.
+    ///
+    /// Runs in O(1); the backing array itself is left untouched, so stale
+    /// references are only released as slots get overwritten by later enqueues.
     public void clear() {
         first = last = -1;
     }
@@ -149,6 +156,12 @@ public class ArrayQueue implements QueueInterface<Object> {
         return QueueInterface.boxedQueue(sb.toString());
     }
 
+    /// Returns the raw contents of the backing storage array in index order.
+    ///
+    /// Intended for debugging: unlike {@link #toString()}, it includes stale
+    /// slots left behind by wrap-around operations, not only live elements.
+    ///
+    /// @return a string representation of the internal storage array
     public String showStorage() {
         return Arrays.toString(storage);
     }

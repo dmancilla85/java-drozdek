@@ -12,7 +12,19 @@ import java.util.LinkedList;
 
 import static java.time.ZoneId.systemDefault;
 
-/// @author David
+/// Undirected graph ADT storing vertices, edges, and a byte adjacency
+/// matrix, with BFS/DFS traversal, random generation by connectivity
+/// level, and adjacency-table printing.
+///
+/// **Real-world use case:** Social network analysis, road maps, electrical
+/// circuits, and as the base structure for MST and shortest-path
+/// algorithms.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(V) neighbour lookup, O(V²) traversals via matrix scans
+/// Auxiliary Space: O(V²) for the adjacency matrix
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Graph_(abstract_data_type)">Graph (abstract data type) (Wikipedia)</a>
 public class Graph {
 
     public List<Vertex> vertices;
@@ -20,12 +32,17 @@ public class Graph {
     public byte[][] adjacencyMatrix;
 
 
+    /// Creates an empty graph with no edges and no adjacency matrix.
     public Graph() {
         this.edges = null;
         this.vertices = new ArrayList<>();
         this.adjacencyMatrix = null;
     }
 
+    /// Creates a graph with n isolated vertices whose names follow their
+    /// index ('a' + index) plus a zeroed n-by-n adjacency matrix.
+    ///
+    /// @param n number of vertices
     public Graph(int n) {
         this.adjacencyMatrix = new byte[n][n];
         this.vertices = new ArrayList<>();
@@ -37,6 +54,12 @@ public class Graph {
 
     protected static final SecureRandom RANDOM = new SecureRandom();
 
+    /// Factory producing a random undirected graph where each ordered
+    /// pair of vertices gets an edge with probability conexividad%.
+    ///
+    /// @param n           number of vertices
+    /// @param conexividad connectivity percentage in [0, 100]
+    /// @return a random graph over n letter-named vertices
     public static Graph createRandom(int n, int conexividad) {
         Graph al = new Graph(n);
 
@@ -63,11 +86,21 @@ public class Graph {
         uno.createEdge('h', 'd');
     }
 
+    /// Appends a vertex to the graph, ignoring null inputs.
+    ///
+    /// @param v vertex to add
     public void addVertex(Vertex v) {
         if (v != null)
             vertices.add(v);
     }
 
+    /// Runs a breadth-first traversal over the whole graph and stores
+    /// the BFS tree edges in a fresh result graph, restarting until every
+    /// vertex is visited.
+    ///
+    /// Complexity: O(V²) due to adjacency-matrix scans.
+    ///
+    /// @return a graph holding the breadth-first search forest
     public Graph breadthFirstSearch() {
 
         Clock ini = Clock.tickMillis(systemDefault());
@@ -118,6 +151,13 @@ public class Graph {
         }
     }
 
+    /// Runs a depth-first traversal over the whole graph and stores the
+    /// DFS tree edges in a fresh result graph, restarting until every
+    /// vertex is visited.
+    ///
+    /// Complexity: O(V²) due to adjacency-matrix scans.
+    ///
+    /// @return a graph holding the depth-first search forest
     public Graph depthFirstSearch() {
 
         Clock ini = Clock.tickMillis(systemDefault());
@@ -142,6 +182,9 @@ public class Graph {
         return result;
     }
 
+    /// Returns the vertex count derived from the adjacency matrix size.
+    ///
+    /// @return number of vertices, or zero when no matrix exists yet
     public int cardinality() {
 
         if (adjacencyMatrix == null)
@@ -150,10 +193,19 @@ public class Graph {
         return adjacencyMatrix[0].length;
     }
 
+    /// Returns the number of stored edges.
+    ///
+    /// @return current edge count
     public int countEdges() {
         return this.edges.size();
     }
 
+    /// Creates an undirected edge using letter names, where 'a' maps to
+    /// vertex 0.
+    ///
+    /// @param a1 first vertex name in [a..z]
+    /// @param a2 second vertex name in [a..z]
+    /// @return true if the edge was created
     public boolean createEdge(char a1, char a2) {
         int n1 = a1 - 97;
         int n2 = a2 - 97;
@@ -176,6 +228,13 @@ public class Graph {
         }
     }
 
+    /// Lists the neighbours of a vertex via a row scan of the adjacency
+    /// matrix.
+    ///
+    /// Complexity: O(V).
+    ///
+    /// @param vertex index of the queried vertex
+    /// @return adjacent vertices, or an empty list for an invalid index
     public List<Vertex> getAdjacentVertices(int vertex) {
         List<Vertex> ady = new ArrayList<>();
 
@@ -189,6 +248,14 @@ public class Graph {
         return ady;
     }
 
+    /// Lists the vertices with no edge to the given vertex, excluding
+    /// the vertex itself.
+    ///
+    /// Complexity: O(V).
+    ///
+    /// @param vertex index of the queried vertex
+    /// @return non-adjacent vertices, or an empty list for an invalid
+    ///         index
     public List<Vertex> getNonAdjacentVertices(int vertex) {
         List<Vertex> ady = new ArrayList<>();
 
@@ -202,6 +269,13 @@ public class Graph {
         return ady;
     }
 
+    /// Creates an undirected edge between two vertex indices, setting
+    /// both symmetric matrix cells and raising both degrees.
+    ///
+    /// @param node1 first vertex index
+    /// @param node2 second vertex index
+    /// @return true if the edge was created, false if it already
+    ///         existed, the vertices coincide, or an index is invalid
     public boolean newEdge(int node1, int node2) {
         try {
 
@@ -226,12 +300,21 @@ public class Graph {
         }
     }
 
+    /// Compares the present edge count against the undirected maximum
+    /// n(n-1)/2.
+    ///
+    /// @return connectivity ratio formatted as a percentage string
     public String connectivityPercentage() {
         double max = (double) cardinality() * (cardinality() - 1) / 2.0;
         return String.format("Conexividad: %3.2f", edges.size() / max * 100)
                 + "%";
     }
 
+    /// Removes the undirected edge between two vertex indices, clearing
+    /// both matrix cells and lowering both degrees.
+    ///
+    /// @param node1 first vertex index
+    /// @param node2 second vertex index
     public void removeEdge(int node1, int node2) {
 
         if (edges.isEmpty())
@@ -251,10 +334,17 @@ public class Graph {
         }
     }
 
+    /// Renders the adjacency table of the graph.
+    ///
+    /// @return printable representation of the adjacency table
     public String toString() {
         return getAdjacencyTable().toString();
     }
 
+    /// Builds the adjacency matrix as a letter-labelled table whose rows
+    /// and columns are headed by 'a' + vertex index.
+    ///
+    /// @return the table contents ready for printing
     public StringBuilder getAdjacencyTable() {
         if (adjacencyMatrix == null)
             return new StringBuilder();

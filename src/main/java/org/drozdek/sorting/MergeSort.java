@@ -1,34 +1,31 @@
 package org.drozdek.sorting;
 
-/**
- * Merge Sort algorithm.
- *
- * A divide-and-conquer algorithm that recursively splits the array in half,
- * sorts each half independently, then merges the two sorted halves into one.
- * Guarantees O(n log n) performance for all inputs and is a stable sort.
- *
- * <p><b>Real-world use case:</b> External sorting of large files that do not
- * fit in main memory, or efficiently sorting linked lists where random access
- * is expensive.
- *
- * Time complexity: O(n log n)
- * Memory complexity: O(n)
- *
- * @see <a href="https://en.wikipedia.org/wiki/Merge_sort">Merge sort (Wikipedia)</a>
- */
+/// Merge Sort algorithm.
+///
+/// A divide-and-conquer algorithm that recursively splits the array in half,
+/// sorts each half independently, then merges the two sorted halves into one.
+/// Guarantees O(n log n) performance for all inputs and is a stable sort.
+///
+/// **Real-world use case:** External sorting of large files that do not
+/// fit in main memory, or efficiently sorting linked lists where random access
+/// is expensive.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(n log n)
+/// Auxiliary Space: O(n)
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Merge_sort">Merge sort (Wikipedia)</a>
 public final class MergeSort {
 
     private MergeSort() {
         // do nothing
     }
 
-    /**
-     * Sorts a sub-array in-place using Merge Sort.
-     *
-     * @param array Array of integers to sort
-     * @param left  Starting index of the sub-array
-     * @param right Ending index of the sub-array
-     */
+    /// Sorts a sub-array in-place using Merge Sort.
+    ///
+    /// @param array Array of integers to sort
+    /// @param left  Starting index of the sub-array
+    /// @param right Ending index of the sub-array
     public static void mergeSort(int[] array, int left, int right) {
 
         if (left < right) {

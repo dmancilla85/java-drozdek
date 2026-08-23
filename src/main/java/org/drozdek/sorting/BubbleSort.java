@@ -1,33 +1,30 @@
 package org.drozdek.sorting;
 
-/**
- * Bubble Sort algorithm.
- *
- * Repeatedly steps through the array, compares adjacent elements, and swaps
- * them if they are in the wrong order. Each pass causes the next largest
- * element to "bubble" to its correct position at the end. The process repeats
- * until no swaps occur, indicating the array is sorted.
- *
- * <p><b>Real-world use case:</b> Teaching sorting fundamentals in computer
- * science education, or sorting very small datasets (fewer than ~50 elements)
- * where implementation simplicity matters more than raw speed.
- *
- * Time complexity: O(n²)
- * Memory complexity: O(1)
- *
- * @see <a href="https://en.wikipedia.org/wiki/Bubble_sort">Bubble sort (Wikipedia)</a>
- */
+/// Bubble Sort algorithm.
+///
+/// Repeatedly steps through the array, compares adjacent elements, and swaps
+/// them if they are in the wrong order. Each pass causes the next largest
+/// element to "bubble" to its correct position at the end. The process repeats
+/// until no swaps occur, indicating the array is sorted.
+///
+/// **Real-world use case:** Teaching sorting fundamentals in computer
+/// science education, or sorting very small datasets (fewer than ~50 elements)
+/// where implementation simplicity matters more than raw speed.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(n²)
+/// Auxiliary Space: O(1)
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Bubble_sort">Bubble sort (Wikipedia)</a>
 public final class BubbleSort {
 
     private BubbleSort() {
         // do nothing
     }
 
-    /**
-     * Sorts an array in-place using Bubble Sort.
-     *
-     * @param array Array of integers to sort
-     */
+    /// Sorts an array in-place using Bubble Sort.
+    ///
+    /// @param array Array of integers to sort
     public static void bubbleSort(int[] array) {
         int n = array.length;
         boolean swapped;

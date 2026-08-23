@@ -71,6 +71,11 @@ public class DynamicQueue implements UnlamQueue, QueueInterface<Object> {
         return first.data;
     }
 
+    /// Returns the number of elements currently stored in this queue.
+    ///
+    /// Traverses the underlying singly-linked list, so it runs in O(n).
+    ///
+    /// @return the number of elements in this queue
     public int size() {
         int count = 0;
         QueueNode current = first;

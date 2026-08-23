@@ -33,6 +33,12 @@ public class StaticQueue implements UnlamQueue, QueueInterface<Object> {
         last = -1;
     }
 
+    /// Constructs a circular queue backed by an array of the given capacity.
+    ///
+    /// When the capacity is exceeded, the backing array doubles in size
+    /// on the next enqueue.
+    ///
+    /// @param capacity initial capacity of the backing array
     public StaticQueue(int capacity) {
         queue = new Object[capacity];
         this.size = capacity;
@@ -58,6 +64,10 @@ public class StaticQueue implements UnlamQueue, QueueInterface<Object> {
         }
     }
 
+    /// Adds an element to the rear of the queue.
+    ///
+    /// If the queue is full, its capacity is automatically doubled and the
+    /// insertion retried, so this method never fails due to a full queue.
     @Override
     public boolean enqueue(Object obj) {
         try {
@@ -125,6 +135,12 @@ public class StaticQueue implements UnlamQueue, QueueInterface<Object> {
         return null;
     }
 
+    /// Returns the number of elements currently stored in this queue.
+    ///
+    /// This is the live element count, not the backing array capacity;
+    /// it accounts for wrap-around positions in the circular layout.
+    ///
+    /// @return the number of elements in this queue
     public int size() {
         return elementCount();
     }

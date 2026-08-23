@@ -40,6 +40,12 @@ public class IntThreadedTree implements TreeInterface {
         return root == null;
     }
 
+    /// Inserts a value keeping the successor threads consistent.
+    ///
+    /// When the new node takes over a thread from its parent, the thread is transferred so
+    /// in-order traversal stays correct. Runs in O(h), where h is the tree height.
+    ///
+    /// @param value key to insert
     public void insert(int value) {
         IntThreadedTreeNode newNode = new IntThreadedTreeNode(value);
         IntThreadedTreeNode p = root;
@@ -82,6 +88,9 @@ public class IntThreadedTree implements TreeInterface {
         }
     }
 
+    /// Prints the keys in in-order using the threaded traversal.
+    ///
+    /// @param out destination stream for visited keys
     public void printInOrder(PrintStream out) {
         threadInOrder(out);
     }
@@ -90,6 +99,12 @@ public class IntThreadedTree implements TreeInterface {
         return countNodes(root);
     }
 
+    /// Performs an in-order traversal following threads instead of recursion.
+    ///
+    /// Starts at the leftmost node and repeatedly descends to the leftmost descendant of real
+    /// right children or follows successor threads. Runs in O(n) time and O(1) space.
+    ///
+    /// @param out destination stream for visited keys
     public void threadInOrder(PrintStream out) {
         IntThreadedTreeNode prev;
         IntThreadedTreeNode p = root;
@@ -117,6 +132,10 @@ public class IntThreadedTree implements TreeInterface {
 
     }
 
+    /// Prints the key of the visited node followed by a space.
+    ///
+    /// @param p   node being visited, ignored when null
+    /// @param out destination stream
     protected void visit(IntThreadedTreeNode p, PrintStream out) {
         if (p == null)
             return;

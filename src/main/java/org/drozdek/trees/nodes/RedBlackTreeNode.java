@@ -15,6 +15,11 @@ public class RedBlackTreeNode<T extends Comparable<T>> {
     private RedBlackTreeNode<T> right;
     private RedBlackTreeNode<T> parent;
 
+    /// Creates a red leaf node without children or parent.
+    ///
+    /// New nodes start red, as required by red-black insertion.
+    ///
+    /// @param key comparable value stored in the node
     public RedBlackTreeNode(T key) {
         this.key = key;
         this.color = RED;
@@ -75,6 +80,9 @@ public class RedBlackTreeNode<T extends Comparable<T>> {
         return color == BLACK;
     }
 
+    /// Returns the sibling of this node's parent.
+    ///
+    /// @return uncle node, or null when no grandparent exists
     public RedBlackTreeNode<T> getUncle() {
         if (parent == null || parent.getParent() == null) {
             return null;

@@ -41,6 +41,12 @@ public class Stack<T> implements StackInterface<T> {
             this.pool.ensureCapacity(n);
     }
 
+    /// Renders the given element strings as a unicode box with TOP and BOTTOM markers.
+    ///
+    /// The first list item is marked as the bottom of the stack and the last one as the top.
+    ///
+    /// @param elementStrings string representation of each element, bottom first
+    /// @return a boxed multi-line rendering, or an empty string when the list is empty
     static String formatStackBox(List<String> elementStrings) {
         if (elementStrings.isEmpty()) {
             return "";
@@ -86,6 +92,12 @@ public class Stack<T> implements StackInterface<T> {
         return sb.toString();
     }
 
+    /// Renders the given elements as a table of values, runtime types, and the top marker.
+    ///
+    /// The last element of the list is displayed at the top of the stack.
+    ///
+    /// @param elements elements in insertion order, bottom first
+    /// @return a formatted multi-line listing, or an empty string when the list is empty
     static String formatStackList(List<?> elements) {
         if (elements.isEmpty()) return "";
 

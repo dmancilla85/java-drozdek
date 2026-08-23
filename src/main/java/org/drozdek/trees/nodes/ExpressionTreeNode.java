@@ -15,6 +15,9 @@ public class ExpressionTreeNode {
     private ExpressionTreeNode left;
     private ExpressionTreeNode right;
 
+    /// Creates a leaf node holding the given symbol.
+    ///
+    /// @param data symbol stored in the node
     public ExpressionTreeNode(char data) {
         this(data, null, null);
     }

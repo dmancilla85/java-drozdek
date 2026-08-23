@@ -38,6 +38,8 @@ public class TaskSchedulingSolution {
         return solution;
     }
 
+    /// Returns a multi-line summary of this solution.
+    ///
     /// @return A formatted string with task count, instruction count, and all selected tasks
     public String toString() {
         StringBuilder result = new StringBuilder();

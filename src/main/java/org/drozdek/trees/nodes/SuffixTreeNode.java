@@ -11,6 +11,11 @@ public class SuffixTreeNode {
     private final int id;
     private SuffixTreeNode suffixLink;
 
+    /// Allocates edge arrays sized for the alphabet and assigns the next sequential id.
+    ///
+    /// Left interval bounds start at -1 (no edge); right bounds start at 0.
+    ///
+    /// @param sz number of representable characters, used as array size
     public SuffixTreeNode(int sz) {
         id = cnt++;
         suffixLink = null;

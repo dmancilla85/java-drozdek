@@ -26,12 +26,22 @@ public class StaticBinaryTree implements TreeInterface {
         size = 0;
     }
 
+    /// Creates the tree and places the given node at the root position.
+    ///
+    /// @param root node stored at index 0
     public StaticBinaryTree(HeapNode root) {
         tree = new HeapNode[CAPACITY];
         tree[0] = root;
         size = 1;
     }
 
+    /// Stores a node in the right-child slot of the given parent position.
+    ///
+    /// Fails when the computed index exceeds capacity or the tree is already full.
+    ///
+    /// @param parent index of the parent position
+    /// @param node   node to store
+    /// @return true when the node was placed, false otherwise
     public boolean setRightChild(int parent, HeapNode node) {
         try {
             if (((parent * 2) + 1) <= CAPACITY - 1 && !isFull()) {
@@ -47,6 +57,13 @@ public class StaticBinaryTree implements TreeInterface {
         return false;
     }
 
+    /// Stores a node in the left-child slot of the given parent position.
+    ///
+    /// Fails when the computed index exceeds capacity or the tree is already full.
+    ///
+    /// @param parent index of the parent position
+    /// @param node   node to store
+    /// @return true when the node was placed, false otherwise
     public boolean setLeftChild(int parent, HeapNode node) {
         try {
             if ((parent * 2) <= CAPACITY - 1 && !isFull()) {
@@ -62,6 +79,13 @@ public class StaticBinaryTree implements TreeInterface {
         return false;
     }
 
+    /// Places a node at the rightmost slot of the last occupied level.
+    ///
+    /// The slot is derived from the current size parity and overwritten directly, without
+    /// increasing the node count.
+    ///
+    /// @param node node to place
+    /// @return true when the computed index was valid, false otherwise
     public boolean setRightmostChild(HeapNode node) {
         int index = (size - 1) % 2 != 0 ? size - 1 : size - 2;
         if (index < 0 || index >= CAPACITY) {
@@ -71,6 +95,13 @@ public class StaticBinaryTree implements TreeInterface {
         return true;
     }
 
+    /// Places a node at the leftmost slot of the last occupied level.
+    ///
+    /// The slot is derived from the current size parity and overwritten directly, without
+    /// increasing the node count.
+    ///
+    /// @param node node to place
+    /// @return true when the computed index was valid, false otherwise
     public boolean setLeftmostChild(HeapNode node) {
         int index = (size - 1) % 2 == 0 ? size - 1 : size - 2;
         if (index < 0 || index >= CAPACITY) {
@@ -80,6 +111,11 @@ public class StaticBinaryTree implements TreeInterface {
         return true;
     }
 
+    /// Installs the given node as root when the root position is still empty.
+    ///
+    /// Calls with a non-empty root or a null node are ignored.
+    ///
+    /// @param node node to place at index 0
     public void setRoot(HeapNode node) {
         if (tree[0] == null && node != null) {
             tree[0] = node;
@@ -99,6 +135,12 @@ public class StaticBinaryTree implements TreeInterface {
         return size;
     }
 
+    /// Reads the backing array at the slot adjacent to the given parent position.
+    ///
+    /// Accesses index `2 * parent + 1`; out-of-range accesses are logged and yield null.
+    ///
+    /// @param parent index of the parent position
+    /// @return node at the computed slot, or null when the access falls outside the array
     public HeapNode leftChild(int parent) {
         try {
             return tree[(parent * 2) + 1];
@@ -109,6 +151,9 @@ public class StaticBinaryTree implements TreeInterface {
         return null;
     }
 
+    /// Returns the node stored at the rightmost occupied slot of the last level.
+    ///
+    /// @return node at the computed slot, which may be null
     public Object rightmostChild() {
         if ((size - 1) % 2 != 0)
             return tree[size - 1];
@@ -116,6 +161,9 @@ public class StaticBinaryTree implements TreeInterface {
             return tree[size - 2];
     }
 
+    /// Returns the node stored at the leftmost occupied slot of the last level.
+    ///
+    /// @return node at the computed slot, which may be null
     public Object leftmostChild() {
         if ((size - 1) % 2 == 0)
             return tree[size - 1];
@@ -124,6 +172,10 @@ public class StaticBinaryTree implements TreeInterface {
     }
 
     @SuppressWarnings("java:S4144")
+    /// Compatibility overload that ignores its argument and behaves like leftmostChild().
+    ///
+    /// @param node unused parameter kept for signature compatibility
+    /// @return node at the leftmost occupied slot, which may be null
     public Object leftmostChild(@SuppressWarnings("unused") int node) {
         if ((size - 1) % 2 == 0)
             return tree[size - 1];

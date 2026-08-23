@@ -8,7 +8,18 @@ import static java.time.ZoneId.systemDefault;
 
 import org.drozdek.commons.LoggerService;
 
-/// @author David
+/// Directed graph with integer arc weights kept both as adjacency lists
+/// and as a weight table.
+///
+/// **Real-world use case:** Flight networks with fares, road networks with
+/// travel times, and communication networks with latency — typical inputs
+/// to Dijkstra's algorithm.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(V) average createArc/removeArc via lists
+/// Auxiliary Space: O(V²) weight table plus adjacency lists
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Directed_graph">Directed graph (Wikipedia)</a>
 public class WeightedDigraph implements Digraph {
 
     protected List<Vertex> v;
@@ -17,6 +28,10 @@ public class WeightedDigraph implements Digraph {
     public int[][] weightTable;
     protected int totalArcs;
 
+    /// Creates a weighted digraph with n vertices, a zeroed adjacency
+    /// matrix, and a zeroed n-by-n weight table.
+    ///
+    /// @param n number of vertices
     public WeightedDigraph(int n) {
         this.adjacencyList = null;
         this.adjacencyMatrix = new byte[n][n];
@@ -29,7 +44,10 @@ public class WeightedDigraph implements Digraph {
 
     }
 
-    /// @param args
+    /// Demo entry point exercising arc creation, table printing, and
+    /// DFS.
+    ///
+    /// @param args unused
     static void main(@SuppressWarnings("unused") String[] args) {
         WeightedDigraph dp = new WeightedDigraph(10);
         dp.createArc('a', 'e', 1);
@@ -54,6 +72,13 @@ public class WeightedDigraph implements Digraph {
         newGraph.printArcWeightTable();
     }
 
+    /// Traverses the whole weighted digraph depth-first, copying each
+    /// traversed arc with its original weight into a result graph and
+    /// restarting until every vertex is visited.
+    ///
+    /// Complexity: O(V²) due to adjacency-matrix scans.
+    ///
+    /// @return a weighted digraph holding the depth-first search forest
     @SuppressWarnings({"java:S3776", "java:S6541"})
     public WeightedDigraph depthFirstSearch() {
 
@@ -79,15 +104,31 @@ public class WeightedDigraph implements Digraph {
         return result;
     }
 
+    /// Returns the vertex count derived from the adjacency matrix size.
+    ///
+    /// @return number of vertices
     public int cardinality() {
         return adjacencyMatrix[0].length;
     }
 
+    /// Checks whether the weighted directed arc from-to exists,
+    /// validating both indices first.
+    ///
+    /// @param from source vertex index
+    /// @param to   target vertex index
+    /// @return true if the arc is present
     public boolean hasArc(int from, int to) {
         return from >= 0 && from < cardinality() && to >= 0 && to < cardinality()
                 && adjacencyMatrix[from][to] == 1;
     }
 
+    /// Creates a weighted directed arc using letter names, where 'a'
+    /// maps to vertex 0.
+    ///
+    /// @param a1     source vertex name in [a..z]
+    /// @param a2     target vertex name in [a..z]
+    /// @param weight arc weight
+    /// @return true if the arc was created
     public boolean createArc(char a1, char a2, int weight) {
         int n1 = a1 - 97;
         int n2 = a2 - 97;
@@ -95,6 +136,14 @@ public class WeightedDigraph implements Digraph {
         return createArc(n1, n2, weight);
     }
 
+    /// Creates a weighted directed arc between two vertex indices,
+    /// recording it in both the matrix and the weight table.
+    ///
+    /// @param node1  source vertex index
+    /// @param node2  target vertex index
+    /// @param weight arc weight
+    /// @return true if the arc was created, false if it already existed,
+    ///         the vertices coincide, or an index is invalid
     public boolean createArc(int node1, int node2, int weight) {
         try {
             if (adjacencyMatrix[node1][node2] == 1 || node1 == node2)
@@ -127,6 +176,13 @@ public class WeightedDigraph implements Digraph {
         }
     }
 
+    /// Removes the weighted arc between two vertex indices, clearing
+    /// its matrix cell and weight-table entry.
+    ///
+    /// @param node1 source vertex index
+    /// @param node2 target vertex index
+    /// @return the weight previously stored for the arc, or null when no
+    ///         arcs remain or the operation fails
     public Integer removeArc(int node1, int node2) {
         if (totalArcs == 0)
             return null;
@@ -144,11 +200,18 @@ public class WeightedDigraph implements Digraph {
         }
     }
 
+    /// Reports adjacency in either direction between two vertices.
+    ///
+    /// @param i first vertex index
+    /// @param j second vertex index
+    /// @return true if an arc exists from i to j or from j to i
     public boolean isAdjacent(int i, int j) {
         return adjacencyMatrix[i][j] == 1 ||
                 adjacencyMatrix[j][i] == 1;
     }
 
+    /// Prints the letter-labelled adjacency matrix, where cell `[i][j]`
+    /// marks an arc from vertex 'a' + i to 'a' + j.
     public void printAdjacencyTable() {
         StringBuilder sb = new StringBuilder();
 
@@ -175,6 +238,8 @@ public class WeightedDigraph implements Digraph {
         LoggerService.logInfo(sb.toString());
     }
 
+    /// Prints the letter-labelled arc weight table aligned with the
+    /// adjacency matrix layout.
     public void printArcWeightTable() {
         StringBuilder sb = new StringBuilder();
 

@@ -247,6 +247,18 @@ public class DoubleLinkedList<T> implements Iterable<T>, ListInterface<T> {
         return size;
     }
 
+    /// Adds a new element to the tail of the list.
+    ///
+    /// Implements the `ListInterface` contract and simply delegates to
+    /// `addToTail()`, so the new element becomes the tail of the list.
+    ///
+    /// @param data the data value to store in the new node
+    ///
+    /// Time Complexity: O(1) - constant time insertion at the tail
+    public void add(T data) {
+        addToTail(data);
+    }
+
     /// Returns the head node of this doubly-linked list without removing it.
     ///
     /// @return the head node, or null if the list is empty
@@ -255,10 +267,6 @@ public class DoubleLinkedList<T> implements Iterable<T>, ListInterface<T> {
     ///
     /// Note: This method exposes the internal node structure. Use with caution
     /// as it allows direct manipulation of the list's internal structure.
-    public void add(T data) {
-        addToTail(data);
-    }
-
     public DoubleLinkedListNode<T> viewHeadNode() {
         return head;
     }

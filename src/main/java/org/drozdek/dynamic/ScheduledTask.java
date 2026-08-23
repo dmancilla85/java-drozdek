@@ -10,11 +10,16 @@ public class ScheduledTask implements Comparable<ScheduledTask>, Comparator<Sche
     private int start;
     private int end;
 
+    /// Creates a default task with zero start and end times.
     public ScheduledTask() {
         start = 0;
         end = 0;
     }
 
+    /// Creates a task that spans from the given start time to the given end time.
+    ///
+    /// @param i start time of the task
+    /// @param f end time of the task
     public ScheduledTask(int i, int f) {
         start = i;
         end = f;
@@ -53,6 +58,8 @@ public class ScheduledTask implements Comparable<ScheduledTask>, Comparator<Sche
         return java.util.Objects.hash(end);
     }
 
+    /// Returns a string representation of this task.
+    ///
     /// @return A string in the format {S:start, E:end}
     public String toString() {
         return "{S:" + start + ", E:" + end + "}";

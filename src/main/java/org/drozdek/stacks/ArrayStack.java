@@ -24,11 +24,22 @@ public class ArrayStack<T> implements StackInterface<T> {
         this(DEFAULT_CAPACITY);
     }
 
+    /// Constructs a stack backed by an ArrayList with the given initial capacity.
+    ///
+    /// The list grows dynamically, so the capacity is only a sizing hint.
+    ///
+    /// @param capacity initial capacity hint for the backing list
     public ArrayStack(int capacity) {
         this.list = new ArrayList<>(capacity);
         this.top = -1;
     }
 
+    /// Pushes an element onto the top of this stack.
+    ///
+    /// Null elements are rejected.
+    ///
+    /// @param element the element to add on top of the stack
+    /// @throws NullPointerException if the element is null
     @Override
     public void push(T element) {
         Objects.requireNonNull(element, "Element cannot be null");

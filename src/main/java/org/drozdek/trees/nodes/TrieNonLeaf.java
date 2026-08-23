@@ -12,6 +12,9 @@ public class TrieNonLeaf extends TrieNode {
     private String letters;
     private TrieNode[] ptr;
 
+    /// Creates a non-leaf node whose letter string starts with the given character.
+    ///
+    /// @param ch first branching letter of the node
     public TrieNonLeaf(char ch) {
         letters = "";
         letters += ch;

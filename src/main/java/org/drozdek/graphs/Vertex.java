@@ -2,7 +2,16 @@ package org.drozdek.graphs;
 
 import java.util.Comparator;
 
-/// @author David
+/// Graph vertex holding an integer key, an optional display name, a color
+/// mark used by traversal and coloring algorithms, and its degree.
+///
+/// **Real-world use case:** Intersections in road networks, users in
+/// social graphs, and web pages in link-analysis models.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) for all operations
+/// Auxiliary Space: O(1)
+///
 public class Vertex implements Comparable<Object>, Comparator<Object> {
 
     protected static final int A_MINUSC = 97;
@@ -12,6 +21,10 @@ public class Vertex implements Comparable<Object>, Comparator<Object> {
     protected int degree;
 
 
+    /// Creates a vertex with an explicit key and display name.
+    ///
+    /// @param key  integer identifier of the vertex
+    /// @param name display name used by printouts; may be null
     public Vertex(int key, String name) {
         this.key = key;
         this.name = name;
@@ -19,19 +32,29 @@ public class Vertex implements Comparable<Object>, Comparator<Object> {
         this.color = 0;
     }
 
+    /// Creates a vertex whose display name is derived from its key,
+    /// mapping key 0 to 'a', 1 to 'b', and so on.
+    ///
+    /// @param key integer identifier of the vertex
     public Vertex(int key) {
         this(key, "");
         this.name = Character.toString(generateName(key));
     }
 
+    /// Creates a default vertex with key 0 and no display name.
     public Vertex() {
         this(0, null);
     }
 
+    /// Maps a vertex index to its letter name, where 0 becomes 'a'.
+    ///
+    /// @param i vertex index
+    /// @return the letter corresponding to the index
     public static char generateName(int i) {
         return (char) (A_MINUSC + i);
     }
 
+    /// Increments the degree counter by one.
     public void increaseDegree() {
         degree++;
     }
@@ -46,6 +69,7 @@ public class Vertex implements Comparable<Object>, Comparator<Object> {
         return this.degree - ((Vertex) arg0).degree;
     }
 
+    /// Decrements the degree counter, never letting it go below zero.
     public void decreaseDegree() {
         if (degree > 0)
             degree--;
@@ -101,6 +125,9 @@ public class Vertex implements Comparable<Object>, Comparator<Object> {
             this.color = color;
     }
 
+    /// Renders the key, name, and degree of the vertex.
+    ///
+    /// @return printable representation of the vertex
     public String toString() {
         return "{ Key = " + key + ", Name = "
                 + name + ", Degree = " + degree + "}";

@@ -32,7 +32,7 @@ Branch is `master`, not `main`.
 | `lists/` | Linked list variants + `nodes/` and `iterators/` |
 | `dynamic/` | Knapsack + task scheduling |
 | `hashing/` | Hash table with separate chaining |
-| `graphs/unlam/` | Graph ADT, algorithms (Dijkstra, Prim-Jarnik, Kruskal, Floyd-Warshall) |
+| `graphs/` + `graphs/algorithms/` | Graph ADT and high-level algorithm suites (Dijkstra, Prim-Jarnik, Kruskal, Floyd-Warshall, A*, MST, topological sort) |
 | `stacks/` | Stack implementations |
 | `queues/` + `queues/unlam/` | Queue implementations |
 | `recursion/` | Recursive algorithms |
@@ -46,6 +46,18 @@ Branch is `master`, not `main`.
 - Google Checks style (120 char lines, 2-space indent, Javadoc on public methods).
 - `@SuppressWarnings("java:S...")` is used for SonarQube overrides on complex methods.
 - No databases, no external services, no Docker — pure in-memory Java algorithms.
+
+## Documentation Conventions
+
+- All public APIs use modern markdown doc comments (`///`, JEP-467) — no classic `/** */`.
+- Class-level docs follow the template: description, **Real-world use case**, **Complexity Analysis** (Time Complexity / Auxiliary Space), optional `@see`.
+- Every package has a `package-info.java`.
+- Method-level docs are required for all API-relevant public/protected members; trivial getters/setters and restating `@Override`s are exempt.
+- Run `mvn javadoc:javadoc` to generate HTML; `mvn validate` enforces checkstyle (120-char lines, 2-space indent).
+
+## Quality Gate Status
+
+SonarCloud quality gate: **PASSED** (rating A across Reliability, Security, Maintainability; 0 open issues, 84.9% coverage, 2.9% duplication, 100% hotspots reviewed).
 
 ## Coverage
 

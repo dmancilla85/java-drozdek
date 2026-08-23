@@ -1,37 +1,34 @@
 package org.drozdek.searching;
 
-/**
- * Ternary Search algorithm.
- *
- * A divide-and-conquer algorithm that splits the sorted array into three equal
- * parts using two midpoints, then recursively searches the relevant one-third
- * interval. Although it makes more comparisons than binary search per level,
- * it divides the space into smaller portions.
- *
- * <p><b>Real-world use case:</b> Finding the maximum of a unimodal function
- * in numerical optimization (e.g., locating the peak signal strength in
- * antenna calibration).
- *
- * Time complexity: O(log₃ n)
- * Memory complexity: O(log n) for the recursive stack
- *
- * @see <a href="https://en.wikipedia.org/wiki/Ternary_search">Ternary search (Wikipedia)</a>
- */
+/// Ternary Search algorithm.
+///
+/// A divide-and-conquer algorithm that splits the sorted array into three equal
+/// parts using two midpoints, then recursively searches the relevant one-third
+/// interval. Although it makes more comparisons than binary search per level,
+/// it divides the space into smaller portions.
+///
+/// **Real-world use case:** Finding the maximum of a unimodal function
+/// in numerical optimization (e.g., locating the peak signal strength in
+/// antenna calibration).
+///
+/// Complexity Analysis:
+/// Time Complexity: O(log₃ n)
+/// Auxiliary Space: O(log n) for the recursive stack
+///
+/// @see <a href="https://en.wikipedia.org/wiki/Ternary_search">Ternary search (Wikipedia)</a>
 public final class TernarySearch {
 
     private TernarySearch() {
         // do nothing
     }
 
-    /**
-     * Searches for a target value in a sorted array using Ternary Search.
-     *
-     * @param array  Sorted array of integers
-     * @param left   Left boundary of the search interval
-     * @param right  Right boundary of the search interval
-     * @param target Value to search for
-     * @return Index of the target if found, -1 otherwise
-     */
+    /// Searches for a target value in a sorted array using Ternary Search.
+    ///
+    /// @param array  Sorted array of integers
+    /// @param left   Left boundary of the search interval
+    /// @param right  Right boundary of the search interval
+    /// @param target Value to search for
+    /// @return Index of the target if found, -1 otherwise
     public static int ternarySearch(int[] array, int left, int right, int target) {
         if (left > right) {
             return -1;

@@ -31,6 +31,11 @@ public class HeapArray {
         position = 0;
     }
 
+    /// Sorts the stored keys in ascending order using in-place heapsort.
+    ///
+    /// Repeatedly swaps the current maximum to the end and sifts the displaced value down;
+    /// every intermediate array state is appended to a trace file. Runs in O(n log n) with
+    /// O(1) extra space.
     public void heapSort() {
         int parent;
         int child;
@@ -60,14 +65,27 @@ public class HeapArray {
         }
     }
 
+    /// Computes the array index of the right child of the given position.
+    ///
+    /// @param parentPosition index of the parent node
+    /// @return child index computed as `2 * parentPosition + 1`
     public int rightChild(int parentPosition) {
         return (2 * parentPosition) + 1;
     }
 
+    /// Computes the array index of the left child of the given position.
+    ///
+    /// @param parentPosition index of the parent node
+    /// @return child index computed as `2 * parentPosition`
     public int leftChild(int parentPosition) {
         return 2 * parentPosition;
     }
 
+    /// Inserts a key and restores the max-heap property by sifting it up.
+    ///
+    /// The backing array doubles in size when full. Runs in O(log n) amortized.
+    ///
+    /// @param key value to add to the heap
     public void insert(int key) {
         int next = position;
         if (next >= keys.length) {
@@ -86,6 +104,10 @@ public class HeapArray {
         position++;
     }
 
+    /// Appends the current heap array contents to target/files/HeapArray.txt.
+    ///
+    /// Creates the target directory when missing and reports I/O failures through the logger
+    /// without throwing.
     public void displayToFile() {
         Path path = Path.of("target", "files", "HeapArray.txt");
         try {
@@ -110,6 +132,11 @@ public class HeapArray {
         }
     }
 
+    /// Renders the heap array as a single-line string.
+    ///
+    /// Unused slots (zero values) appear as "--".
+    ///
+    /// @return textual representation of every slot in the backing array
     public String display() {
         StringBuilder result = new StringBuilder();
         int i = 0;
@@ -124,6 +151,7 @@ public class HeapArray {
         return result.toString();
     }
 
+    /// Logs the current heap display through the application logger.
     public void print() {
         LoggerService.logInfo(System.lineSeparator() + display());
     }

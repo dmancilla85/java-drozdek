@@ -38,6 +38,12 @@ public class SimpleTree<T> implements TreeInterface {
         return root;
     }
 
+    /// Attaches a new node with the given label under the parent node.
+    ///
+    /// Passing a null parent sets the new node as the tree root.
+    ///
+    /// @param parent node receiving the child, or null to define the root
+    /// @param label  value stored in the created node
     public void insertElement(TreeNode<T> parent, T label) {
         TreeNode<T> newNode = new TreeNode<>(label);
         if (parent == null) {
@@ -48,6 +54,12 @@ public class SimpleTree<T> implements TreeInterface {
         nodeCount++;
     }
 
+    /// Finds the first node carrying the given label using a depth-first search.
+    ///
+    /// Compares labels with equals(); runs in O(n).
+    ///
+    /// @param label value to look for
+    /// @return matching node, or null when no node carries the label
     public TreeNode<T> findNode(T label) {
         return findNodeRecursive(root, label);
     }

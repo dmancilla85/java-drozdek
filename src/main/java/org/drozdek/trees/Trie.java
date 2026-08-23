@@ -25,6 +25,11 @@ public class Trie implements TreeInterface {
         root = null;
     }
 
+    /// Creates a trie seeded with the given word.
+    ///
+    /// The first character becomes the root label and the remainder is stored in a leaf.
+    ///
+    /// @param word initial word; must contain at least one character
     public Trie(String word) {
         // init on root
         root = new TrieNonLeaf(word.charAt(0));
@@ -75,6 +80,13 @@ public class Trie implements TreeInterface {
     }
 
     @SuppressWarnings({"java:S3776", "java:S6541"})
+    /// Reports whether the trie contains the given word.
+    ///
+    /// Walks one level per character and resolves stored leaf suffixes. Runs in O(m), where m
+    /// is the word length.
+    ///
+    /// @param word string to look up
+    /// @return true when the word is present, false otherwise
     public boolean found(String word) {
         TrieNode p = root;
         int i = 0;
@@ -109,6 +121,12 @@ public class Trie implements TreeInterface {
     }
 
     @SuppressWarnings({"java:S3776", "java:S6541"})
+    /// Adds a word to the trie, splitting stored leaf suffixes when prefixes are shared.
+    ///
+    /// The first inserted word initializes the root; duplicates are logged and skipped.
+    /// Runs in O(m), where m is the word length.
+    ///
+    /// @param word string to add
     public void insert(String word) {
         if (root == null) {
             root = new TrieNonLeaf(word.charAt(0));
@@ -280,6 +298,9 @@ public class Trie implements TreeInterface {
         return root.toString();
     }
 
+    /// Renders the trie with tab-indented prefixes and leaf suffixes.
+    ///
+    /// @return textual dump of the trie, or "&lt;EMPTY&gt;" when no word has been inserted
     public String printTrie() {
         if (root != null)
             return oldPrintTrie(0, root, "w");

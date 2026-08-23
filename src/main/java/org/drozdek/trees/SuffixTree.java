@@ -28,6 +28,13 @@ public class SuffixTree implements TreeInterface {
         this(0, 127);
     }
 
+    /// Creates an empty suffix tree configured for a range of character codes.
+    ///
+    /// Characters are indexed into the node arrays by subtracting the offset, so the range must
+    /// cover every character of the texts processed later.
+    ///
+    /// @param from lowest accepted character code
+    /// @param to   highest accepted character code
     public SuffixTree(int from, int to) {
         size = to - from + 1;
         offset = from;
@@ -107,6 +114,11 @@ public class SuffixTree implements TreeInterface {
         return printTree(root, 0, 0, 0, pos);
     }
 
+    /// Renders the whole suffix tree with edge intervals and suffix link targets.
+    ///
+    /// Produces one section per prefix of the stored text, indented by node depth.
+    ///
+    /// @return multi-line textual dump of the tree structure
     public String printTree() {
         StringBuilder tree = new StringBuilder();
         tree.append("Name:  ");
@@ -241,7 +253,7 @@ public class SuffixTree implements TreeInterface {
     /// We understand that the working example of such a complex algorithm could prove to be a very important step for
     /// your learning. But, first read the below 2 statements to understand the basics.
     ///
-    /// @param text
+    /// @param text input string whose suffix tree is built
     public void ukkonen(String text) {
         this.text = text;
         final int n = this.text.length();

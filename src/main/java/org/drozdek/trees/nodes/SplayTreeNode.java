@@ -25,6 +25,9 @@ public class SplayTreeNode<T extends Comparable<T>> {
         this.parent = parent;
     }
 
+    /// Creates a leaf node without a parent.
+    ///
+    /// @param element comparable key stored in the node
     public SplayTreeNode(T element) {
         this(element, null, null, null);
     }

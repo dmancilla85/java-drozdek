@@ -22,6 +22,14 @@ public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> 
     protected final List<E> nodes;
     protected int count;
 
+    /// Constructs an empty min-heap with the given capacity hint.
+    ///
+    /// Elements are ordered by the supplied comparator or, when it is null,
+    /// by their natural ordering.
+    ///
+    /// @param capacity initial capacity hint; must be greater than zero
+    /// @param cmp comparator defining the priority order, or null for natural ordering
+    /// @throws IllegalArgumentException if capacity is not greater than zero
     public Heap(int capacity, Comparator<? super E> cmp) {
         if (capacity <= 0)
             throw new IllegalArgumentException();
@@ -29,10 +37,15 @@ public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> 
         this.cmp = cmp;
     }
 
+    /// Constructs an empty min-heap ordered by the natural ordering of its elements.
+    ///
+    /// @param capacity initial capacity hint; must be greater than zero
+    /// @throws IllegalArgumentException if capacity is not greater than zero
     public Heap(int capacity) {
         this(capacity, null);
     }
 
+    /// Removes all elements from this heap, leaving it empty.
     public synchronized void clear() {
         nodes.clear();
         count = 0;
@@ -44,6 +57,13 @@ public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> 
         return a.compareTo(b);
     }
 
+    /// Removes and returns the smallest element of this heap.
+    ///
+    /// The last element is sifted down to restore the heap invariant.
+    /// Runs in O(log n).
+    ///
+    /// @return the smallest element according to the heap ordering,
+    ///         or null if this heap is empty
     public synchronized E extract() {
         if (count < 1)
             return null;
@@ -73,6 +93,11 @@ public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> 
         return least;
     }
 
+    /// Inserts an element into this heap, sifting it up to restore the heap invariant.
+    ///
+    /// Runs in O(log n).
+    ///
+    /// @param x the element to insert
     public synchronized void insert(E x) {
         nodes.add(x);
         int k = count;
@@ -96,6 +121,12 @@ public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> 
         return (k - 1) / 2;
     }
 
+    /// Returns the smallest element of this heap without removing it.
+    ///
+    /// Runs in O(1).
+    ///
+    /// @return the smallest element according to the heap ordering,
+    ///         or null if this heap is empty
     public synchronized E peek() {
         if (count > 0)
             return nodes.get(0);
@@ -107,11 +138,20 @@ public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> 
         return 2 * (k + 1);
     }
 
+    /// Inserts an element into this heap; equivalent to calling insert(x).
+    ///
+    /// @param x the element to add
+    /// @return true if the element was added
     public synchronized boolean enqueue(E x) {
         insert(x);
         return true;
     }
 
+    /// Removes and returns the smallest element of this heap;
+    /// equivalent to calling extract().
+    ///
+    /// @return the smallest element according to the heap ordering,
+    ///         or null if this heap is empty
     public synchronized E dequeue() {
         return extract();
     }
