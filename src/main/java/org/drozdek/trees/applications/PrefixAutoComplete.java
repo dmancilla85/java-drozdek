@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-
 import org.drozdek.trees.Trie;
 
 /// Search query and text auto-complete engine powered by a Trie (prefix tree)

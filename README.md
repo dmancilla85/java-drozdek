@@ -22,7 +22,7 @@ mvn exec:java -Dexec.mainClass="org.drozdek.sorting.QuickSort" -q
 
 # Generate Javadoc HTML
 mvn javadoc:javadoc
-# Open target/site/apidocs/index.html in a browser
+# Open target/reports/apidocs/index.html in a browser
 ```
 
 ## Tech Stack
@@ -84,6 +84,7 @@ consistent template (class-level includes **Real-world use case** and **Complexi
 Analysis** sections). Javadoc is generated via `mvn javadoc:javadoc`.
 
 Each package contains a `package-info.java` summarizing its scope.
+See [docs/report.md](docs/report.md) for a comprehensive architecture and change report.
 
 ## License
 

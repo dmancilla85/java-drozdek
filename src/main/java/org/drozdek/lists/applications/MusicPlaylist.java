@@ -2,7 +2,6 @@ package org.drozdek.lists.applications;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.drozdek.lists.DoubleLinkedList;
 import org.drozdek.lists.nodes.DoubleLinkedListNode;
 

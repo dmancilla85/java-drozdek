@@ -38,6 +38,15 @@ Branch is `master`, not `main`.
 | `recursion/` | Recursive algorithms |
 | `commons/` | `LoggerService`, `ArrayUtils` |
 
+## Skills
+
+The following specialized skills are integrated and should be utilized for ongoing development and maintenance:
+- `acquire-codebase-knowledge` — Codebase onboarding, architecture discovery, and structural mapping.
+- `java-architect` — Enterprise Java architecture, domain design, and clean code practices.
+- `java-docs` — Modern Javadoc best practices and JEP-467 markdown documentation standards.
+- `java-junit` — JUnit 5 unit testing, parameterized testing (`@ParameterizedTest`), and assertion patterns.
+- `maven` — Maven lifecycle management, plugin configurations, and dependency resolution.
+
 ## Conventions
 
 - `LoggerService.logInfo/Error` is the logger (wraps `System.out`). Do not use `System.out` directly.

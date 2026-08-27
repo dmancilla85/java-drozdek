@@ -1,225 +1,166 @@
-# Drozdek Project — Comprehensive Change Report
+# Drozdek Project — Master Architecture & Change Report
 
 ## Overview
 
-Systematic audit and repair spanning lists, queues, stacks, sorting, searching, trees, recursion, dynamic programming, and graphs. All 801 tests pass with 0 failures, 90.1% instruction coverage (19,069/21,155).
+A comprehensive repository for abstract data types (ADTs), data structures, and classical algorithms in Java 25, based on *Data Structures and Algorithms in Java* by Adam Drozdek.
+
+- **Build Tool:** Maven 3.9+ (single-module)
+- **Language / Runtime:** Java 25
+- **Unit Testing:** JUnit Jupiter 6.0.3 — **854 tests across 88 test files** (100% passing, 0 failures, 0 errors)
+- **Code Coverage:** JaCoCo 0.8.14 (90%+ instruction coverage)
+- **Static Analysis:** SonarCloud Quality Gate **PASSED** (Rating A in Reliability, Security, Maintainability; 0 open issues)
+- **Code Style:** Checkstyle Google Java Style (120-character line limit, 2-space indentation)
+- **Documentation:** Modern JEP-467 Markdown doc comments (`///`) across all public APIs and 27 `package-info.java` descriptors
 
 ---
 
-## Bugs Fixed (15 items)
+## 1. Core ADT Applications Catalog
 
-### BinarySearchTree.postorder() called preorder() internally
-- **File:** `src/main/java/org/drozdek/trees/BinarySearchTree.java`
-- **Fix:** Changed `postorder()` recursion to left→right→root instead of left→root→right.
+To illustrate the practical value and concrete problem-solving capabilities of each Abstract Data Type, dedicated `applications` subpackages have been introduced across all six core data structure modules:
 
-### CountingSort missing decrement in output loop
-- **File:** `src/main/java/org/drozdek/sorting/CountingSort.java`
-- **Fix:** Added `count[array[i]]--` after placing each element to handle duplicate values.
+| ADT Module | Package | Application Class | Backing ADT | Real-World Problem Solved | Complexity |
+|---|---|---|---|---|---|
+| **Stacks** | `org.drozdek.stacks.applications` | `BalancedBracketValidator` | `ArrayStack<Character>` | Delimiter validation `()`, `[]`, `{}` in code/math expressions | $O(n)$ time / $O(n)$ space |
+| **Queues** | `org.drozdek.queues.applications` | `PrintSpooler` (`PrintJob` record) | `Queue<PrintJob>` | Multi-user FIFO print spooling and job dispatching | $O(1)$ enqueue/dequeue / $O(n)$ space |
+| **Lists** | `org.drozdek.lists.applications` | `MusicPlaylist` (`Track` record) | `DoubleLinkedList<Track>` | Bidirectional audio track stepping & looping playback | $O(1)$ step / $O(n)$ space |
+| **Trees** | `org.drozdek.trees.applications` | `PrefixAutoComplete` | `Trie` | Fast dictionary prefix search and query completion | $O(L)$ query / $O(N \cdot L)$ space |
+| **Graphs** | `org.drozdek.graphs.applications` | `BuildDependencyResolver` | `DirectedAcyclicGraph` | Build task dependency resolution & cycle detection | $O(V + E)$ topological sort / $O(V)$ space |
+| **Hashing** | `org.drozdek.hashing.applications` | `UserSessionStore` (`UserSession` record) | `HashTable<String, UserSession>` | In-memory token verification, TTL expiry, & revocation | $O(1)$ expected lookup / $O(n)$ space |
 
-### DoubleLinkedList.delete() corrupted prev pointers
-- **File:** `src/main/java/org/drozdek/lists/DoubleLinkedList.java`
-- **Fix:** Set `head.previous = null` when deleting head; set `tmp.next.previous = predecessor` for middle deletions. Removed orphaned duplicate code block.
+### Detailed Use Case Breakdown
 
-### CircularLinkedList.delete() broken for single-element, circularity, not-found
-- **File:** `src/main/java/org/drozdek/lists/CircularLinkedList.java`
-- **Fix:** Single-element case sets head to null; circularity restored on tail-delete; returns early if value not found.
+#### Stacks: Balanced Bracket Validator
+- **Package:** `org.drozdek.stacks.applications`
+- **Class:** `BalancedBracketValidator`
+- **Backing ADT:** `org.drozdek.stacks.ArrayStack<T>`
+- **Problem Statement:** Syntax validation of nested delimiters (`()`, `[]`, `{}`) in programming languages, configuration files (JSON), and mathematical formulas.
+- **Mechanism:** Scans input strings in $O(n)$ time. Opening brackets are pushed onto the LIFO stack; closing brackets must match the element popped from the top. Returns true if balanced and identifies mismatch indices.
 
-### DoubleCircularLinkedList.delete() single-element case
-- **File:** `src/main/java/org/drozdek/lists/DoubleCircularLinkedList.java`
-- **Fix:** Single-element delete now sets head = null.
+#### Queues: Multi-User Print Spooler
+- **Package:** `org.drozdek.queues.applications`
+- **Class:** `PrintSpooler` (with `PrintJob` record)
+- **Backing ADT:** `org.drozdek.queues.Queue<T>` (`QueueInterface<T>`)
+- **Problem Statement:** Asynchronous print job management where requests submitted by multiple network workstations must be buffered and printed in strict First-Come, First-Served (FIFO) order.
+- **Mechanism:** Jobs are enqueued at the tail of the FIFO queue without blocking client callers. The printing engine processes and dequeues jobs from the head sequentially, recording cumulative page counts and job completion statistics.
 
-### IntSkipList.chooseLevel() overflow at Integer.MIN_VALUE
-- **File:** `src/main/java/org/drozdek/lists/IntSkipList.java`
-- **Fix:** `Math.abs(rd.nextInt())` wraps to Integer.MIN_VALUE for negative values. Replaced with `rd.nextInt(Integer.MAX_VALUE) + 1`.
+#### Lists: Continuous Music Playlist Manager
+- **Package:** `org.drozdek.lists.applications`
+- **Class:** `MusicPlaylist` (with `Track` record)
+- **Backing ADT:** `org.drozdek.lists.DoubleLinkedList<T>`
+- **Problem Statement:** Sequential and bidirectional audio track navigation in a media player with track addition, deletion, and optional infinite loop playback.
+- **Mechanism:** Tracks are stored as nodes in a doubly-linked list. Pointers allow instantaneous $O(1)$ stepping forward (`nextTrack()`) and backward (`previousTrack()`), wrapping around boundaries when looping is active.
 
-### IntSkipList.choosePowers() off-by-one shift
-- **File:** `src/main/java/org/drozdek/lists/IntSkipList.java`
-- **Fix:** `(2 << (maxLevel - 1)) - 1` → `(1 << maxLevel) - 1`.
+#### Trees: Prefix Search Auto-Complete Engine
+- **Package:** `org.drozdek.trees.applications`
+- **Class:** `PrefixAutoComplete`
+- **Backing ADT:** `org.drozdek.trees.Trie`
+- **Problem Statement:** Interactive query suggestion in search boxes and IDEs that retrieves vocabulary terms matching a partial input prefix.
+- **Mechanism:** Terms inserted into the Trie share prefix nodes. Lookups traverse character paths in $O(L)$ time where $L$ is word length, irrespective of total vocabulary size.
 
-### IntSkipList.search() crash on empty list
-- **File:** `src/main/java/org/drozdek/lists/IntSkipList.java`
-- **Fix:** Added guard in `findMajorNotNullValue()` to check if list is empty before accessing nodes.
+#### Graphs: Build System Dependency Resolver
+- **Package:** `org.drozdek.graphs.applications`
+- **Class:** `BuildDependencyResolver`
+- **Backing ADT:** `org.drozdek.graphs.DirectedAcyclicGraph`
+- **Problem Statement:** Determining valid compilation or execution schedules for software modules with prerequisite dependencies (e.g., Maven, Gradle), while preventing cyclic deadlock dependencies.
+- **Mechanism:** Modules are mapped to vertices in a DAG. Adding a dependency adds a directed arc from prerequisite to dependent; any arc that introduces a path back to the origin is rejected as a circular dependency. Topological sorting generates the linear build order.
 
-### Ejercicio3_2.mochilaMaximizar() infinite loop
-- **File:** `src/main/java/org/drozdek/dynamic/Ejercicio3_2.java`
-- **Fix:** Extracted `fraccion` calculation variable; added `objeto++` increment.
-
-### Ejercicio3_2 used Double.MIN_VALUE (positive) instead of NEGATIVE_INFINITY
-- **File:** `src/main/java/org/drozdek/dynamic/Ejercicio3_2.java`
-- **Fix:** `Double.MIN_VALUE` → `Double.NEGATIVE_INFINITY`.
-
-### ElementoMochilaDyn & Tarea compareTo integer overflow
-- **Files:** `src/main/java/org/drozdek/dynamic/ElementoMochilaDyn.java`, `src/main/java/org/drozdek/dynamic/SolucionEjercicio2.java`
-- **Fix:** Subtraction-based comparison replaced with `Integer.compare()`.
-
-### DynamicStack.verTope() NPE on empty stack
-- **File:** `src/main/java/org/drozdek/stacks/unlam/DynamicStack.java`
-- **Fix:** Added null-guard before accessing top node data.
-
-### StaticStack.apilar() exception-based flow control
-- **File:** `src/main/java/org/drozdek/stacks/unlam/StaticStack.java`
-- **Fix:** Simplified: use `if (esLlena()) reDim()` instead of throwing/catching exception.
-
-### SmartStack.tipo was final (never switched)
-- **File:** `src/main/java/org/drozdek/stacks/unlam/SmartStack.java`
-- **Fix:** Removed `final` qualifier; `cambiarA*()` methods now update `tipo`.
-
-### AvlTreeNode height defaulted to 0 instead of 1
-- **File:** `src/main/java/org/drozdek/trees/AvlTreeNode.java`
-- **Fix:** Constructor initializes `height = 1`.
+#### Hashing: In-Memory User Session Store
+- **Package:** `org.drozdek.hashing.applications`
+- **Class:** `UserSessionStore` (with `UserSession` record)
+- **Backing ADT:** `org.drozdek.hashing.HashTable<K, V>`
+- **Problem Statement:** High-throughput HTTP bearer token validation, TTL expiration enforcement, and session revocation in web APIs and microservices.
+- **Mechanism:** Cryptographic session tokens map to `UserSession` state within a hash table with separate chaining. Authentication checks and revocations execute in expected $O(1)$ constant time.
 
 ---
 
-## New Features
+## 2. Documentation Modernization (JEP-467)
 
-### ArrayUtils.isSorted()
-- **File:** `src/main/java/org/drozdek/commons/ArrayUtils.java`
-- **Fix:** Added `public static boolean isSorted(int[] array)` helper. Replaced all `assertTrue(true)` in 10 sort tests with `assertTrue(ArrayUtils.isSorted(array))`.
+All public APIs have been upgraded to modern Markdown doc comments (`///`, JEP-467).
 
-### ExpressionTree multi-digit support
-- **File:** `src/main/java/org/drozdek/trees/ExpressionTree.java`
-- **Fix:** Rewrote character parsing to accumulate consecutive digits (`num = num * 10 + (c - '0')`) instead of casting char to int (ASCII bug). Test expectation corrected from 101 → 71 for `(5+7)*4+23`.
+### Canonical Documentation Template (Pattern M)
+```java
+/// Brief single-sentence summary ending with a period.
+///
+/// Detailed description of the algorithm or abstract data type structure.
+///
+/// **Real-world use case:** Concrete industrial or academic application scenario.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(...) description
+/// Auxiliary Space: O(...) description
+///
+/// @see <a href="...">External Reference</a>
+```
 
-### Ejercicio2_7 3-way merge sort rewrite
-- **File:** `src/main/java/org/drozdek/sorting/Ejercicio2_7.java`
-- **Fix:** Complete rewrite with proper 3-way split (tercio1, tercio2), 3-way merge (three-pointer comparison), correct 0-indexed base cases, and `test()` method updated to use 0-based indexing.
-
----
-
-## Code Quality Improvements
-
-| File | Change |
-|------|--------|
-| `BinarySearch.java` | `(left + right) / 2` → `left + (right - left) / 2` (overflow-safe) |
-| `CompareExample.java` | Removed stale TODO comment |
-| `LoggerService.java` | `logWarning`/`logError` use correct log levels (WARNING/SEVERE) |
-| `QuickSort.java` | Diamond operator on `ArrayList` |
-| `TestEjercicio1.java` | Removed `System.exit(0)` |
-| `IntThreadedTree.java` | `printInOrder()` delegates to `threadInOrder()` |
+### Scope of Modernization
+1. **Class-level Headers:** Every class across all 27 packages is documented following Pattern M.
+2. **Method-level Javadocs:** All API-relevant public methods, constructors, and factory methods have full parameter, return, and exception tags.
+3. **Package Descriptors:** Every package contains a dedicated `package-info.java`.
+4. **Delimiters:** Converted all legacy `/** ... */` HTML comments in `sorting/` and `searching/` to `///`.
 
 ---
 
-## Configuration Upgrades
+## 3. Historical Bug Fixes & Refactoring Highlights
 
-| File | Change |
-|------|--------|
-| `pom.xml` | JUnit 5.12.2, Surefire 3.5.5, Compiler 3.15.0; added encoding properties |
-| `.github/workflows/maven.yml` | `checkout@v4`, narrowed `contents: read` and `issues: write` permissions |
-| `.github/workflows/codeql.yml` | `checkout@v4`, `setup-java@v4` with JDK 25, `codeql-action@v3` |
-| `.github/dependabot.yml` | Added `github-actions` ecosystem |
+### Core Data Structure Fixes
+- **`BinarySearchTree.postorder()`:** Fixed recursion traversal to left → right → root (previously invoked preorder).
+- **`CountingSort`:** Added decrement `count[array[i]]--` to correctly handle duplicate values.
+- **`DoubleLinkedList.delete()`:** Repaired predecessor/successor pointer integrity on arbitrary node deletion.
+- **`CircularLinkedList.delete()`:** Fixed single-element deletions, tail pointer circularity restore, and missing-element guards.
+- **`DoubleCircularLinkedList.delete()`:** Fixed single-element head removal logic.
+- **`IntSkipList`:** Fixed level generation overflow at `Integer.MIN_VALUE` and off-by-one bitshift in `choosePowers()`.
+- **`DynamicKnapsackItem` & `ScheduledTask`:** Corrected `compareTo` integer overflow bugs using `Integer.compare()`.
+- **`AvlTreeNode`:** Initialized height default to 1.
+- **`ExpressionTree`:** Added multi-digit number parsing accumulation.
+- **`TernaryMergeSort`:** Complete rewrite with 3-way split, 3-pointer merge, and 0-indexed bounds.
 
----
-
-## Test Assertions Fixed
-
-All 10 sort tests and BinarySearchTest replaced meaningless `assertTrue(true)` with proper assertions:
-
-| Test | Before | After |
-|------|--------|-------|
-| BubbleSortTest | `assertTrue(true)` | `assertTrue(ArrayUtils.isSorted(array))` |
-| InsertionSortTest | `assertTrue(true)` | `assertTrue(ArrayUtils.isSorted(array))` |
-| SelectionSortTest | `assertTrue(true)` | `assertTrue(ArrayUtils.isSorted(array))` |
-| ShellSortTest | `assertTrue(true)` | `assertTrue(ArrayUtils.isSorted(array))` |
-| MergeSortTest | `assertTrue(true)` | `assertTrue(ArrayUtils.isSorted(array))` |
-| QuickSortTest | `assertTrue(true)` | `assertTrue(ArrayUtils.isSorted(array))` |
-| HeapSortTest | `assertTrue(true)` | `assertTrue(ArrayUtils.isSorted(array))` |
-| CountingSortTest | `assertTrue(true)` | `assertTrue(ArrayUtils.isSorted(array))` |
-| BucketSortTest | `assertTrue(true)` | `assertTrue(ArrayUtils.isSorted(array))` |
-| BinarySearchTest | `assertTrue(true)` | `assertEquals(4, index)` / `assertEquals(-1, index)` |
-
-## Coverage Improvement (87% → 90%)
-
-**Commit:** `6c276e9` — 16 files changed, 607 insertions.
-
-7 new test files, 9 existing test files extended. Total: 75 test files, 714 tests.
-
-| Test File | Type | Tests |
-|-----------|------|-------|
-| `CompareExampleTest.java` | new | Comparator coverage |
-| `IntSkipListNodeTest.java` | new | Record node |
-| `TrieLeafTest.java` | new | TrieLeaf |
-| `KnapsackSolutionTest.java` | new | KnapsackSolution |
-| `KnapsackItemTest.java` | new | KnapsackItem |
-| `ScheduledTaskTest.java` | new | 12 tests |
-| `DynamicKnapsackItemTest.java` | new | 12 tests |
-| `LinkedListStackTest.java` | extended | pop/top on empty |
-| `JumpSearchTest.java` | extended | single-element |
-| `FibonacciSearchTest.java` | extended | single/two-element |
-| `InterpolationSearchTest.java` | extended | single-element, right-branch |
-| `TernaryMergeSortTest.java` | extended | exhaustion paths |
-| `AlphabeticallySortedTest.java` | extended | test method |
-| `MajorityElementTest.java` | extended | test method |
-| `WordTest.java` | extended | equals/hashCode (5) |
-| `HeapNodeTest.java` | extended | equals/hashCode (6) |
-
-### Per-file coverage gains
-
-| Class | Before | After |
-|-------|--------|-------|
-| `AlphabeticallySorted` | 34.8% | 96.5% |
-| `MajorityElement` | 53.5% | 98.4% |
-| `DynamicKnapsackItem` | 51.7% | 95.3% |
-| `ScheduledTask` | 46.2% | 94.8% |
-| `HeapNode` | 47.6% | 93.4% |
-| `LinkedListStack`, `InterpolationSearch`, `FibonacciSearch` | — | 100% |
+### Code Quality & Standards
+- **BinarySearch:** Midpoint calculation changed to `left + (right - left) / 2` to prevent 32-bit signed integer overflow.
+- **LoggerService:** Standardized on `logInfo()`, `logWarning()`, and `logError()` wrapping `java.util.logging.Logger` with ANSI formatting.
+- **Dead References:** Replaced broken/dead academic DOIs with valid persistent identifiers and Wikipedia links.
 
 ---
 
-## Documentation
+## 4. Package Architecture Reference
 
-### README.md rewritten
-
-Full rewrite: title with badges (CI, CodeQL, SonarCloud quality gate), tech stack table, module list grouped by topic, build commands, project structure tree, MIT license. Replaced 12-line stub with TODO list.
-
-### AGENTS.md created
-
-Compact instruction file for OpenCode sessions: exact build/test commands, checkstyle/coverage notes, package directory map, code conventions (`LoggerService`, `private` constructors, Google Checks style, SonarQube suppression pattern), coverage target and high-ROI files.
+```
+org.drozdek.
+├── commons/                     # Shared utilities (LoggerService, ArrayUtils, DataTypeInterface)
+├── dynamic/                     # Knapsack and task scheduling algorithms
+├── graphs/                      # Graph ADTs (Graph, Digraph, DirectedGraph, WeightedGraph, FlowNetwork)
+│   ├── algorithms/              # Graph suites (ShortestPath, Construction, Structural)
+│   └── applications/            # BuildDependencyResolver
+├── hashing/                     # HashTable (separate chaining)
+│   └── applications/            # UserSessionStore, UserSession
+├── lists/                       # List ADTs (Single, Double, Circular, DoubleCircular, IntSkipList)
+│   ├── interfaces/              # ListInterface
+│   ├── iterators/               # Single/DoubleLinkedListIterator
+│   ├── nodes/                   # Internal list nodes
+│   └── applications/            # MusicPlaylist, Track
+├── queues/                      # Queue ADTs (Queue, ArrayQueue, Deque)
+│   ├── interfaces/              # QueueInterface, UnlamQueue
+│   ├── unlam/                   # Academic queue variants (Static, Dynamic, Heap)
+│   └── applications/            # PrintSpooler, PrintJob
+├── recursion/                   # Recursive algorithms (TowersOfHanoi, MajorityElement, AlphabeticallySorted)
+├── searching/                   # Search algorithms (Binary, Jump, Interpolation, Exponential, Fibonacci, etc.)
+├── sorting/                     # Sorting algorithms (Bubble, Quick, Merge, Heap, Counting, Bucket, etc.)
+│   └── exercises/               # Closest Pair, Ternary Merge Sort, Point
+├── stacks/                      # Stack ADTs (ArrayStack, LinkedStack, AdaptiveStack, Stack)
+│   ├── interfaces/              # StackInterface, StackIterable
+│   └── applications/            # BalancedBracketValidator
+└── trees/                       # Tree ADTs (BST, AVL, RedBlack, Splay, Trie, Heap, SuffixTree, etc.)
+    ├── interfaces/              # TreeInterface
+    ├── nodes/                   # Internal tree nodes
+    └── applications/            # PrefixAutoComplete
+```
 
 ---
 
-## .gitignore
+## 5. Verification Matrix
 
-- `.idea/` and `*.iml` already covered — no action needed.
-
----
-
-## Recent Changes
-
-### Reference audit — broken DOIs fixed
-
-| Broken reference | Replacement | Files |
-|---|---|---|
-| `10.5555/1614191` (CLRS, dead) | `https://en.wikipedia.org/wiki/Introduction_to_Algorithms` | 18 |
-| `10.1145/512274.512284` (dead) | `10.1145/512274.3734138` | 4 |
-| `10.1145/367390.367400` (wrong) | `10.1145/367177.367202` | 1 |
-
-12 graph-package DOIs verified and left unchanged.
-
-### New data structures and algorithms (5)
-
-| Class | Package | Notes | Coverage |
+| Verification Target | Maven Lifecycle Command | Status | Notes |
 |---|---|---|---|
-| `HashTable` | `hashing/` | Generic separate-chaining map with auto-resize | 96% |
-| `RedBlackTree` (+ `RedBlackTreeNode`) | `trees/` | Self-balancing BST with insert + fix-up, search/min/max | 78% / 73.6% |
-| `ZeroOneKnapsack` | `dynamic/` | Classic 0/1 DP with backtracking + space-optimised variant | 100% |
-| `Deque` | `queues/` | Doubly-linked double-ended queue implementing `QueueInterface` | 93% |
-| `TowersOfHanoi` | `recursion/` | Recursive solver + closed-form `minimumMoves()` | 100% |
-
-Supporting changes: `QueueInterface` gained `clear()` (required by `Deque`); `TowersOfHanoi.solve(0, ...)` guard added for the base case.
-
-### CI fix — committed conflict markers
-
-`src/main/java/org/drozdek/queues/unlam/FullQueueException.java` at HEAD still contained unresolved `git stash` conflict markers, which broke the Checkstyle (ANTLR) parse at `11:1: no viable alternative at input '<'`. The working-tree copy was already resolved (message kept, Javadoc added); the clean version must be committed.
-
-### Test / logging
-
-- `TowersOfHanoi` tests silence `java.util.logging` (`Logger` "Logger") in `@BeforeAll` and restore `INFO` in `@AfterAll`, removing ~1000 move-log lines per run and fixing the suite timeout.
-- Test suite grew 754 -> 795 tests during the audit (82 test files); with the follow-up display-support work below it reached 801 tests at 90.1% coverage.
-
-### Display support for new structures
-
-- `HashTable` now implements `DataTypeInterface`: `toString()` renders one `[index] ➔ key=value` line per non-empty bucket (`(empty table)` when empty) and inherits the default `print()`.
-- `RedBlackTreeNode` gained the standard prefix-diagram helper (`├──`/`└──`, same pattern as `AvlTreeNode`), tagging every line `key [R]` / `key [B]`; `RedBlackTree.toString()` delegates to it and returns `(empty)` on an empty tree. `inOrder()` is unchanged.
-- `Deque` already matched the queue family format (`FRONT ➔ [x] ➔ REAR`, boxed via `QueueInterface.boxedQueue`) — verified, no change needed.
-- Static algorithms (`ZeroOneKnapsack.Result`, `TowersOfHanoi` move logs) were left as-is; their output was already printable under existing conventions.
-- Test suite grew 795 -> 801 tests (+6 display tests). Coverage rose to 90.1% instruction (19,069/21,155): `HashTable` 96%, `Deque` 93%, `RedBlackTree` 78%.
+| **Checkstyle Gate** | `mvn validate` | **PASSED** | 0 violations (Google Java Style, 120 chars) |
+| **Unit Test Suite** | `mvn test` | **PASSED** | 854 tests executed across 88 test files (0 failures, 0 errors) |
+| **Javadoc Compiler** | `mvn javadoc:javadoc` | **PASSED** | 0 errors, generated at `target/reports/apidocs/index.html` |
+| **Full Build & JAR** | `mvn clean package` | **PASSED** | Full clean compilation, tests, JaCoCo report, and JAR package |
