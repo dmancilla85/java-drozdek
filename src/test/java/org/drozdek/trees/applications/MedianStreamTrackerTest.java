@@ -1,11 +1,28 @@
 package org.drozdek.trees.applications;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class MedianStreamTrackerTest {
+
+    @Test
+    @DisplayName("Median of an empty stream is undefined")
+    void median_empty() {
+        MedianStreamTracker tracker = new MedianStreamTracker();
+        assertThrows(IllegalStateException.class, tracker::median);
+        assertEquals(0, tracker.size());
+    }
+
+    @Test
+    @DisplayName("Single measurement is its own median")
+    void median_single() {
+        MedianStreamTracker tracker = new MedianStreamTracker();
+        tracker.add(42);
+        assertEquals(42.0, tracker.median());
+    }
 
     @Test
     @DisplayName("Odd stream size yields the middle value")

@@ -52,6 +52,9 @@ public class MedianStreamTracker {
     ///
     /// @return median as a double
     public double median() {
+        if (lower.isEmpty() && upper.isEmpty()) {
+            throw new IllegalStateException("Cannot compute median of an empty stream");
+        }
         if (lower.size() > upper.size()) {
             return lower.getMax();
         }

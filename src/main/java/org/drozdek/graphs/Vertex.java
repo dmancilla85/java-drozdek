@@ -70,7 +70,7 @@ public class Vertex implements Comparable<Object>, Comparator<Object> {
 
     @Override
     public int compareTo(Object arg0) {
-        return this.degree - ((Vertex) arg0).degree;
+        return Integer.compare(this.degree, ((Vertex) arg0).degree);
     }
 
     /// Decrements the degree counter, never letting it go below zero.

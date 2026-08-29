@@ -192,7 +192,7 @@ class MaximumHeapTest {
     @Test
     @DisplayName("Insert null element throws")
     void insertNull() {
-        assertThrows(IllegalArgumentException.class, () -> heap.insert(null));
+        assertThrows(NullPointerException.class, () -> heap.insert(null));
     }
 
     @Test

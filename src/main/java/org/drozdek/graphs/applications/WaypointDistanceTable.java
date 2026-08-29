@@ -25,11 +25,18 @@ import org.drozdek.graphs.algorithms.ShortestPathAlgorithms;
 /// @see ShortestPathAlgorithms
 public class WaypointDistanceTable {
 
-    private static final int INF = Integer.MAX_VALUE / 2;
+    /// Sentinel distance used when two waypoints are unreachable.
+    public static final int INF = Integer.MAX_VALUE / 2;
 
     private final WeightedGraph network;
+    private int[][] distances;
+    private boolean dirty = true;
 
     /// Creates a distance table over a highway network of the given size.
+    ///
+    /// The all-pairs shortest-distance matrix is built lazily from the current
+    /// segments the first time a distance is queried, and rebuilt whenever the
+    /// network changes.
     ///
     /// @param waypoints number of waypoints (vertices)
     public WaypointDistanceTable(int waypoints) {
@@ -43,7 +50,11 @@ public class WaypointDistanceTable {
     /// @param distance segment length
     /// @return true if the edge was added
     public boolean addSegment(int first, int second, int distance) {
-        return network.createEdge(first, second, distance);
+        if (network.createEdge(first, second, distance)) {
+            dirty = true;
+            return true;
+        }
+        return false;
     }
 
     /// Returns the shortest travel distance between two waypoints.
@@ -51,8 +62,17 @@ public class WaypointDistanceTable {
     /// @param from source waypoint index
     /// @param to   destination waypoint index
     /// @return shortest distance, or INF when unreachable
+    /// @throws IllegalArgumentException when either waypoint index is out of range
     public int distanceBetween(int from, int to) {
-        return ShortestPathAlgorithms.floydMarshallAlgorithm(network)[from][to];
+        int size = network.cardinality();
+        if (from < 0 || from >= size || to < 0 || to >= size) {
+            throw new IllegalArgumentException("Waypoint index out of range");
+        }
+        if (dirty) {
+            distances = ShortestPathAlgorithms.floydMarshallAlgorithm(network);
+            dirty = false;
+        }
+        return distances[from][to];
     }
 
     /// Returns the number of waypoints in the network.

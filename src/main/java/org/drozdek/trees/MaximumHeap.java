@@ -4,6 +4,7 @@ import org.drozdek.trees.interfaces.TreeInterface;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /// Maximum heap data structure implemented with an ArrayList. Maintains the max-heap property
 /// where the parent node is always greater than or equal to its children.
@@ -42,11 +43,9 @@ public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
     /// Adds an element and restores the max-heap property by sifting it up.
     ///
     /// @param element value to add
-    /// @throws IllegalArgumentException when element is null
+    /// @throws NullPointerException when element is null
     public void insert(T element) {
-        if (element == null) {
-            throw new IllegalArgumentException("Element cannot be null");
-        }
+        Objects.requireNonNull(element, "Element cannot be null");
         heap.add(element);
         siftUp(heap.size() - 1);
     }
