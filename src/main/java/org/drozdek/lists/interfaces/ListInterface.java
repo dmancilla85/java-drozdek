@@ -9,6 +9,10 @@ import org.drozdek.commons.DataTypeInterface;
 /// sequential collection where positional access patterns vary by
 /// implementation.
 ///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 3.
+///
 public interface ListInterface<T> extends DataTypeInterface {
 
     /// Tests if this list contains no elements.

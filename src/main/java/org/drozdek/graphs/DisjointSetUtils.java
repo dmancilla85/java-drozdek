@@ -10,6 +10,10 @@ package org.drozdek.graphs;
 /// Time Complexity: O(log n) amortized per find with path halving
 /// Auxiliary Space: O(1)
 ///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
+///
 public final class DisjointSetUtils {
     private DisjointSetUtils() {
     }

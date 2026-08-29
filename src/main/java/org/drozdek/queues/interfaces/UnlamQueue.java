@@ -10,7 +10,10 @@ package org.drozdek.queues.interfaces;
 /// Time Complexity: O(1) for enqueue and dequeue (per implementation)
 /// Auxiliary Space: O(n) for storing n elements
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
+/// Bibliography:
+///
+/// - Thomas H. Cormen et al. *Introduction to Algorithms*, 4th ed. MIT Press.
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 4.
 public interface UnlamQueue {
 
     /// Removes and returns the element at the front of the queue.

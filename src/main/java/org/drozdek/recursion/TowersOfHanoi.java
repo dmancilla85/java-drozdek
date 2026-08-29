@@ -9,10 +9,13 @@ import org.drozdek.commons.LoggerService;
 /// and teaching recursive problem decomposition.
 ///
 /// Complexity Analysis:
-/// Time Complexity: O(2^n) — two recursive calls per invocation
-/// Auxiliary Space: O(n) — recursion stack depth
+/// Time Complexity: O(2^n) - two recursive calls per invocation
+/// Auxiliary Space: O(n) - recursion stack depth
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Tower_of_Hanoi">Tower of Hanoi (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Tower of Hanoi. *Wikipedia*. https://en.wikipedia.org/wiki/Tower_of_Hanoi
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 5.
 public final class TowersOfHanoi {
     private TowersOfHanoi() {
         // do nothing

@@ -22,7 +22,10 @@ import java.io.PrintStream;
 /// Time Complexity: O(log n) average for search/insert/delete, O(n) worst-case
 /// Auxiliary Space: O(log n) for recursion stack, O(n) for storage
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
+/// Bibliography:
+///
+/// - Thomas H. Cormen et al. *Introduction to Algorithms*, 4th ed. MIT Press.
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 6.
 ///
 /// @author David
 /// @version 1.0.0

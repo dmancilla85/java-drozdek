@@ -17,7 +17,10 @@ import java.time.ZoneId;
 /// Time Complexity: O(1) amortized for push and pop
 /// Auxiliary Space: O(n) for storing n elements
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
+/// Bibliography:
+///
+/// - Thomas H. Cormen et al. *Introduction to Algorithms*, 4th ed. MIT Press.
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 4.
 public class AdaptiveStack<T> implements StackInterface<T> {
 
     /// Mode flag selecting the array-backed (static) representation.

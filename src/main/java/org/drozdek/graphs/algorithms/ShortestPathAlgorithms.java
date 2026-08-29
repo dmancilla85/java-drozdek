@@ -10,6 +10,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+/// Shortest-path algorithms over weighted graphs and digraphs: Dijkstra,
+/// Bellman-Ford, Floyd-Marshall, and A* search.
+///
+/// **Real-world use case:** GPS navigation, network routing (OSPF/BGP),
+/// supply-chain cost optimization, and game pathfinding.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(V^2) Dijkstra, O(V E) Bellman-Ford, O(V^3) Floyd-Marshall,
+///                  O(E log V) A* with a priority queue
+/// Auxiliary Space: O(V) to O(V^2) depending on the algorithm
+///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
 public final class ShortestPathAlgorithms {
     private ShortestPathAlgorithms() {
     }

@@ -36,6 +36,7 @@ import java.security.SecureRandom;
 ///   *Introduction to Algorithms*, Third Edition. MIT Press, 2009. Chapter 12:
 ///   Binary Search Trees, Skip Lists section.
 /// - Eric W. Weisstein. *Skip List*. From MathWorld--A Wolfram Web Resource.
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 3.
 public class IntSkipList implements ListInterface<Integer> {
     /// Maximum level allowed in this skip list
     private final int maximumLevel;

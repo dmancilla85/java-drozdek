@@ -12,6 +12,10 @@ import java.util.Comparator;
 /// Time Complexity: O(1) for all operations
 /// Auxiliary Space: O(1)
 ///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
+///
 public class Vertex implements Comparable<Object>, Comparator<Object> {
 
     protected static final int A_MINUSC = 97;

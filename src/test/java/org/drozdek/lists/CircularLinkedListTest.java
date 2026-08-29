@@ -1,7 +1,7 @@
 package org.drozdek.lists;
 
 import org.drozdek.commons.LoggerService;
-import org.drozdek.lists.nodes.SingleLinkedListNode;
+import org.drozdek.lists.nodes.SinglyLinkedListNode;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -155,7 +155,7 @@ class CircularLinkedListTest {
         list.add(234.34);
         list.add("bye");
 
-        SingleLinkedListNode<Object> node = list.viewHeadNode();
+        SinglyLinkedListNode<Object> node = list.viewHeadNode();
         LoggerService.logInfo(node.toString());
         assertEquals(test, node.getData());
     }

@@ -14,7 +14,10 @@ import org.drozdek.trees.nodes.SuffixTreeNode;
 /// Time Complexity: O(n) for construction (Ukkonen's algorithm)
 /// Auxiliary Space: O(n) for storage
 ///
-/// @see <a href="https://doi.org/10.1007/BF01206331">Ukkonen, 1995, On-line construction of suffix trees (Algorithmica)</a>
+/// Bibliography:
+///
+/// - E. Ukkonen. *On-line construction of suffix trees*. Algorithmica, 1995. https://doi.org/10.1007/BF01206331
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 13.
 public class SuffixTree implements TreeInterface {
     protected final SuffixTreeNode root;
     protected final String name;

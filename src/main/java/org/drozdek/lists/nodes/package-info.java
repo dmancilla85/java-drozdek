@@ -1,5 +1,5 @@
-/// Node classes backing the list variants: SingleLinkedListNode,
-/// DoubleLinkedListNode, CircularLinkedListNode, and IntSkipListNode.
+/// Node classes backing the list variants: SinglyLinkedListNode,
+/// DoublyLinkedListNode, CircularLinkedListNode, and IntSkipListNode.
 ///
 /// These are internal building blocks and not intended for direct client use.
 ///

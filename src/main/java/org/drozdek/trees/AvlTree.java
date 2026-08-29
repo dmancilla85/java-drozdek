@@ -14,7 +14,10 @@ import org.drozdek.trees.interfaces.TreeInterface;
 /// Time Complexity: O(log n) for search, insert, and delete
 /// Auxiliary Space: O(log n) for recursion stack
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
+/// Bibliography:
+///
+/// - Thomas H. Cormen et al. *Introduction to Algorithms*, 4th ed. MIT Press.
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 6.
 public class AvlTree implements TreeInterface {
 
     AvlTreeNode root;

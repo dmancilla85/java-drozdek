@@ -15,7 +15,10 @@ package org.drozdek.sorting;
 /// Time Complexity: O(n log n)
 /// Auxiliary Space: O(1)
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Heapsort">Heapsort (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Heapsort. *Wikipedia*. https://en.wikipedia.org/wiki/Heapsort
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 9.
 public final class HeapSort {
 
     private HeapSort() {

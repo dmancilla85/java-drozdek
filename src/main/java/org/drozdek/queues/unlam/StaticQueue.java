@@ -17,7 +17,10 @@ import org.drozdek.commons.LoggerService;
 /// Time Complexity: O(1) amortized for enqueue and dequeue
 /// Auxiliary Space: O(n) for the storage array
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
+/// Bibliography:
+///
+/// - Thomas H. Cormen et al. *Introduction to Algorithms*, 4th ed. MIT Press.
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 4.
 public class StaticQueue implements UnlamQueue, QueueInterface<Object> {
 
     private static final int DEFAULT_SIZE = 5;

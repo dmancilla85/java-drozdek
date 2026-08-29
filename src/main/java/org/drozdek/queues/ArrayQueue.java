@@ -15,7 +15,10 @@ import java.util.Arrays;
 /// Time Complexity: O(1) for enqueue and dequeue
 /// Auxiliary Space: O(n) for the fixed-size storage array
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
+/// Bibliography:
+///
+/// - Thomas H. Cormen et al. *Introduction to Algorithms*, 4th ed. MIT Press.
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 4.
 public class ArrayQueue implements QueueInterface<Object> {
     private final int capacity;
     private final Object[] storage;

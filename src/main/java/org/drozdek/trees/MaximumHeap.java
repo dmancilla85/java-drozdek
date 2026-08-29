@@ -15,7 +15,10 @@ import java.util.List;
 /// Time Complexity: O(log n) for insert/extractMax, O(n) for heapify
 /// Auxiliary Space: O(n) for storage
 ///
-/// @see <a href="https://doi.org/10.1145/512274.3734138">Williams, 1964, Heapsort (ACM)</a>
+/// Bibliography:
+///
+/// - J. W. J. Williams. *Heapsort*. Communications of the ACM, 1964. https://doi.org/10.1145/512274.3734138
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 6.
 public class MaximumHeap<T extends Comparable<T>> implements TreeInterface {
 
     private static final int DEFAULT_CAPACITY = 10;

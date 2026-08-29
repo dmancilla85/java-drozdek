@@ -14,7 +14,10 @@ import org.drozdek.trees.nodes.RedBlackTreeNode;
 /// Time Complexity: O(log n) for search, insert, and delete
 /// Auxiliary Space: O(log n) for recursion stack; O(n) for storage
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Red-black_tree">Red-black tree (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Red-black tree. *Wikipedia*. https://en.wikipedia.org/wiki/Red-black_tree
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 7.
 public class RedBlackTree<T extends Comparable<T>> implements TreeInterface {
     private RedBlackTreeNode<T> root;
     private int nodeCount;

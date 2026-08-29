@@ -15,7 +15,11 @@ import java.io.PrintStream;
 /// Time Complexity: O(log n) amortized for search/insert/delete
 /// Auxiliary Space: O(1)
 ///
-/// @see <a href="https://doi.org/10.1145/3828.3835">Sleator &amp; Tarjan, 1985, Self-adjusting binary search trees (JACM)</a>
+/// Bibliography:
+///
+/// - D. D. Sleator and R. E. Tarjan. *Self-adjusting binary search trees*.
+///   Journal of the ACM, 1985. https://doi.org/10.1145/3828.3835
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 6.
 public class SplayTree<T extends Comparable<T>> implements TreeInterface {
 
     SplayTreeNode<T> root;

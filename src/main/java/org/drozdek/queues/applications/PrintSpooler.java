@@ -19,6 +19,10 @@ import org.drozdek.queues.interfaces.QueueInterface;
 ///                  and status peek
 /// Auxiliary Space: O(n) where n is the number of currently queued jobs
 ///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 4.
+///
 /// @see Queue
 /// @see QueueInterface
 public class PrintSpooler {

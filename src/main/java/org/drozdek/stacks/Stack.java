@@ -16,7 +16,10 @@ import java.util.Objects;
 /// Time Complexity: O(1) amortized for push and pop
 /// Auxiliary Space: O(n) for storing n elements
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
+/// Bibliography:
+///
+/// - Thomas H. Cormen et al. *Introduction to Algorithms*, 4th ed. MIT Press.
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 4.
 public class Stack<T> implements StackInterface<T> {
     private final ArrayList<T> pool;
     private boolean printWithUnicode;

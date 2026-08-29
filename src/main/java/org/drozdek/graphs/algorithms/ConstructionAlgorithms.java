@@ -12,6 +12,20 @@ import org.drozdek.commons.LoggerService;
 import org.drozdek.graphs.*;
 import org.drozdek.trees.MinimumHeap;
 
+/// Graph construction algorithms: minimum spanning trees (Prim-Jarnik and
+/// Kruskal), maximum flow (Edmonds-Karp), and graph coloring.
+///
+/// **Real-world use case:** Network design, road and pipeline planning,
+/// traffic capacity routing, and register allocation in compilers.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(E log V) Prim-Jarnik, O(E log E) Kruskal,
+///                  O(V E^2) Edmonds-Karp, O(V + E) graph coloring
+/// Auxiliary Space: O(V) for temporary structures
+///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
 public final class ConstructionAlgorithms {
     private ConstructionAlgorithms() {
     }

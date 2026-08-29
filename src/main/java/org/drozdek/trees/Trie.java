@@ -16,7 +16,10 @@ import org.drozdek.trees.nodes.TrieNonLeaf;
 /// Time Complexity: O(m) where m is key length
 /// Auxiliary Space: O(n * m) where n is number of keys and m is average key length
 ///
-/// @see <a href="https://doi.org/10.1145/367390.367400">Fredkin, 1960, Trie memory (ACM)</a>
+/// Bibliography:
+///
+/// - E. Fredkin. *Trie memory*. Communications of the ACM, 1960. https://doi.org/10.1145/367390.367400
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 7.
 public class Trie implements TreeInterface {
     public static final int NOT_FOUND = -1;
     private TrieNonLeaf root;

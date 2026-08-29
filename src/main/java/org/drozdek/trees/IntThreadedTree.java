@@ -15,7 +15,11 @@ import java.io.PrintStream;
 /// Time Complexity: O(n) for traversal, O(log n) for search/insert on balanced
 /// Auxiliary Space: O(1) for traversal, O(1) for insert
 ///
-/// @see <a href="https://doi.org/10.1145/367177.367202">Perlis &amp; Thornton, 1960, Symbol manipulation by threaded lists (ACM)</a>
+/// Bibliography:
+///
+/// - A. J. Perlis and C. Thornton. *Symbol manipulation by threaded lists*.
+///   Communications of the ACM, 1960. https://doi.org/10.1145/367177.367202
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 6.
 public class IntThreadedTree implements TreeInterface {
     private IntThreadedTreeNode root;
 

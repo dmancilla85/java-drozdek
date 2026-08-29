@@ -16,7 +16,10 @@ import java.util.NoSuchElementException;
 /// Time Complexity: O(1) for add/remove/peek at both ends
 /// Auxiliary Space: O(n) for storing n elements
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Double-ended_queue">Double-ended queue (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Double-ended queue. *Wikipedia*. https://en.wikipedia.org/wiki/Double-ended_queue
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 4.
 public class Deque<T> implements QueueInterface<T> {
     private Node<T> head;
     private Node<T> tail;

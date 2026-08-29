@@ -17,11 +17,14 @@ import java.util.List;
 /// (Dual-Pivot QuickSort).
 ///
 /// Complexity Analysis:
-/// Time Complexity: O(n log n) average, O(n²) worst case
+/// Time Complexity: O(n log n) average, O(n�) worst case
 /// Auxiliary Space: O(log n) for the recursive stack
 /// Type: Unstable
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Quicksort">Quicksort (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Quicksort. *Wikipedia*. https://en.wikipedia.org/wiki/Quicksort
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 9.
 public final class QuickSort {
 
     private QuickSort() {

@@ -24,6 +24,10 @@ import org.drozdek.graphs.DirectedAcyclicGraph;
 /// Time Complexity: O(V + E) for adding dependencies and topological ordering
 /// Auxiliary Space: O(V) for node mapping and graph storage
 ///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
+///
 /// @see DirectedAcyclicGraph
 public class BuildDependencyResolver {
 

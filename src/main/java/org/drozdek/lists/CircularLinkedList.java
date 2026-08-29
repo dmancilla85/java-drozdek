@@ -1,12 +1,12 @@
 package org.drozdek.lists;
 
-import org.drozdek.lists.nodes.SingleLinkedListNode;
+import org.drozdek.lists.nodes.SinglyLinkedListNode;
 
 /// Circular singly-linked list data structure where the last node points back to the first node.
 ///
 /// Abstract Data Type: Circular singly-linked list
 ///
-/// This implementation extends SingleLinkedList but modifies the add() method to add elements
+/// This implementation extends SinglyLinkedList but modifies the add() method to add elements
 /// to the tail instead of the head, and ensures the last node points back to the first node,
 /// creating a circular structure. The head node still refers to the most recently added element.
 ///
@@ -33,7 +33,8 @@ import org.drozdek.lists.nodes.SingleLinkedListNode;
 ///   *Introduction to Algorithms*, Third Edition. MIT Press, 2009. Chapter 10:
 ///   Elementary Data Structures.
 /// - William Fiset. *Data Structures: Circular Linked Lists*. YouTube, 2020.
-public class CircularLinkedList<T> extends SingleLinkedList<T> {
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 3.
+public class CircularLinkedList<T> extends SinglyLinkedList<T> {
 
     /// Adds a new element to the tail (end) of the circular list.
     /// Overrides the base class method to maintain circular structure.
@@ -61,17 +62,17 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
     /// Time Complexity: O(n) where n is the number of elements, due to traversal to find the tail
     public void addToTail(T el) {
         if (isEmpty()) {
-            head = new SingleLinkedListNode<>(el);
+            head = new SinglyLinkedListNode<>(el);
             head.setNext(head);  // Point to itself in empty list
         } else {
-            SingleLinkedListNode<T> tmp = head;
+            SinglyLinkedListNode<T> tmp = head;
 
             // Traverse to find the last node (the one pointing to head)
             while (tmp.getNext() != head)
                 tmp = tmp.getNext();
 
             // Insert new node after tmp, pointing to head
-            tmp.setNext(new SingleLinkedListNode<>(el, head));
+            tmp.setNext(new SinglyLinkedListNode<>(el, head));
         }
     }
 
@@ -93,13 +94,13 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
                 head = null;
                 return;
             }
-            SingleLinkedListNode<T> tmp = head;
+            SinglyLinkedListNode<T> tmp = head;
             while (tmp.getNext() != head) tmp = tmp.getNext();
             head = head.getNext();
             tmp.setNext(head);
         } else {
-            SingleLinkedListNode<T> predecessor = head;
-            SingleLinkedListNode<T> tmp = head.getNext();
+            SinglyLinkedListNode<T> predecessor = head;
+            SinglyLinkedListNode<T> tmp = head.getNext();
             boolean flag = true;
 
             while (flag && !tmp.getData().equals(data)) {
@@ -125,7 +126,7 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
     @Override
     public T deleteHead() {
         T el = head.getData();
-        SingleLinkedListNode<T> tmp = head;
+        SinglyLinkedListNode<T> tmp = head;
 
         while (tmp.getNext() != head)
             tmp = tmp.getNext();
@@ -145,7 +146,7 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
     /// O(1) in the best case when the element is at the head.
     @Override
     public T find(T data) {
-        SingleLinkedListNode<T> tmp = head;
+        SinglyLinkedListNode<T> tmp = head;
         boolean flag = true;
 
         while (flag && !data.equals(tmp.getData())) {
@@ -165,7 +166,7 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
 
         StringBuilder middle = new StringBuilder();
         int count = 0;
-        SingleLinkedListNode<T> tmp = head;
+        SinglyLinkedListNode<T> tmp = head;
         while (count < s) {
             middle.append(tmp.getData());
             if (count < s - 1) {
@@ -192,7 +193,7 @@ public class CircularLinkedList<T> extends SingleLinkedList<T> {
     @Override
     public int size() {
         int size = 0;
-        SingleLinkedListNode<T> tmp = head;
+        SinglyLinkedListNode<T> tmp = head;
         boolean flag = true;
 
         while (flag && tmp != null) {

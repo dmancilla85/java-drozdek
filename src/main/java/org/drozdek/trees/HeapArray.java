@@ -18,7 +18,10 @@ import java.util.Arrays;
 /// Time Complexity: O(n*log(n)) for heap sort, O(log n) for insert, O(n) for heapify
 /// Auxiliary Space: O(1)
 ///
-/// @see <a href="https://doi.org/10.1145/512274.3734138">Williams, 1964, Heapsort (ACM)</a>
+/// Bibliography:
+///
+/// - J. W. J. Williams. *Heapsort*. Communications of the ACM, 1964. https://doi.org/10.1145/512274.3734138
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 6.
 public class HeapArray {
 
     private static final int DEFAULT_CAPACITY = 10;

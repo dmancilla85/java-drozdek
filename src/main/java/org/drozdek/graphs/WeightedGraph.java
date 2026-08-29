@@ -10,8 +10,12 @@ import org.drozdek.commons.LoggerService;
 /// spanning tree algorithms.
 ///
 /// Complexity Analysis:
-/// Time Complexity: O(1) edge weight lookup, O(n²) random generation
-/// Auxiliary Space: O(n²) for the weight table
+/// Time Complexity: O(1) edge weight lookup, O(n�) random generation
+/// Auxiliary Space: O(n�) for the weight table
+///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
 ///
 public class WeightedGraph extends Graph {
 

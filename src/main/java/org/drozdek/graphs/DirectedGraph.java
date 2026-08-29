@@ -9,6 +9,19 @@ import static java.time.ZoneId.systemDefault;
 
 import org.drozdek.commons.LoggerService;
 
+/// Directed graph ADT backed by a byte adjacency matrix with arc
+/// insertion/removal, depth-first traversal, and adjacency-table rendering.
+///
+/// **Real-world use case:** Dependency modeling, workflow engines, and
+/// network routing where relationships between vertices are directional.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(1) arc lookup, O(V) per adjacency scan, O(V + E) DFS
+/// Auxiliary Space: O(V�) for the adjacency matrix
+///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
 public class DirectedGraph implements Digraph {
 
     protected List<Vertex> vertices;

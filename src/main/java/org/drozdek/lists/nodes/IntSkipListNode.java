@@ -22,6 +22,7 @@ import java.util.Arrays;
 ///     <cite>Introduction to Algorithms</cite>, Third Edition. MIT Press, 2009. Chapter 12:
 ///     Binary Search Trees, Skip Lists section.
 ///   - Eric W. Weisstein. <cite>Skip List</cite>. From MathWorld--A Wolfram Web Resource.
+///   - Adam Drozdek. <cite>Data Structures and Algorithms in Java</cite>, 2nd Ed. Chapter 3.
 ///
 /// @param key  The key value stored in this node
 /// @param next Array of forward pointers to next nodes at various levels

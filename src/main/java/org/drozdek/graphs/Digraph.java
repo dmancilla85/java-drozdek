@@ -8,6 +8,10 @@ package org.drozdek.graphs;
 /// Complexity Analysis:
 /// Time Complexity: implementation-defined for cardinality and arc lookup
 ///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
+///
 /// @see DirectedGraph
 public interface Digraph {
     /// Returns the number of vertices in the digraph.

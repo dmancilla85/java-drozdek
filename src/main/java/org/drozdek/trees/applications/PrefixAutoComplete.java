@@ -23,6 +23,10 @@ import org.drozdek.trees.Trie;
 ///                  O(L + K) for prefix matching where K is matching subtree size
 /// Auxiliary Space: O(N * L) where N is vocabulary size and L is average length
 ///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 7.
+///
 /// @see Trie
 public class PrefixAutoComplete {
 

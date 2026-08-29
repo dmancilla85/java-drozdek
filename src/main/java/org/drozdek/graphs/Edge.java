@@ -12,6 +12,10 @@ import org.drozdek.commons.LoggerService;
 /// Time Complexity: O(1) for accessors, compareTo, equals, hashCode
 /// Auxiliary Space: O(1)
 ///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
+///
 public class Edge implements Comparable<Edge> {
 
     protected Vertex origin;

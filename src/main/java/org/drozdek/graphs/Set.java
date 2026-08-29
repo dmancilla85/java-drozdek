@@ -12,6 +12,10 @@ import java.util.LinkedHashSet;
 /// Time Complexity: O(1) expected add/contains/remove, O(n) subset/union
 /// Auxiliary Space: O(n)
 ///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
+///
 public class Set<T> {
 
     private final java.util.Set<T> elements;

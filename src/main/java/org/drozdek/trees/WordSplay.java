@@ -9,6 +9,10 @@ import java.io.*;
 /// Complexity Analysis:
 /// Time Complexity: O(n * log n) amortized for building the tree
 /// Auxiliary Space: O(n) for storage
+///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 6.
 public class WordSplay extends SplayTree<Word> {
     private int differentWords;
     private int wordCnt;

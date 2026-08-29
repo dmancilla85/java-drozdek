@@ -21,6 +21,10 @@ import org.drozdek.stacks.interfaces.StackInterface;
 /// Time Complexity: O(n) where n is the length of the string (single pass)
 /// Auxiliary Space: O(n) worst-case stack depth for nested opening brackets
 ///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 4.
+///
 /// @see ArrayStack
 public final class BalancedBracketValidator {
 

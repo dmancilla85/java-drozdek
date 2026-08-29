@@ -16,7 +16,10 @@ import java.util.List;
 /// Time Complexity: O(log n) for insert and extract, O(1) for peek
 /// Auxiliary Space: O(n) for storing n elements
 ///
-/// @see <a href="https://doi.org/10.1145/512274.3734138">Williams, "Algorithm 232: Heapsort", CACM 1964</a>
+/// Bibliography:
+///
+/// - J. W. J. Williams. *Algorithm 232: Heapsort*. Communications of the ACM, 1964. https://doi.org/10.1145/512274.3734138
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 6.
 public class Heap<E extends Comparable<? super E>> implements QueueInterface<E> {
     protected final Comparator<? super E> cmp;
     protected final List<E> nodes;

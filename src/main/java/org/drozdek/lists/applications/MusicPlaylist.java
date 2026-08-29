@@ -2,10 +2,10 @@ package org.drozdek.lists.applications;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.drozdek.lists.DoubleLinkedList;
-import org.drozdek.lists.nodes.DoubleLinkedListNode;
+import org.drozdek.lists.DoublyLinkedList;
+import org.drozdek.lists.nodes.DoublyLinkedListNode;
 
-/// Music playlist manager utilizing a doubly-linked list (`DoubleLinkedList`)
+/// Music playlist manager utilizing a doubly-linked list (`DoublyLinkedList`)
 /// to enable sequential, bidirectional audio track navigation (next/previous)
 /// and optional continuous loop playback.
 ///
@@ -21,17 +21,21 @@ import org.drozdek.lists.nodes.DoubleLinkedListNode;
 ///                  O(n) for searching/deleting arbitrary tracks by value
 /// Auxiliary Space: O(n) for storing n track nodes
 ///
-/// @see DoubleLinkedList
-/// @see DoubleLinkedListNode
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 3.
+///
+/// @see DoublyLinkedList
+/// @see DoublyLinkedListNode
 public class MusicPlaylist {
 
-  private DoubleLinkedList<Track> tracks;
-  private DoubleLinkedListNode<Track> currentCursor;
+  private DoublyLinkedList<Track> tracks;
+  private DoublyLinkedListNode<Track> currentCursor;
   private boolean looping;
 
   /// Creates a new, empty music playlist with looping enabled by default.
   public MusicPlaylist() {
-    this.tracks = new DoubleLinkedList<>();
+    this.tracks = new DoublyLinkedList<>();
     this.currentCursor = null;
     this.looping = true;
   }
@@ -165,7 +169,7 @@ public class MusicPlaylist {
 
   /// Clears all tracks from the playlist.
   public void clear() {
-    this.tracks = new DoubleLinkedList<>();
+    this.tracks = new DoublyLinkedList<>();
     this.currentCursor = null;
   }
 }

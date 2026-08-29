@@ -9,9 +9,12 @@ package org.drozdek.graphs;
 ///
 /// Complexity Analysis:
 /// Time Complexity: O(1) for addEdge/getCapacity/getVertexCount
-/// Auxiliary Space: O(n²) for the capacity matrix
+/// Auxiliary Space: O(n�) for the capacity matrix
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Flow_network">Flow network (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Flow network. *Wikipedia*. https://en.wikipedia.org/wiki/Flow_network
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
 public class FlowNetwork {
     private final int[][] capacity;
     private final int vertexCount;

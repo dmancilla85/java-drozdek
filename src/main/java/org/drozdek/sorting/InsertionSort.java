@@ -12,11 +12,14 @@ package org.drozdek.sorting;
 /// incrementally to an already-sorted list.
 ///
 /// Complexity Analysis:
-/// Time Complexity: O(n²)
+/// Time Complexity: O(n�)
 /// Auxiliary Space: O(1)
 /// Type: Stable
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Insertion_sort">Insertion sort (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Insertion sort. *Wikipedia*. https://en.wikipedia.org/wiki/Insertion_sort
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 9.
 public final class InsertionSort {
 
     private InsertionSort() {

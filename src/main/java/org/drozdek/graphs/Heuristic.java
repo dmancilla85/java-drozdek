@@ -6,6 +6,10 @@ package org.drozdek.graphs;
 /// Euclidean), puzzle solvers, and route estimation in navigation
 /// systems.
 ///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
+///
 @FunctionalInterface
 public interface Heuristic {
     /// Estimates the traversal cost between two vertices for A* search.

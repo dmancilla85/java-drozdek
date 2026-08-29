@@ -7,6 +7,10 @@ import org.drozdek.commons.LoggerService;
 /// Complexity Analysis:
 /// Time Complexity: O(1)
 /// Auxiliary Space: O(1)
+///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 6.
 public class Word implements Comparable<Word> {
     private final String words;
     private int freq;

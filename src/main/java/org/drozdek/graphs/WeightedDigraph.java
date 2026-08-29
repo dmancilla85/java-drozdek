@@ -17,9 +17,12 @@ import org.drozdek.commons.LoggerService;
 ///
 /// Complexity Analysis:
 /// Time Complexity: O(V) average createArc/removeArc via lists
-/// Auxiliary Space: O(V²) weight table plus adjacency lists
+/// Auxiliary Space: O(V�) weight table plus adjacency lists
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Directed_graph">Directed graph (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Directed graph. *Wikipedia*. https://en.wikipedia.org/wiki/Directed_graph
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
 public class WeightedDigraph implements Digraph {
 
     protected List<Vertex> v;

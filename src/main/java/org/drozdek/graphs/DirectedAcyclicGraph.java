@@ -20,7 +20,10 @@ import java.util.List;
 /// Time Complexity: O(V + E) cycle check per createArc, O(V + E) topological sort
 /// Auxiliary Space: O(V)
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">Directed acyclic graph (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Directed acyclic graph. *Wikipedia*. https://en.wikipedia.org/wiki/Directed_acyclic_graph
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
 public class DirectedAcyclicGraph extends DirectedGraph {
 
     /// Creates an acyclic digraph with n isolated vertices named after

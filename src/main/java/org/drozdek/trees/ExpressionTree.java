@@ -16,7 +16,10 @@ import java.util.Deque;
 /// Time Complexity: O(n) for construction and evaluation
 /// Auxiliary Space: O(n) for storage
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
+/// Bibliography:
+///
+/// - Thomas H. Cormen et al. *Introduction to Algorithms*, 4th ed. MIT Press.
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 6.
 public class ExpressionTree implements TreeInterface {
     final ExpressionTreeNode root;
 

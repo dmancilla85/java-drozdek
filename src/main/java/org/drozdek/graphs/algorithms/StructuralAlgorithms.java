@@ -10,6 +10,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/// Structural graph algorithms: cycle detection, topological sorting,
+/// strongly connected components, articulation points, and bridges.
+///
+/// **Real-world use case:** Deadlock detection, build-order scheduling,
+/// network vulnerability analysis, and social network connectivity.
+///
+/// Complexity Analysis:
+/// Time Complexity: O(V + E) for cycle detection, topological sort,
+///                  strongly connected components, articulation points,
+///                  and bridges
+/// Auxiliary Space: O(V)
+///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
 public final class StructuralAlgorithms {
     private StructuralAlgorithms() {
     }

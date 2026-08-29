@@ -12,10 +12,13 @@ package org.drozdek.sorting;
 /// overhead — Shell Sort requires no recursion and no auxiliary arrays.
 ///
 /// Complexity Analysis:
-/// Time Complexity: O(n³∕²) with the original gap sequence (n/2, n/4, ...)
+/// Time Complexity: O(n3/�) with the original gap sequence (n/2, n/4, ...)
 /// Auxiliary Space: O(1)
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Shellsort">Shellsort (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Shellsort. *Wikipedia*. https://en.wikipedia.org/wiki/Shellsort
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 9.
 public final class ShellSort {
 
     private ShellSort() {

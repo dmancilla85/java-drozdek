@@ -14,7 +14,10 @@ package org.drozdek.sorting;
 /// Time Complexity: O(n log n)
 /// Auxiliary Space: O(n)
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Merge_sort">Merge sort (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Merge sort. *Wikipedia*. https://en.wikipedia.org/wiki/Merge_sort
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 9.
 public final class MergeSort {
 
     private MergeSort() {

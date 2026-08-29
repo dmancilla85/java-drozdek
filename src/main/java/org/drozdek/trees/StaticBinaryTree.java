@@ -14,7 +14,10 @@ import org.drozdek.trees.nodes.HeapNode;
 /// Time Complexity: O(1) for get/set operations
 /// Auxiliary Space: O(n) for storage
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">Cormen et al., Introduction to Algorithms, 4th ed. (MIT Press)</a>
+/// Bibliography:
+///
+/// - Thomas H. Cormen et al. *Introduction to Algorithms*, 4th ed. MIT Press.
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 6.
 public class StaticBinaryTree implements TreeInterface {
 
     private static final int CAPACITY = 10;

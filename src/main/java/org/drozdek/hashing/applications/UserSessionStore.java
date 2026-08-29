@@ -22,6 +22,10 @@ import org.drozdek.hashing.HashTable;
 ///                  and revocation; O(n) worst-case during bucket collisions
 /// Auxiliary Space: O(n) where n is the number of active sessions
 ///
+/// Bibliography:
+///
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 10.
+///
 /// @see HashTable
 public class UserSessionStore {
 

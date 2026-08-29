@@ -18,7 +18,10 @@ import org.drozdek.commons.DataTypeInterface;
 ///            [Object#equals(Object)])
 /// @param <V> Value type
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Hash_table">Hash table (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Hash table. *Wikipedia*. https://en.wikipedia.org/wiki/Hash_table
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 10.
 public class HashTable<K, V> implements DataTypeInterface {
     private static final int DEFAULT_CAPACITY = 16;
     private static final double LOAD_FACTOR = 0.75;

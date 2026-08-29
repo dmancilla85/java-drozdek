@@ -12,10 +12,13 @@ package org.drozdek.sorting;
 /// where implementation simplicity matters more than raw speed.
 ///
 /// Complexity Analysis:
-/// Time Complexity: O(n²)
+/// Time Complexity: O(n�)
 /// Auxiliary Space: O(1)
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Bubble_sort">Bubble sort (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Bubble sort. *Wikipedia*. https://en.wikipedia.org/wiki/Bubble_sort
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 9.
 public final class BubbleSort {
 
     private BubbleSort() {

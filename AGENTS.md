@@ -4,7 +4,7 @@
 
 ```bash
 mvn clean package           # full build + tests + coverage report
-mvn test                    # run all tests (854)
+mvn test                    # run all tests (1176)
 mvn test -Dtest=FooTest     # single test class
 mvn validate                # checkstyle (Google Checks, fails on error)
 mvn jacoco:report           # coverage → target/site/jacoco/
@@ -19,7 +19,7 @@ JaCoCo report auto-generates at `test` phase (no separate step needed for local 
 
 Single-module Maven project. Java 25, JUnit Jupiter 6.0.3, JaCoCo 0.8.14. Two dependencies: JUnit (test) and `moby-names-generator` (SuffixTree uses it for random names).
 
-Source mirrors under `src/test/java/org/drozdek/`. 88 test files, 854 tests, 90% instruction coverage.
+Source mirrors under `src/test/java/org/drozdek/`. 149 test files, 1176 tests, ~92% instruction coverage.
 
 Branch is `master`, not `main`.
 
@@ -27,15 +27,19 @@ Branch is `master`, not `main`.
 
 | src/main/org/drozdek/ | Contains |
 |---|---|
-| `sorting/` `searching/` | Algorithm implementations (static utility classes, most with private constructors) |
-| `trees/` + `trees/applications/` | 15 tree types + `nodes/` subpackage + prefix auto-complete application |
-| `lists/` + `lists/applications/` | Linked list variants + `nodes/`, `iterators/` + music playlist application |
+| `sorting/` + `sorting/applications/` + `sorting/exercises/` | Sorting algorithms + score-ranking app + solved exercises |
+| `searching/` | Searching algorithms |
+| `trees/` + `trees/applications/` + `trees/exercises/` | 15 tree types + `nodes/` subpackage + prefix auto-complete app + diameter exercise |
+| `lists/` + `lists/applications/` + `lists/exercises/` | Linked list variants + `nodes/`, `iterators/` + music playlist app + Josephus exercise |
 | `dynamic/` | Knapsack + task scheduling |
-| `hashing/` + `hashing/applications/` | Hash table with separate chaining + user session store application |
-| `graphs/` + `graphs/algorithms/` + `graphs/applications/` | Graph ADT, algorithm suites, and build dependency resolver application |
+| `hashing/` + `hashing/applications/` + `hashing/exercises/` | Separate chaining + open addressing (linear, double) + user session app |
+| `graphs/` + `graphs/algorithms/` + `graphs/applications/` + `graphs/exercises/` | Graph ADT, algorithm suites, build dependency resolver app, Knight's-tour exercise |
 | `stacks/` + `stacks/applications/` | Stack implementations + balanced bracket validator application |
 | `queues/` + `queues/unlam/` + `queues/applications/` | Queue implementations + FIFO print spooler application |
-| `recursion/` | Recursive algorithms |
+| `recursion/` + `recursion/applications/` + `recursion/exercises/` | Recursive algorithms + maze solver app + permutation exercise |
+| `compression/` + `compression/applications/` + `compression/exercises/` | Huffman, RLE, LZW encoders + apps + exercises |
+| `memory/` + `memory/applications/` + `memory/exercises/` | Sequential/Buddy allocators + mark-and-sweep collector + apps + exercises |
+| `strings/` + `strings/applications/` + `strings/exercises/` | Pattern matching (KMP, Boyer-Moore, Aho-Corasick) + edit distance + apps + exercises |
 | `commons/` | `LoggerService`, `ArrayUtils` |
 
 ## Skills
@@ -70,4 +74,6 @@ SonarCloud quality gate: **PASSED** (rating A across Reliability, Security, Main
 
 ## Coverage
 
-90% target (instruction). Lowest coverage today: `BruteForceClosestPair` (~16%), `WordSplay` (~74%), `RedBlackTree` (~78%), plus 0%-covered node classes (`DoubleLinkedListNode`, `SingleLinkedListNode`, `IntSkipListNode`) — the highest-ROI targets for new tests.
+90% target (instruction). Lowest coverage today: `BruteForceClosestPair` (~16%), `SuffixTreeNode` (~39%), `WordSplay` (~75%), `MarkAndSweepCollector.HeapObject` (~74%), plus 0%-covered node classes (`DoublyLinkedListNode`, `SinglyLinkedListNode`, `IntSkipListNode`) — the highest-ROI targets for new tests.
+
+ADT/algorithm **application coverage** reached **76.3% (74 of 97** core ADTs**)** via 30 new `applications` classes added across searching, dynamic, stacks, queues, lists, trees, sorting, hashing, graphs, strings, recursion, memory, and compression. See `docs/report.md` §1.

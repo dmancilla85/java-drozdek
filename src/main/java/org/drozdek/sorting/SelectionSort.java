@@ -10,10 +10,13 @@ package org.drozdek.sorting;
 /// memory where write operations are expensive and each swap has a wear cost.
 ///
 /// Complexity Analysis:
-/// Time Complexity: O(n²)
+/// Time Complexity: O(n�)
 /// Auxiliary Space: O(1)
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Selection_sort">Selection sort (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Selection sort. *Wikipedia*. https://en.wikipedia.org/wiki/Selection_sort
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 9.
 public final class SelectionSort {
 
     private SelectionSort() {

@@ -21,10 +21,13 @@ import static java.time.ZoneId.systemDefault;
 /// algorithms.
 ///
 /// Complexity Analysis:
-/// Time Complexity: O(V) neighbour lookup, O(V²) traversals via matrix scans
-/// Auxiliary Space: O(V²) for the adjacency matrix
+/// Time Complexity: O(V) neighbour lookup, O(V�) traversals via matrix scans
+/// Auxiliary Space: O(V�) for the adjacency matrix
 ///
-/// @see <a href="https://en.wikipedia.org/wiki/Graph_(abstract_data_type)">Graph (abstract data type) (Wikipedia)</a>
+/// Bibliography:
+///
+/// - Graph (abstract data type). *Wikipedia*. https://en.wikipedia.org/wiki/Graph_(abstract_data_type)
+/// - Adam Drozdek. *Data Structures and Algorithms in Java*, 2nd Ed. Chapter 8.
 public class Graph {
 
     public List<Vertex> vertices;
