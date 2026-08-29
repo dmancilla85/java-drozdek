@@ -1,5 +1,7 @@
 package org.drozdek.trees.applications;
 
+import java.util.Objects;
+
 import org.drozdek.trees.MaximumHeap;
 import org.drozdek.trees.MinimumHeap;
 
@@ -58,7 +60,12 @@ public class MedianStreamTracker {
         if (lower.size() > upper.size()) {
             return lower.getMax();
         }
-        return (lower.getMax() + upper.getMin()) / 2.0;
+        // Equal-size case: the rebalance invariant maintained by add() guarantees
+        // both heaps hold the same, non-zero number of elements when we reach this
+        // point, so the roots are non-null.
+        int lowMax = Objects.requireNonNull(lower.getMax(), "lower heap is empty");
+        int upMin = Objects.requireNonNull(upper.getMin(), "upper heap is empty");
+        return (lowMax + upMin) / 2.0;
     }
 
     /// Returns the number of measurements seen so far.
